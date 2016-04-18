@@ -1,0 +1,216 @@
+<div class="container">
+    <div class="content">
+        <div class="content-container">
+            <div class="content-header">
+                <h2 class="content-header-title">Handset Group</h2>
+
+            </div>
+            <div class="portlet">
+                <div class="portlet-header">
+                    <h3><i class="fa fa-tasks"></i>Field marked with <span class="asterisk">*</span> are Mandatory</h3>
+                </div>
+                <!-- /.portlet-header -->
+                <div class="portlet-content">
+                    <!-- /.content-header -->
+                    <div class="row">
+                        <span class="col-sm-offset-3 col-sm-9" data-ng-show="errorvisible" style="color: red;">{{error}}
+                        </span>
+                        <span class="col-sm-offset-3 col-sm-9" data-ng-show="successvisible" style="color: green;">{{success}}
+                        </span>
+                        <form class="form-horizontal" name="hendsetgroup" role="form" data-ng-submit="SubmitForm(hendsetgroup.$valid)">
+                            <div class="col-md-12">
+
+
+                                <div class="col-sm-6 col-md-12">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="firstname" class="col-sm-12">Handset Group List</label>
+                                            <div class="col-sm-12">
+                                                <span class="ui-select">
+                                                    <select name="handset" class="ng-pristine ng-valid form-control" data-ng-model="SelectedHandsetGroup" data-ng-options="item.chgr_group_id as item.chgr_group_name for item in AllGroups" data-ng-change="HandsetGroupChange()" required>
+                                                        <option value="">Select Handset</option>
+                                                    </select>
+                                                    <span style="color: red" data-ng-show="hendsetgroup.$submitted || hendsetgroup.handset.$dirty">
+                                                        <span data-ng-show="hendsetgroup.handset.$error.required">Please select Handset Group.</span>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="col-sm-12"><span class="asterisk">*</span>Handset Group Name</label>
+                                            <div class="col-sm-12">
+                                                <input type="text" data-ng-disabled="IsDisable" name="handsetname" class="ng-pristine ng-valid form-control" data-ng-disabled="IsDisable" placeholder="Name must be unique" data-ng-model="handsetname" required>
+                                                <span style="color: red" data-ng-show="hendsetgroup.$submitted || hendsetgroup.handsetname.$touched">
+                                                    <span data-ng-show="hendsetgroup.handsetname.$error.required">Please enter Handset Group name.</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Currency" class="col-sm-12">Disc</label>
+                                            <div class="col-sm-12">
+                                                <textarea cols="5" class="form-control" data-ng-disabled="IsDisable" data-ng-model="disc"></textarea>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="portlet">
+                                            <div class="portlet-header">
+                                                <h3>Use Filters</h3>
+                                            </div>
+                                            <!-- /.portlet-header -->
+                                            <div class="portlet-content">
+
+                                                <div class="form-group">
+                                                    <label for="firstname" class="col-sm-12">Brand Name</label>
+                                                    <div class="col-sm-12">
+                                                        <span class="ui-select">
+                                                            <select name="brandname" class="ng-pristine ng-valid form-control" data-ng-disabled="IsDisable" data-ng-model="Selectedbrand" data-ng-options="item as item for item in BrandNames" data-ng-change="FilterChange()">
+                                                                <option value="">--Select Brand--</option>
+                                                            </select>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <div class="form-group">
+                                                            <label for="firstname" class="col-sm-12">OS</label>
+                                                            <div class="col-sm-12">
+                                                                <span class="ui-select">
+                                                                    <select name="os" class="ng-pristine ng-valid form-control" data-ng-disabled="IsDisable" data-ng-model="Selectedos" data-ng-options="item as item for item in OS" data-ng-change="FilterChange()">
+                                                                        <option value="">--Select OS--</option>
+                                                                    </select>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="firstname" class="col-sm-12">Architecture</label>
+                                                            <div class="col-sm-12">
+                                                                <span class="ui-select">
+                                                                    <select name="architecture" class="ng-pristine ng-valid form-control" data-ng-disabled="IsDisable" data-ng-model="Selectedarchitecture" data-ng-options="item as item for item in Architectures" data-ng-change="FilterChange()">
+                                                                        <option value="">--Select Architecture--</option>
+                                                                    </select>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="firstname" class="col-sm-12">Reso W</label>
+                                                            <div class="col-sm-12">
+                                                                <span class="ui-select">
+                                                                    <select name="resow" class="ng-pristine ng-valid form-control" data-ng-disabled="IsDisable" data-ng-model="Selectedresow" data-ng-options="item as item for item in ResoW" data-ng-change="FilterChange()">
+                                                                        <option value="">--Select Reso W--</option>
+                                                                    </select>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <div class="form-group">
+                                                            <label for="firstname" class="col-sm-12">OS Version</label>
+                                                            <div class="col-sm-12">
+                                                                <span class="ui-select">
+                                                                    <select name="osversion" class="ng-pristine ng-valid form-control" data-ng-disabled="IsDisable" data-ng-model="Selectedosversion" data-ng-options="item as item for item in OSVesions" data-ng-change="FilterChange()">
+                                                                        <option value="">--Select OS Version--</option>
+                                                                    </select>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="firstname" class="col-sm-12">RAM</label>
+                                                            <div class="col-sm-12">
+                                                                <span class="ui-select">
+                                                                    <select name="ram" class="ng-pristine ng-valid form-control" data-ng-disabled="IsDisable" data-ng-model="Selectedram" data-ng-options="item as item for item in RAMS" data-ng-change="FilterChange()">
+                                                                        <option value="">--Select RAM--</option>
+                                                                    </select>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="firstname" class="col-sm-12">Reso H</label>
+                                                            <div class="col-sm-12">
+                                                                <span class="ui-select">
+                                                                    <select name="resoh" class="ng-pristine ng-valid form-control" data-ng-disabled="IsDisable" data-ng-model="Selectedresoh" data-ng-options="item as item for item in ResoH" data-ng-change="FilterChange()">
+                                                                        <option value="">--Select Reso H--</option>
+                                                                    </select>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <!-- /.portlet-content -->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label class="col-sm-12">Handset to be mapped with Group</label>
+                                                <div class="col-sm-12">
+                                                    <span class="ui-select-list">
+                                                        <select name="handsetmap" class="ng-pristine ng-valid form-control" data-ng-disabled="IsDisable" data-ng-options="item.dc_id as item.dc_model for item in GroupHandset" data-ng-model="SelectedGroupHandset" multiple data-ng-change="handsetMapselect()" size="10">
+                                                        </select>
+                                                        <span style="color: red" data-ng-show="hendsetgroup.$submitted || hendsetgroup.handsetmap.$touched">
+                                                            <span data-ng-show="hendsetgroup.handsetmap.$error.required">Group of Handset required.</span>
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-2" style="margin-top: 50px; text-align: center;">
+                                            <div class="form-group">
+                                                <input type="button" title="All Move Right" data-ng-disabled="IsDisable" class="btn btn-primary btn-w-md" value="All Move Right" data-ng-click="leftAllclick()" />
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="button" title="Move Right" data-ng-disabled="IsDisable" class="btn btn-primary btn-w-md" value="Move Right" data-ng-click="leftclick()" />
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="button" title="Move left" data-ng-disabled="IsDisable" class="btn btn-primary btn-w-md" value="Move left" data-ng-click="rightclick()" />
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="button" title="All Move left" data-ng-disabled="IsDisable" class="btn btn-primary btn-w-md" value="All Move left" data-ng-click="rightAllclick()" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label class="col-sm-12">Handset as per Selected Criteria</label>
+                                                <div class="col-sm-12">
+                                                    <span class="ui-select-list">
+                                                        <select name="handsetselected" class="ng-pristine ng-valid form-control" data-ng-disabled="IsDisable" data-ng-options="item.dc_id as item.dc_model for item in SelectedCriteriaHandset" data-ng-model="SelectedFilterCriteria" multiple data-ng-change="handsetperSelected()" size="10">
+                                                        </select>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.portlet -->
+                                </div>
+
+                            </div>
+
+                            <div class="col-xs-12">
+                                <div class="col-sm-offset-5 col-sm-7">
+                                    <a href="#add-content-files">
+                                        <input type="button" title="Back" class="btn btn-primary btn-w-md" value="Back" /></a>
+                                    <input type="submit" title="Submit" class="btn btn-primary btn-w-md" value="Submit" />
+                                    <input type="reset" title="Reset" data-ng-click="resetform()" value="Reset" class="btn btn-default btn-w-md" />
+                                </div>
+
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.content-container -->
+</div>
+<!-- /.content -->
+</div>

@@ -1,0 +1,145 @@
+<div class="container">
+    <div class="content">
+        <div class="content-container">
+            <div class="content-header">
+                <h2 class="content-header-title">Add / Edit Users</h2>
+            </div>
+            <!-- /.content-header -->
+            <div class="row">
+                <div class="col-md-6">
+                    <form class="form-horizontal" role="form" name="userform" data-ng-submit="SaveUserDetails(userform.$valid)" novalidate>
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label"><span class="asterisk">*</span>Full Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="u_fullname" data-ng-maxlength="50" class="form-control" id="" placeholder="Full Name" data-ng-model="FullName" required>
+                                <span style="color: red" data-ng-show="userform.$submitted || userform.u_fullname.$dirty">
+                                    <span data-ng-show="userform.u_fullname.$error.required">FullName is required.</span>
+                                    <span data-ng-show="userform.u_fullname.$error.maxlength">Maximum 50 characters allowed!</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label"><span class="asterisk">*</span>User Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="u_username" data-ng-maxlength="50" class="form-control" id="exampleInputEmail1" placeholder="User Name" data-ng-model="UserName" required>
+                                <span style="color: red" data-ng-show="userform.$submitted || userform.u_username.$dirty">
+                                    <span data-ng-show="userform.u_username.$error.required">UserName is required.</span>
+                                    <span data-ng-show="userform.u_username.$error.maxlength">Maximum 50 characters allowed!</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Currency" class="col-sm-3 control-label"><span class="asterisk">*</span>Email Id</label>
+                            <div class="col-sm-9">
+                                <input type="email" name="u_emailid" data-ng-maxlength="50" class="form-control" id="Text1" placeholder="Email" data-ng-pattern="/^[_A-Za-z0-9]+(\.[_A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[a-z]{2,4})$/" data-ng-model="EmailId" required>
+                                <span style="color: red" data-ng-show="userform.$submitted || userform.u_emailid.$dirty">
+                                    <span data-ng-show="userform.u_emailid.$error.required">Email is required.</span>
+                                    <span data-ng-show="userform.u_emailid.$error.pattern">Not valid email!</span>
+                                    <span data-ng-show="userform.u_emailid.$error.maxlength">Maximum 50 characters allowed!</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label"><span class="asterisk">*</span>Mobile No</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="u_mobileno" data-ng-maxlength="10" class="form-control" id="Text2" placeholder="Mobile no" data-ng-minlength="10" data-ng-maxlength="10" data-ng-model="MobileNo" data-ng-pattern="/^[0-9]*$/" required>
+                                <span style="color: red" data-ng-show="userform.$submitted || userform.u_mobileno.$dirty">
+                                    <span data-ng-show="userform.u_mobileno.$error.required">Mobile No. is required.</span>
+                                    <span data-ng-show="userform.u_mobileno.$error.maxlength">Invalid Mobile No.</span>
+                                    <span data-ng-show="userform.u_mobileno.$error.minlength">Invalid Mobile No.</span>
+                                    <span data-ng-show="userform.u_mobileno.$error.maxlength">Maximum 10 characters allowed!</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label"><span class="asterisk">*</span>Role</label>
+                            <div class="col-sm-9">
+                                <span class="ui-select">
+                                    <select name="u_role" class="form-control" data-ng-model="SelectedUserRole" data-ng-options="item.cd_name as item.cd_name for item in UserRole" required>
+                                        <option value="">--Select Role--</option>
+                                    </select>
+                                </span>
+                                <span style="color: red" ng-show="userform.$submitted || userform.u_role.$dirty">
+                                    <span ng-show="userform.u_role.$error.required">Please Select Role.</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label">Vendor</label>
+                            <div class="col-sm-9">
+                                <span class="ui-select-list">
+                                    <select multiple class="ng-pristine ng-valid form-control" data-ng-model="SelectedVendorList" data-ng-options="item.vd_id as item.vd_name for item in Vendor">
+                                    </select>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <button type="submit" title="Submit" class="btn btn-primary btn-w-md">Submit</button>
+                                <input type="reset" title="Reset" value="Reset" data-ng-click="resetform()" class="btn btn-default btn-w-md" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="table-responsive">
+                        <div id="user-exportable">
+                            <table id="user-signups" class="table table-striped table-bordered table-checkable">
+                                <thead>
+                                <tr>
+                                    <th>Sr</th>
+                                    <th>Full Name</th>
+                                    <th>User Name</th>
+                                    <th>Role</th>
+                                    <th>Vendors</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody data-ng-repeat="user in UserList |startFrom:currentPage*pageSize | limitTo:pageSize">
+                                <tr>
+                                    <td class="col-md-1 col-xs-1 text-center">{{$index+1+(currentPage*pageSize)}}</td>
+
+                                    <!--<td>{{ user.ld_id }}</td>-->
+                                    <td>{{ user.ld_display_name }}</td>
+                                    <td>{{ user.ld_user_name }}</td>
+                                    <td>{{ user.ld_role }}</td>
+                                    <td>{{user.Vendors}}
+                                    </td>
+                                    <!--if role = Super Admin-->
+                                    <td class="text-center" data-ng-if="user.ld_role == 'Super Admin'"><a href=""><i title="Super Admin" class="fa fa-eye"></i></a></td>
+                                    <!--if role != Super Admin-->
+                                    <td data-ng-if="user.ld_role != 'Super Admin'">
+                                        <table width="100%">
+                                            <tr>
+                                                <td width="50%"><a href="#/edituser/{{ user.ld_id }}"><i title="Edit" class="fa fa-edit"></i></a></td>
+                                                <td width="50%" class="text-right"><a href="" title="{{user.ld_title}}" data-ng-click="BlockUnBlockUser(user.ld_id,user.ld_title,user.ld_class)"><i class="fa fa-ban text-right {{user.ld_class}}"></i></a></td>
+                                            </tr>
+
+                                        </table>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="col-xs-12 col-sm-4">
+                            <button type="button" class="btn btn-primary btn-w-xs" title="Previous" data-ng-disabled="currentPage == 0" data-ng-click="currentPage=currentPage-1">Previous</button>
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <button type="button" class="btn btn-primary btn-w-xs" title="Download" data-ng-click="ExportExcel()">Download in excel</button>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 text-right">
+                            <button type="button" class="btn btn-primary btn-w-xs" title="Next" data-ng-disabled="currentPage >= UserList.length/pageSize - 1" data-ng-click="currentPage=currentPage+1">Next</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- /.content-container -->
+    </div>
+    <!-- /.content -->
+</div>

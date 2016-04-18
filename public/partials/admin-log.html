@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="content">
+        <div class="content-container">
+            <div class="content-header">
+                <h2 class="content-header-title">Admin Logs</h2>
+            </div>
+            <!-- /.content-header -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portlet">
+                        <div class="portlet-header">
+                            <h3><i class="fa fa-tasks"></i>Admin Logs</h3>
+                        </div>
+                        <div class="portlet-content">
+                            <div class="col-xs-12">
+                                <div class="table-responsive">
+                                    <div id="property-exportable">
+                                        <table width="100%" id="user-signups" class="table table-striped table-bordered table-checkable">
+                                            <thead>
+                                            <tr>
+                                                <th>Sr</th>
+                                                <th>Log Message</th>
+                                                <th>Action</th>
+                                                <th>Created On</th>
+                                                <th>Created By</th>
+                                                <th>Modified On</th>
+                                                <th>Modified By</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody data-ng-repeat="admin in AdminLogs |startFrom:currentPage*pageSize | limitTo:pageSize| filter: {logmsg: serchpropertyquery}">
+                                            <tr>
+                                                <td>{{ $index + 1 }}</td>
+                                                <td>{{admin.ald_message}}</td>
+                                                <td>{{admin.ald_action}}</td>
+                                                <td>{{admin.ald_created_on}}</td>
+                                                <td>{{admin.ald_created_by}}</td>
+                                                <td>{{admin.ald_modified_on}}</td>
+                                                <td>{{admin.ald_modified_by}}</td>
+
+
+                                            </tr>
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12">
+                                <div class="col-xs-12 col-sm-4">
+                                    <button type="button" class="btn btn-primary btn-w-xs" title="Previous" data-ng-disabled="currentPage == 0" data-ng-click="currentPage=currentPage-1">Previous</button>
+
+                                </div>
+                                <div class="col-xs-12 col-sm-4">
+                                    <!--<a href="#">Download in excel</a>-->
+                                    <button type="button" class="btn btn-primary btn-w-xs" title="Download" data-ng-click="ExportExcel()">Download in excel</button>
+                                </div>
+                                <div class="col-xs-12 col-sm-4 text-right">
+                                    <button type="button" class="btn btn-primary btn-w-xs" title="Next" data-ng-disabled="currentPage >= AdminLogs.length/pageSize - 1" data-ng-click="currentPage=currentPage+1">Next</button>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <!-- /.content-container -->
+    </div>
+    <!-- /.content -->
+</div>

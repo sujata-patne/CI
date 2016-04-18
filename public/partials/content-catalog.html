@@ -1,0 +1,690 @@
+<div class="container">
+    <div class="content">
+        <div class="content-container">
+            <div class="content-header">
+                <h2 class="content-header-title">Content Catalog</h2>
+            </div>
+            <!-- /.content-header -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="col-xs-12 col-sm-5">
+                        <label for="userid" class="col-sm-5 control-label">Select Content Status: </label>
+                        <div class="col-sm-7">
+                            <select name="ContentStatus" class="ng-pristine ng-valid form-control" data-ng-model="SelectedContentStatus" data-ng-options="item.cd_id as item.cd_name for item in ContentStatus" data-ng-change="StatusChange()">
+                                <option value="">Select Status</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <label for="userid" class="col-sm-4 control-label">Vendor: </label>
+                        <div class="col-sm-8">
+                            <select name="Vendor" class="ng-pristine ng-valid form-control" data-ng-model="SelectedVendor" data-ng-options="item.vd_id as item.vd_name for item in Vendors" data-ng-change="SearchChange()">
+                                <option value="">Select Vendor</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-3">
+                        <label for="userid" class="col-sm-3 control-label">Type: </label>
+                        <div class="col-sm-9">
+                            <select name="Type" class="ng-pristine ng-valid form-control" data-ng-model="SelectedType" data-ng-options="item.cd_id as item.cd_name for item in ContentType" data-ng-change="SearchChange()">
+                                <option value="">Select Type</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding-top: 15px;">
+                <div class="col-xs-12">
+                    <div class="col-xs-12 col-sm-6">
+                        <label for="userid" class="col-sm-4 control-label">Search Content by</label>
+                        <div class="col-sm-8">
+                            <select name="SearchContentBy" class="ng-pristine ng-valid form-control" data-ng-model="SelectedSearchContentBy" data-ng-options="item.cm_name as item.cm_name for item in SearchByList" data-ng-change="SearchChange()">
+                                <option value="">Select SearchContentBy</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="col-xs-6 col-sm-8">
+                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Search" data-ng-model="SearchContent">
+                        </div>
+                        <div class="col-xs-6 col-sm-4">
+                            <button type="button" class="btn btn-primary btn-w-xs" title="Search" data-ng-click="SearchChange()">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Content Upload Pending Wallpaper Listing starts -->
+            <div class="row" id="content" data-ng-show="FileUploadPendingContentShow">
+                <div class="col-md-12">
+                    <div class="portlet">
+                        <div class="portlet-header">
+                            <h3>Content Upload Pending {{SelectedContentType}} Listing </h3>
+                        </div>
+                        <!-- /.portlet-header -->
+                        <div class="portlet-content">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Metadata Unique Id</th>
+                                        <th>Content Title</th>
+                                        <th>Property Title</th>
+                                        <th>Added On</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr data-ng-repeat="i in FilterData | startFrom:currentPage*pageSize | limitTo:pageSize ">
+                                        <td>
+                                            <span>{{i.MetaId}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{i.cm_title}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{i.propertyname}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{i.cm_created_on}}</span>
+                                        </td>
+                                        <td>
+                                            <a href="#{{i.edit}}/{{i.MetaId}}"><i title="Edit" class="fa fa-edit"></i></a>
+                                            <a href="" data-ng-click="DeleteMetadata(i.cm_id,i.cm_title,i.cm_state)"><i data-ng-show="IsEditPermission" title="Delete" class="fa fa-times"></i></a>
+                                            <span ng-show="i.contentTypeName == 'CRBT'" >
+                                                <span ng-show="(i.parentname == 'Audio') && i.cm_ispersonalized">
+                                                    <a href="#" data-ng-click="ShowPopupForExport(i.cm_id)"><i title="Export" class="fa fa-cloud-download"></i></a>
+                                                </span>
+                                                <span ng-show="((UserRole == 'Moderator' || UserRole == 'Content Manager') && i.parentname == 'Audio' ) && i.cm_ispersonalized">
+                                                    <a href="#" data-ng-click="ShowPopupForImport(i.cm_id)"><i title="Import" class="fa fa-cloud-upload"></i></a>
+                                                </span>
+                                                <span ng-show="((UserRole == 'Moderator' || UserRole == 'Content Manager') && i.parentname == 'Audio') && !i.cm_ispersonalized">
+                                                    <a href="#" data-ng-click="ShowPopupForVcode(i.cm_id)"><i title="Import" class="fa fa-cloud-upload"></i></a>
+                                                </span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                            <div class="col-xs-12">
+                                <div class="col-xs-12 col-sm-4">
+                                    <button type="button" class="btn btn-primary btn-w-xs" title="Previous " data-ng-disabled="currentPage == 0" data-ng-click="currentPage=currentPage-1">Previous</button>
+                                </div>
+                                <div class="col-xs-12 col-sm-4">
+                                    <button type="button" class="btn btn-primary btn-w-xs" title="Download" data-ng-click="ExportExcel()">Download in excel</button>
+                                </div>
+                                <div class="col-xs-12 col-sm-4 text-right">
+                                    <button type="button" class="btn btn-primary btn-w-xs" title="Next" data-ng-disabled="currentPage >= FilterData.length/pageSize - 1" data-ng-click="currentPage = currentPage+1">Next</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.portlet-content -->
+                </div>
+                <!-- /.portlet -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- Content Upload Pending Wallpaper Listing ends -->
+        <!-- Inprocess Wallpaper Listing starts -->
+        <div class="row" id="inprocess" data-ng-show="ContentInProgressShow">
+            <div class="col-md-12">
+                <div class="portlet">
+                    <div class="portlet-header">
+                        <h3>Inprocess {{SelectedContentType}} Listing </h3>
+                    </div>
+                    <!-- /.portlet-header -->
+                    <div class="portlet-content">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Metadata Unique Id</th>
+                                    <th>Content Title</th>
+                                    <th>Property Title</th>
+                                    <th>Added On</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr data-ng-repeat="i in FilterData |startFrom:currentPage*pageSize | limitTo:pageSize ">
+                                    <td>
+                                        <span>{{i.MetaId}}</span>
+                                    </td>
+                                    <td><span>{{i.cm_title}}</span></td>
+                                    <td><span>{{i.propertyname}}</span></td>
+                                    <td><span>{{i.cm_created_on}}</span></td>
+                                    <td><span ng-show="i.contentTypeName == 'CRBT'" >
+                                        <span ng-show="(i.parentname == 'Audio') && i.cm_ispersonalized">
+                                            <a href="#" data-ng-click="ShowPopupForExport(i.cm_id)"><i title="Export" class="fa fa-cloud-download"></i></a>
+                                        </span>
+                                        <span ng-show="((UserRole == 'Moderator' || UserRole == 'Content Manager') && i.parentname == 'Audio') && i.cm_ispersonalized">
+                                            <a href="#" data-ng-click="ShowPopupForImport(i.cm_id)"><i title="Import" class="fa fa-cloud-upload"></i></a>
+                                        </span>
+                                        <span ng-show="((UserRole == 'Moderator' || UserRole == 'Content Manager') && i.parentname == 'Audio') && !i.cm_ispersonalized">
+                                            <a href="#" data-ng-click="ShowPopupForVcode(i.cm_id)"><i title="Import" class="fa fa-cloud-upload"></i></a>
+                                        </span>
+                                    </span></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                        <div class="col-xs-12">
+                            <div class="col-xs-12 col-sm-4">
+                                <button type="button" class="btn btn-primary btn-w-xs" title="Previous " data-ng-disabled="currentPage == 0" data-ng-click="currentPage=currentPage-1">Previous</button>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <button type="button" class="btn btn-primary btn-w-xs" title="Download" data-ng-click="ExportExcel()">Download in excel</button>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 text-right">
+                                <button type="button" class="btn btn-primary btn-w-xs" title="Next" data-ng-disabled="currentPage >= FilterData.length/pageSize - 1" data-ng-click="currentPage = currentPage+1">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.portlet-content -->
+                </div>
+                <!-- /.portlet -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- Inprocess Wallpaper Listing ends -->
+        <!-- Ready to Moderate Wallpaper Listing starts -->
+        <div class="row " id="ready" data-ng-show="ReadyToModerateContentShow">
+            <div class="col-md-12">
+                <div class="portlet">
+                    <div class="portlet-header">
+                        <h3>Ready to Moderate {{SelectedContentType}} Listing </h3>
+                    </div>
+                    <!-- /.portlet-header -->
+                    <div class="portlet-content">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Content Id</th>
+                                    <th>Metadata Id</th>
+                                    <th>Content Title</th>
+                                    <th>Property Title</th>
+                                    <th>Thumb</th>
+                                    <th>Added On</th>
+                                    <th>Action</th>
+                                    <th data-ng-show="IsEditPermission">Publish / Reject</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr data-ng-repeat="i in FilterData | startFrom:currentPage*pageSize | limitTo:pageSize ">
+                                    <td>
+                                        <span>{{i.cm_id}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{i.MetaId}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{i.cm_title}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{i.propertyname}}</span>
+                                    </td>
+                                    <td>
+                                        <span ng-show="i.cm_thumb_url != null && i.cm_thumb_url != ''"><img alt="Thumb" data-ng-src="{{base_url}}{{i.cm_thumb_url}}"  width="100" height="100" /></span>
+                                        <span ng-hide="i.cm_thumb_url != null && i.cm_thumb_url != ''" title="{{files.filename}}"><img width="50" height="50" src="{{base_url}}assets/img/no_image.gif" /></span>
+                                    </td>
+                                    <td>
+                                        <span>{{i.cm_created_on}}</span>
+                                    </td>
+                                    <td>
+                                        <a href="#{{i.edit}}/{{i.MetaId}}"><i title="Edit" class="fa fa-edit"></i></a>
+                                        <a href="#/content-catalog-listing/{{i.cm_id}}"><i data-ng-click="downloadFile(i.cm_id)" title="Content-Listing" class="fa fa-download" ng-href="#" target="_self"></i></a>
+                                        <a href="" data-ng-click="DeleteMetadata(i.cm_id,i.cm_title,i.cm_state)"><i data-ng-show="IsEditPermission" title="Delete" class="fa fa-times"></i></a>
+                                        <span ng-show="i.contentTypeName == 'CRBT'" >
+                                            <span ng-show="(i.parentname == 'Audio') && i.cm_ispersonalized">
+                                                <a href="#" data-ng-click="ShowPopupForExport(i.cm_id)"><i title="Export" class="fa fa-cloud-download"></i></a>
+                                            </span>
+                                            <span ng-show="((UserRole == 'Moderator' || UserRole == 'Content Manager') && i.parentname == 'Audio') && i.cm_ispersonalized">
+                                                <a href="#" data-ng-click="ShowPopupForImport(i.cm_id)"><i title="Import" class="fa fa-cloud-upload"></i></a>
+                                            </span>
+                                            <span ng-show="((UserRole == 'Moderator' || UserRole == 'Content Manager') && i.parentname == 'Audio') && !i.cm_ispersonalized">
+                                                <a href="#" data-ng-click="ShowPopupForVcode(i.cm_id)"><i title="Import" class="fa fa-cloud-upload"></i></a>
+                                            </span>
+                                        </span>
+                                    </td>
+                                    <td data-ng-show="IsEditPermission">
+                                        <select name="PublishReject" class="ng-pristine ng-valid form-control" data-ng-model="i.SelectedPublishReject" data-ng-options="item.id as item.Name for item in i.PublishArray" data-ng-change="PublishRejectChange(i.cm_id,i.SelectedPublishReject)">
+                                            <option value="">Select One</option>
+                                        </select>
+                                        <!--  <select name="PublishReject" class="ng-pristine ng-valid form-control" data-ng-model="i.SelectedPublishReject" data-ng-change="PublishRejectChange(i.cm_id,i.SelectedPublishReject)" required>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   </select>-->
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                        <div class="col-xs-12">
+                            <div class="col-xs-12 col-sm-4">
+                                <button type="button" class="btn btn-primary btn-w-xs" title="Previous " data-ng-disabled="currentPage == 0" data-ng-click="PreviousClick()">Previous</button>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <button type="button" class="btn btn-primary btn-w-xs" title="Download" data-ng-click="ExportExcel()">Download in excel</button>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 text-right">
+                                <button type="button" class="btn btn-primary btn-w-xs" title="Next" data-ng-disabled="currentPage >= ((FilterData.length/pageSize) - 1)" data-ng-click="NextClick()">Next</button>
+                            </div>
+                        </div>
+                        <div class="col-xs-12" data-ng-show="IsEditPermission">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <button type="button" title="Submit" class="btn btn-primary" data-ng-click="Submit()">Submit</button>
+                                <button type="button" title="Publish From Current Page" class="btn btn-primary" data-ng-click="PublishAllFromCurrentPage()">Publish all from current page</button>
+                                <button type="button" title="Publish All" class="btn btn-primary" data-ng-click="PublishAll()">Publish all from list</button>
+                                <button type="button" title="Reset" class="btn btn-default" data-ng-click="Reset()">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.portlet-content -->
+                </div>
+                <!-- /.portlet -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- Ready to Moderate Wallpaper Listing ends -->
+        <!-- Published Wallpaper Listing starts -->
+        <div class="row " id="publish" data-ng-show="PublishedContentShow">
+            <div class="col-md-12">
+                <div class="portlet">
+                    <div class="portlet-header">
+                        <h3>Published {{SelectedContentType}} Listing </h3>
+                    </div>
+                    <!-- /.portlet-header -->
+                    <div class="portlet-content">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Content Id</th>
+                                    <th>Metadata Id</th>
+                                    <th>Content Title</th>
+                                    <th>Property Title</th>
+                                    <th>Thumb</th>
+                                    <th>Added On</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr data-ng-repeat="i in FilterData |startFrom:currentPage*pageSize | limitTo:pageSize ">
+                                    <td>
+                                        <span>{{i.cm_id}}</span>
+
+                                    </td>
+                                    <td>
+                                        <span>{{i.MetaId}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{i.cm_title}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{i.propertyname}}</span>
+                                    </td>
+                                    <td>
+                                        <span ng-show="files.cf_url != null && i.cm_thumb_url != ''"><img alt="Thumb" data-ng-src="{{base_url}}{{i.cm_thumb_url}}"  width="100" height="100" /></span>
+                                        <span ng-hide="files.cf_url != null && i.cm_thumb_url != ''" title="{{files.filename}}"><img width="50" height="50" src="{{base_url}}assets/img/no_image.gif" /></span>
+                                        <!--<img alt="Thumb" data-ng-src="{{base_url}}{{i.cm_thumb_url}}"  width="100" height="100" />-->
+                                    </td>
+                                    <td>
+                                        <span>{{i.cm_created_on}}</span>
+                                    </td>
+                                    <td>
+                                        <a href="#{{i.edit}}/{{i.MetaId}}"><i title="Edit" class="fa fa-edit"></i></a>
+                                        <a href="#/content-catalog-listing/{{i.cm_id}}"><i class="fa fa-download" title="Content-Listing"></i></a>
+                                        <a href="" data-ng-show="IsEditPermission" data-ng-click="BlockUnBlockMetadata(i.cm_id,i.cm_title,i.IsBlock,i.cm_expires_on,'Block',6)"><i title="Block" class="fa fa-ban text-right"></i></a>
+                                        <a href="" data-ng-click="DeleteMetadata(i.cm_id,i.cm_title,i.cm_state)"><i data-ng-show="IsEditPermission" title="Delete" class="fa fa-times"></i></a>
+
+                                        <span ng-show="i.contentTypeName == 'CRBT'" >
+                                            <span ng-show="(i.parentname == 'Audio') && i.cm_ispersonalized">
+                                                <a href="#" data-ng-click="ShowPopupForExport(i.cm_id)"><i title="Export" class="fa fa-cloud-download"></i></a>
+                                            </span>
+                                            <span ng-show="((UserRole == 'Moderator' || UserRole == 'Content Manager') && i.parentname == 'Audio') && i.cm_ispersonalized">
+                                                <a href="#" data-ng-click="ShowPopupForImport(i.cm_id)"><i title="Import" class="fa fa-cloud-upload"></i></a>
+                                            </span>
+                                            <span ng-show="((UserRole == 'Moderator' || UserRole == 'Content Manager') && i.parentname == 'Audio') && !i.cm_ispersonalized">
+                                                <a href="#" data-ng-click="ShowPopupForVcode(i.cm_id)"><i title="Import" class="fa fa-cloud-upload"></i></a>
+                                            </span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                        <div class="col-xs-12">
+                            <div class="col-xs-12 col-sm-4">
+                                <button type="button" class="btn btn-primary btn-w-xs" title="Previous " data-ng-disabled="currentPage == 0" data-ng-click="currentPage=currentPage-1">Previous</button>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <button type="button" class="btn btn-primary btn-w-xs" title="Download" data-ng-click="ExportExcel()">Download in excel</button>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 text-right">
+                                <button type="button" class="btn btn-primary btn-w-xs" title="Next" data-ng-disabled="currentPage >= FilterData.length/pageSize - 1" data-ng-click="currentPage = currentPage+1">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.portlet-content -->
+                </div>
+                <!-- /.portlet -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- Published Wallpaper Listing ends -->
+        <!-- Rejected Wallpaper Listing starts -->
+        <div class="row " id="reject" data-ng-show="RejectedContentShow">
+            <div class="col-md-12">
+                <div class="portlet">
+                    <div class="portlet-header">
+                        <h3>Rejected {{SelectedContentType}} Listing </h3>
+                    </div>
+                    <!-- /.portlet-header -->
+                    <div class="portlet-content">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Content Id</th>
+                                    <th>Metadata Id</th>
+                                    <th>Content Title</th>
+                                    <th>Property Title</th>
+                                    <th>Thumb</th>
+                                    <th>Added On</th>
+                                    <th>Comments</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr data-ng-repeat="i in FilterData |startFrom:currentPage*pageSize | limitTo:pageSize ">
+                                    <td>
+                                        <span>{{i.cm_id}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{i.MetaId}}</span>
+                                    </td>
+                                    <td><span>{{i.cm_title}}</span></td>
+                                    <td><span>{{i.propertyname}}</span></td>
+                                    <td>
+                                        <span ng-show="i.cm_thumb_url != null && i.cm_thumb_url != ''"><img alt="Thumb" data-ng-src="{{base_url}}{{i.cm_thumb_url}}"  width="100" height="100" /></span>
+                                        <span ng-hide="i.cm_thumb_url != null && i.cm_thumb_url != ''" title="{{files.filename}}"><img width="50" height="50" src="{{base_url}}assets/img/no_image.gif" /></span>
+                                        <!--<img alt="Thumb" data-ng-src="{{base_url}}{{i.cm_thumb_url}}"  width="100" height="100" />-->
+                                    </td>
+                                    <td><span>{{i.cm_created_on}}</span></td>
+                                    <td>{{i.cm_comment}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                        <div class="col-xs-12">
+                            <div class="col-xs-12 col-sm-4">
+                                <button type="button" class="btn btn-primary btn-w-xs" title="Previous " data-ng-disabled="currentPage == 0" data-ng-click="currentPage=currentPage-1">Previous</button>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <button type="button" class="btn btn-primary btn-w-xs" title="Download" data-ng-click="ExportExcel()">Download in excel</button>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 text-right">
+                                <button type="button" class="btn btn-primary btn-w-xs" title="Next" data-ng-disabled="currentPage >= FilterData.length/pageSize - 1" data-ng-click="currentPage = currentPage+1">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.portlet-content -->
+                </div>
+                <!-- /.portlet -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- Rejected Wallpaper Listing ends -->
+        <!-- Inactive Wallpaper Listing starts -->
+        <div class="row " id="inactive" data-ng-show="InActiveContentShow">
+            <div class="col-md-12">
+                <div class="portlet">
+                    <div class="portlet-header">
+                        <h3>Inactive {{SelectedContentType}} Listing </h3>
+                    </div>
+                    <!-- /.portlet-header -->
+                    <div class="portlet-content">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Content Id</th>
+                                    <th>Metadata Id</th>
+                                    <th>Content Title</th>
+                                    <th>Property Title</th>
+                                    <th>Thumb</th>
+                                    <th>Expired On</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr data-ng-repeat="i in FilterData | startFrom:currentPage*pageSize | limitTo:pageSize ">
+
+                                    <td>
+                                        <span>{{i.cm_id}}</span>
+
+                                    </td>
+                                    <td>
+                                        <span>{{i.MetaId}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{i.cm_title}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{i.propertyname}}</span>
+                                    </td>
+                                    <td>
+                                        <span ng-show="i.cm_thumb_url != null && i.cm_thumb_url != ''"><img alt="Thumb" data-ng-src="{{base_url}}{{i.cm_thumb_url}}"  width="100" height="100" /></span>
+                                        <span ng-hide="i.cm_thumb_url != null && i.cm_thumb_url != ''" title="{{files.filename}}"><img width="50" height="50" src="{{base_url}}assets/img/no_image.gif" /></span>
+                                        <!--<img alt="Thumb" data-ng-src="{{base_url}}{{i.cm_thumb_url}}"  width="100" height="100" />-->
+                                    </td>
+                                    <td>
+                                        <span>{{i.cm_expires_on}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{i.status}}</span>
+                                    </td>
+                                    <td>
+                                        <a href="#{{i.edit}}/{{i.MetaId}}" data-ng-show="i.IsEdit"><i title="Edit" class="fa fa-edit"></i></a>
+                                        <a data-ng-show="i.IsEdit" href="#/content-catalog-listing/{{i.cm_id}}"><i class="fa fa-download" title="Content-Listing"></i></a>
+                                        <a href="" data-ng-click="BlockUnBlockMetadata(i.cm_id,i.cm_title,i.IsBlock,i.cm_expires_on,'UnBlock',4)"><i data-ng-show="IsEditPermission" class="fa fa-bullseye {{i.color}}" title="Reactive"></i></a>
+                                        <a href="" data-ng-click="DeleteMetadata(i.cm_id,i.cm_title,i.cm_state)"><i data-ng-show="IsEditPermission" title="Delete" class="fa fa-times"></i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                        <div class="col-xs-12">
+                            <div class="col-xs-12 col-sm-4">
+                                <button type="button" class="btn btn-primary btn-w-xs" title="Previous " data-ng-disabled="currentPage == 0" data-ng-click="currentPage=currentPage-1">Previous</button>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <button type="button" class="btn btn-primary btn-w-xs" title="Download" data-ng-click="ExportExcel()">Download in excel</button>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 text-right">
+                                <button type="button" class="btn btn-primary btn-w-xs" title="Next" data-ng-disabled="currentPage >= FilterData.length/pageSize - 1" data-ng-click="currentPage = currentPage+1">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.portlet-content -->
+                </div>
+                <!-- /.portlet -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- Inactive Wallpaper Listing ends -->
+        <!-- Deleted Wallpaper Listing starts -->
+        <div class="row " id="delete" data-ng-show="DeletedContentShow">
+            <div class="col-md-12">
+                <div class="portlet">
+                    <div class="portlet-header">
+                        <h3>Deleted {{SelectedContentType}} Listing </h3>
+                    </div>
+                    <!-- /.portlet-header -->
+                    <div class="portlet-content">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Content Id</th>
+                                    <th>Metadata Id</th>
+                                    <th>Content Title</th>
+                                    <th>Property Title</th>
+                                    <th>Thumb</th>
+                                    <th>Deleted On</th>
+                                    <th>Deleted By</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr data-ng-repeat="i in FilterData | startFrom:currentPage*pageSize | limitTo:pageSize ">
+                                    <td><span>{{i.cm_id}}</span></td>
+                                    <td>
+                                        <span>{{i.MetaId}}</span>
+                                    </td>
+                                    <td><span>{{i.cm_title}}</span></td>
+                                    <td><span>{{i.propertyname}}</span></td>
+                                    <td><span ng-show="i.cm_thumb_url != null && i.cm_thumb_url != ''"><img alt="Thumb" data-ng-src="{{base_url}}{{i.cm_thumb_url}}"  width="100" height="100" /></span>
+                                        <span ng-hide="i.cm_thumb_url != null && i.cm_thumb_url != ''" title="{{files.filename}}"><img width="50" height="50" src="{{base_url}}assets/img/no_image.gif" /></span>
+                                        <!--<img alt="Thumb" data-ng-src="{{base_url}}{{i.cm_thumb_url}}"  width="100" height="100"  />--></td>
+                                    <td><span>{{i.cm_modified_on}}</span></td>
+                                    <td>{{i.cm_modified_by}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                        <div class="col-xs-12">
+                            <div class="col-xs-12 col-sm-4">
+                                <button type="button" class="btn btn-primary btn-w-xs" title="Previous " data-ng-disabled="currentPage == 0" data-ng-click="currentPage=currentPage-1">Previous</button>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <button type="button" class="btn btn-primary btn-w-xs" title="Download" data-ng-click="ExportExcel()">Download in excel</button>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 text-right">
+                                <button type="button" class="btn btn-primary btn-w-xs" title="Next" data-ng-disabled="currentPage >= FilterData.length/pageSize - 1" data-ng-click="currentPage = currentPage+1">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.portlet-content -->
+                </div>
+                <!-- /.portlet -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- Deleted Wallpaper Listing ends -->
+        <!-- Comment Pop-Up Starts-->
+        <div id="Export" data-ng-show="ShowExportPopUp">
+            <div class="modal-dialog" style="max-width: 400px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-ng-click="CloseImportExport()" aria-label="Close"><span aria-hidden="true">x</span></button>
+                        <h4 class="modal-title">Download Name List</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-5"><label for="export" class="control-label">Select Operator:</label><br />
+                            <em class="red">[For Vcode List]</em></div>
+                            <div class="col-sm-7">
+                                <select name="countryOperator" class="ng-pristine ng-valid form-control" data-ng-model="SelectedCountryOperator" data-ng-options="item.cd_id as item.cd_name for item in CountryOperator" data-ng-change="CountryOperatorChange(meta.cm_id)">
+                                    <option value="">Select Operator</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" title="Save" data-ng-click="ExportForVcode()" class="btn btn-primary btn-w-xs">Download</button>
+                        <button type="button" title="Close" data-ng-click="CloseImportExport()" class="btn btn-primary btn-w-xs">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="Import" data-ng-show="ShowImportPopUp">
+            <form class="form-horizontal" role="form" name="vcodeImportForm" enctype="multipart/form-data" data-ng-submit="upload(vcodeImportForm.$valid)" novalidate>
+            <div class="modal-dialog" style="max-width: 400px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-ng-click="CloseImportExport()" aria-label="Close"><span aria-hidden="true">x</span></button>
+                        <h4 class="modal-title">Upload Vcode for Name List</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-5"><label for="export" class="control-label"><span class="asterisk">*</span>&nbsp;Upload Vcode List:</label><br />
+                                <em class="red">[.xlsx]</em>
+                            </div>
+                            <div class="col-sm-7">
+
+                                <input type="file" class="form-control"  data-ngf-select data-ng-model="vcodefile" id="vcodefiles" name="vcodefiles" data-ng-change="vcodefileuploader()" accept=".xlsx"  required />
+                                <span style="color: red" data-ng-show="vcodeImportForm.$submitted || vcodeImportForm.vcodefiles.$touched">
+                                    <span data-ng-show="vcodeImportForm.vcodefiles.$error.required">Please upload Excel file.</span>
+                                </span>
+                                <!--<span style="color: red" ng-show="vcodeImportForm.$submitted || vcodeImportForm.vcodefiles.$touched">
+                                       {{ng-pattern="/^[a-zA-Z0-9 ]*_NameList.xlsx$/"}}
+                                        <span ng-show="vcodeImportForm.vcodefiles.$error.pattern">Invalid File Name.</span>
+                                    </span>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" title="Upload" class="btn btn-primary btn-w-md"  value="Upload" />
+                        <button type="button" title="Close" data-ng-click="CloseImportExport()" class="btn btn-primary btn-w-xs">Close</button>
+                     </div>
+                </div>
+            </div>
+            </form>
+
+        </div>
+
+        <div id="Comment" data-ng-show="ShowVcodeAddUpdatePopUp">
+            <form class="form-horizontal" role="form" name="vcodeAddUpdateForm" enctype="multipart/form-data" data-ng-submit="addUpdateVcode(vcodeAddUpdateForm.$valid)" novalidate>
+                <div class="modal-dialog" style="max-width: 400px">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-ng-click="CloseImportExport()" aria-label="Close"><span aria-hidden="true">x</span></button>
+                            <h4 class="modal-title">Update Name List</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-sm-4"><label for="export" class="control-label"><span class="asterisk">*</span>&nbsp;Operator:</label></div>
+                                <div class="col-sm-8">
+                                    <select name="countryOperator" class="ng-pristine ng-valid form-control" data-ng-model="SelectedCountryOperator" data-ng-options="item.cd_id as item.cd_name for item in CountryOperator" data-ng-change="CountryOperatorChange(meta.cm_id)" required>
+                                        <option value="">Select Operator</option>
+                                    </select>
+                                    <span style="color: red" data-ng-show="vcodeAddUpdateForm.$submitted || vcodeAddUpdateForm.countryOperator.$touched">
+                                        <span data-ng-show="vcodeAddUpdateForm.countryOperator.$error.required">Please select Operator.</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">&nbsp;</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4"><label for="export" class="control-label"><span class="asterisk">*</span>&nbsp;Vcode:</label></div>
+                                <div class="col-sm-8">
+                                    <input type="text" name="vcodeName" class="ng-pristine ng-valid form-control" data-ng-model="SelectedVcode" required />
+                                    <span style="color: red" data-ng-show="vcodeAddUpdateForm.$submitted || vcodeAddUpdateForm.vcodeName.$touched">
+                                        <span data-ng-show="vcodeAddUpdateForm.vcodeName.$error.required">Please enter Vcode for Operator.</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" title="Save" data-ng-click="SubmitVcode()" class="btn btn-primary btn-w-xs">Submit</button>
+                            <button type="button" title="Close" data-ng-click="CloseImportExport()" class="btn btn-primary btn-w-xs">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- Comment Pop-Up Ends-->
+    </div>
+    <!-- /.content-container -->
+</div>
+<!-- /.content -->
+</div>

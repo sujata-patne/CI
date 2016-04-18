@@ -1,0 +1,171 @@
+<div class="container">
+    <div class="content">
+        <div class="content-container">
+            <div class="content-header">
+                <h2 class="content-header-title">Content Catalog</h2>
+            </div>
+            <!-- /.content-header -->
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label">Content Id:</label>
+                            <div class="col-sm-9">
+                                {{ contentid }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label">Content Tile:</label>
+                            <div class="col-sm-9">
+                                {{ contenttitle }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label">Property Title:</label>
+                            <div class="col-sm-9">
+                                {{ propertytitle }}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portlet">
+                        <div class="portlet-header">
+                            <h3>Files Listing </h3>
+                        </div>
+                        <!-- /.portlet-header -->
+                        <div class="portlet-content">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="5" style="text-align: center;">Thumb Preview</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr data-ng-repeat="file in filesdetail">
+                                        <td data-ng-repeat="files in file" style="text-align: center">
+                                            <div data-ng-if="SelectedContentType == 8">
+                                                <a class="fancybox" rel="group" href="{{base_url}}{{ files.cf_url }}" title="{{files.filename}}">
+                                                    <img src="{{base_url}}{{ files.cf_url }}" alt="img1" width="150" height="150" />
+                                                    <br />
+                                                        {{  files.width       }}x{{files.height }}</a>
+                                            </div>
+                                            <div data-ng-if="SelectedContentType == 9">
+                                                <a class="fancybox-video fancybox.iframe" rel="groups" href="{{base_url}}{{ files.cf_url }}" title="{{files.filename}}">
+                                                    <img src="{{base_url}}{{ files.cm_thumb_url }}" alt="img1" width="150" height="150" />
+                                                    <br />
+                                                        {{  files.width       }}x{{files.height }}</a>
+                                            </div>
+                                            <div data-ng-if="SelectedContentType == 10">
+                                                <a class="fancybox-audio fancybox.iframe" rel="group" href="{{base_url}}{{ files.cf_url }}" title="{{files.filename}}">
+                                                    <img src="{{base_url}}{{ files.cm_thumb_url }}" alt="img1" width="150" height="150" />
+                                                    <br />
+                                                        128</a>
+                                            </div>
+                                        </td>
+                                                                                    <!-- <td data-ng-if="files.type == 'image'">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <a class="fancybox" rel="group" href="{{ files.cf_url }}"><img src="{{ files.cf_url }}" alt="img1" width="150" height="150" /></a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </td>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <td data-ng-if="files.type == 'video'">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <a class="fancybox-video fancybox.iframe" rel="groups" href="{{ files.cf_url }}"><img src="{{ files.cf_url }}" alt="img1" width="150" height="150" /></a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </td>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <td data-ng-if="files.type == 'audio'">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <a class="fancybox-audio fancybox.iframe" rel="group" href="{{ files.cf_url }}"><img src="{{ files.cf_url }}" alt="img1" width="150" height="150" /></a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </td>-->
+                                        <!--<td data-ng-if="SelectedContentType == 8">-->
+                                        <!--<a class="fancybox" rel="group" href="{{base_url}}{{ files.cf_url }}" title="{{files.filename}}">-->
+                                        <!--<img src="{{base_url}}{{ files.cf_url }}" alt="img1" width="150" height="150" />-->
+                                        <!--{{  files.width       }}x{{files.height }}</a>-->
+                                        <!--</td>-->
+                                        <!--<td data-ng-if="SelectedContentType == 9">-->
+                                        <!--<a class="fancybox-video fancybox.iframe" rel="groups" href="{{base_url}}{{ files.cf_url }}" title="{{files.filename}}">-->
+                                        <!--<img src="{{base_url}}{{ files.cm_thumb_url }}" alt="img1" width="150" height="150" />-->
+                                        <!--{{  files.width       }}x{{files.height }}</a>-->
+                                        <!--</td>-->
+                                        <!--<td data-ng-if="SelectedContentType == 10">-->
+                                        <!--<a class="fancybox-audio fancybox.iframe" rel="group" href="{{base_url}}{{ files.cf_url }}" title="{{files.filename}}">-->
+                                        <!--<img src="{{base_url}}{{ files.cf_url }}" alt="img1" width="150" height="150" />-->
+                                        <!--{{  files.width       }}x{{files.height }}</a>-->
+                                        <!--</td>-->
+                                        <!--<td>{{  files.cf_url}}</td>-->
+                                        <!--<td>{{  files.width       }}x{{files.height }}</td>-->
+                                                                                    <!-- <td data-ng-if="ContentType == 9">
+                                            
+                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <video>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <source type="video/mp4" src="{{ files.cf_url }}" >
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </video>
+                                            
+                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </td>-->
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                            <div class="col-xs-12">
+                                <span class="col-sm-offset-3 col-sm-9" data-ng-show="successvisible" style="color: green;">{{success}}
+                                </span>
+                                <span class="col-sm-offset-3 col-sm-9" data-ng-show="errorvisible" style="color: red;">{{error}}
+                                </span>
+                                <form class="form-horizontal" role="form" data-ng-submit="UploadMetadata()">
+                                    <div class="form-group" data-ng-show="FileUploadVisible">
+                                        <label for="firstname" class="col-sm-3 control-label">Select Files to Replace</label>
+                                        <div class="col-sm-9">
+                                            <div class="col-sm-6">
+                                                <input type="file" class="form-control" id="physicalFile" onchange="angular.element(this).scope().uploadPhysicalFile(this.files)" multiple />
+                                            </div>
+                                            <div class="col-sm-3" data-ng-show="Submitbuttonvisible">
+                                                <button type="submit" title="Submit" class="btn btn-primary btn-w-md">Submit</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="col-sm-3">
+                                                &nbsp;
+                                            </div>
+                                            <div class="col-sm-9" style="color: red;">
+                                               {{Filesuggestion}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                                                            <!-- <div class="col-xs-12">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                <div class="form-group">
+                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <video width="560" height="340" controls>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <source src="../video/mov_bbb.mp4" type='video/mp4'>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Your browser does not support HTML5 video.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </video>
+                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>-->
+                        </div>
+                        <!-- /.portlet-content -->
+                    </div>
+                    <!-- /.portlet -->
+                </div>
+                <!-- /.col -->
+            </div>
+        </div>
+        <!-- /.content-container -->
+    </div>
+    <!-- /.content -->
+    <script type="text/javascript">
+        $(function () {
+            $('.fancybox').fancybox();
+        
+            $('.fancybox-audio').fancybox();
+        
+            $(".fancybox-video").fancybox({
+                width: '70%',
+                height: '70%'
+            });
+        
+        });
+    </script>
+</div>

@@ -1,0 +1,170 @@
+.home-navebar {
+    display: none;
+}
+
+.mainbar .mainbar-nav {
+    float: left;
+}
+
+.navbar-brand-image {
+    padding-top: 20px;
+    padding-right: 25px;
+}
+
+.navbar-nav.navbar-right:last-child {
+    margin-top: 15px;
+    color: #fff;
+    margin-right: 0px;
+}
+
+.container {
+    width: 95%;
+}
+
+.fa {
+    font-size: 21px;
+}
+
+table .fa:hover {
+    color: #bf0000;
+}
+
+i.fa.fa-calendar {
+    font-size: 12px;
+}
+
+.tbl-none {
+    display: none;
+}
+
+.navbar-right {
+    top: 5px;
+    right: 5px;
+    position: absolute;
+    color: #fff;
+    list-style-type: none;
+}
+
+@media (max-width:1200px) {
+    .mainbar .mainbar-nav > li > a {
+        font-size: 12px;
+        padding: 10px 2px;
+    }
+
+    .navbar-nav.navbar-right:last-child {
+        font-size: 12px;
+    }
+
+    .mainbar {
+        height: 150px;
+    }
+}
+
+@media (max-width:991px) {
+    .mainbar {
+        height: 200px;
+    }
+
+    .navbar-brand-image {
+        padding-top: 5px;
+    }
+
+    .mainbar .mainbar-nav {
+        width: 100%;
+        margin-top: 0px;
+    }
+
+    .navbar-nav.navbar-right:last-child {
+        margin-top: -130px;
+    }
+
+    .navbar-nav.navbar-right:last-child {
+        margin-right: 15px;
+    }
+}
+
+@media (max-width:767px) {
+    .mainbar {
+        height: auto;
+    }
+
+    .mainbar .mainbar-nav > li > a {
+        font-size: 14px;
+        padding: 10px 15px;
+        text-align: left;
+    }
+    /*.navbar-nav.navbar-right:last-child{
+display:none;
+}*/
+    .mainbar .mainbar-toggle {
+        margin-top: 10px;
+    }
+
+    .home-navebar {
+        display: block;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    .navbar-brand-image {
+        padding: 0px;
+    }
+
+    .home-navebar {
+        width: 50%;
+    }
+
+    .navbar-right {
+        color: #000;
+    }
+}
+
+@media (max-width:480px) {
+    .home-navebar {
+        width: 30%;
+    }
+
+    .home-navebar img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+#Comment {
+    background-color: rgba(0,0,0,.2);
+    bottom: 0;
+    cursor: default;
+    left: 0;
+    opacity: 1;
+    position: fixed;
+    right: 0;
+    top: 0;
+    /* visibility: hidden; */
+    z-index: 999;
+}
+#Export {
+    background-color: rgba(0,0,0,.2);
+    bottom: 0;
+    cursor: default;
+    left: 0;
+    opacity: 1;
+    position: fixed;
+    right: 0;
+    top: 0;
+    /* visibility: hidden; */
+    z-index: 999;
+}
+#Import {
+    background-color: rgba(0,0,0,.2);
+    bottom: 0;
+    cursor: default;
+    left: 0;
+    opacity: 1;
+    position: fixed;
+    right: 0;
+    top: 0;
+    /* visibility: hidden; */
+    z-index: 999;
+}

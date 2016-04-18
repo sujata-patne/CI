@@ -1,0 +1,181 @@
+<div class="container">
+    <div class="content">
+        <div class="content-container">
+            <div class="content-header">
+                <h2 class="content-header-title">{{PageTitle}} Vendor</h2>
+            </div>
+            <div class="portlet">
+                <div class="portlet-header">
+                    <h3><i class="fa fa-tasks"></i>Field marked with <span class="asterisk">*</span> are Mandatory</h3>
+                </div>
+                <!-- /.portlet-header -->
+                <div class="portlet-content">
+                    <!-- /.content-header -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form class="form-horizontal" role="form" name="vendorForm" data-ng-submit="submitForm(vendorForm.$valid)">
+                                <div class="col-sm-6 col-md-7">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="firstname" class="col-sm-12"><span class="asterisk">*</span>Title</label>
+                                            <div class="col-sm-12">
+                                                <input type="text" data-ng-maxlength="50" class="ng-pristine ng-valid form-control" name="title" id="Title" placeholder="Title" data-ng-model="Title" data-ng-disabled="IsEdit" required>
+                                                <span style="color: red" data-ng-show="vendorForm.$submitted || vendorForm.title.$touched">
+                                                    <span data-ng-show="vendorForm.title.$error.required">Please enter valid Title.</span>
+                                                    <span data-ng-show="vendorForm.title.$error.maxlength">Maximum 50 characters allowed!</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Currency" class="col-sm-12">Short Description</label>
+                                            <div class="col-sm-12">
+                                                <textarea name="description" cols="5" data-ng-maxlength="100" class="form-control" data-ng-model="ShortDescription" data-ng-disabled="IsEdit"></textarea>
+                                                <span style="color: red" data-ng-show="vendorForm.$submitted || vendorForm.description.$touched">
+                                                    <span data-ng-show="vendorForm.description.$error.maxlength">Maximum 100 characters allowed!</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="userid" class="col-sm-12"><span class="asterisk">*</span>Contact Person Name</label>
+                                            <div class="col-sm-12">
+                                                <input type="text" data-ng-maxlength="50" name="contactpersonname" class="ng-pristine ng-valid form-control" id="PersonName" placeholder="Contact Person Name" data-ng-model="PersonName" data-ng-disabled="IsEdit" required>
+                                                <span style="color: red" data-ng-show="vendorForm.$submitted || vendorForm.contactpersonname.$touched">
+                                                    <span data-ng-show="vendorForm.contactpersonname.$error.required">Please enter Person Name.</span>
+                                                    <span data-ng-show="vendorForm.contactpersonname.$error.maxlength">Maximum 50 characters allowed!</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="userid" class="col-sm-12"><span class="asterisk">*</span>Contact Person Email</label>
+                                            <div class="col-sm-12">
+                                                <input type="email" data-ng-maxlength="50" name="contactpersonemail" data-ng-pattern="/^[_A-Za-z0-9]+(\.[_A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[a-z]{2,4})$/" class="ng-pristine ng-valid form-control" id="PersonEmail" placeholder="Contact Person Email" data-ng-model="PersonEmail" data-ng-disabled="IsEdit" required>
+                                                <span style="color: red" data-ng-show="vendorForm.$submitted || vendorForm.contactpersonemail.$touched">
+                                                    <span data-ng-show="vendorForm.contactpersonemail.$error.required">Email is required.</span>
+                                                    <span data-ng-show="vendorForm.contactpersonemail.$error.pattern">Please enter valid Email.</span>
+                                                    <span data-ng-show="vendorForm.contactpersonemail.$error.maxlength">Maximum 50 characters allowed!</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="userid" class="col-sm-12"><span class="asterisk">*</span>Contact Person Mobile no</label>
+                                            <div class="col-sm-12">
+                                                <input type="text" name="contactpersonemobileno" data-ng-pattern="/^\+?\d{10}$/" data-ng-maxlength="10" data-ng-minlength="10" class="ng-pristine ng-valid form-control" id="PersonMobileNo" placeholder="Contact Person Mobile no" maxlength="10" data-ng-model="PersonMobileNo" data-ng-disabled="IsEdit" required>
+                                                <span style="color: red" data-ng-show="vendorForm.$submitted || vendorForm.contactpersonemobileno.$touched">
+                                                    <span data-ng-show="vendorForm.contactpersonemobileno.$error.required">Please enter Mobile no.</span>
+                                                    <span data-ng-show="vendorForm.contactpersonemobileno.$error.pattern">Invalid Mobile No.</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="col-sm-12"><span class="asterisk">*</span>Starts from</label>
+                                            <div class="col-sm-12">
+                                                <div class="input-group date">
+                                                    <input my-enter="" type="text" class="form-control" name="startfrom" datepicker-popup="MM-dd-yyyy" data-ng-model="StartDate" placeholder="Start date" data-ng-disabled="IsEdit" data-ng-click="openDatepicker($event)" data-is-open="open1" required />
+                                                    <span class="input-group-btn">
+                                                        <button type="button" data-ng-disabled="IsEdit" class="btn btn-default" data-ng-click="openDatepicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                    </span>
+                                                </div>
+                                                <span style="color: red" data-ng-show="vendorForm.$submitted || vendorForm.startfrom.$touched">
+                                                    <span data-ng-show="vendorForm.startfrom.$error.required">Please select start date.</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="col-sm-12"><span class="asterisk">*</span>Expired On</label>
+                                            <div class="col-sm-12">
+                                                <div class="input-group date">
+                                                    <input my-enter="" type="text" class="form-control" name="expireon" bk-auto-focus datepicker-popup="MM-dd-yyyy" data-ng-model="ExpiryDate" placeholder="End date" data-ng-click="openEndDatepicker($event)" data-ng-disabled="IsEdit" data-is-open="open2" required />
+                                                    <span class="input-group-btn">
+                                                        <button type="button" data-ng-disabled="IsEdit" class="btn btn-default" data-ng-click="openEndDatepicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                    </span>
+                                                </div>
+                                                <span style="color: red" data-ng-show="vendorForm.$submitted || vendorForm.expireon.$touched">
+                                                    <span data-ng-show="vendorForm.expireon.$error.required">Please select expiry date.</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-5">
+                                    <div class="portlet">
+                                        <div class="portlet-header">
+                                            <h3><i class="fa fa-tasks"></i>Rights Setting </h3>
+                                        </div>
+                                        <!-- /.portlet-header -->
+                                        <div class="portlet-content">
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputPassword1" class="col-sm-12"><span class="asterisk">*</span>Allowed Content Type</label>
+                                                            <div class="col-sm-12">
+                                                                <select multiple name="allowedcontenttype" class="ng-pristine ng-valid form-control" data-ng-model="SelectedAllowedContentType" data-ng-options="item.cd_id as item.cd_name for item in AllowedContentType" data-ng-disabled="IsEdit" required="">
+                                                                </select>
+                                                                <span style="color: red" data-ng-show="vendorForm.$submitted || vendorForm.allowedcontenttype.$touched">
+                                                                    <span data-ng-show="vendorForm.allowedcontenttype.$error.required">Please Select Allowed Content Type.</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputPassword1" class="col-sm-12"><span class="asterisk">*</span>Country Distribution rights</label>
+                                                            <div class="col-sm-12">
+                                                                <select multiple name="countrydistributionrights" class="ng-pristine ng-valid form-control" data-ng-model="SelectedCountryDistributionRights" data-ng-options="item.cd_id as item.cd_name for item in CountryDistributionRights" data-ng-disabled="IsEdit" required="">
+                                                                </select>
+                                                                <span style="color: red" data-ng-show="vendorForm.$submitted || vendorForm.countrydistributionrights.$touched">
+                                                                    <span data-ng-show="vendorForm.countrydistributionrights.$error.required">Please Select Country Distribution rights.</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputPassword1" class="col-sm-12"><span class="asterisk">*</span>Channel Distribution rights</label>
+                                                            <div class="col-sm-12">
+                                                                <select multiple name="channeldistridutionright" class="ng-pristine ng-valid form-control" data-ng-model="SelectedChannelDistributionRights" data-ng-options="item.cd_id as item.cd_name for item in ChannelDistributionRights" data-ng-disabled="IsEdit" required="">
+                                                                </select>
+                                                                <span style="color: red" data-ng-show="vendorForm.$submitted || vendorForm.channeldistridutionright.$touched">
+                                                                    <span data-ng-show="vendorForm.channeldistridutionright.$error.required">Please Select Channel Distribution rights.</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="mobileno" class="col-sm-12">Allow to change rights at property level</label>
+                                                            <div class="col-sm-12">
+                                                                <label class="radio-inline">
+                                                                    <input type="radio" name="inline_optionsRadios" id="inline_optionsRadios1" value="1" data-ng-model="Checked" data-ng-disabled="IsEdit" data-ng-change="RadioChange()">
+                                                                    Yes
+                                                                </label>
+                                                                <label class="radio-inline">
+                                                                    <input type="radio" name="inline_optionsRadios" id="inline_optionsRadios2" value="0" data-ng-model="Checked" data-ng-disabled="IsEdit" data-ng-change="RadioChange()">
+                                                                    No
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /.row -->
+                                        </div>
+                                        <!-- /.portlet-content -->
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="col-sm-offset-5 col-sm-7">
+                                        <button type="submit" data-ng-hide="IsEdit" title="Submit" data-ng-hide="hidebtn" class="btn btn-primary btn-w-md">Submit</button>
+                                        <input type="reset" value="Reset" data-ng-hide="IsDisable" data-ng-click="resetform()" title="Reset" type="button" class="btn btn-default btn-w-md" />
+                                        <a href="#vendor-list">
+                                            <input type="button" title="Back To Vendorlist" class="btn btn-primary btn-w-xs" value="Back To VendorList" /></a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.content-container -->
+    </div>
+    <!-- /.content -->
+</div>

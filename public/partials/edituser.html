@@ -1,0 +1,100 @@
+<div class="container">
+    <div class="content">
+        <div class="content-container">
+            <div class="content-header">
+                <h2 class="content-header-title">Edit User</h2>
+            </div>
+            <!-- /.content-header -->
+            <div class="row">
+                <div class="col-md-6">
+                    <form class="form-horizontal" role="form" name="userform" data-ng-submit="SaveUserDetails(userform.$valid)">
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label"><span class="asterisk">*</span>Full Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="u_fullname" data-ng-maxlength="50" class="form-control" id="" placeholder="Full Name" data-ng-model="FullName" required>
+                                <!--    <span data-ng-show="NameValidation" class="WarningMsg">Please Insert Full Name</span>-->
+                                <span style="color: red" data-ng-show="userform.$submitted || userform.u_fullname.$touched">
+                                    <span data-ng-show="userform.u_fullname.$error.required">FullName is required.</span>
+                                    <span data-ng-show="userform.u_fullname.$error.maxlength">Maximum 50 characters allowed!</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label"><span class="asterisk">*</span>User Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="u_username" data-ng-maxlength="50" class="form-control" id="exampleInputEmail1" placeholder="User Name" data-ng-model="UserName" required>
+                                <span style="color: red" data-ng-show="userform.$submitted || userform.u_username.$touched">
+                                    <span data-ng-show="userform.u_username.$error.required">UserName is required.</span>
+                                    <span data-ng-show="userform.u_username.$error.maxlength">Maximum 50 characters allowed!</span>
+                                </span>
+                                <!-- <span data-ng-show="UserNameValidation" class="WarningMsg">Please Insert User Name</span>-->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Currency" class="col-sm-3 control-label"><span class="asterisk">*</span>Email Id</label>
+                            <div class="col-sm-9">
+                                <input type="email" name="u_emailid" data-ng-maxlength="50" class="form-control" id="Text1" placeholder="Email" data-ng-pattern="/^[_A-Za-z0-9]+(\.[_A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[a-z]{2,4})$/" data-ng-model="EmailId" required>
+                                <!--  <span data-ng-show="EmailValidation" class="WarningMsg">Please Insert Email Id</span>-->
+                                <span style="color: red" data-ng-show="userform.$submitted || userform.u_emailid.$touched">
+                                    <span data-ng-show="userform.u_emailid.$error.required">Email is required.</span>
+                                    <span data-ng-show="userform.u_emailid.$error.pattern">Not valid email!</span>
+                                    <span data-ng-show="userform.u_emailid.$error.maxlength">Maximum 50 characters allowed!</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label"><span class="asterisk">*</span>Mobile No</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="u_mobileno" data-ng-maxlength="10" class="form-control" id="Text2" placeholder="Mobile no" data-ng-minlength="10" data-ng-maxlength="10" data-ng-model="MobileNo" data-ng-pattern="/^[0-9]*$/" required>
+                                <!-- <span data-ng-show="MobileValidation && userform.u_mobileno.$invalid" class="WarningMsg">Please Enter Valid Mobile No.</span>-->
+                                <span style="color: red" data-ng-show="userform.$submitted || userform.u_mobileno.$touched">
+                                    <span data-ng-show="userform.u_mobileno.$error.required">Mobile No. is required.</span>
+                                    <span data-ng-show="userform.u_mobileno.$error.maxlength">Invalid Mobile No.</span>
+                                    <span data-ng-show="userform.u_mobileno.$error.minlength">Invalid Mobile No.</span>
+                                    <span data-ng-show="userform.u_mobileno.$error.maxlength">Maximum 10 characters allowed!</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label"><span class="asterisk">*</span>Role</label>
+                            <div class="col-sm-9">
+                                <span class="ui-select">
+                                                                            <!--  <select id="select-input" name="u_role" class="form-control ng-pristine ng-valid" data-ng-model="SelectedUserRole">
+                                                                                                                        <option value="0" selected="selected">--Select Role--</option>
+                                                                                                                        <option data-ng-repeat="role in UserRole" value="{{ role.cd_name }}">{{ role.cd_name }}</option>
+                                                                                                                    </select>-->
+                                    <select name="u_role" class="form-control" data-ng-model="SelectedUserRole" data-ng-options="item.cd_name as item.cd_name for item in UserRole" required>
+                                        <option value="">--Select Role--</option>
+                                    </select>
+                                </span>
+                                <span style="color: red" ng-show="userform.$submitted || userform.u_role.$touched">
+                                    <span ng-show="userform.u_role.$error.required">Please Select Role.</span>
+                                </span>
+                                                                    <!--<span data-ng-show="RoleValidationVisible" style="color: #f00;">Please Select Role First.
+                                                                                                        </span>-->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label">Vendor</label>
+                            <div class="col-sm-9">
+                                <span class="ui-select-list">
+                                    <select multiple class="ng-pristine ng-valid form-control" data-ng-model="SelectedVendorList" data-ng-options="item.vd_id as item.vd_name for item in Vendor">
+                                    </select>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <button type="submit" title="Submit" class="btn btn-primary btn-w-md">Submit</button>
+                                <input type="button" title="Back To Userlist" class="btn btn-primary btn-w-xs" data-ng-click="BackToList()" value="Back To UserList" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /.content-container -->
+    </div>
+    <!-- /.content -->
+</div>
+

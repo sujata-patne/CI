@@ -1,0 +1,109 @@
+<div class="container">
+    <div class="content">
+        <div class="content-container">
+            <div class="content-header">
+                <h2 class="content-header-title">Master List Management - {{PageTitle}}</h2>
+            </div>
+            <!-- /.content-header -->
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form" name="masterlistform" data-ng-submit="submitForm(masterlistform.$valid)" novalidate>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="selectparenttype" class="col-sm-12"><span class="asterisk">*</span>Select Content Type</label>
+
+                                <div class="col-sm-12">
+                                    <span class="ui-select">
+                                        <select multiple="multiple" name="selectparenttype" class="form-control" data-ng-model="SelectedContentType" data-ng-options="item.cd_id as item.cd_name for item in ContentTypes" required>
+                                        </select>
+                                        <span style="color: red" ng-show="masterlistform.$submitted || masterlistform.selectparenttype.$touched">
+                                            <span ng-show="masterlistform.selectparenttype.$error.required">Please Select the Content Type</span>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="firstname" class="col-sm-12">Select Master List of</label>
+                                <div class="col-sm-12">
+                                    <span class="ui-select">
+                                        <select name="masterlist" class="ng-pristine ng-valid form-control" data-ng-disabled="MasterDisable" data-ng-model="SelectedMasterList" data-ng-options="item.cm_id as item.cm_name for item in MasterList" data-ng-change="MasterListChange()" required>
+                                            <option value="">--- Select Master List ---</option>
+                                        </select>
+                                        <span style="color: red" data-ng-show="masterlistform.$submitted || masterlistform.masterlist.$touched">
+                                            <span data-ng-show="masterlistform.masterlist.$error.required">Please Select Master List.</span>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="firstname" class="col-sm-12">Add / Edit Main Title</label>
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" data-ng-maxlength="200" data-ng-disabled="IsEditPermission" name="mainTitle" placeholder="Title" data-ng-model="MainTitle" required>
+                                    <span style="color: red" data-ng-show="masterlistform.$submitted || masterlistform.mainTitle.$touched">
+                                        <span data-ng-show="masterlistform.mainTitle.$error.required">Please Insert Main Title.</span>
+                                        <span data-ng-show="masterlistform.mainTitle.$error.maxlength">Maximum 200 characters allowed!</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="firstname" class="col-sm-12">Add / Edit Display Title</label>
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" data-ng-maxlength="200" data-ng-disabled="IsEditPermission" name="dispalyTitle" placeholder="Title" data-ng-model="DisplayTitle">
+                                    <span style="color: red" data-ng-show="masterlistform.$submitted || masterlistform.dispalyTitle.$touched">
+                                        <span data-ng-show="masterlistform.dispalyTitle.$error.required">Please Insert Display Title.</span>
+                                        <span data-ng-show="masterlistform.dispalyTitle.$error.maxlength">Maximum 200 characters allowed!</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="portlet">
+                                <div class="portlet-header">
+                                    <h3><i class="fa fa-tasks"></i>For Celebrity Only </h3>
+                                </div>
+                                <!-- /.portlet-header -->
+                                <div class="portlet-content">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1" class="col-sm-4 control-label">Celebrity Role</label>
+                                                <div class="col-sm-8">
+                                                    <span class="ui-select-list">
+                                                        <select multiple="multiple" id="select-multi-input" class="form-control" data-ng-model="SelectedCelebrityRole" data-ng-options="item.cd_id as item.cd_name for item in CelebrityRole" data-ng-disabled="CelebrityRoleDisable">
+                                                        </select>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="firstname" class="col-sm-4 control-label">Alias</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" data-ng-maxlength="40" class="form-control" name="alias" id="alias" placeholder="Alias" data-ng-model="Alias" data-ng-disabled="CelebrityRoleDisable">
+                                                    <span style="color: red" data-ng-show="masterlistform.$submitted || masterlistform.alias.$touched">
+                                                        <span data-ng-show="masterlistform.alias.$error.maxlength">Maximum 40 characters allowed!</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- /.row -->
+                                </div>
+                                <!-- /.portlet-content -->
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="col-sm-offset-5 col-sm-7">
+                                <button type="submit" data-ng-hide="IsEditPermission" class="btn btn-primary btn-w-md" title="Save">Submit</button>
+                                <input type="reset" value="Reset" data-ng-hide="MasterDisable" data-ng-click="resetform()" title="Reset" type="button" class="btn btn-default btn-w-md" />
+                                <a href="#master-list">
+                                    <input type="button" value="Back To MasterList" class="btn btn-primary btn-w-md" title="Back To MasterList" /></a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /.content-container -->
+    </div>
+    <!-- /.content -->
+</div>

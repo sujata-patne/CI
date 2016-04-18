@@ -1,0 +1,170 @@
+<div class="container">
+    <div class="content">
+        <div class="content-container">
+            <div class="content-header">
+                <h2 class="content-header-title">{{PageTitle}} Property</h2>
+
+            </div>
+            <div class="portlet">
+                <div class="portlet-header">
+                    <h3><i class="fa fa-tasks"></i>Field marked with <span class="asterisk">*</span> are Mandatory</h3>
+                </div>
+                <!-- /.portlet-header -->
+                <div class="portlet-content">
+                    <!-- /.content-header -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span class="col-sm-offset-3 col-sm-9" data-ng-show="errorvisible" style="color: red;">{{error}}
+                            </span>
+                            <span class="col-sm-offset-3 col-sm-9" data-ng-show="successvisible" style="color: green;">{{success}}
+                            </span>
+                            <form class="form-horizontal" name="propertyForm" role="form" data-ng-submit="submitForm(propertyForm.$valid)">
+                                <div class="col-sm-6 col-md-7">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="firstname" class="col-sm-12"><span class="asterisk">*</span>Select Vendor Title</label>
+                                            <div class="col-sm-12">
+                                                <span class="ui-select">
+                                                    <select name="vendor" class="ng-pristine ng-valid form-control" data-ng-disabled="IsDisable" data-ng-model="SelectedVendor" data-ng-options="item.vd_id as item.vd_name for item in Vendors" data-ng-change="VendorChange()" required>
+                                                        <option value="">--Select Vendor--</option>
+                                                    </select>
+                                                    <span style="color: red" data-ng-show="propertyForm.$submitted || propertyForm.vendor.$touched">
+                                                        <span data-ng-show="propertyForm.vendor.$error.required">Please Select Vendor.</span>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Currency" class="col-sm-12">Short Description</label>
+                                            <div class="col-sm-12">
+                                                <textarea cols="5" name="description" data-ng-maxlength="200" data-ng-disabled="IsEditPermission" class="form-control" data-ng-model="ShortDescription"></textarea>
+                                                <span style="color: red" data-ng-show="propertyForm.$submitted || propertyForm.description.$touched">
+                                                    <span data-ng-show="propertyForm.description.$error.maxlength">Maximum 200 characters allowed!</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="userid" class="col-sm-12"><span class="asterisk">*</span>Release Year</label>
+                                            <div class="col-sm-12">
+                                                <input type="number" name="releaseyear" data-ng-maxlength="4" data-ng-disabled="IsEditPermission" class="ng-pristine ng-valid form-control" id="Title" placeholder="Release Year" data-ng-model="ReleaseYear" required>
+                                                <span style="color: red" data-ng-show="propertyForm.$submitted || propertyForm.releaseyear.$touched">
+                                                    <span data-ng-show="propertyForm.releaseyear.$error.required">Please enter Release Year.</span>
+                                                    <span data-ng-show="propertyForm.releaseyear.$error.maxlength">Maximum 4 characters allowed!</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="col-sm-12"><span class="asterisk">*</span>Title</label>
+                                            <div class="col-sm-12">
+                                                <input type="text" name="title" data-ng-maxlength="200" data-ng-disabled="IsEditPermission" class="ng-pristine ng-valid form-control" id="Text1" placeholder="Title" data-ng-model="Title" required>
+                                                <span style="color: red" data-ng-show="propertyForm.$submitted || propertyForm.title.$touched">
+                                                    <span data-ng-show="propertyForm.title.$error.required">Please enter Title.</span>
+                                                    <span data-ng-show="propertyForm.title.$error.maxlength">Maximum 200 characters allowed!</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="col-sm-12"><span class="asterisk">*</span>Starts from</label>
+                                            <div class="col-sm-12">
+                                                <div class="input-group date">
+                                                    <input my-enter="" type="text" name="startfrom" class="form-control" bk-auto-focus datepicker-popup="MM-dd-yyyy" data-ng-model="StartDate" placeholder="Start date" data-ng-disabled="IsEditPermission" data-ng-click="openDatepicker($event)" data-is-open="open1" required />
+                                                    <span class="input-group-btn">
+                                                        <button type="button" data-ng-disabled="IsEditPermission" class="btn btn-default" data-ng-click="openDatepicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                    </span>
+                                                </div>
+                                                <span style="color: red" data-ng-show="propertyForm.$submitted || propertyForm.startfrom.$touched">
+                                                    <span data-ng-show="propertyForm.startfrom.$error.required">Please enter Start date.</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="col-sm-12"><span class="asterisk">*</span>Expired On</label>
+                                            <div class="col-sm-12">
+                                                <div class="input-group date">
+                                                    <input my-enter="" type="text" name="expiredate" class="form-control" bk-auto-focus datepicker-popup="MM-dd-yyyy" data-ng-model="ExpiryDate" placeholder="End date" data-ng-click="openEndDatepicker($event)" data-ng-disabled="IsEditPermission" data-is-open="open2" required />
+                                                    <span class="input-group-btn">
+                                                        <button type="button" data-ng-disabled="IsEditPermission" class="btn btn-default" data-ng-click="openEndDatepicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                    </span>
+                                                </div>
+                                                <span style="color: red" data-ng-show="propertyForm.$submitted || propertyForm.expiredate.$touched">
+                                                    <span data-ng-show="propertyForm.expiredate.$error.required">Please enter Expire date.</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-5" data-ng-show="RightsShow">
+                                    <div class="portlet">
+                                        <div class="portlet-header">
+                                            <h3><i class="fa fa-tasks"></i>Rights Setting </h3>
+                                        </div>
+                                        <!-- /.portlet-header -->
+                                        <div class="portlet-content">
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputPassword1" class="col-sm-12"><span class="asterisk">*</span>Allowed Content Type</label>
+                                                            <div class="col-sm-12">
+                                                                <select data-ng-disabled="IsEditPermission" class="ng-pristine ng-valid form-control" data-ng-model="SelectedAllowedContentType" data-ng-options="item.cd_id as item.cd_name for item in AllowedContentType" multiple size="3">
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputPassword1" class="col-sm-12"><span class="asterisk">*</span>Country Distribution rights</label>
+                                                            <div class="col-sm-12">
+                                                                <select data-ng-disabled="IsEditPermission" class="ng-pristine ng-valid form-control" data-ng-model="SelectedCountryDistributionRights" data-ng-options="item.cd_id as item.cd_name for item in CountryDistributionRights" multiple size="3">
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputPassword1" class="col-sm-12"><span class="asterisk">*</span>Channel Distribution rights</label>
+                                                            <div class="col-sm-12">
+                                                                <select data-ng-disabled="IsEditPermission" class="ng-pristine ng-valid form-control" data-ng-model="SelectedChannelDistributionRights" data-ng-options="item.cd_id as item.cd_name for item in ChannelDistributionRights" multiple size="3">
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="mobileno" class="col-sm-12">Allow to change rights at property level</label>
+                                                            <div class="col-sm-12">
+                                                                <label class="radio-inline">
+                                                                    <input data-ng-disabled="IsEditPermission" type="radio" name="inline_optionsRadios" id="inline_optionsRadios1" value="1" data-ng-model="Checked" data-ng-change="RadioChange()">
+                                                                    Yes
+                                                                </label>
+                                                                <label class="radio-inline">
+                                                                    <input data-ng-disabled="IsEditPermission" type="radio" name="inline_optionsRadios" id="inline_optionsRadios2" value="0" data-ng-model="Checked" data-ng-change="RadioChange()">
+                                                                    No
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /.row -->
+                                        </div>
+                                        <!-- /.portlet-content -->
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="col-sm-offset-5 col-sm-7">
+                                        <input type="submit" data-ng-hide="IsEditPermission" title="Submit" class="btn btn-primary btn-w-md" value="Submit" />
+                                        <input type="reset" data-ng-hide="IsDisable" title="Reset" data-ng-click="resetform()" value="Reset" class="btn btn-default btn-w-md" />
+                                        <a href="#property-list">
+                                            <input type="button" title="Back To Propertylist" class="btn btn-primary btn-w-xs" value="Back To PropertyList" /></a>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.content-container -->
+    </div>
+    <!-- /.content -->
+</div>
