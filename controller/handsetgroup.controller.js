@@ -10,6 +10,32 @@ var config = require('../config')();
 var fs = require('fs');
 var btoa = require("btoa");
 var wlogger = require("../config/logger");
+var reload = require('require-reload')(require);
+
+function Pad(padString, value, length) {
+    var str = value.toString();
+    while (str.length < length)
+        str = padString + str;
+
+    return str;
+}
+
+exports.allAction = function (req, res, next) {
+    var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
+    if (wlogger.logDate == currDate) {
+        var logDir = config.log_path;
+        var filePath = logDir + 'logs_'+currDate+'.log';
+        fs.stat(filePath, function(err, stat) {
+            if(err != null&& err.code == 'ENOENT') {
+                wlogger = reload('../config/logger');
+            }
+        });
+        next();
+    } else {
+        wlogger = reload('../config/logger');
+        next();
+    }
+}
 
 exports.gethandsetgroup = function (req, res, next) {
     try {

@@ -90,7 +90,7 @@
                                         <td>
                                             <a href="#{{i.edit}}/{{i.MetaId}}"><i title="Edit" class="fa fa-edit"></i></a>
                                             <a href="" data-ng-click="DeleteMetadata(i.cm_id,i.cm_title,i.cm_state)"><i data-ng-show="IsEditPermission" title="Delete" class="fa fa-times"></i></a>
-                                            <span ng-show="i.contentTypeName == 'CRBT'" >
+                                            <!--<span ng-show="i.contentTypeName == 'CRBT'" >
                                                 <span ng-show="(i.parentname == 'Audio') && i.cm_ispersonalized">
                                                     <a href="#" data-ng-click="ShowPopupForExport(i.cm_id)"><i title="Export" class="fa fa-cloud-download"></i></a>
                                                 </span>
@@ -100,7 +100,7 @@
                                                 <span ng-show="((UserRole == 'Moderator' || UserRole == 'Content Manager') && i.parentname == 'Audio') && !i.cm_ispersonalized">
                                                     <a href="#" data-ng-click="ShowPopupForVcode(i.cm_id)"><i title="Import" class="fa fa-cloud-upload"></i></a>
                                                 </span>
-                                            </span>
+                                            </span>-->
                                         </td>
                                     </tr>
                                     </tbody>
@@ -653,10 +653,10 @@
                             <div class="row">
                                 <div class="col-sm-4"><label for="export" class="control-label"><span class="asterisk">*</span>&nbsp;Operator:</label></div>
                                 <div class="col-sm-8">
-                                    <select name="countryOperator" class="ng-pristine ng-valid form-control" data-ng-model="SelectedCountryOperator" data-ng-options="item.cd_id as item.cd_name for item in CountryOperator" data-ng-change="CountryOperatorChange(meta.cm_id)" required>
+                                    <select name="countryOperator" class="ng-pristine ng-valid form-control" data-ng-model="SelectedCountryOperator" data-ng-options="item.cd_id as item.cd_name for item in CountryOperator" data-ng-change="getVcodeForGeneric(meta.cm_id)" required>
                                         <option value="">Select Operator</option>
                                     </select>
-                                    <span style="color: red" data-ng-show="vcodeAddUpdateForm.$submitted || vcodeAddUpdateForm.countryOperator.$touched">
+                                    <span style="color: red" data-ng-show="vcodeAddUpdateForm.$submitted">
                                         <span data-ng-show="vcodeAddUpdateForm.countryOperator.$error.required">Please select Operator.</span>
                                     </span>
                                 </div>
@@ -668,7 +668,7 @@
                                 <div class="col-sm-4"><label for="export" class="control-label"><span class="asterisk">*</span>&nbsp;Vcode:</label></div>
                                 <div class="col-sm-8">
                                     <input type="text" name="vcodeName" class="ng-pristine ng-valid form-control" data-ng-model="SelectedVcode" required />
-                                    <span style="color: red" data-ng-show="vcodeAddUpdateForm.$submitted || vcodeAddUpdateForm.vcodeName.$touched">
+                                    <span style="color: red" data-ng-show="vcodeAddUpdateForm.$submitted">
                                         <span data-ng-show="vcodeAddUpdateForm.vcodeName.$error.required">Please enter Vcode for Operator.</span>
                                     </span>
                                 </div>

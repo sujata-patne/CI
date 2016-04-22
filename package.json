@@ -17,8 +17,10 @@
     "nodemailer": "^1.4.0",
     "nprogress": "^0.2.0",
     "path": "^0.11.14",
+    "require-reload": "^0.2.2",
     "serve-favicon": "~2.3.0",
     "stylus": "^0.51.1",
+    "winston-daily-rotate-file": "^1.0.1",
     "xlsx": "^0.8.0"
   }
 }

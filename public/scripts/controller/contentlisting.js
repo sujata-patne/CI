@@ -69,7 +69,7 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
             $scope.SingleAudioVisible = true;
             $scope.BulkAudioVisible = false;
             if (meta.parentname == "Audio") {
-                $scope.Filesuggestion = " Filename must be ContentId_Bitrate.extension like [2345_128.mp3].";
+                $scope.Filesuggestion = " Filename must be ContentId_Bitrate.extension like [2345_0_128.mp3].";
             }
         }
         $scope.TypeName = meta.parentname;
@@ -97,7 +97,9 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
                 val.cf_url = val.cft_thumbnail_img_browse;
                 val.type = 'thumb';
                 val.Name = 'Thumb File';
-                val.filename = val.cf_url.substring(val.cf_url.lastIndexOf("/") + 1).toLowerCase();
+                //val.filename = val.cf_url.substring(val.cf_url.lastIndexOf("/") + 1).toLowerCase();
+                val.filename = (val.cf_url != '' && val.cf_url != null)?val.cf_url.substring(val.cf_url.lastIndexOf("/") + 1).toLowerCase():'';
+
                 $scope.Files.push(val);
             });
             _.each($scope.WallpaperFiles, function (val) {
@@ -113,19 +115,25 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
                 }
                 val.type = 'wallpaper';
                 val.Name = 'Wallpaper File';
-                val.filename = val.cf_url.substring(val.cf_url.lastIndexOf("/") + 1).toLowerCase();
+                //val.filename = val.cf_url.substring(val.cf_url.lastIndexOf("/") + 1).toLowerCase();
+                val.filename = (val.cf_url != '' && val.cf_url != null)?val.cf_url.substring(val.cf_url.lastIndexOf("/") + 1).toLowerCase():'';
+
                 $scope.Files.push(val);
             })
             _.each($scope.VideoFiles, function (val) {
                 val.type = 'video';
                 val.Name = 'Video File';
-                val.filename = val.cf_url.substring(val.cf_url.lastIndexOf("/") + 1).toLowerCase();
+                //val.filename = val.cf_url.substring(val.cf_url.lastIndexOf("/") + 1).toLowerCase();
+                val.filename = (val.cf_url != '' && val.cf_url != null)?val.cf_url.substring(val.cf_url.lastIndexOf("/") + 1).toLowerCase():'';
+
                 $scope.Files.push(val);
             });
             _.each($scope.AppFiles, function (val) {
                 val.type = 'app';
                 val.Name = 'AppsGames File';
-                val.filename = val.cf_url.substring(val.cf_url.lastIndexOf("/") + 1).toLowerCase();
+                //val.filename = val.cf_url.substring(val.cf_url.lastIndexOf("/") + 1).toLowerCase();
+                val.filename = (val.cf_url != '' && val.cf_url != null)?val.cf_url.substring(val.cf_url.lastIndexOf("/") + 1).toLowerCase():'';
+
                 $scope.Files.push(val);
             });
             _.each($scope.TextFiles, function (val) {
@@ -137,17 +145,20 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
             _.each($scope.OtherImages, function (val) {
                 val.type = 'otherimage';
                 val.Name = 'Supporting Image';
-                val.filename = val.cf_url.substring(val.cf_url.lastIndexOf("/") + 1).toLowerCase();
+                //val.filename = (val.cf_url != '' && val.cf_url != null)?val.cf_url.substring(val.cf_url.lastIndexOf("/") + 1).toLowerCase():'';
+                val.filename = (val.cf_url != '' && val.cf_url != null)?val.cf_url.substring(val.cf_url.lastIndexOf("/") + 1).toLowerCase():'';
+
                 $scope.Files.push(val);
             });
             _.each($scope.OtherVideos, function (val) {
                 val.type = 'othervideo';
                 val.Name = 'Supporting Video';
-                val.filename = val.cf_url.substring(val.cf_url.lastIndexOf("/") + 1).toLowerCase();
+                //val.filename = val.cf_url.substring(val.cf_url.lastIndexOf("/") + 1).toLowerCase();
+                val.filename = (val.cf_url != '' && val.cf_url != null)?val.cf_url.substring(val.cf_url.lastIndexOf("/") + 1).toLowerCase():'';
+
                 $scope.Files.push(val);
             });
             $scope.filesdetail = BindMasterList($scope.Files, 5);
-            console.log($scope.filesdetail)
 
             if (data) {
                 $scope.error = data;
@@ -186,15 +197,17 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
                 }
                 val.type = 'wallpaper';
                 val.Name = 'Audio Supporting Image File';
-                val.filename = val.cf_url.substring(val.cf_url.lastIndexOf("/") + 1).toLowerCase();
+                //val.filename = val.cf_url.substring(val.cf_url.lastIndexOf("/") + 1).toLowerCase();
+                val.filename = (val.cf_url != '' && val.cf_url != null)?val.cf_url.substring(val.cf_url.lastIndexOf("/") + 1).toLowerCase():'';
+
                 $scope.Files.push(val);
-                console.log(val.filename)
 
             }else if(fileExt == 'mp4'){
                 val.type = 'video';
                 val.Name = 'Audio Supporting Image File';
-                val.filename = val.cf_url.substring(val.cf_url.lastIndexOf("/") + 1).toLowerCase();
-                console.log(val.filename)
+                //val.filename = val.cf_url.substring(val.cf_url.lastIndexOf("/") + 1).toLowerCase();
+                val.filename = (val.cf_url != '' && val.cf_url != null)?val.cf_url.substring(val.cf_url.lastIndexOf("/") + 1).toLowerCase():'';
+
                 $scope.Files.push(val);
             }
         });

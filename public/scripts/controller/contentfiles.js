@@ -174,7 +174,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                             if (!status) {
                                 $scope.Files = metadata.Files;
                                 $scope.ThumbDataFiles = metadata.ThumbFiles;
-                                 $scope.cm_title = metadata.Metadata[0].cm_title;
+                                $scope.cm_title = metadata.Metadata[0].cm_title;
                                 if ($scope.TypeName == "Text") {
                                     $scope.LanguagesMetadata = metadata.Languages;
                                     _.each($scope.LanguagesMetadata, function (lang) {
@@ -184,7 +184,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                                 }
                                 else if ($scope.TypeName == "Audio") {
                                     $scope.LyricsLanguagesMetadata = metadata.LyricsLanguages;
-                                     _.each($scope.LyricsLanguagesMetadata, function (lang) {
+                                    _.each($scope.LyricsLanguagesMetadata, function (lang) {
                                         lang.MetaId = Icon.GetEncode(lang.ct_group_id);
                                         lang.file = '';
                                     })
@@ -258,7 +258,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
         $scope.thumberror = false;
         $scope.ThumbFiles = [];
         if ($scope.thumbfile) {
-             var thumblength = $scope.thumbfile.length;
+            var thumblength = $scope.thumbfile.length;
             if ((3 - $scope.ThumbDataFiles.length - thumblength) >= 0) {
 
                 function thumbloop(t) {
@@ -310,7 +310,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                 toastr.error($scope.thumberrormessage);
             }
         }
-		console.log($scope.ThumbFiles)
+        console.log($scope.ThumbFiles)
     }
 
     $scope.wallpaperfileuploader = function () {
@@ -577,7 +577,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
     $scope.textfileuploader = function (textfile, cm_id, ct_group_id, cd_name, MetaId, ct_param, ct_param_value) {
         if (textfile) {
             var texts = _.where($scope.Files, { ct_group_id: ct_group_id });
-             if ((10 - texts.length - textfile.length) >= 0) {
+            if ((10 - texts.length - textfile.length) >= 0) {
                 _.each(textfile, function (val) {
                     var count = _.where($scope.TextFiles, { ct_group_id: ct_group_id });
 
@@ -649,7 +649,6 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                 var flag = true;
                 var otherimages = _.where($scope.Files, { ct_param_value: 'otherimage' });
                 var othervideos = _.where($scope.Files, { ct_param_value: 'othervideo' });
-                console.log(otherimages.length);
                 if (imagecount != 0) {
                     if (!((3 - otherimages.length - imagecount) >= 0)) {
                         flag = false;
@@ -704,7 +703,6 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                         }
                     })
                 }
-                console.log($scope.CommonFiles)
             }
         }
     }
@@ -730,8 +728,8 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             })
             if (!$scope.commonfileerror) {
                 var flag = true;
-				 var otherimages = _.where($scope.Files, { ct_param_value: 'otherimage' });
-                 var othervideos = _.where($scope.Files, { ct_param_value: 'othervideo' });
+                var otherimages = _.where($scope.Files, { ct_param_value: 'otherimage' });
+                var othervideos = _.where($scope.Files, { ct_param_value: 'othervideo' });
                 if (imagecount != 0) {
                     if (!((5 - otherimages.length - imagecount) >= 0)) {
                         flag = false;
@@ -805,15 +803,15 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                             tu = tu + 1;
                             if (tu == $scope.ThumbFiles.length) {
                                 /*if ($scope.wallpaperfile) {
-                                    WallpaperUpload(0);
-                                }
-                                else {*/
-                                    $("#thumbfile").val("");
-                                    $scope.ThumbFiles = [];
-                                    $scope.thumbfile = null;
-                                    $scope.uploading = false;
-                                    ngProgress.complete();
-                               // }
+                                 WallpaperUpload(0);
+                                 }
+                                 else {*/
+                                $("#thumbfile").val("");
+                                $scope.ThumbFiles = [];
+                                $scope.thumbfile = null;
+                                $scope.uploading = false;
+                                ngProgress.complete();
+                                // }
                             }
                             else {
                                 wallpaperthumbupload(tu);
@@ -882,14 +880,14 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                             tu = tu + 1;
                             if (tu == $scope.ThumbFiles.length) {
                                 /*if ($scope.videofile) {
-                                    VideoUpload(0);
-                                }
-                                else {*/
-                                    $("#thumbfile").val("");
-                                    $scope.ThumbFiles = [];
-                                    $scope.thumbfile = null;
-                                    $scope.uploading = false;
-                                    ngProgress.complete();
+                                 VideoUpload(0);
+                                 }
+                                 else {*/
+                                $("#thumbfile").val("");
+                                $scope.ThumbFiles = [];
+                                $scope.thumbfile = null;
+                                $scope.uploading = false;
+                                ngProgress.complete();
                                 //}
                             }
                             else {
@@ -957,6 +955,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
         }
         else if ($scope.TypeName == "Audio") {
             //if ($scope.AudioZipError.length == 0) {
+            console.log($scope.CommonFiles.length)
             if ($scope.audiofile || $scope.CommonFiles.length || $scope.thumbfile || $scope.TextFiles.length > 0 || ($scope.AudioZipFiles.length > 0)) {
                 if ($scope.thumberror || $scope.audioerror) {
                     toastr.error($scope.thumberror ? $scope.thumberrormessage : $scope.audioerrormessage);
@@ -1033,8 +1032,9 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                     }
 
                     function AudioCommonUpload(tcu) {
+                        console.log(tcu)
                         var data = $scope.CommonFiles[tcu];
-                            ContentFile.Upload('/uploadotherfiles', {
+                        ContentFile.Upload('/uploadotherfiles', {
                             count: data.count,
                             file: data.file,
                             cm_title: $scope.cm_title,
@@ -1056,6 +1056,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                                 $scope.supportfile = null;
                                 $scope.uploading = false;
                                 ngProgress.complete();
+
                             }
                             else {
                                 AudioCommonUpload(tcu);
@@ -1108,33 +1109,34 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                     if ($scope.thumbfile) {
                         audiothumbupload(0);
                     }else {
-                        $scope.uploading = false;
-                        ngProgress.complete();
+                        //$scope.uploading = false;
+                        // ngProgress.complete();
                     }
                     if ($scope.audiofile != undefined) {
                         AudioUpload(0);
                     }else {
-                        $scope.uploading = false;
-                        ngProgress.complete();
+                        //  $scope.uploading = false;
+                        // ngProgress.complete();
                     }
                     if ($scope.CommonFiles.length > 0) {
                         AudioCommonUpload(0);
                     }else {
-                        $scope.uploading = false;
-                        ngProgress.complete();
+                        //$scope.uploading = false;
+                        //ngProgress.complete();
                     }
                     if ($scope.TextError.length == 0 && $scope.TextFiles.length > 0) {
-                         LyricsTextFileUpload(0);
+                        LyricsTextFileUpload(0);
                     }else {
-                         $scope.uploading = false;
-                         ngProgress.complete();
+                        //$scope.uploading = false;
+                        //ngProgress.complete();
                     }
+
                     /*if ($scope.AudioZipFiles.length > 0) {
-                        AudioZipUpload(0);
-                    }else {
-                         $scope.uploading = false;
-                         ngProgress.complete();
-                    }*/
+                     AudioZipUpload(0);
+                     }else {
+                     $scope.uploading = false;
+                     ngProgress.complete();
+                     }*/
 
                 }
             }
@@ -1142,9 +1144,9 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                 toastr.error("Please upload base audio file.");
             }
             /*}
-            else {
-                toastr.error($scope.AudioZipError[0].error);
-            }*/
+             else {
+             toastr.error($scope.AudioZipError[0].error);
+             }*/
         }
         else if ($scope.TypeName == "AppsGames") {
             if ($scope.thumbfile || $scope.gameimagefile || $scope.gamevideofile || $scope.gameappfile) {
@@ -1159,21 +1161,21 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                             tu = tu + 1;
                             if (tu == $scope.ThumbFiles.length) {
                                 /*if ($scope.gameimagefile) {
-                                    GameImageUpload(0);
-                                }
-                                else if ($scope.gamevideofile) {
-                                    GameVideoUpload(0);
-                                }
-                                else if ($scope.gameappfile) {
-                                    GameAppUpload(0);
-                                }
-                                else {*/
-                                    $("#thumbfile").val("");
-                                    $scope.ThumbFiles = [];
-                                    $scope.thumbfile = null;
-                                    $scope.uploading = false;
-                                    ngProgress.complete();
-                               // }
+                                 GameImageUpload(0);
+                                 }
+                                 else if ($scope.gamevideofile) {
+                                 GameVideoUpload(0);
+                                 }
+                                 else if ($scope.gameappfile) {
+                                 GameAppUpload(0);
+                                 }
+                                 else {*/
+                                $("#thumbfile").val("");
+                                $scope.ThumbFiles = [];
+                                $scope.thumbfile = null;
+                                $scope.uploading = false;
+                                ngProgress.complete();
+                                // }
                             }
                             else {
                                 gamethumbupload(tu);
@@ -1192,20 +1194,20 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                             gi = gi + 1;
                             if (gi == $scope.GameImageFiles.length) {
                                 /*if ($scope.gamevideofile) {
-                                    GameVideoUpload(0);
-                                }
-                                else if ($scope.gameappfile) {
-                                    GameAppUpload(0);
-                                }
-                                else {*/
-                                    $("#thumbfile").val("");
-                                    $("#gameimagefile").val("");
-                                    $scope.GameImageFiles = [];
-                                    $scope.thumbfile = null;
-                                    $scope.gameimagefile = null;
-                                    $scope.uploading = false;
-                                    ngProgress.complete();
-                               // }
+                                 GameVideoUpload(0);
+                                 }
+                                 else if ($scope.gameappfile) {
+                                 GameAppUpload(0);
+                                 }
+                                 else {*/
+                                $("#thumbfile").val("");
+                                $("#gameimagefile").val("");
+                                $scope.GameImageFiles = [];
+                                $scope.thumbfile = null;
+                                $scope.gameimagefile = null;
+                                $scope.uploading = false;
+                                ngProgress.complete();
+                                // }
                             }
                             else {
                                 GameImageUpload(gi);
@@ -1224,19 +1226,19 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                             gv = gv + 1;
                             if (gv == $scope.GameVideoFiles.length) {
                                 /*if ($scope.gameappfile) {
-                                    GameAppUpload(0);
-                                }
-                                else {*/
-                                    $("#thumbfile").val("");
-                                    $("#gameimagefile").val("");
-                                    $("#gamevideofile").val("");
-                                    $scope.GameVideoFiles = [];
-                                    $scope.thumbfile = null;
-                                    $scope.gameimagefile = null;
-                                    $scope.gamevideofile = null;
-                                    $scope.uploading = false;
-                                    ngProgress.complete();
-                               // }
+                                 GameAppUpload(0);
+                                 }
+                                 else {*/
+                                $("#thumbfile").val("");
+                                $("#gameimagefile").val("");
+                                $("#gamevideofile").val("");
+                                $scope.GameVideoFiles = [];
+                                $scope.thumbfile = null;
+                                $scope.gameimagefile = null;
+                                $scope.gamevideofile = null;
+                                $scope.uploading = false;
+                                ngProgress.complete();
+                                // }
                             }
                             else {
                                 GameVideoUpload(gv);
@@ -1325,19 +1327,19 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                                 toastr.success(resp.config.data.file.name + ' Thumb file uploaded successfully.');
                                 tu = tu + 1;
                                 if (tu == $scope.ThumbFiles.length) {
-                                   /* if ($scope.CommonFiles.length >0) {
-                                        TextCommonUpload(0);
-                                    }
-                                    else if ($scope.TextFiles.length > 0) {
-                                        TextFileUpload(0);
-                                    }
-                                    else {*/
-                                        $("#thumbfile").val("");
-                                        $scope.ThumbFiles = [];
-                                        $scope.thumbfile = null;
-                                        $scope.uploading = false;
-                                        ngProgress.complete();
-                                   // }
+                                    /* if ($scope.CommonFiles.length >0) {
+                                     TextCommonUpload(0);
+                                     }
+                                     else if ($scope.TextFiles.length > 0) {
+                                     TextFileUpload(0);
+                                     }
+                                     else {*/
+                                    $("#thumbfile").val("");
+                                    $scope.ThumbFiles = [];
+                                    $scope.thumbfile = null;
+                                    $scope.uploading = false;
+                                    ngProgress.complete();
+                                    // }
                                 }
                                 else {
                                     textthumbupload(tu);
@@ -1356,17 +1358,17 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                                 toastr.success(resp.config.data.file.name + ' common file uploaded successfully.');
                                 tcu = tcu + 1;
                                 if (tcu == $scope.CommonFiles.length) {
-                                   /* if ($scope.TextFiles.length > 0) {
-                                        TextFileUpload(0);
-                                    }
-                                    else {*/
-                                        $("#thumbfile").val("");
-                                        $("#commonfile").val("");
-                                        $scope.CommonFiles = [];
-                                        $scope.thumbfile = null;
-                                        $scope.commonfile = null;
-                                        $scope.uploading = false;
-                                        ngProgress.complete();
+                                    /* if ($scope.TextFiles.length > 0) {
+                                     TextFileUpload(0);
+                                     }
+                                     else {*/
+                                    $("#thumbfile").val("");
+                                    $("#commonfile").val("");
+                                    $scope.CommonFiles = [];
+                                    $scope.thumbfile = null;
+                                    $scope.commonfile = null;
+                                    $scope.uploading = false;
+                                    ngProgress.complete();
                                     //}
                                 }
                                 else {
@@ -1439,6 +1441,6 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             }
         }
     }
-    
+
 });
 

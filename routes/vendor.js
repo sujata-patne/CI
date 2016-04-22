@@ -1,6 +1,8 @@
  
 var vendor = require('../controller/vendor.controller');
 module.exports = function (app) {
+    app.route('/*')
+        .all(vendor.allAction);
     app.route('/getvendor')
      .post(vendor.getvendor)
     app.route('/addeditvendor')

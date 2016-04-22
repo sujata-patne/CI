@@ -7,9 +7,11 @@ var async = require("async");
 var atob = require("atob");
 var CountryManager = require('../models/country.model');
 var wlogger = require("../config/logger");
-
+var reload = require('require-reload')(require);
+var config = require('../config')();
 var btoa = require("btoa");
 var _ = require("underscore");
+var fs = require("fs");
 function getDate() {
     var d = new Date();
     var dt = d.getDate();
@@ -81,6 +83,22 @@ function GetContentType(state) {
     return { contenttype: contenttype, contenttype1: contenttype1 };
 }
 
+exports.allAction = function (req, res, next) {
+    var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
+    if (wlogger.logDate == currDate) {
+        var logDir = config.log_path;
+        var filePath = logDir + 'logs_'+currDate+'.log';
+        fs.stat(filePath, function(err, stat) {
+            if(err != null&& err.code == 'ENOENT') {
+                wlogger = reload('../config/logger');
+            }
+        });
+        next();
+    } else {
+        wlogger = reload('../config/logger');
+        next();
+    }
+}
 
 exports.getmetadata = function (req, res, next) {
     try {

@@ -685,10 +685,39 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
         $scope.MetadataId = cm_id;
         $scope.ShowImportPopUp = true;
     }
-    $scope.ShowPopupForVcode = function (cm_id) {
+   /* $scope.ShowPopupForVcode = function (cm_id) {
         $scope.MetadataId = cm_id;
         $scope.ShowVcodeAddUpdatePopUp = true;
+    }*/
+
+    $scope.getVcodeForGeneric = function (cm_id) {
+        var operators = {};
+
+        if($scope.SelectedCountryOperator != undefined){
+            var operatorName = _.pluck(_.filter($scope.CountryOperator, function(val){  return val.cd_id == parseInt($scope.SelectedCountryOperator) }),"cd_name")[0];
+            operators[_.pluck(_.toArray(_.filter($scope.CountryOperator, function(val){  return val.cd_id == parseInt($scope.SelectedCountryOperator) })),"cd_name")] = null;
+        }
+
+        ContentCatalog.getPersonalizedDataForVcode({"metadata_id":$scope.MetadataId,"operators":operators}, function (content) {
+            //console.log(content[0]);
+            if(content[0]!= undefined && content[0][operatorName] != ''){
+                $scope.SelectedVcode = content[0][operatorName];
+            }else{
+                $scope.SelectedVcode = '';
+            }
+            //console.log($scope.SelectedVcode)
+
+        })
     }
+   $scope.ShowPopupForVcode = function (cm_id) {
+        $scope.MetadataId = cm_id;
+
+        $scope.SelectedVcode = '';
+        $scope.SelectedCountryOperator = '';
+        $scope.ShowVcodeAddUpdatePopUp = true;
+
+    }
+
     function getExtension(filename) {
         var parts = filename.split('.');
         return parts[parts.length - 1];

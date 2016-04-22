@@ -1,14 +1,15 @@
 /**
  * Created by sujata.patne on 05-04-2016.
  */
+var config = require('../config')();
 var winston = require( 'winston' ),
+//var winston = require('winston-daily-rotate-file'),
     fs = require( 'fs' ),
-    logDir = 'logs/', // Or read from a configuration
+    logDir = config.log_path, // Or read from a configuration
     //logDir = '../../IconLogs/ContentIngestion/', // Or read from a configuration
     env = process.env.NODE_ENV || 'development',
     logger;
-
-
+ 
 winston.setLevels( winston.config.npm.levels );
 winston.addColors( winston.config.npm.colors );
 
@@ -133,7 +134,8 @@ var wlogger = {
     log: function(level,msg){
         var lvl = wlogger[level];
         lvl(msg);
-    }
+    },
+    logDate: Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear()
 };
 
 module.exports = wlogger;

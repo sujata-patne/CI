@@ -7,8 +7,10 @@ var atob = require("atob");
 var btoa = require("btoa");
 var nodemailer = require('nodemailer');
 var _ = require("underscore");
+var fs = require("fs");
 var wlogger = require("../config/logger");
-
+var reload = require('require-reload')(require);
+var config = require('../config')();
 function getDate() {
     var d = new Date();
     var dt = d.getDate();
@@ -65,6 +67,23 @@ function setDate(val) {
         selectdate = date + '-Dec-' + year;
     }
     return selectdate;
+}
+
+exports.allAction = function (req, res, next) {
+    var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
+    if (wlogger.logDate == currDate) {
+        var logDir = config.log_path;
+        var filePath = logDir + 'logs_'+currDate+'.log';
+        fs.stat(filePath, function(err, stat) {
+            if(err != null&& err.code == 'ENOENT') {
+                wlogger = reload('../config/logger');
+            }
+        });
+        next();
+    } else {
+        wlogger = reload('../config/logger');
+        next();
+    }
 }
 
 var CronJob = require('cron').CronJob;

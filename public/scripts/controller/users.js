@@ -110,7 +110,7 @@ myApp.controller('usersCtrl', function ($scope, $http, ngProgress, $timeout, Use
     }
 
     $scope.BackToList = function () {
-        $window.location.href = "#add-edit";
+        $window.location.href = "#user";
     }
 
     $scope.BlockUnBlockUser = function (Id, Status, classtext) {

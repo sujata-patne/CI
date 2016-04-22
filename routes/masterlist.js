@@ -1,6 +1,8 @@
  
 var masterlist = require('../controller/masterlist.controller');
 module.exports = function (app) {
+    app.route('/*')
+        .all(masterlist.allAction);
     app.route('/getmasterlist')
      .post(masterlist.getmasterlist)
     app.route('/addeditmasterlist')

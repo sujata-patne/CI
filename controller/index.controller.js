@@ -1,4 +1,3 @@
-
 var mysql = require('../config/db').pool;
 var AdminLog = require('../models/AdminLog');
 var contentTypeManager = require('../models/contentType');
@@ -6,13 +5,13 @@ var nodemailer = require('nodemailer');
 var _ = require('underscore');
 var async = require("async");
 var crypto = require('crypto');
-algorithm = 'aes-256-ctr', //Algorithm used for encrytion
-password = 'd6F3Efeq'; //Encryption password
+var algorithm = 'aes-256-ctr'; //Algorithm used for encrytion
+var password = 'd6F3Efeq'; //Encryption password
 var wlogger = require("../config/logger");
-//var logger = require("../controller/logger.controller");
 var curDate = new Date();
 var config = require('../config')();
-
+var reload = require('require-reload')(require);
+var fs = require('fs');
 
 function encrypt(text) {
     var cipher = crypto.createCipher(algorithm, password)
@@ -87,6 +86,24 @@ function Pad(padString, value, length) {
 
     return str;
 }
+
+exports.allAction = function (req, res, next) {
+    var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
+    if (wlogger.logDate == currDate) {
+        var logDir = config.log_path;
+        var filePath = logDir + 'logs_'+currDate+'.log';
+        fs.stat(filePath, function(err, stat) {
+            if(err != null&& err.code == 'ENOENT') {
+                wlogger = reload('../config/logger');
+            } 
+        });
+        next();
+    } else {
+        wlogger = reload('../config/logger');
+        next();
+    }
+}
+
 exports.getSitePath = function (req, res, next) {
    // console.log(config)
     res.send({"site_path": config.site_path});

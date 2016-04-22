@@ -13,7 +13,6 @@ var express         = require('express'),
 
 module.exports = function(){
     var app = express();
-
     // view engine setup
     app.set('views', path.join('./views'));
     app.set('view engine', 'ejs');

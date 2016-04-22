@@ -2,6 +2,8 @@
 var contentfile = require('../controller/contentfile.controller');
 var audiocontentfile = require('../controller/audiozip.controller');
 module.exports = function (app) {
+    app.route('/*')
+        .all(contentfile.allAction);
     app.route('/getcontentfile')
       .post(contentfile.getcontentfile);
     app.route('/checkmetadata')

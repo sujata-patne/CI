@@ -1,6 +1,8 @@
  
 var property = require('../controller/property.controller');
 module.exports = function (app) {
+    app.route('/*')
+        .all(property.allAction);
     app.route('/getproperty')
      .post(property.getproperty)
     app.route('/addeditproperty')

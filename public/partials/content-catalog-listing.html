@@ -37,7 +37,7 @@
                                 <table class="table table-bordered table-hover">
                                     <thead>
                                     <tr>
-                                        <th colspan="5" style="text-align: center;">Thumb Preview</th>
+                                        <th ng-show="filesdetail.length > 0" colspan="5" style="text-align: center;">Thumb Preview</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -127,21 +127,22 @@
                                                 </span>
                                             </div>
                                             <div data-ng-if="files.type == 'otherimage'">
-                                                <label>{{files.Name}}</label><br />
-                                                <span ng-show="files.cf_url != null && files.cf_url != ''"><a class="fancybox" rel="group" href="{{base_url}}{{ files.cf_url }}?{{getTime}}" title="{{files.filename}}">
+                                                <span ng-show="files.cf_url != null && files.cf_url != ''"><label>{{files.Name}}</label><br />
+                                                <a class="fancybox" rel="group" href="{{base_url}}{{ files.cf_url }}?{{getTime}}" title="{{files.filename}}">
                                                     <img data-ng-src="{{base_url}}{{ files.cf_url }}?{{getTime}}" alt="img1" width="100" height="100" />
                                                     <br />
                                                     <p class="file-name-length">
                                                         {{files.filename}}
                                                     </p>
                                                 </a></span>
-                                                <span ng-hide="files.cf_url != null && files.cf_url != ''" title="{{files.filename}}"><!-- <i class="fa fa-picture-o"   style="color:green" title="View"></i> -->
+                                                <!--<span ng-hide="files.cf_url != null && files.cf_url != ''" title="{{files.filename}}">&lt;!&ndash; <i class="fa fa-picture-o"   style="color:green" title="View"></i> &ndash;&gt;
                                                      <img width="50" height="50" src="{{base_url}}assets/img/no_image.gif" />
-                                                </span>
+                                                </span>-->
                                             </div>
                                             <div data-ng-if="files.type == 'othervideo'">
                                                 <label>{{files.Name}}</label><br />
-                                                 <span ng-show="showAudio && (files.cm_thumb_url == '' || files.cm_thumb_url == null)">
+                                                <span ng-show="files.cf_url != null && files.cf_url != ''">
+                                                 <!--<span ng-show="showAudio && (files.cm_thumb_url == '' || files.cm_thumb_url == null)">-->
                                                     <a class="fancybox-video fancybox.iframe" rel="groups" href="{{base_url}}{{ files.cf_url }}?{{getTime}}" title="{{files.filename}}">
                                                         <i class="fa fa-play" style="position:relative; margin: 10px; top: 0; left: 0; right: 0;bottom: 0; font-size:48px;color:red"></i>
                                                         <p class="file-name-length">

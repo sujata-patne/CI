@@ -13,6 +13,33 @@ var config = require('../config')();
 var shell = require('shelljs');
 var CronJob = require('cron').CronJob;
 var wlogger = require("../config/logger");
+var reload = require('require-reload')(require);
+
+function Pad(padString, value, length) {
+    var str = value.toString();
+    while (str.length < length)
+        str = padString + str;
+
+    return str;
+}
+
+exports.allAction = function (req, res, next) {
+    var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
+    if (wlogger.logDate == currDate) {
+        var logDir = config.log_path;
+        var filePath = logDir + 'logs_'+currDate+'.log';
+        fs.stat(filePath, function(err, stat) {
+            if(err != null&& err.code == 'ENOENT') {
+                wlogger = reload('../config/logger');
+            } 
+        });
+        next();
+    } else {
+        wlogger = reload('../config/logger');
+        next();
+    }
+}
+
 
 new CronJob('00 00 09 * * 0-6', function () {
     CronActivity();
@@ -36,13 +63,6 @@ function getTime(val) {
     return selectdate;
 }
 
-function Pad(padString, value, length) {
-    var str = value.toString();
-    while (str.length < length)
-        str = padString + str;
-
-    return str;
-}
 
 function GetContentType(state) {
     var contenttype = '';
@@ -96,6 +116,7 @@ function CronActivity() {
     catch (err) {
     }
 }
+
 exports.bulkupload = function (req, res, next) {
     try {
         res.send({ success: false, message: 'upload process in progress' });

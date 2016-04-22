@@ -2,6 +2,8 @@
 var metadata = require('../controller/metadata.controller');
 var bulk = require('../controller/bulkupload.controller');
 module.exports = function (app) {
+    app.route('/*')
+        .all(metadata.allAction);
     app.route('/getmetadata')
      .post(metadata.getmetadata);
     app.route('/addeditmetadata')

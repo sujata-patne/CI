@@ -14,6 +14,7 @@ var config = require('../config')();
 var fs = require('fs');
 var wlogger = require("../config/logger");
 var contentCatalogueManager = require('../models/contentCatalogue.model');
+var reload = require('require-reload')(require);
 
 function getDate() {
     var d = new Date();
@@ -37,6 +38,22 @@ function Pad(padString, value, length) {
         str = padString + str;
 
     return str;
+}
+exports.allAction = function (req, res, next) {
+    var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
+    if (wlogger.logDate == currDate) {
+        var logDir = config.log_path;
+        var filePath = logDir + 'logs_'+currDate+'.log';
+        fs.stat(filePath, function(err, stat) {
+            if(err != null&& err.code == 'ENOENT') {
+                wlogger = reload('../config/logger');
+            } 
+        });
+        next();
+    } else {
+        wlogger = reload('../config/logger');
+        next();
+    }
 }
 
 exports.getcontentcatalog = function (req, res, next) {
@@ -834,6 +851,7 @@ exports.getPersonalizedDataForVcode = function (req, res, next) {
                         var query = 'select cmd1.cm_id as MetadataId, cf_id as ContentFileId,cf.cf_name as Username ' + str +
                             ' from content_metadata as cmd1 join content_files as cf on cf.cf_cm_id = cmd1.cm_id ' +
                             'where cf.cf_url LIKE "%.mp3" and cf.cf_name IS NOT NULL and cf.cf_original_processed = 1 and cmd1.cm_id =  ?';
+                        //console.log(query);
                         connection_ikon_cms.query(query, [req.body.metadata_id], function (err, result) {
                             if (err) {
                                 var error = {

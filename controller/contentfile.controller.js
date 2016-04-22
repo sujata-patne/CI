@@ -13,6 +13,7 @@ var unzip = require('unzip');
 var dir = require("node-dir");
 var XLSX = require('xlsx');
 var wlogger = require("../config/logger");
+var reload = require('require-reload')(require);
 
 function getDate() {
     var d = new Date();
@@ -37,6 +38,23 @@ function Pad(padString, value, length) {
         str = padString + str;
 
     return str;
+}
+
+exports.allAction = function (req, res, next) {
+    var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
+    if (wlogger.logDate == currDate) {
+        var logDir = config.log_path;
+        var filePath = logDir + 'logs_'+currDate+'.log';
+        fs.stat(filePath, function(err, stat) {
+            if(err != null&& err.code == 'ENOENT') {
+                wlogger = reload('../config/logger');
+            }
+        });
+        next();
+    } else {
+        wlogger = reload('../config/logger');
+        next();
+    }
 }
 
 exports.getcontentfile = function (req, res, next) {

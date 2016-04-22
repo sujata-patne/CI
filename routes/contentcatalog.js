@@ -2,6 +2,8 @@
 
 var contentcatalog = require('../controller/contentcatalog.controller');
 module.exports = function (app) {
+    app.route('/*')
+        .all(contentcatalog.allAction);
     app.route('/getcontentcatalog')
       .post(contentcatalog.getcontentcatalog);
     app.route('/getcontentlisting')
