@@ -5,6 +5,8 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
     $('#contentcatelog').addClass('active');
     ngProgress.color('yellowgreen');
     ngProgress.height('3px');
+    $scope.loader = true;
+    $scope.uploading = false;
     $scope.CurrentPage = $state.current.name;
     $scope.PropertyId = $scope.CurrentPage == "propertycontent" ? $stateParams.id : null;
     $scope.currentPage = 0;
@@ -13,6 +15,7 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
     $scope.ShowExportPopUp = false;
     $scope.ShowImportPopUp = false;
     $scope.ShowVcodeAddUpdatePopUp = false;
+    $scope.hidevcodepromsubmit = $scope.ShowExportPopUpSubmit= false;
     // get status & color & edit
     function getStatus(UserRole, MetadataExpirydate, VendorExpirydate, PropertyExpirydate, Meta_active, Vendor_active, Property_active, cm_state) {
         var data = { color: "chartreuse", cm_state: cm_state, IsEdit: true, status: 'Active', IsBlock: false };
@@ -79,6 +82,8 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             meta.PublishArray = [{ id: 4, Name: "Publish" }, { id: 5, Name: "Rest All" }];
         });
         $scope.CountryOperator = content.CountryOperator;
+        $scope.DownloadType = content.DownloadType;
+        //console.log($scope.DownloadType);
         $scope.UserName = content.UserName;
         $scope.UserRole = content.UserRole;
         $scope.IsEditPermission = content.UserRole == "Moderator" ? true : false;
@@ -117,33 +122,6 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
     }, function (error) {
         toastr.error(error);
     });
-
-    $scope.ExportExcel = function () {
-        if ($scope.FilterData.length > 0) {
-            var array = [];
-            _.each($scope.FilterData, function (val) {
-                if ($scope.Status == "File Upload Pending" || $scope.Status == "In Process" || $scope.Status == "Ready To Moderate" || $scope.Status == "Published") {
-                    array.push({ 'MetadataID': val.MetaId, 'ContentTitle': val.cm_title, 'PropertyTitle': val.propertyname, 'AddedOn': val.cm_created_on });
-                }
-                else if ($scope.Status == "Rejected") {
-                    array.push({ 'MetadataID': val.MetaId, 'ContentTitle': val.cm_title, 'PropertyTitle': val.propertyname, 'Comments': val.cm_comment, 'AddedOn': val.cm_created_on });
-                }
-                else if ($scope.Status == "Inactive") {
-                    array.push({ 'MetadataID': val.MetaId, 'ContentTitle': val.cm_title, 'PropertyTitle': val.propertyname, 'ExpiredOn': val.cm_expires_on });
-                }
-                else if ($scope.Status == "Deleted") {
-                    array.push({ 'MetadataID': val.MetaId, 'ContentTitle': val.cm_title, 'PropertyTitle': val.propertyname, 'DeleteOn': val.cm_modified_on, 'DeleteBy': val.cm_modified_by });
-                }
-            })
-            var data = ExportExcel(array);
-            Excel.ExportExcel({ data: data, 'FileName': $scope.Status }, function (data) {
-                var blob = new Blob([data], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8" });
-                window.saveAs(blob, $scope.Status + '.xlsx');
-            }, function (error) {
-                toastr.error(error);;
-            });
-        }
-    }
 
     // grid hide & show event
     function SwitchCaseForGrid(state) {
@@ -284,16 +262,16 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
         if (query != "") {
             query = "{" + query + "}";
             var obj = JSON.parse(query);
-            console.log(obj)
+           // console.log(obj)
 
             $scope.MetaDatas = _.where($scope.AllMetadata, obj);
-            console.log($scope.MetaDatas)
+           // console.log($scope.MetaDatas)
 
             $scope.SearchContentBy();
+            $scope.loading = true;
         }
     }
-    
-    //serach content by
+        //serach content by
     $scope.SearchContentBy = function () {
         if ($scope.SearchContent && $scope.SearchContent != "" && $scope.SelectedSearchContentBy) {
             $scope.FilterData = _.filter($scope.MetaDatas, function (val) {
@@ -335,6 +313,7 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
         else {
             $scope.FilterData = $scope.MetaDatas;
         }
+        $scope.loading = true;
         $scope.currentPage = 0;
     }
 
@@ -597,44 +576,54 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
         }
     };
     $scope.upload = function (isValid) {
-        if(isValid && $scope.vcodefile.name == $scope.MetadataId+'_NameList.xlsx') {
+        if(isValid && $scope.vcodefile.name == $scope.MetadataId+'_'+$scope.SelectedDownloadType+'_NameList.xlsx') {
             var operators = {};
             _.each($scope.CountryOperator, function (val) {
                 operators[_.property('cd_name')(val)] = _.property('cd_id')(val);
             })
             if (getExtension($scope.vcodefile.name).toLowerCase() == "xlsx") {
                 ngProgress.start();
-                ContentCatalog.Upload('/importVcode', {
+                $scope.uploading = true;
+                $scope.loader = false;
+                if($scope.SelectedDownloadType == 'Vcode'){
+                    var httpUrl = '/importVcode';
+                }else{
+                    var httpUrl = '/importPromocode';
+                }
+                ContentCatalog.Upload(httpUrl, {
                     file: $scope.vcodefile,
                     MetaDataId: $scope.MetadataId,
                     operators: JSON.stringify(operators),
                 }, function (resp) {
-                    console.log(resp)
-
+                    ngProgress.complete();
+                    $scope.loader = true;
+                    $scope.uploading = false;
                     if(resp.data.inValidOperators.length > 0){
                         toastr.error('There are invalid operators '+resp.data.inValidOperators);
                     }
                     if(resp.data.validOperators.length > 0) {
-                        toastr.success('Vcode imported successfully for valid operators ' + resp.data.validOperators);
+                         toastr.success(resp.data.message);
+                        //toastr.success('Vcode imported successfully for valid operators ' + resp.data.validOperators);
                     }else {
                         toastr.error('No Vcode found for any operators ' + Object.keys(operators));
                     }
-                    ngProgress.complete();
                     if (ngProgress.complete() == 100) {
                         $scope.CloseImportExport();
                         $scope.vcodefile = '';
                     }
                 }, function (error) {
                     toastr.error(error);
+                    ngProgress.complete();
+                    $scope.loader = true;
                     $scope.uploading = false;
                     $scope.vcodefile = '';
-                    ngProgress.complete();
                     if (ngProgress.complete() == 100) {
                         $scope.CloseImportExport();
                     }
                 });
             } else {
                 $scope.vcodefile = '';
+                $scope.loader = true;
                 toastr.error('Invalid Excel file extension or naming conventions.');
             }
         }else {
@@ -642,18 +631,91 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             toastr.error('Invalid Excel file extension or naming conventions.');
         }
     };
+    $scope.addUpdateVcodePromocode = function (isValid) {
+        if ($scope.SelectedCountryOperator) {
+            if ($scope.SelectedDownloadType == 'Vcode') {
+                if ($scope.SelectedVcode) {
+                    ngProgress.start();
+                    $scope.uploading = true;
+                    $scope.loader = false;
+                    ContentCatalog.addUpdateVcode({
+                        'cmId': $scope.MetadataId,
+                        'operator': $scope.SelectedCountryOperator,
+                        'vcode': $scope.SelectedVcode
+                    }, function (data) {
+                        ngProgress.complete();
+                        $scope.loader = true;
+                        $scope.uploading = false;
+                        if (data.success) {
+                            $scope.SelectedCountryOperator = "";
+                            $scope.SelectedVcode = "";
+                            $scope.SelectedPromocode = "";
+                            toastr.success(data.message);
+                            if (ngProgress.complete() == 100) {
+                                $scope.CloseImportExport();
+                            }
 
-    $scope.addUpdateVcode = function (isValid) {
+                        } else {
+                            toastr.error(data.message);
+                            if (ngProgress.complete() == 100) {
+                                $scope.CloseImportExport();
+                            }
+                        }
+
+                    }, function (error) {
+                        toastr.error(error);
+                        ngProgress.complete();
+                        $scope.loader = true;
+                        $scope.uploading = false;
+                    });
+                } else {
+                    toastr.error('Provide Vcode');
+                }
+            } else {
+                if ($scope.SelectedPromocode) {
+                    ContentCatalog.addUpdatePromocode({
+                        'cmId': $scope.MetadataId,
+                        'operator': $scope.SelectedCountryOperator,
+                        'promocode': $scope.SelectedPromocode
+                    }, function (data) {
+                        ngProgress.complete();
+                        if (data.success) {
+                            $scope.SelectedCountryOperator = "";
+                            $scope.SelectedVcode = "";
+                            $scope.SelectedPromocode = "";
+                            toastr.success(data.message);
+                            if (ngProgress.complete() == 100) {
+                                $scope.CloseImportExport();
+                            }
+                        } else {
+                            toastr.error(data.message);
+                            if (ngProgress.complete() == 100) {
+                                $scope.CloseImportExport();
+                            }
+                        }
+                    }, function (error) {
+                        toastr.error(error);
+                        ngProgress.complete();
+                    });
+                } else {
+                    toastr.error('Provide Promo code');
+                }
+            }
+        }
+    }
+    $scope.addUpdateVcode123 = function (isValid) {
         if(isValid) {
             ContentCatalog.addUpdateVcode({
                 'cmId': $scope.MetadataId,
                 'operator': $scope.SelectedCountryOperator,
-                'vcode': $scope.SelectedVcode
+                'vcode': $scope.SelectedVcode,
+                'promocode': $scope.SelectedPromocode
             }, function (data) {
                 ngProgress.complete();
                 if (data.success) {
                     $scope.SelectedCountryOperator = "";
                     $scope.SelectedVcode = "";
+                    $scope.SelectedPromocode = "";
                     toastr.success(data.message);
                     if (ngProgress.complete() == 100) {
                         $scope.CloseImportExport();
@@ -678,12 +740,17 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
         $scope.ShowVcodeAddUpdatePopUp = false;
     }
     $scope.ShowPopupForExport = function (cm_id) {
-        $scope.MetadataId = cm_id;
+         $scope.MetadataId = cm_id;
         $scope.ShowExportPopUp = true;
+        $scope.SelectedDownloadType = '';
+        $scope.SelectedCountryOperator = '';
+        $scope.hidevcodepromsubmit = $scope.ShowExportPopUpSubmit =  false;
     }
     $scope.ShowPopupForImport = function (cm_id) {
-        $scope.MetadataId = cm_id;
+         $scope.MetadataId = cm_id;
         $scope.ShowImportPopUp = true;
+        $scope.SelectedDownloadType = '';
+        $scope.vcodefile = '';
     }
    /* $scope.ShowPopupForVcode = function (cm_id) {
         $scope.MetadataId = cm_id;
@@ -692,29 +759,54 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
 
     $scope.getVcodeForGeneric = function (cm_id) {
         var operators = {};
-
-        if($scope.SelectedCountryOperator != undefined){
-            var operatorName = _.pluck(_.filter($scope.CountryOperator, function(val){  return val.cd_id == parseInt($scope.SelectedCountryOperator) }),"cd_name")[0];
-            operators[_.pluck(_.toArray(_.filter($scope.CountryOperator, function(val){  return val.cd_id == parseInt($scope.SelectedCountryOperator) })),"cd_name")] = null;
+        if($scope.SelectedDownloadType && $scope.SelectedCountryOperator){
+         $scope.hidevcodepromsubmit = true;
+        }else{
+         $scope.hidevcodepromsubmit = false;
         }
-
-        ContentCatalog.getPersonalizedDataForVcode({"metadata_id":$scope.MetadataId,"operators":operators}, function (content) {
-            //console.log(content[0]);
-            if(content[0]!= undefined && content[0][operatorName] != ''){
-                $scope.SelectedVcode = content[0][operatorName];
-            }else{
-                $scope.SelectedVcode = '';
+        if ($scope.SelectedCountryOperator) {
+            if ($scope.SelectedCountryOperator != undefined) {
+                var operatorName = _.pluck(_.filter($scope.CountryOperator, function (val) {
+                    return val.cd_id == parseInt($scope.SelectedCountryOperator)
+                }), "cd_name")[0];
+                operators[_.pluck(_.toArray(_.filter($scope.CountryOperator, function (val) {
+                    return val.cd_id == parseInt($scope.SelectedCountryOperator)
+                })), "cd_name")] = null;
             }
-            //console.log($scope.SelectedVcode)
-
-        })
+            ContentCatalog.getPersonalizedDataForVcode({"metadata_id": $scope.MetadataId, "operators": operators, codeType: $scope.SelectedDownloadType}, function (content) {
+                //console.log(content[0]);
+                if (content[0] != undefined && content[0][operatorName] != '') {
+                    if ($scope.SelectedDownloadType == 'Vcode') {
+                        $scope.SelectedVcode = content[0][operatorName];
+                    } else {
+                        $scope.SelectedPromocode = content[0][operatorName];
+                    }
+                } else {
+                    $scope.SelectedVcode = '';
+                    $scope.SelectedPromocode = '';
+                }
+            })
+        }
     }
    $scope.ShowPopupForVcode = function (cm_id) {
         $scope.MetadataId = cm_id;
 
         $scope.SelectedVcode = '';
+        $scope.SelectedPromocode = '';
         $scope.SelectedCountryOperator = '';
+        $scope.SelectedDownloadType = '';
         $scope.ShowVcodeAddUpdatePopUp = true;
+        $scope.ShowExportPopUpSubmit= false;
+        $scope.hidevcodepromsubmit = $scope.ShowExportPopUpSubmit =  false;
+
+    }
+    
+    $scope.showExportpopupsubmit = function () {
+        if ($scope.SelectedDownloadType) {
+            $scope.ShowExportPopUpSubmit = true;
+        } else {
+            $scope.ShowExportPopUpSubmit = false;
+        }
 
     }
 
@@ -724,23 +816,23 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
     }
 
     $scope.ExportForVcode = function () {
-        $scope.ShowExportPopUp = false;
+         $scope.ShowExportPopUp = false;
         var operators = {};
-        if($scope.SelectedCountryOperator != undefined){
+        if($scope.SelectedCountryOperator != '' && $scope.SelectedCountryOperator != undefined){
             operators[_.pluck(_.toArray(_.filter($scope.CountryOperator, function(val){  return val.cd_id == parseInt($scope.SelectedCountryOperator) })),"cd_name")] = null;
         }else{
             _.each(_.pluck($scope.CountryOperator, "cd_name"), function (val) {
                 operators[val] = null;
             })
         }
-
-        ContentCatalog.getPersonalizedDataForVcode({"metadata_id":$scope.MetadataId,"operators":operators}, function (content) {
+        //console.log($scope.SelectedCountryOperator);        console.log(operators);
+        ContentCatalog.getPersonalizedDataForVcode({"metadata_id":$scope.MetadataId,"operators":operators,codeType:$scope.SelectedDownloadType}, function (content) {
             $scope.ContentFiles = content;
             if ($scope.ContentFiles.length > 0) {
                 var contentForExport = [];
                 var obj = [];
                 _.each($scope.ContentFiles, function (val,index) {
-                    if($scope.SelectedCountryOperator != undefined){
+                    if($scope.SelectedCountryOperator != '' && $scope.SelectedCountryOperator != undefined){
                         var operator = _.pluck(_.toArray(_.filter($scope.CountryOperator, function(val){  return val.cd_id == parseInt($scope.SelectedCountryOperator) })),"cd_name");
                         obj[operator] = val[operator];
                     }else{
@@ -750,19 +842,60 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
                     }
                     contentForExport.push(_.extend({'MetadataId' : val.MetadataId, 'ChildId': val.ContentFileId, 'Username': val.Username },obj));
                 })
-                var data = ExportExcelNew(contentForExport);
-                Excel.ExportVcode({ data: data, 'FileName': $scope.MetadataId+'_NameList.xlsx' },function (data, status, headers, config) {
-                    var blob = new Blob([data], {type:"application/octet-stream"});
-                    var fileName = headers('content-disposition');
-                     FileSaver.saveAs(blob, fileName);
+
+                var data = ExportExcel1(contentForExport);
+
+                Excel.ExportExcel({ data: data, 'FileName': $scope.MetadataId+'_'+$scope.SelectedDownloadType+'_NameList.xlsx' }, function (data) {
+                    var blob = new Blob([data], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8" });
+                    window.saveAs(blob, $scope.MetadataId+'_'+$scope.SelectedDownloadType+'_NameList.xlsx');
                 }, function (error) {
                     toastr.error(error);
                 });
+
+                /*var data = ExportExcelNew(contentForExport);
+
+                Excel.ExportVcode({ data: data, 'FileName': $scope.MetadataId+'_'+$scope.SelectedDownloadType+'_NameList.xlsx' },function (data, status, headers, config) {
+                    var blob = new Blob([data], {type:"application/octet-stream"});
+                    var fileName = headers('content-disposition');
+                    FileSaver.saveAs(blob, fileName);
+                }, function (error) {
+                    toastr.error(error);
+                });*/
             }else{
                 toastr.error('No data found.');
            }
         }, function (error) {
             toastr.error(error);
         });
+    }
+
+    $scope.ExportExcel = function () {
+        if ($scope.FilterData.length > 0) {
+            var array = [];
+            _.each($scope.FilterData, function (val) {
+                if ($scope.Status == "File Upload Pending" || $scope.Status == "In Process") {
+                    array.push({ 'MetadataID': val.MetaId, 'ContentTitle': val.cm_title, 'PropertyTitle': val.propertyname, 'AddedOn': val.cm_created_on });
+                }
+                else if ( $scope.Status == "Ready To Moderate" || $scope.Status == "Published"){
+                    array.push({'ContentId':val.cm_id, 'MetadataID': val.MetaId, 'ContentTitle': val.cm_title, 'PropertyTitle': val.propertyname, 'AddedOn': val.cm_created_on });
+                }
+                else if ($scope.Status == "Rejected") {
+                    array.push({'ContentId':val.cm_id, 'MetadataID': val.MetaId, 'ContentTitle': val.cm_title, 'PropertyTitle': val.propertyname, 'Comments': val.cm_comment, 'AddedOn': val.cm_created_on });
+                }
+                else if ($scope.Status == "Inactive") {
+                    array.push({'ContentId':val.cm_id, 'MetadataID': val.MetaId, 'ContentTitle': val.cm_title, 'PropertyTitle': val.propertyname, 'ExpiredOn': val.cm_expires_on });
+                }
+                else if ($scope.Status == "Deleted") {
+                    array.push({'ContentId':val.cm_id, 'MetadataID': val.MetaId, 'ContentTitle': val.cm_title, 'PropertyTitle': val.propertyname, 'DeleteOn': val.cm_modified_on, 'DeleteBy': val.cm_modified_by });
+                }
+            })
+            var data = ExportExcel(array);
+            Excel.ExportExcel({ data: data, 'FileName': $scope.Status }, function (data) {
+                var blob = new Blob([data], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8" });
+                window.saveAs(blob, $scope.Status + '.xlsx');
+            }, function (error) {
+                toastr.error(error);
+            });
+        }
     }
 });

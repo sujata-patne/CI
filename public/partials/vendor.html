@@ -7,6 +7,7 @@
             <div class="portlet">
                 <div class="portlet-header">
                     <h3><i class="fa fa-tasks"></i>Field marked with <span class="asterisk">*</span> are Mandatory</h3>
+                    <div loading-spinner></div>
                 </div>
                 <!-- /.portlet-header -->
                 <div class="portlet-content">
@@ -72,7 +73,7 @@
                                             <label for="inputEmail3" class="col-sm-12"><span class="asterisk">*</span>Starts from</label>
                                             <div class="col-sm-12">
                                                 <div class="input-group date">
-                                                    <input my-enter="" type="text" class="form-control" name="startfrom" datepicker-popup="MM-dd-yyyy" data-ng-model="StartDate" placeholder="Start date" data-ng-disabled="IsEdit" data-ng-click="openDatepicker($event)" data-is-open="open1" required />
+                                                    <input my-enter="" type="text" class="form-control" name="startfrom" datepicker-popup="dd-MM-yyyy" data-ng-model="StartDate" placeholder="Start date" data-ng-disabled="IsEdit" data-ng-click="openDatepicker($event)" data-is-open="open1" required />
                                                     <span class="input-group-btn">
                                                         <button type="button" data-ng-disabled="IsEdit" class="btn btn-default" data-ng-click="openDatepicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                                     </span>
@@ -86,7 +87,7 @@
                                             <label for="inputEmail3" class="col-sm-12"><span class="asterisk">*</span>Expired On</label>
                                             <div class="col-sm-12">
                                                 <div class="input-group date">
-                                                    <input my-enter="" type="text" class="form-control" name="expireon" bk-auto-focus datepicker-popup="MM-dd-yyyy" data-ng-model="ExpiryDate" placeholder="End date" data-ng-click="openEndDatepicker($event)" data-ng-disabled="IsEdit" data-is-open="open2" required />
+                                                    <input my-enter="" type="text" class="form-control" name="expireon" bk-auto-focus datepicker-popup="dd-MM-yyyy" data-ng-model="ExpiryDate" placeholder="End date" data-ng-click="openEndDatepicker($event)" data-ng-disabled="IsEdit" data-is-open="open2" required />
                                                     <span class="input-group-btn">
                                                         <button type="button" data-ng-disabled="IsEdit" class="btn btn-default" data-ng-click="openEndDatepicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                                     </span>

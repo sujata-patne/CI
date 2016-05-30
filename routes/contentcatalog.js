@@ -14,6 +14,10 @@ module.exports = function (app) {
         .post(contentcatalog.getPersonalizedDataForVcode);
     app.route('/importVcode')
         .post(contentcatalog.importVcode);
+    app.route('/importPromocode')
+        .post(contentcatalog.importPromocode);
     app.route('/addUpdateVcode')
         .post(contentcatalog.addUpdateVcode)
+    app.route('/addUpdatePromocode')
+        .post(contentcatalog.addUpdatePromocode)
 }

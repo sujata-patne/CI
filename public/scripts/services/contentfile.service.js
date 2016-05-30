@@ -20,7 +20,6 @@ myApp.service('ContentFile', ['$http', 'Upload', function ($http, Upload) {
         });
     }
     service.Upload = function (url, data, success, error) {
-        console.log(data)
         Upload.upload({
             url: url,
             data: data

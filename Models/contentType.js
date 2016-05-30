@@ -38,7 +38,7 @@ exports.getOtherTemplates = function( dbConnection, callback ) {
 						"FROM "+
 							"content_template "+
 						 "WHERE " +
-						 	"ct_param_value IN ('bitrate','otherimage','othervideo','app','utf 16') ", 
+						 	"ct_param_value IN ('bitrate','otherimage','otheraudio','othervideo','app','utf 16') ",
 		function( err, otherTemplates ) {
 			callback( err, otherTemplates );
 		}

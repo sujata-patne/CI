@@ -16,8 +16,15 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
     $scope.Checked = 1;
     $scope.open1 = false;
     $scope.open2 = false;
+    $scope.open = false;
     $scope.IsDisable = $scope.CurrentPage == "addproperty" ? false : true;
-
+    $scope.openReleaseDatepicker = function (evt) {
+        $scope.open1 = false;
+        $scope.open2 = false;
+        evt.preventDefault();
+        evt.stopPropagation();
+        $scope.open = !$scope.open;
+    }
     $scope.openDatepicker = function (evt) {
         $scope.open2 = false;
         evt.preventDefault();
@@ -199,7 +206,8 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
                 $scope.OldVendor = prop.cm_vendor;
                 $scope.Title = prop.cm_title;
                 $scope.ShortDescription = prop.cm_short_desc;
-                $scope.ReleaseYear = prop.cm_release_year;
+                $scope.ReleaseYear = prop.cm_release_date;
+
                 $scope.StartDate = new Date(prop.cm_starts_from);
                 $scope.ExpiryDate = new Date(prop.cm_expires_on);
                 $scope.property_group = prop.cm_r_group_id;
@@ -227,6 +235,7 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
         else {
             $window.location.href = "/";
         }
+        $scope.loading = true;
     }, function (error) {
         toastr.error(error);
     });
@@ -382,7 +391,9 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
     $scope.submitForm = function (isValid) {
         if (isValid) {
             var year = new Date().getFullYear();
-            var flag = ($scope.ReleaseYear > 1949 && $scope.ReleaseYear < (year + 2)) ? Datewithouttime($scope.StartDate) <= Datewithouttime($scope.ExpiryDate) ? Datewithouttime($scope.VendorStartDate) <= Datewithouttime($scope.StartDate) && Datewithouttime($scope.VendorEndDate) >= Datewithouttime($scope.ExpiryDate) ? $scope.RightsShow == true ? $scope.SelectedAllowedContentType.length > 0 ? $scope.SelectedCountryDistributionRights.length > 0 ? $scope.SelectedChannelDistributionRights.length > 0 ? "" : "Please Select Channel Distribution rights." : "Please Select Country Distribution rights." : "Please Select Allowed Content Type." : "" : "Start & Expiry date should be within limit of Vendor limits." : "Expire date must be equal or greater than start date." : "Release Year must be between 1950 to current year + 1.";
+            var ReleaseYear = new Date($scope.ReleaseYear).getFullYear();
+
+            var flag = (ReleaseYear > 1949 && ReleaseYear < (year + 2)) ? Datewithouttime($scope.StartDate) <= Datewithouttime($scope.ExpiryDate) ? Datewithouttime($scope.VendorStartDate) <= Datewithouttime($scope.StartDate) && Datewithouttime($scope.VendorEndDate) >= Datewithouttime($scope.ExpiryDate) ? $scope.RightsShow == true ? $scope.SelectedAllowedContentType.length > 0 ? $scope.SelectedCountryDistributionRights.length > 0 ? $scope.SelectedChannelDistributionRights.length > 0 ? "" : "Please Select Channel Distribution rights." : "Please Select Country Distribution rights." : "Please Select Allowed Content Type." : "" : "Start & Expiry date should be within limit of Vendor limits." : "Expire date must be equal or greater than start date." : "Release Year must be between 1950 to current year + 1.";
             if (flag == "") {
                 var NewRightsData = [];
                 if (!$scope.RightsShow) {
@@ -410,7 +421,7 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
                     "Title": $scope.Title,
                     "Vendor": $scope.SelectedVendor,
                     "Description": $scope.ShortDescription,
-                    "ReleaseYear": $scope.ReleaseYear,
+                    "ReleaseYear": getDate($scope.ReleaseYear),
                     "AddRightsData": AddRights,
                     "DeleteRightsData": DeleteRights,
                     "StartDate": getDate($scope.StartDate),
@@ -419,7 +430,7 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
                     "AllowChange": $scope.Checked,
                     "property_content": $scope.property_content_type
                 }
-                Propertys.AddEditProperty(property, function (data) {
+                 Propertys.AddEditProperty(property, function (data) {
                     if (data.success) {
                         toastr.success(data.message);
                         $window.location.href = "#property-list";

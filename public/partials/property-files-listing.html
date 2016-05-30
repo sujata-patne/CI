@@ -1,0 +1,90 @@
+<div class="container">
+    <div class="content">
+        <div class="content-container">
+            <div class="content-header">
+                <h2 class="content-header-title">Property Files</h2>
+                <div loading-spinner></div>
+                <!--<img class="col-sm-offset-6" data-ng-hide="ajaxloadershow" src="{{base_url}}/assets/img/loaders/ajax-loader.gif" >-->
+            </div>
+            <!-- /.content-header -->
+            <div class="row">
+                <label class="col-sm-offset-3 col-sm-9" data-ng-show="errorvisible" style="color: red;"> {{error}} </label>
+                <div class="col-md-12">
+
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group col-sm-4">
+                            <label for="firstname" class=" control-label">Property Id:</label>
+                                {{ contentid }}
+                        </div>
+                        <div class="form-group col-sm-4">
+                            <label for="firstname" class="control-label">Property Tile:</label>
+                                {{ contenttitle }}
+                        </div>
+                        <div class="form-group col-sm-4">
+                            <label for="firstname" class="control-label">Vendor Title:</label>
+                                {{ vendortitle }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portlet">
+                        <div class="portlet-header">
+                            <h3>Files Listing </h3>
+                        </div>
+                        <!-- /.portlet-header -->
+                         <div class="portlet-content">
+                            <div class="row">
+                                <tabset active="active">
+                                    <!--<tab index="1" heading="Supporting Files">
+                                        <div class="col-md-12" supporting-file-list-grid ng-if="supportingFilesDetail.length > 0 " data-file-upload="FileUploadVisible"></div>
+                                    </tab>-->
+                                    <tab index="2" heading="Preview Files">
+                                        <div class="col-md-12" preview-file-list-grid ng-if="previewFilesDetail.length > 0 " data-file-upload="FileUploadVisible"></div>
+                                    </tab>
+                                </tabset>
+                            </div>
+                        </div>
+                        <!-- /.portlet-content -->
+                    </div>
+                    <!-- /.portlet -->
+                </div>
+                <!-- /.col -->
+            </div>
+        </div>
+        <!-- /.content-container -->
+    </div>
+    <!-- /.content -->
+    <script type="text/javascript">
+        $(function () {
+            $('.fancybox').fancybox();
+
+            $('.fancybox-audio').fancybox({
+             afterShow: function() {
+                $('.fancybox-prev').css('width','10%');
+                $('.fancybox-next').css('width','10%');
+                
+            },
+              afterClose: function() {
+                $('.fancybox-prev').attr('style','');
+                $('.fancybox-next').attr('style','');
+            } 
+            });
+
+            $(".fancybox-video").fancybox({
+                width: '70%',
+                height: '70%',
+                afterShow: function() {
+                 $('.fancybox-prev').css('width','10%');
+                 $('.fancybox-next').css('width','10%');
+                },
+                afterClose: function() {
+                $('.fancybox-prev').attr('style','');
+                $('.fancybox-next').attr('style','');
+                }
+            });
+
+        });
+    </script>
+</div>

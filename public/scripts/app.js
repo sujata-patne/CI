@@ -88,6 +88,11 @@ myApp.config(function ($stateProvider,$httpProvider) {
          controller: 'content-listingCtrl',
          url: '/content-catalog-listing/:id'
     })
+    .state("propertyfiles", {
+         templateUrl: 'partials/property-files-listing.html',
+         controller: 'content-listingCtrl',
+         url: '/property-files-listing/:id/:isProperty'
+    })
     .state("masterlist", {
          templateUrl: 'partials/master-list.html',
          controller: 'masterListCtrl',
@@ -178,6 +183,25 @@ myApp.config(function ($stateProvider,$httpProvider) {
          controller: "adminLogCtrl",
          url: "/admin-log"
     })
+
+    /*.state('contentlisting.thumb', {
+        templateUrl: 'partials/content-file-list.html'
+    })
+    .state('contentlisting.thumb', {
+        templateUrl: 'partials/content-file-list.html'
+    })
+    .state('contentlisting.content', {
+        templateUrl: 'partials/content-file-list.html'
+    })
+    .state('contentlisting.image', {
+        templateUrl: 'partials/content-file-list.html'
+    })
+    .state('contentlisting.audio', {
+        templateUrl: 'partials/content-file-list.html'
+    })
+    .state('contentlisting.video', {
+        templateUrl: 'partials/content-file-list.html'
+    })*/
 }).run(function ($state,$http,$rootScope) {
         $state.go("dashboard");
         $http.get("/getSitePath").success(function (configData) {

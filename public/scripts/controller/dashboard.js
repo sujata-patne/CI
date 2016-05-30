@@ -150,12 +150,13 @@ myApp.controller('dashboardCtrl', function ($scope, $http, ngProgress, Icon, _) 
             }
         })
         $scope.Vendors = dashboard.Vendors;
-        console.log($scope.Vendors)
+  //      console.log($scope.Vendors)
         $scope.StatusFiles = MakeFileStatusList($scope.FilesStatus, $scope.Vendors, dashboard.VendorFiles);
         $scope.VendorGridData = MakeVendorStatusList($scope.FileNames, $scope.Vendors, dashboard.VendorFiles);
         var data = GetStatusFiles($scope.FilesStatus, $scope.StatusFiles);
         $scope.FileGridData = data.FileGridData;
         HighchartBind(data.chartdata);
+        $scope.loading = true;
     }, function (error) {
         toastr.error(error);
     });

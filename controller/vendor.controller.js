@@ -45,7 +45,7 @@ exports.getvendor = function (req, res, next) {
                     async.parallel({
                         VendorList: function (callback) {
                             if (req.body.state == "vendor") {
-                                console.log('select vd_id,vd_name,vd_display_name,vd_created_on,vd_starts_on,vd_end_on,vd_is_active,vd_desc as title,vd_desc as buttoncolor,vd_desc as status from (select * from icn_vendor_detail ) vd ' + vendorquery + ' order by vd_name'    )
+                               // console.log('select vd_id,vd_name,vd_display_name,vd_created_on,vd_starts_on,vd_end_on,vd_is_active,vd_desc as title,vd_desc as buttoncolor,vd_desc as status from (select * from icn_vendor_detail ) vd ' + vendorquery + ' order by vd_name'    )
                                 var query = connection_ikon_cms.query('select vd_id,vd_name,vd_display_name,vd_created_on,vd_starts_on,vd_end_on,vd_is_active,vd_desc as title,vd_desc as buttoncolor,vd_desc as status from (select * from icn_vendor_detail ) vd ' + vendorquery + ' order by vd_name', function (err, VendorList) {
                                     callback(err, VendorList);
                                 });

@@ -4,6 +4,7 @@
             <div class="content-header" style="border-bottom: 0px;">
                 <h2 class="content-header-title" style="float: left;">{{PageTitle}} Metadata - Video</h2>
                 <p style="float: right;">Field marked with <span class="asterisk">*</span> are Mandatory</p>
+                <div loading-spinner></div>
             </div>
             <!-- /.content-header -->
             <div class="portlet">
@@ -116,14 +117,32 @@
                                                         </span>
                                                     </div>
                                                 </div>
+                                                <div class="form-group">
+                                                    <label for="firstname" class="col-sm-12">Lyrics Languages</label>
+                                                    <div class="col-sm-12">
+                                                        <span class="ui-select">
+                                                            <select name="lyricslanguages" size="2" data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in Languages" data-ng-model="SelectedLyricsLanguages" multiple>
+                                                            </select>
+                                                        </span>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="userid" class="col-sm-12">Sub Genres</label>
                                                     <div class="col-sm-12">
                                                         <span class="ui-select">
-                                                            <select name="SubGenres" data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in SubGenres" data-ng-model="SelectedSubGenres">
+                                                            <select name="SubGenres" size="2" data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in SubGenres" data-ng-model="SelectedSubGenres" multiple>
                                                                 <option value="">Select Sub Genres</option>
+                                                            </select>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="firstname" class="col-sm-12">Singer</label>
+                                                    <div class="col-sm-12">
+                                                        <span class="ui-select-list">
+                                                            <select name="Singers" size="2" data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in Singers" data-ng-model="SelectedSingers" multiple>
                                                             </select>
                                                         </span>
                                                     </div>
@@ -155,24 +174,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="firstname" class="col-sm-12">Singer</label>
-                                            <div class="col-sm-12">
-                                                <span class="ui-select-list">
-                                                    <select name="Singers" size="2" data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in Singers" data-ng-model="SelectedSingers" multiple>
-                                                    </select>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="firstname" class="col-sm-12">Music Director</label>
-                                            <div class="col-sm-12">
-                                                <span class="ui-select-list">
-                                                    <select name="MusicDirectors" size="2" data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in MusicDirectors" data-ng-model="SelectedMusicDirectors" multiple>
-                                                    </select>
-                                                </span>
-                                            </div>
-                                        </div>
+
+
                                     </div>
                                 </div>
                                 <div class="col-sm-6" style="padding: 0px;">
@@ -294,6 +297,17 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="firstname" class="col-sm-12">Music Director</label>
+                                                    <div class="col-sm-12">
+                                                    <span class="ui-select-list">
+                                                        <select name="MusicDirectors" size="2" data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in MusicDirectors" data-ng-model="SelectedMusicDirectors" multiple>
+                                                        </select>
+                                                    </span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
 
                                     </div>
@@ -328,8 +342,11 @@
                                                             <label class="col-sm-12"><span class="asterisk">*</span>Country Distribution rights</label>
                                                             <div class="col-sm-12">
                                                                 <span class="ui-select-list">
-                                                                    <select name="CountryRights" data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in CountryRights" data-ng-model="SelectedCountryRights" multiple size="3" data-ng-change="">
+                                                                    <select name="CountryRights" data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in CountryRights" data-ng-model="SelectedCountryRights" multiple size="3" data-ng-change="" ng-required='RightSettingShow'>
                                                                     </select>
+                                                                </span>
+                                                                <span style="color: red" data-ng-show="metaform.$submitted || metaform.CountryRights.$touched">
+                                                                    <span data-ng-show="metaform.CountryRights.$error.required">Please select Country Distribution rights.</span>
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -337,8 +354,11 @@
                                                             <label class="col-sm-12"><span class="asterisk">*</span>Channel Distribution rights</label>
                                                             <div class="col-sm-12">
                                                                 <span class="ui-select-list">
-                                                                    <select name="ChannelRights" data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in ChannelRights" data-ng-model="SelectedChannelRights" multiple size="3" data-ng-change="">
+                                                                    <select name="ChannelRights" data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in ChannelRights" data-ng-model="SelectedChannelRights" multiple size="3" data-ng-change="" ng-required='RightSettingShow'>
                                                                     </select>
+                                                                </span>
+                                                                <span style="color: red" data-ng-show="metaform.$submitted || metaform.ChannelRights.$touched">
+                                                                    <span data-ng-show="metaform.ChannelRights.$error.required">Please select Channel Distribution rights.</span>
                                                                 </span>
                                                             </div>
                                                         </div>

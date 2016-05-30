@@ -4,6 +4,7 @@
             <div class="content-header" style="border-bottom: 0px;">
                 <h2 class="content-header-title" style="float: left;">{{PageTitle}} Metadata - Text</h2>
                 <p style="float: right;">Field marked with <span class="asterisk">*</span> are Mandatory</p>
+                <div loading-spinner></div>
             </div>
             <div class="portlet">
                 <!-- /.portlet-header -->
@@ -103,13 +104,22 @@
                                                         </span>
                                                     </div>
                                                 </div>
+                                                <div class="form-group">
+                                                    <label for="firstname" class="col-sm-12">Location</label>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" data-ng-maxlength="200" name="location" data-ng-disabled="IsDisable" class="form-control" placeholder="Location" data-ng-model="Location">
+                                                <span style="color: red" data-ng-show="metaform.$submitted || metaform.location.$touched">
+                                                    <span data-ng-show="metaform.location.$error.maxlength">Maximum 200 characters allowed!</span>
+                                                </span>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="userid" class="col-sm-12">Sub Genres</label>
                                                     <div class="col-sm-12">
                                                         <span class="ui-select">
-                                                            <select name="SubGenres" data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in SubGenres" data-ng-model="SelectedSubGenres">
+                                                            <select name="SubGenres" size="2" data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in SubGenres" data-ng-model="SelectedSubGenres" multiple>
                                                                 <option value="">Select Sub Genres</option>
                                                             </select>
                                                         </span>
@@ -117,16 +127,31 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="language" class="col-sm-12"><span class="asterisk">*</span>Languages</label>
-                                            <div class="col-sm-12">
-                                                <select name="languages" size="2" data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in Languages" data-ng-model="SelectedLanguages" multiple required>
-                                                </select>
-                                                <span style="color: red" data-ng-show="metaform.$submitted || metaform.languages.$touched">
-                                                    <span data-ng-show="metaform.languages.$error.required">Please Select Language.</span>
-                                                </span>
+                                        <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="language" class="col-sm-12"><span class="asterisk">*</span>Languages</label>
+                                                <div class="col-sm-12">
+                                                    <select name="languages" size="2" data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in Languages" data-ng-model="SelectedLanguages" multiple required>
+                                                    </select>
+                                                    <span style="color: red" data-ng-show="metaform.$submitted || metaform.languages.$touched">
+                                                        <span data-ng-show="metaform.languages.$error.required">Please Select Language.</span>
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="firstname" class="col-sm-12">Supporting Languages</label>
+                                                <div class="col-sm-12">
+                                                    <span class="ui-select">
+                                                        <select size="2" name="lyricslanguages"  data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in Languages" data-ng-model="SelectedLyricsLanguages" multiple>
+                                                        </select>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            </div>
                                         <div class="form-group">
                                             <label for="language" class="col-sm-12">Mood</label>
                                             <div class="col-sm-12">
@@ -151,15 +176,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="firstname" class="col-sm-12">Location</label>
-                                            <div class="col-sm-12">
-                                                <input type="text" data-ng-maxlength="200" name="location" data-ng-disabled="IsDisable" class="form-control" placeholder="Location" data-ng-model="Location">
-                                                <span style="color: red" data-ng-show="metaform.$submitted || metaform.location.$touched">
-                                                    <span data-ng-show="metaform.location.$error.maxlength">Maximum 200 characters allowed!</span>
-                                                </span>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="col-sm-6" style="padding: 0px;">
@@ -198,7 +215,7 @@
                                             <label for="inputEmail3" class="col-sm-12"><span class="asterisk">*</span>Go Live On</label>
                                             <div class="col-sm-12">
                                                 <div class="input-group date">
-                                                    <input my-enter="" name="startdate" type="text" class="form-control" bk-auto-focus datepicker-popup="MM-dd-yyyy" data-ng-model="Startdate" placeholder="Start date" data-ng-disabled="IsDisable" data-ng-click="openDatepicker($event)" data-is-open="open1" required />
+                                                    <input my-enter="" name="startdate" type="text" class="form-control" bk-auto-focus datepicker-popup="dd-MM-yyyy" data-ng-model="Startdate" placeholder="Start date" data-ng-disabled="IsDisable" data-ng-click="openDatepicker($event)" data-is-open="open1" required />
                                                     <span class="input-group-btn">
                                                         <button type="button" class="btn btn-default" data-ng-disabled="IsDisable" data-ng-click="openDatepicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                                     </span>
@@ -212,7 +229,7 @@
                                             <label for="inputEmail3" class="col-sm-12"><span class="asterisk">*</span>Expired On</label>
                                             <div class="col-sm-12">
                                                 <div class="input-group date">
-                                                    <input my-enter="" name="enddate" type="text" class="form-control" bk-auto-focus datepicker-popup="MM-dd-yyyy" data-ng-model="Expirydate" placeholder="End date" data-ng-click="openEndDatepicker($event)" data-ng-disabled="IsDisable" data-is-open="open2" required />
+                                                    <input my-enter="" name="enddate" type="text" class="form-control" bk-auto-focus datepicker-popup="dd-MM-yyyy" data-ng-model="Expirydate" placeholder="End date" data-ng-click="openEndDatepicker($event)" data-ng-disabled="IsDisable" data-is-open="open2" required />
                                                     <span class="input-group-btn">
                                                         <button type="button" class="btn btn-default" data-ng-disabled="IsDisable" data-ng-click="openEndDatepicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                                     </span>
@@ -234,6 +251,21 @@
                                                 </span>
                                             </div>
                                         </div>
+<!--                                        <div class="form-group">
+                                            <label for="userid" class="col-sm-12"><span class="asterisk">*</span>Release Date</label>
+                                            <div class="col-sm-12">
+                                                <div class="input-group date">
+                                                    <input type="text" my-enter="" name="releaseyear"  data-ng-disabled="IsEditPermission" bk-auto-focus datepicker-popup="dd-MM-yyyy" class="ng-pristine ng-valid form-control" id="Title" placeholder="Release Date" data-ng-model="ReleaseYear" data-ng-click="openReleaseDatepicker($event)" data-is-open="open" required>
+                                                    <span class="input-group-btn">
+                                                        <button type="button" data-ng-disabled="IsEditPermission" class="btn btn-default" data-ng-click="openReleaseDatepicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                    </span>
+                                                </div>
+                                                <span style="color: red" data-ng-show="metaform.$submitted || metaform.releaseyear.$touched">
+                                                    <span data-ng-show="metaform.releaseyear.$error.required">Please enter Release Date.</span>
+                                                     <span data-ng-show="propertyForm.releaseyear.$error.maxlength">Maximum 4 characters allowed!</span> 
+                                                </span>
+                                            </div>
+                                        </div>-->
                                         <div class="form-group">
                                             <label for="firstname" class="col-sm-12">CP Content ID</label>
                                             <div class="col-sm-12">
@@ -255,8 +287,11 @@
                                                             <label class="col-sm-12"><span class="asterisk">*</span>Country Distribution rights</label>
                                                             <div class="col-sm-12">
                                                                 <span class="ui-select-list">
-                                                                    <select name="CountryRights" data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in CountryRights" data-ng-model="SelectedCountryRights" multiple size="3" data-ng-change="">
+                                                                    <select name="CountryRights" data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in CountryRights" data-ng-model="SelectedCountryRights" multiple size="3" data-ng-change="" ng-required='RightSettingShow'>
                                                                     </select>
+                                                                </span>
+                                                                <span style="color: red" data-ng-show="metaform.$submitted || metaform.CountryRights.$touched">
+                                                                    <span data-ng-show="metaform.CountryRights.$error.required">Please select Country Distribution rights.</span>
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -264,8 +299,11 @@
                                                             <label class="col-sm-12"><span class="asterisk">*</span>Channel Distribution rights</label>
                                                             <div class="col-sm-12">
                                                                 <span class="ui-select-list">
-                                                                    <select name="ChannelRights" data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in ChannelRights" data-ng-model="SelectedChannelRights" multiple size="3" data-ng-change="">
+                                                                    <select name="ChannelRights" data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in ChannelRights" data-ng-model="SelectedChannelRights" multiple size="3" data-ng-change="" ng-required='RightSettingShow'>
                                                                     </select>
+                                                                    <span style="color: red" data-ng-show="metaform.$submitted || metaform.ChannelRights.$touched">
+                                                                    <span data-ng-show="metaform.ChannelRights.$error.required">Please select Channel Distribution rights.</span>
+                                                                    </span>
                                                                 </span>
                                                             </div>
                                                         </div>

@@ -3,6 +3,7 @@
         <div class="content-container">
             <div class="content-header">
                 <h2 class="content-header-title">Property List</h2>
+                <div loading-spinner></div>
             </div>
             <!-- /.content-header -->
             <div class="row">
@@ -50,9 +51,13 @@
                                                 <td>
                                                     <table width="100%">
                                                         <tr>
-                                                            <td width="30%"><a data-ng-show="{{property.IsEditvisible}}" href="#/edit-property/{{ property.cm_id }}"><i title="Edit" class="fa fa-edit"></i></a></td>
-                                                            <td width="30%" class="text-right"><a href="#/property-content-list/{{ property.cm_id }}"><i title="Property-Content-List" class="fa fa-video-camera text-right"></i></a></td>
-                                                            <td width="40%" class="text-right"><a data-ng-show="IsBlockPermission" href="" title="{{property.title}}" data-ng-click="BlockUnBlockProperty(property.cm_id,property.title,property.buttoncolor)"><i class="fa fa-ban text-right {{property.buttoncolor}}"></i></a></td>
+                                                            <td width="25%"><a data-ng-show="{{property.IsEditvisible}}" href="#/edit-property/{{ property.cm_id }}"><i title="Edit" class="fa fa-edit"></i></a></td>
+                                                            <td width="25%" class="text-right">
+                                                                <!-- <a href="#/property-content-list/{{ property.cm_id }}"><i title="Property-Content-List" class="fa fa-video-camera text-right"></i></a> -->
+                                                                <a href="#/property-files-listing/{{property.cm_id}}/true"><i class="fa fa-download" title="Property-Preview-Files"></i></a>
+                                                            </td>
+                                                            <td width="25%" class="text-right"><a href="#/property-content-list/{{ property.cm_id }}"><i title="Property-Content-List" class="fa fa-video-camera text-right"></i></a></td>
+                                                            <td width="25%" class="text-right"><a data-ng-show="IsBlockPermission" href="" title="{{property.title}}" data-ng-click="BlockUnBlockProperty(property.cm_id,property.title,property.buttoncolor)"><i class="fa fa-ban text-right {{property.buttoncolor}}"></i></a></td>
                                                         </tr>
                                                     </table>
                                                 </td>
@@ -65,7 +70,6 @@
                             <div class="col-xs-12">
                                 <div class="col-xs-12 col-sm-4">
                                     <button type="button" class="btn btn-primary btn-w-xs" title="Previous" data-ng-disabled="currentPage == 0" data-ng-click="currentPage=currentPage-1">Previous</button>
-
                                 </div>
                                 <div class="col-xs-12 col-sm-4">
                                     <!--<a href="#">Download in excel</a>-->

@@ -23,7 +23,6 @@ function getDate() {
     var selectdate = year + '-' + Pad("0", month, 2) + '-' + Pad("0", dt, 2);
     return selectdate;
 }
-
 function getTime(val) {
     var d = new Date(val);
     var minite = d.getMinutes();
@@ -40,6 +39,12 @@ function Pad(padString, value, length) {
     return str;
 }
 
+/**
+ * @class
+ * @classdesc create a log file if not exist.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.allAction = function (req, res, next) {
     var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
     if (wlogger.logDate == currDate) {
@@ -56,7 +61,12 @@ exports.allAction = function (req, res, next) {
         next();
     }
 }
-
+/**
+ * @class
+ * @classdesc  Get Content File data like Devices Details, ContentType, Templates.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.getcontentfile = function (req, res, next) {
     try {
         if (req.session) {
@@ -69,7 +79,7 @@ exports.getcontentfile = function (req, res, next) {
                                 userName: req.session.UserName,
                                 action : 'getcontentfile',
                                 responseCode: 500,
-                                message: JSON.stringify(err.message) 
+                                message: JSON.stringify(err.message)
                             }
                             wlogger.error(error); // for err
                         } else {
@@ -85,7 +95,7 @@ exports.getcontentfile = function (req, res, next) {
                                     });
                                 },
                                 OtherTemplates: function (callback) {
-                                    var query = connection_ikon_cms.query('select * from (select * from content_template where ct_param_value in ("bitrate","otherimage","othervideo","app","utf 16"))other', function (err, OtherTemplates) {
+                                    var query = connection_ikon_cms.query('select * from (select * from content_template where ct_param_value in ("bitrate","otherimage","othervideo","otheraudio","app","utf 16", "Preview","Supporting","Main"))other', function (err, OtherTemplates) {
                                         callback(err, OtherTemplates);
                                     });
                                 },
@@ -109,6 +119,29 @@ exports.getcontentfile = function (req, res, next) {
                                 },
                                 UserName: function (callback) {
                                     callback(null, req.session.UserName);
+                                },
+                                ConfigData: function (callback) {
+                                    callback(null, {
+                                        audio_preview_limit:config.audio_preview_limit,
+                                        audio_download_limit:config.audio_download_limit,
+                                        video_preview_limit:config.video_preview_limit,
+                                        video_download_limit:config.video_download_limit,
+                                        text_preview_limit:config.text_preview_limit,
+                                        text_download_limit:config.text_download_limit,
+                                        supporting_image_limit:config.supporting_image_limit,
+                                        thumb_limit:config.thumb_limit,
+                                        wallpaper_limit : config.wallpaper_limit,
+                                        game_limit : config.game_limit,
+                                        text_limit : config.text_limit,
+                                        audio_limit : config.audio_limit,
+                                        video_limit : config.video_limit,
+                                        log_path:config.log_path})
+                                },
+                                BGSongType: function (callback) {
+                                    var query = connection_ikon_cms.query('select * from catalogue_detail as cd ' +
+                                        'inner join(select * from catalogue_master where cm_name IN ("BG Song Type") ) cm on (cd.cd_cm_id = cm.cm_id )', function (err, ContentType) {
+                                        callback(err, ContentType);
+                                    });
                                 }
                             }, function (err, results) {
                                 if (err) {
@@ -116,7 +149,7 @@ exports.getcontentfile = function (req, res, next) {
                                         userName: req.session.UserName,
                                         action : 'getcontentfile',
                                         responseCode: 500,
-                                        message: JSON.stringify(err.message) 
+                                        message: JSON.stringify(err.message)
                                     }
                                     wlogger.error(error); // for err
                                     connection_ikon_site_user.release();
@@ -197,21 +230,34 @@ exports.checkmetadata = function (req, res, next) {
                             }
                         },
                         LyricsLanguages: function (callback) {
-                            if (req.body.contenttype == "Audio") {
-                                var query = connection_ikon_cms.query('select * from (SELECT * FROM content_metadata where cm_id =? )meta ' +
-                                    'inner join(select * from multiselect_metadata_detail)mlm on(mlm.cmd_group_id = meta.cm_lyrics_languages) ' +
-                                    'inner join(select * from catalogue_detail )cd on(cd.cd_id = mlm.cmd_entity_detail) ' +
-                                    'inner join(select * from catalogue_master where cm_name in ("Languages"))cm on(cm.cm_id =cd.cd_cm_id)' +
-                                    'inner join(select * from content_template)ct on(ct.ct_param =  mlm.cmd_entity_detail and ct.ct_param_value = cd.cd_name)', [req.body.Id], function (err, Languages) {
-                                    callback(err, Languages);
-                                });
-                            }
-                            else {
-                                callback(null, []);
-                            }
+                            //if (req.body.contenttype == "Audio") {
+                            var query = 'select * from (SELECT cm_id,cm_lyrics_languages FROM content_metadata where cm_id =? and NOT ISNULL(cm_lyrics_languages) )meta ' +
+                                'left join(select * from multiselect_metadata_detail)mlm on(mlm.cmd_group_id = meta.cm_lyrics_languages) ' +
+                                'left join(select * from catalogue_detail )cd on(cd.cd_id = mlm.cmd_entity_detail) ' +
+                                'left join(select * from catalogue_master where cm_name in ("Languages"))cm on(cm.cm_id =cd.cd_cm_id)' +
+                                'left join(select * from content_template)ct on(ct.ct_param =  mlm.cmd_entity_detail and ct.ct_param_value = cd.cd_name) ' +
+                                'left join (SELECT * FROM content_files )cm_files on(meta.cm_id = cm_files.cf_cm_id and ct.ct_group_id = cm_files.cf_template_id and file_category_id = 1) ';
+
+                            var query123 = 'select cd.*, ct.* from (SELECT * FROM content_metadata where cm_id =? )meta ' +
+                                'left join(select * from multiselect_metadata_detail)mlm on(mlm.cmd_group_id = meta.cm_lyrics_languages) ' +
+                                'left join(select * from catalogue_detail )cd on(cd.cd_id = mlm.cmd_entity_detail) ' +
+                                'left join(select * from catalogue_master where cm_name in ("Languages"))cm on(cm.cm_id =cd.cd_cm_id)' +
+                                'left join(select * from content_template)ct on(ct.ct_param =  mlm.cmd_entity_detail and ct.ct_param_value = cd.cd_name)';
+                            //console.log(query)
+                            var query = connection_ikon_cms.query(query, [req.body.Id], function (err, Languages) {
+                                callback(err, Languages);
+                            });
+                            /* }
+                             else {
+                             callback(null, []);
+                             }*/
                         },
                         Files: function (callback) {
-                            var query = connection_ikon_cms.query('select * from (SELECT cm_id FROM content_metadata where cm_id =? )meta inner join(select * from content_files where cf_cm_id = ? and cf_original_processed = 1)files on(files.cf_cm_id = meta.cm_id) inner join(select ct_group_id ,group_concat(ct_param) as ct_param,group_concat(ct_param_value) as ct_param_value from content_template group by ct_group_id)template on(template.ct_group_id =files.cf_template_id)', [req.body.Id, req.body.Id], function (err, Files) {
+                            var query = 'select * from (SELECT cm_id FROM content_metadata where cm_id =? )meta ' +
+                                'inner join(select * from content_files where cf_cm_id = ? and cf_original_processed = 1)files on(files.cf_cm_id = meta.cm_id) ' +
+                                'inner join(select ct_group_id ,group_concat(ct_param) as ct_param,group_concat(ct_param_value) as ct_param_value ' +
+                                'from content_template group by ct_group_id)template on(template.ct_group_id =files.cf_template_id )';
+                            connection_ikon_cms.query(query, [req.body.Id, req.body.Id], function (err, Files) {
                                 callback(err, Files);
                             });
                         },
@@ -1057,13 +1103,15 @@ exports.uploadimagery = function (req, res, next) {
                                                                                                     var file = {
                                                                                                         cf_id: result[0].id == null ? 1 : result[0].id + 1,
                                                                                                         cf_cm_id: fields.cm_id,
+                                                                                                        file_category_id: fields.fileCategory,
+
                                                                                                         cf_original_processed: (fields.width == width && height == fields.height) ? 1 : 0,
                                                                                                         cf_url_base: save_path,
                                                                                                         cf_url: subfilepath,
                                                                                                         cf_absolute_url: save_path,
                                                                                                         cf_template_id: match.ct_group_id,
                                                                                                         cf_name: null,
-                                                                                                        cf_name_alias: null,
+                                                                                                        cf_name_alias: fields.count,
                                                                                                         cf_created_on: new Date(),
                                                                                                         cf_created_by: req.session.UserName,
                                                                                                         cf_modified_on: new Date(),
@@ -1726,13 +1774,15 @@ exports.uploadvideo = function (req, res, next) {
                                                                                         var file = {
                                                                                             cf_id: result[0].id == null ? 1 : result[0].id + 1,
                                                                                             cf_cm_id: fields.cm_id,
+                                                                                            file_category_id: fields.fileCategory,
+
                                                                                             cf_original_processed: 1,
                                                                                             cf_url_base: save_path,
                                                                                             cf_url: save_path,
                                                                                             cf_absolute_url: save_path,
                                                                                             cf_template_id: fields.ct_group_id,
                                                                                             cf_name: null,
-                                                                                            cf_name_alias: null,
+                                                                                            cf_name_alias: fields.count,
                                                                                             cf_created_on: new Date(),
                                                                                             cf_created_by: req.session.UserName,
                                                                                             cf_modified_on: new Date(),
@@ -1901,7 +1951,10 @@ exports.uploadaudio = function (req, res, next) {
                                             wlogger.error(error); // for err
                                             res.status(500).json(err.message);
                                         } else {
+                                            shell.exec('chmod 777 ' + new_path);
                                             shell.exec('cp "' + new_path + '" "' + temp_path + '"');
+                                            shell.exec('chmod 777 ' + temp_path);
+
                                             fs.unlink(old_path, function (err) {
                                                 if (err) {
                                                     var error = {
@@ -1917,22 +1970,22 @@ exports.uploadaudio = function (req, res, next) {
                                                         async.waterfall([
                                                             function (callback) {
                                                                 var query = connection_ikon_cms.query('select * from content_template where ct_param_value in ("bitrate")', function (err, templates) {
-                                                                        if (err) {
-                                                                            var error = {
-                                                                                userName: req.session.UserName,
-                                                                                action: 'uploadaudio',
-                                                                                responseCode: 500,
-                                                                                message: JSON.stringify(err.message)
-                                                                            }
-                                                                            wlogger.error(error); // for err
-                                                                            callback(err, null);
+                                                                    if (err) {
+                                                                        var error = {
+                                                                            userName: req.session.UserName,
+                                                                            action: 'uploadaudio',
+                                                                            responseCode: 500,
+                                                                            message: JSON.stringify(err.message)
                                                                         }
-                                                                        else {
-                                                                            callback(null, templates);
-                                                                        }
-                                                                    })
+                                                                        wlogger.error(error); // for err
+                                                                        callback(err, null);
+                                                                    }
+                                                                    else {
+                                                                        callback(null, templates);
+                                                                    }
+                                                                })
                                                             },
-                                                            function (templates, callback) { 
+                                                            function (templates, callback) {
                                                                 /*insert original file*/
                                                                 getClosestTemplateIdBitrate(templates, bitrate, function (err, closestBitRate) {
                                                                     if (err) {
@@ -1947,29 +2000,29 @@ exports.uploadaudio = function (req, res, next) {
                                                                     }
                                                                     else {
                                                                         addUpdateAudioFile(connection_ikon_cms, save_path, fields, closestBitRate['templateId'], 1,req.session, function (err, data) {
-                                                                                if (err) {
-                                                                                    var error = {
-                                                                                        userName: req.session.UserName,
-                                                                                        action : 'uploadaudio',
-                                                                                        responseCode: 500,
-                                                                                        message: JSON.stringify(err.message)
-                                                                                    }
-                                                                                    wlogger.error(error); // for err
-                                                                                    //callback(err, {templates:metadata.templates, status:metadata.status, closestBitRate: closestBitRate['bitrate']});
-                                                                                    callback(err, {templates:templates, closestBitRate: closestBitRate['bitrate']});
+                                                                            if (err) {
+                                                                                var error = {
+                                                                                    userName: req.session.UserName,
+                                                                                    action : 'uploadaudio',
+                                                                                    responseCode: 500,
+                                                                                    message: JSON.stringify(err.message)
                                                                                 }
-                                                                                else {
-                                                                                    var info = {
-                                                                                        userName: req.session.UserName,
-                                                                                        action: 'uploadaudio',
-                                                                                        responseCode: 200,
-                                                                                        message: "Original File along with formatted Audio Files uploaded successfully :" + save_path
-                                                                                    }
-                                                                                    wlogger.info(info); // for information
-                                                                                    //callback(null,{templates:metadata.templates, status:metadata.status, closestBitRate: closestBitRate['bitrate']});
-                                                                                    callback(err, {templates:templates, closestBitRate: closestBitRate['bitrate']});
+                                                                                wlogger.error(error); // for err
+                                                                                //callback(err, {templates:metadata.templates, status:metadata.status, closestBitRate: closestBitRate['bitrate']});
+                                                                                callback(err, {templates:templates, closestBitRate: closestBitRate['bitrate']});
+                                                                            }
+                                                                            else {
+                                                                                var info = {
+                                                                                    userName: req.session.UserName,
+                                                                                    action: 'uploadaudio',
+                                                                                    responseCode: 200,
+                                                                                    message: "Original File along with formatted Audio Files uploaded successfully :" + save_path
                                                                                 }
-                                                                            })
+                                                                                wlogger.info(info); // for information
+                                                                                //callback(null,{templates:metadata.templates, status:metadata.status, closestBitRate: closestBitRate['bitrate']});
+                                                                                callback(err, {templates:templates, closestBitRate: closestBitRate['bitrate']});
+                                                                            }
+                                                                        })
                                                                     }
                                                                 })
                                                             },
@@ -2007,60 +2060,61 @@ exports.uploadaudio = function (req, res, next) {
                                                                         var audio_path = config.site_audio_path + filenamedata;
                                                                         var save_path = config.site_base_path + audio_path;
                                                                         var temp_path = config.site_temp_path + filenamedata;
-                                                                        var output = shell.exec('ffmpeg -i ' + new_path + ' -vn -ar 44100 -ac 2 -ab ' + metadata.templates[j].ct_param + 'k -f mp3 ' + save_path);
-                                                                            shell.exec('cp "' + save_path + '" "' + temp_path + '"');
+                                                                        shell.exec('rm ! -f ' + save_path);
 
-                                                                            if (metadata.status == 2) {
-                                                                                addUpdateAudioFile(connection_ikon_cms, audio_path, fields, metadata.templates[j].ct_group_id, 0, req.session, function (err, data) {
-                                                                                    if (err) {
-                                                                                        var error = {
+                                                                        var output = shell.exec('ffmpeg -i ' + new_path + ' -vn -ar 44100 -ac 2 -ab ' + metadata.templates[j].ct_param + 'k -f mp3 ' + save_path);
+                                                                        shell.exec('cp "' + save_path + '" "' + temp_path + '"');
+                                                                        shell.exec('chmod 777 ' + temp_path);
+
+                                                                        if (metadata.status == 2) {
+                                                                            addUpdateAudioFile(connection_ikon_cms, audio_path, fields, metadata.templates[j].ct_group_id, 0, req.session, function (err, data) {
+                                                                                if (err) {
+                                                                                    var error = {
+                                                                                        userName: req.session.UserName,
+                                                                                        action: 'uploadaudio',
+                                                                                        responseCode: 500,
+                                                                                        message: JSON.stringify(err.message)
+                                                                                    }
+                                                                                    wlogger.error(error); // for err
+                                                                                    callback(err, null);
+                                                                                }
+                                                                                else {
+                                                                                    cnt = cnt + 1;
+                                                                                    if (cnt < metadata.templates.length) {
+                                                                                        convertFile(cnt);
+                                                                                    } else {
+                                                                                        var info = {
                                                                                             userName: req.session.UserName,
                                                                                             action: 'uploadaudio',
-                                                                                            responseCode: 500,
-                                                                                            message: JSON.stringify(err.message)
+                                                                                            responseCode: 200,
+                                                                                            message: "Converted Audio File uploaded successfully for bitrate " +metadata.templates[j].ct_param + " :" + audio_path
                                                                                         }
-                                                                                        wlogger.error(error); // for err
-                                                                                        callback(err, null);
+                                                                                        wlogger.info(info); // for information
+                                                                                        callback(null, metadata);
+                                                                                        console.log("Converted Audio File uploaded successfully for bitrate " +metadata.templates[j].ct_param + " :" + audio_path);
                                                                                     }
-                                                                                    else {
-                                                                                        cnt = cnt + 1;
-                                                                                        if (cnt < metadata.templates.length) {
-                                                                                            convertFile(cnt);
-                                                                                        } else {
-                                                                                            var info = {
-                                                                                                userName: req.session.UserName,
-                                                                                                action: 'uploadaudio',
-                                                                                                responseCode: 200,
-                                                                                                message: "Converted Audio File uploaded successfully for bitrate " +metadata.templates[j].ct_param + " :" + audio_path
-                                                                                            }
-                                                                                            wlogger.info(info); // for information
-                                                                                            callback(null, metadata);
-                                                                                            console.log("Converted Audio File uploaded successfully for bitrate " +metadata.templates[j].ct_param + " :" + audio_path);
-                                                                                        }
-                                                                                    }
-                                                                                })
-                                                                            } else {
-                                                                                cnt = cnt + 1;
-                                                                                if (cnt < (metadata.templates.length)) {
-                                                                                    convertFile(cnt);
-                                                                                }else{
-                                                                                    callback(null, metadata);
                                                                                 }
+                                                                            })
+                                                                        } else {
+                                                                            cnt = cnt + 1;
+                                                                            if (cnt < (metadata.templates.length)) {
+                                                                                convertFile(cnt);
+                                                                            }else{
+                                                                                callback(null, metadata);
                                                                             }
+                                                                        }
                                                                     }else{
                                                                         cnt = cnt + 1;
                                                                         if (cnt < (metadata.templates.length)) {
                                                                             convertFile(cnt);
                                                                         }else{
-                                                                             callback(null, metadata);
+                                                                            callback(null, metadata);
                                                                         }
                                                                     }
                                                                 }
-
                                                                 convertFile(0);
-
                                                             }
-                                                            ], function (err, results) {
+                                                        ], function (err, results) {
                                                             if (err) {
                                                                 var error = {
                                                                     userName: req.session.UserName,
@@ -2422,13 +2476,15 @@ exports.uploadappsgame = function (req, res, next) {
                                                             var file = {
                                                                 cf_id: fileid,
                                                                 cf_cm_id: fields.cm_id,
+                                                                file_category_id: fields.fileCategory,
+
                                                                 cf_original_processed: 1,
                                                                 cf_url_base: save_path,
                                                                 cf_url: save_path,
                                                                 cf_absolute_url: save_path,
                                                                 cf_template_id: fields.ct_group_id,
                                                                 cf_name: null,
-                                                                cf_name_alias: null,
+                                                                cf_name_alias: fields.count,
                                                                 cf_created_on: new Date(),
                                                                 cf_created_by: req.session.UserName,
                                                                 cf_modified_on: new Date(),
@@ -2561,9 +2617,11 @@ exports.uploadtext = function (req, res, next) {
                         var index = old_path.lastIndexOf('/') + 1;
                         var file_name = old_path.substr(index);
                         var file_namepath = files.file.name.substring(0, files.file.name.indexOf('.'));
+                      
                         var filenamedata = (fields.cm_id + '_' + fields.ct_param_value + '_' + Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase();
                         var save_path = config.site_text_path + filenamedata;
                         var new_path = config.site_base_path + save_path;
+
                         fs.readFile(old_path, function (err, data) {
                             if (err) {
                                 var error = {
@@ -2807,22 +2865,48 @@ exports.uploadtext = function (req, res, next) {
                                                             res.status(500).json(err.message);
                                                         }
                                                         else {
+                                                            var data = shell.exec('ffprobe -v error -show_entries stream=width,height,bit_rate,duration -show_entries format=size -of default=noprint_wrappers=1 ' + new_path);
+
+                                                            if (data.code == 0) {
+                                                                var endOfLine = require('os').EOL;
+                                                                var fileInfo = data.output.split(endOfLine);
+                                                                fileInfo = fileInfo.filter(function (n) {
+                                                                    return (n != '' && n != 'N/A')
+                                                                });
+                                                                var fileData = {};
+                                                                var info = [];
+                                                                fileInfo.forEach(function (val) {
+                                                                    info = val.split("=");
+                                                                    if (info[1] != 'N/A' && info[1] != '') {
+                                                                        fileData[info[0]] = parseInt(info[1]);
+                                                                    }
+                                                                })
+
+                                                                var bitRate = fileData.size;
+                                                            }else{
+                                                                var bitRate = '';
+                                                            }
+
                                                             var file = {
                                                                 cf_id: result[0].id == null ? 1 : result[0].id + 1,
                                                                 cf_cm_id: fields.cm_id,
+                                                                file_category_id: fields.fileCategory,
+
                                                                 cf_original_processed: 1,
                                                                 cf_url_base: save_path,
                                                                 cf_url: save_path,
                                                                 cf_absolute_url: save_path,
                                                                 cf_template_id: fields.ct_group_id,
                                                                 cf_name: null,
-                                                                cf_name_alias: null,
+                                                                cf_bitrate: bitRate,
+                                                                cf_name_alias: fields.count,
                                                                 cf_created_on: new Date(),
                                                                 cf_created_by: req.session.UserName,
                                                                 cf_modified_on: new Date(),
                                                                 cf_modified_by: req.session.UserName,
                                                                 cf_crud_isactive: 1
                                                             };
+                                                            console.log(file)
                                                             var query = connection_ikon_cms.query('INSERT INTO content_files SET ?', file, function (err, result) {
                                                                 if (err) {
                                                                     var error = {
@@ -2891,6 +2975,7 @@ exports.uploadotherfiles = function (req, res, next) {
             if (req.session.UserName) {
                 var form = new formidable.IncomingForm();
                 form.parse(req, function (err, fields, files) {
+                    //console.log(fields);
                     if (files.file) {
                         var date = new Date();
                         var ticks = date.getTime();
@@ -2900,11 +2985,13 @@ exports.uploadotherfiles = function (req, res, next) {
                         var index = old_path.lastIndexOf('/') + 1;
                         var file_name = old_path.substr(index);
                         var file_namepath = files.file.name.substring(0, files.file.name.indexOf('.'));
-                        var filenamedata = (fields.cm_id + '_' + fields.type + '_' + Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase();
-                        var save_path = (fields.type == 'image' ? config.site_wallpaper_path : config.site_video_path) + filenamedata;
-                        console.log('supporting file upload')
-                        console.log(save_path)
+                        var preview = (fields.fileCategory == 3) ?  '_preview':'';
+
+                        var filenamedata = (fields.type != 'text')? (fields.cm_id + '_' + fields.type + preview + '_' + Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase() : (fields.cm_id + '_' + fields.ct_param_value + '_' + Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase();
+                        var save_path = (fields.type == 'image' ? config.site_wallpaper_path : (fields.type == 'audio' ? config.site_audio_path :(fields.type == 'video' ? config.site_video_path:config.site_text_path ))) + filenamedata;
+
                         var new_path = config.site_base_path + save_path;
+
                         fs.readFile(old_path, function (err, data) {
                             if (err) {
                                 var error = {
@@ -2928,8 +3015,9 @@ exports.uploadotherfiles = function (req, res, next) {
                                         res.status(500).json(err.message);
                                     } else {
                                         var temp_path = config.site_temp_path + filenamedata;
-
+                                      //  console.log(temp_path);
                                         shell.exec('cp "' + new_path + '" "' + temp_path + '"');
+                                        shell.exec('chmod 777 ' + temp_path);
                                         fs.unlink(old_path, function (err) {
                                             if (err) {
                                                 var error = {
@@ -2955,23 +3043,54 @@ exports.uploadotherfiles = function (req, res, next) {
                                                             res.status(500).json(err.message);
                                                         }
                                                         else {
+                                                            var data = shell.exec('ffprobe -v error -show_entries stream=width,height,bit_rate,duration -show_entries format=size -of default=noprint_wrappers=1 ' + new_path);
+
+                                                            if (data.code == 0) {
+                                                                var endOfLine = require('os').EOL;
+                                                                var fileInfo = data.output.split(endOfLine);
+                                                                fileInfo = fileInfo.filter(function(n){ return (n != ''  &&  n != 'N/A') });
+                                                                var fileData = {};
+                                                                var info = [];
+                                                                fileInfo.forEach(function(val){
+                                                                    info = val.split("=");
+                                                                    if(info[1] != 'N/A' && info[1] != ''){
+                                                                        fileData[info[0]] = parseInt(info[1]);
+                                                                    }
+                                                                })
+                                                                if(fields.type == 'image'){
+                                                                    var bitRate = fileData.width +"x"+ fileData.height;
+                                                                } else if (fields.type == 'audio'){
+                                                                    var bitRate = parseInt(fileData.bit_rate / 1000);
+                                                                } else if(fields.type == 'video'){
+                                                                    var bitRate = parseInt(fileData.size/1024);
+                                                                    //var bitRate = parseInt(fileData.duration);
+                                                                }else{
+                                                                    var bitRate = fileData.size;
+                                                                }
+                                                            }else{
+                                                                var bitRate = '';
+                                                            }
                                                             var file = {
                                                                 cf_id: result[0].id == null ? 1 : parseInt(result[0].id + 1),
                                                                 cf_cm_id: fields.cm_id,
+                                                                file_category_id: fields.fileCategory,
                                                                 cf_original_processed: 1,
                                                                 cf_url_base: save_path,
                                                                 cf_url: save_path,
                                                                 cf_absolute_url: save_path,
                                                                 cf_template_id: fields.ct_group_id,
                                                                 cf_name: null,
-                                                                cf_name_alias: null,
+                                                                cf_bitrate: bitRate,
+                                                                cf_name_alias: fields.count,
                                                                 cf_created_on: new Date(),
                                                                 cf_created_by: req.session.UserName,
                                                                 cf_modified_on: new Date(),
                                                                 cf_modified_by: req.session.UserName,
                                                                 cf_crud_isactive: 1
                                                             };
+                                                            //console.log(file)
                                                             var query = connection_ikon_cms.query('INSERT INTO content_files SET ?', file, function (err, result) {
+                                                                //console.log(query.sql);
                                                                 if (err) {
                                                                     var error = {
                                                                         userName: req.session.UserName,
@@ -3005,7 +3124,7 @@ exports.uploadotherfiles = function (req, res, next) {
                                                                             }
                                                                             wlogger.info(info); // for information
                                                                             AdminLog.adminlog(connection_ikon_cms, 'Supporting File Uploaded for ' + fields.cm_title + ' and MetadataId is ' + fields.cm_id + ".", "Supporting File Upload", req.session.UserName, true);
-                                                                            res.send({ success: true, message: 'File uploaded successfully', Files: Files });
+                                                                            res.send({ success: true, message: 'File uploaded successfully', Files: file });
                                                                         }
                                                                     });
                                                                 }
@@ -3065,12 +3184,14 @@ exports.uploadotherfiles = function (req, res, next) {
         res.status(500).json(err.message);
     }
 }
+
 exports.replaceFile = function (req, res, next) {
     try {
         if (req.session) {
             if (req.session.UserName) {
                 var form = new formidable.IncomingForm();
                 form.parse(req, function (err, fields, files) {
+                    console.log(fields)
                     if (files.file) {
                         var old_path = files.file.path;
                         new_path = config.site_base_path + fields.filepath;
@@ -3131,15 +3252,72 @@ exports.replaceFile = function (req, res, next) {
                                                             res.status(500).json(err.message);
                                                         }
                                                         else {
-                                                            var info = {
-                                                                userName: req.session.UserName,
-                                                                action : 'replaceFile',
-                                                                responseCode: 200,
-                                                                message:  files.file.name + ' File replaced successfully for ' + fields.cm_title + ' and MetadataId is ' + fields.cm_id
+                                                            var data = shell.exec('ffprobe -v error -show_entries stream=width,height,bit_rate,duration -show_entries format=size -of default=noprint_wrappers=1 ' + new_path);
+
+                                                            if (data.code == 0) {
+                                                                var endOfLine = require('os').EOL;
+                                                                var fileInfo = data.output.split(endOfLine);
+                                                                fileInfo = fileInfo.filter(function(n){ return (n != ''  &&  n != 'N/A') });
+                                                                var fileData = {};
+                                                                var info = [];
+                                                                fileInfo.forEach(function(val){
+                                                                    info = val.split("=");
+                                                                    if(info[1] != 'N/A' && info[1] != ''){
+                                                                        fileData[info[0]] = parseInt(info[1]);
+                                                                    }
+                                                                })
+                                                                if(fields.TypeName == 'Image'){
+                                                                    var bitRate = fileData.width +"x"+ fileData.height;
+                                                                } else if (fields.TypeName == 'Audio'){
+                                                                    var bitRate = parseInt(fileData.bit_rate / 1000);
+                                                                } else if(fields.TypeName == 'Video'){
+                                                                    var bitRate = parseInt(fileData.size/1024);
+                                                                    //var bitRate = parseInt(fileData.duration);
+                                                                }else{
+                                                                    var bitRate = fileData.size;
+                                                                }
+                                                            }else{
+                                                                var bitRate = '';
                                                             }
-                                                            wlogger.info(info); // for information
-                                                            AdminLog.adminlog(connection_ikon_cms, files.file.name + ' File replaced successfully for ' + fields.cm_title + ' and MetadataId is ' + fields.cm_id + ".", "Replace File", req.session.UserName, true);
-                                                            res.send({ success: true, message: 'File replaced successfully' });
+
+                                                            var file = {
+                                                                cf_id: fields.cf_id,
+                                                                cf_cm_id: fields.cm_id,                                                                
+                                                                cf_bitrate: bitRate,
+                                                                cf_modified_on: new Date(),
+                                                                cf_modified_by: req.session.UserName
+                                                            };
+                                                            //console.log(file);
+                                                            var query = connection_ikon_cms.query('UPDATE content_files SET ? WHERE cf_id=?', [file, fields.cf_id], function (err, result) {
+                                                                //console.log('UPDATE content_files SET '+file+' WHERE cf_cm_id='+fields.cf_id);
+                                                                if (err) {
+                                                                    console.log(err)
+                                                                    var error = {
+                                                                        userName: req.session.UserName,
+                                                                        action: 'uploadotherfiles',
+                                                                        responseCode: 500,
+                                                                        message: JSON.stringify(err.message)
+                                                                    }
+                                                                    wlogger.error(error); // for err
+                                                                    connection_ikon_cms.release();
+                                                                    res.status(500).json(err.message);
+                                                                }
+                                                                else {
+                                                                    var info = {
+                                                                        userName: req.session.UserName,
+                                                                        action: 'replaceFile',
+                                                                        responseCode: 200,
+                                                                        message: files.file.name + ' File replaced successfully for ' + fields.cm_title + ' and MetadataId is ' + fields.cm_id
+                                                                    }
+                                                                    wlogger.info(info); // for information
+                                                                    AdminLog.adminlog(connection_ikon_cms, files.file.name + ' File replaced successfully for ' + fields.cm_title + ' and MetadataId is ' + fields.cm_id + ".", "Replace File", req.session.UserName, true);
+                                                                    res.send({
+                                                                        success: true,
+                                                                        message: 'File replaced successfully',
+                                                                        Files: file
+                                                                    });
+                                                                }
+                                                            })
                                                         }
                                                     })
                                                 });
@@ -3174,6 +3352,53 @@ exports.replaceFile = function (req, res, next) {
         res.status(500).json(err.message); }
 }
 
+exports.replaceThumbFile = function (req, res, next) {
+    try {
+        if (req.session) {
+            if (req.session.UserName) {
+                var form = new formidable.IncomingForm();
+                form.parse(req, function (err, fields, files) {
+                    if (files.file) {
+                        var old_path = files.file.path;
+                        new_path = config.site_base_path + fields.filepath;
+                        fs.readFile(old_path, function (err, data) {
+                            if (err) {
+                                res.status(500).json(err.message);
+                            } else {
+                                fs.writeFile(new_path, data, function (err) {
+                                    if (err) {
+                                        res.status(500).json(err.message);
+                                    } else {
+                                        fs.unlink(old_path, function (err) {
+                                            if (err) {
+                                                res.status(500).json(err.message);
+                                            } else {
+                                                mysql.getConnection('CMS', function (err, connection_ikon_cms) {
+                                                    AdminLog.adminlog(connection_ikon_cms, files.file.name + ' File replaced successfully for ' + fields.cm_title + ' and MetadataId is ' + fields.cm_id + ".", "Replace File", req.session.UserName, true);
+                                                    res.send({ success: true, message: 'File replaced successfully' });
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                    else {
+                        res.status(500).json("File not found.");
+                    }
+                });
+            }
+        }
+    } catch (err) { res.status(500).json(err.message); }
+}
+
+/**
+ * Get Closest Bitrate template id
+ * @param {Array} templates
+ * @param {Number} bitrate
+ * @return {Function} callback
+ */
 function getClosestTemplateIdBitrate(templates, bitrate,callback){
     var closest = null;
     var data = [];
@@ -3188,6 +3413,13 @@ function getClosestTemplateIdBitrate(templates, bitrate,callback){
     callback(null, data);
 }
 
+/**
+ * Update Content Metadata
+ * @param {Resource} connection_ikon_cms
+ * @param {Array} fields
+ * @param {Array} session
+ * @return {Function} callback
+ */
 function updateMetadata(connection_ikon_cms,fields,session, callback){
 
     var query = connection_ikon_cms.query('select * FROM content_files as cf inner join(select cm_id,cm_state from content_metadata)cm on(cm.cm_id =cf.cf_cm_id) where cf.cf_cm_id =? ', [fields.cm_id], function (err, result) {
@@ -3204,8 +3436,8 @@ function updateMetadata(connection_ikon_cms,fields,session, callback){
         }
         else {
             var cm_state = 1;
-            console.log('updateMetadata')
-            console.log(result[0].cm_state)
+            //console.log('updateMetadata')
+            //console.log(result[0].cm_state)
             if (result.length > 0) {
                 if (result[0].cm_state == 4) {
                     cm_state = 4;
@@ -3256,6 +3488,16 @@ function updateMetadata(connection_ikon_cms,fields,session, callback){
     })
 }
 
+/**
+ * Add or Update Audio File
+ * @param {Resource} connection_ikon_cms
+ * @param {String} save_path
+ * @param {Array} fields
+ * @param {Number} templateID
+ * @param {Number} isProcessed
+ * @param {Array} session
+ * @return {Function} callback
+ */
 function addUpdateAudioFile(connection_ikon_cms, save_path, fields, templateID, isProcessed, session, callback){
     var query = connection_ikon_cms.query('SELECT cf_id FROM content_files where cf_cm_id = ? and cf_template_id = ? ', [fields.cm_id,templateID], function (err, result) {
         if (err) {
@@ -3287,6 +3529,7 @@ function addUpdateAudioFile(connection_ikon_cms, save_path, fields, templateID, 
                         var file = {
                             cf_id: result[0].id == null ? 1 : result[0].id + 1,
                             cf_cm_id: fields.cm_id,
+                            file_category_id: fields.fileCategory,
                             cf_original_processed: isProcessed,
                             cf_url_base: save_path,
                             cf_url: save_path,
@@ -3332,3 +3575,57 @@ function addUpdateAudioFile(connection_ikon_cms, save_path, fields, templateID, 
     })
 }
 
+
+/**
+ * Get file inforamtion like width,height,bit_rate,duration, size  of given filepath
+ * @param {String} file_path
+ * @param {String} file_type
+ * @param {Array} session
+ * @return {Function} callback
+ */
+function getBitrate(file_path, file_type, session, callback){
+    var bitRate = '';
+
+    fs.stat(file_path, function(err, stat) {
+        if(err != null&& err.code == 'ENOENT') {
+
+            var data = shell.exec('ffprobe -v error -show_entries stream=width,height,bit_rate,duration -show_entries format=size -of default=noprint_wrappers=1 ' + file_path);
+            console.log(JSON.stringify(data))
+            var info = {
+                userName: session.UserName,
+                action : 'getBitrate',
+                responseCode: 200,
+                message: "File information : " + JSON.stringify(data)
+            }
+            wlogger.info(info); // for information
+            if (data.code == 0) {
+                var endOfLine = require('os').EOL;
+                var fileInfo = data.output.split(endOfLine);
+                fileInfo = fileInfo.filter(function(n){ return (n != ''  &&  n != 'N/A') });
+                var fileData = {};
+                var info = [];
+                fileInfo.forEach(function(val){
+                    info = val.split("=");
+                    if(info[1] != 'N/A' && info[1] != ''){
+                        fileData[info[0]] = parseInt(info[1]);
+                    }
+                })
+                if(file_type == 'image'){
+                    bitRate = fileData.width +"x"+ fileData.height;
+                } else if (file_type == 'audio'){
+                    bitRate = parseInt(fileData.bit_rate / 1000);
+                } else if(file_type == 'video'){
+                    bitRate = parseInt(fileData.size/1024);
+                    //bitRate = parseInt(fileData.duration);
+                }else{
+                    bitRate = fileData.size;
+                }
+             }
+            callback(null, {'bitRate' : bitRate});
+
+        }else {
+            console.log('Some other error: ', err.code);
+            callback(err, {'bitRate' : bitRate});
+        }
+    });
+}

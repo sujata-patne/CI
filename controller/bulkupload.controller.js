@@ -138,6 +138,7 @@ exports.bulkupload = function (req, res, next) {
                         var vendor_length = Vendors.length;
                         CheckVendorFiles(0);
                         function CheckVendorFiles(a) {
+                            console.log(Vendors[a].vd_name)
                             if (Vendors[a].vd_is_active == 1) {
                                 if (new Date(Vendors[a].vd_end_on) >= new Date(currentdate)) {
                                     dir.readFiles(__dirname + '/../public/Vendors/' + Vendors[a].vd_name, {
@@ -148,7 +149,7 @@ exports.bulkupload = function (req, res, next) {
                                         next();
                                     }, function (err, files) {
                                         if (err) { connection_ikon_cms.release(); };
-                                        if (files.length > 0) {
+                                        if (files && files.length > 0) {
                                             var fileslength = files.length;
                                             ExcelreadFile(0);
                                             function ExcelreadFile(f_index) {
@@ -249,7 +250,7 @@ exports.bulkupload = function (req, res, next) {
                                                                                                                 userName: req.session.UserName,
                                                                                                                 action: 'bulkupload',
                                                                                                                 responseCode: 500,
-                                                                                                                message: JSON.stringify(err.message)
+                                                                                                                message: JSON.stringify(err)
                                                                                                             }
                                                                                                             wlogger.error(error); // for error
                                                                                                             callback(err, null);
@@ -1062,6 +1063,7 @@ exports.bulkupload = function (req, res, next) {
                                                                             },
                                                                             // Expired_On
                                                                             function (value, callback) {
+
                                                                                 if (obj.Expired_On) {
                                                                                     if (obj.cm_expires_on) {
                                                                                         if (new Date(obj.Expired_On) > new Date(obj.cm_expires_on)) {
@@ -3050,7 +3052,7 @@ exports.bulkupload = function (req, res, next) {
                                                                                                 userName: req.session.UserName,
                                                                                                 action: 'bulkupload',
                                                                                                 responseCode: 500,
-                                                                                                message: JSON.stringify(err.message)
+                                                                                                message: JSON.stringify(err)
                                                                                             }
                                                                                             wlogger.error(error); // for error
                                                                                             connection_ikon_cms.release();
@@ -3072,7 +3074,7 @@ exports.bulkupload = function (req, res, next) {
                                                                                                                 userName: req.session.UserName,
                                                                                                                 action: 'bulkupload',
                                                                                                                 responseCode: 500,
-                                                                                                                message: JSON.stringify(err.message)
+                                                                                                                message: JSON.stringify(err)
                                                                                                             }
                                                                                                             wlogger.error(error); // for error
                                                                                                             connection_ikon_cms.release();
@@ -3117,7 +3119,7 @@ exports.bulkupload = function (req, res, next) {
                                                                                                                 userName: req.session.UserName,
                                                                                                                 action: 'bulkupload',
                                                                                                                 responseCode: 500,
-                                                                                                                message: JSON.stringify(err.message)
+                                                                                                                message: JSON.stringify(err)
                                                                                                             }
                                                                                                             wlogger.error(error); // for error
                                                                                                             connection_ikon_cms.release();
@@ -3165,7 +3167,7 @@ exports.bulkupload = function (req, res, next) {
                                                                                         userName: req.session.UserName,
                                                                                         action: 'bulkupload',
                                                                                         responseCode: 500,
-                                                                                        message: JSON.stringify(err.message)
+                                                                                        message: JSON.stringify(err)
                                                                                     }
                                                                                     wlogger.error(error); // for error
                                                                                     connection_ikon_cms.release();
@@ -3204,7 +3206,7 @@ exports.bulkupload = function (req, res, next) {
                                                                             userName: req.session.UserName,
                                                                             action: 'bulkupload',
                                                                             responseCode: 500,
-                                                                            message: JSON.stringify(err.message)
+                                                                            message: JSON.stringify(err)
                                                                         }
                                                                         wlogger.error(error); // for error
                                                                         connection_ikon_cms.release();
@@ -3243,7 +3245,7 @@ exports.bulkupload = function (req, res, next) {
                                                                     userName: req.session.UserName,
                                                                     action: 'bulkupload',
                                                                     responseCode: 500,
-                                                                    message: JSON.stringify(err.message)
+                                                                    message: JSON.stringify(err)
                                                                 }
                                                                 wlogger.error(error); // for error
                                                                 connection_ikon_cms.release();
@@ -3280,7 +3282,7 @@ exports.bulkupload = function (req, res, next) {
                                                                 userName: req.session.UserName,
                                                                 action: 'bulkupload',
                                                                 responseCode: 500,
-                                                                message: JSON.stringify(err.message)
+                                                                message: JSON.stringify(err)
                                                             }
                                                             wlogger.error(error); // for error
                                                             connection_ikon_cms.release();
@@ -3314,12 +3316,13 @@ exports.bulkupload = function (req, res, next) {
                                         else {
                                             // no file avaliable for vendor
                                             fs.writeFile(__dirname + '/../public/Vendors/' + Vendors[a].vd_name + '/' + Vendors[a].vd_name + '_error_' + new Date().getTime() + '.txt', 'No xlsx file Avaliable.', function (err) {
+                                                console.log(err)
                                                 if (err) {
                                                     var error = {
                                                         userName: req.session.UserName,
                                                         action: 'bulkupload',
                                                         responseCode: 500,
-                                                        message: JSON.stringify(err.message)
+                                                        message: JSON.stringify(err)
                                                     }
                                                     wlogger.error(error); // for error
                                                     connection_ikon_cms.release();
@@ -3352,7 +3355,7 @@ exports.bulkupload = function (req, res, next) {
                                                 userName: req.session.UserName,
                                                 action: 'bulkupload',
                                                 responseCode: 500,
-                                                message: JSON.stringify(err.message)
+                                                message: JSON.stringify(err)
                                             }
                                             wlogger.error(error); // for error
                                             connection_ikon_cms.release();
@@ -3383,7 +3386,7 @@ exports.bulkupload = function (req, res, next) {
                                             userName: req.session.UserName,
                                             action: 'bulkupload',
                                             responseCode: 500,
-                                            message: JSON.stringify(err.message)
+                                            message: JSON.stringify(err)
                                         }
                                         wlogger.error(error); // for error
                                         connection_ikon_cms.release();

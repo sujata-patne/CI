@@ -3,6 +3,7 @@
         <div class="content-container">
             <div class="content-header">
                 <h2 class="content-header-title">Content Catalog</h2>
+                <div loading-spinner></div>
             </div>
             <!-- /.content-header -->
             <div class="row">
@@ -229,7 +230,7 @@
                                     </td>
                                     <td>
                                         <span ng-show="i.cm_thumb_url != null && i.cm_thumb_url != ''"><img alt="Thumb" data-ng-src="{{base_url}}{{i.cm_thumb_url}}"  width="100" height="100" /></span>
-                                        <span ng-hide="i.cm_thumb_url != null && i.cm_thumb_url != ''" title="{{files.filename}}"><img width="50" height="50" src="{{base_url}}assets/img/no_image.gif" /></span>
+                                        <span ng-hide="i.cm_thumb_url != null && i.cm_thumb_url != ''" title="{{files.filename}}"><img width="50" height="50" src="{{base_url}}assets/img/icons/no_image.gif" /></span>
                                     </td>
                                     <td>
                                         <span>{{i.cm_created_on}}</span>
@@ -315,7 +316,6 @@
                                 <tr data-ng-repeat="i in FilterData |startFrom:currentPage*pageSize | limitTo:pageSize ">
                                     <td>
                                         <span>{{i.cm_id}}</span>
-
                                     </td>
                                     <td>
                                         <span>{{i.MetaId}}</span>
@@ -327,8 +327,8 @@
                                         <span>{{i.propertyname}}</span>
                                     </td>
                                     <td>
-                                        <span ng-show="files.cf_url != null && i.cm_thumb_url != ''"><img alt="Thumb" data-ng-src="{{base_url}}{{i.cm_thumb_url}}"  width="100" height="100" /></span>
-                                        <span ng-hide="files.cf_url != null && i.cm_thumb_url != ''" title="{{files.filename}}"><img width="50" height="50" src="{{base_url}}assets/img/no_image.gif" /></span>
+                                        <span ng-show="i.cm_thumb_url != null && i.cm_thumb_url != ''"><img alt="Thumb" data-ng-src="{{base_url}}{{i.cm_thumb_url}}"  width="100" height="100" /></span>
+                                        <span ng-hide="i.cm_thumb_url != null && i.cm_thumb_url != ''" title="{{files.filename}}"><img width="50" height="50" src="{{base_url}}assets/img/icons/no_image.gif" /></span>
                                         <!--<img alt="Thumb" data-ng-src="{{base_url}}{{i.cm_thumb_url}}"  width="100" height="100" />-->
                                     </td>
                                     <td>
@@ -480,7 +480,7 @@
                                     </td>
                                     <td>
                                         <span ng-show="i.cm_thumb_url != null && i.cm_thumb_url != ''"><img alt="Thumb" data-ng-src="{{base_url}}{{i.cm_thumb_url}}"  width="100" height="100" /></span>
-                                        <span ng-hide="i.cm_thumb_url != null && i.cm_thumb_url != ''" title="{{files.filename}}"><img width="50" height="50" src="{{base_url}}assets/img/no_image.gif" /></span>
+                                        <span ng-hide="i.cm_thumb_url != null && i.cm_thumb_url != ''" title="{{files.filename}}"><img width="50" height="50" src="{{base_url}}assets/img/icons/no_image.gif" /></span>
                                         <!--<img alt="Thumb" data-ng-src="{{base_url}}{{i.cm_thumb_url}}"  width="100" height="100" />-->
                                     </td>
                                     <td>
@@ -550,7 +550,7 @@
                                     <td><span>{{i.cm_title}}</span></td>
                                     <td><span>{{i.propertyname}}</span></td>
                                     <td><span ng-show="i.cm_thumb_url != null && i.cm_thumb_url != ''"><img alt="Thumb" data-ng-src="{{base_url}}{{i.cm_thumb_url}}"  width="100" height="100" /></span>
-                                        <span ng-hide="i.cm_thumb_url != null && i.cm_thumb_url != ''" title="{{files.filename}}"><img width="50" height="50" src="{{base_url}}assets/img/no_image.gif" /></span>
+                                        <span ng-hide="i.cm_thumb_url != null && i.cm_thumb_url != ''" title="{{files.filename}}"><img width="50" height="50" src="{{base_url}}assets/img/icons/no_image.gif" /></span>
                                         <!--<img alt="Thumb" data-ng-src="{{base_url}}{{i.cm_thumb_url}}"  width="100" height="100"  />--></td>
                                     <td><span>{{i.cm_modified_on}}</span></td>
                                     <td>{{i.cm_modified_by}}</td>
@@ -580,6 +580,7 @@
         <!-- Deleted Wallpaper Listing ends -->
         <!-- Comment Pop-Up Starts-->
         <div id="Export" data-ng-show="ShowExportPopUp">
+
             <div class="modal-dialog" style="max-width: 400px">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -587,6 +588,17 @@
                         <h4 class="modal-title">Download Name List</h4>
                     </div>
                     <div class="modal-body">
+                        <img class="col-sm-offset-6" data-ng-hide="loader" src="assets/img/loaders/ajax-loader.gif" >
+
+                        <div class="row">
+                            <div class="col-sm-5"><label for="export" class="control-label">Download Type:</label> </div>
+                            <div class="col-sm-7">
+                                <select name="downloadType" class="ng-pristine ng-valid form-control" ng-change="showExportpopupsubmit()" data-ng-model="SelectedDownloadType" data-ng-options="item.cd_name as item.cd_name for item in DownloadType" >
+                                    <option value="">Select Download Type</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row"><div class="col-sm-12">&nbsp;</div></div>
                         <div class="row">
                             <div class="col-sm-5"><label for="export" class="control-label">Select Operator:</label><br />
                             <em class="red">[For Vcode List]</em></div>
@@ -597,8 +609,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" title="Save" data-ng-click="ExportForVcode()" class="btn btn-primary btn-w-xs">Download</button>
+                    <div class="modal-footer" data-ng-hide="uploading">
+                        <button type="button" ng-show="ShowExportPopUpSubmit" title="Save" data-ng-click="ExportForVcode()" class="btn btn-primary btn-w-xs">Download</button>
                         <button type="button" title="Close" data-ng-click="CloseImportExport()" class="btn btn-primary btn-w-xs">Close</button>
                     </div>
                 </div>
@@ -614,8 +626,19 @@
                         <h4 class="modal-title">Upload Vcode for Name List</h4>
                     </div>
                     <div class="modal-body">
+                        <img class="col-sm-offset-6" data-ng-hide="loader" src="assets/img/loaders/ajax-loader.gif" >
+
                         <div class="row">
-                            <div class="col-sm-5"><label for="export" class="control-label"><span class="asterisk">*</span>&nbsp;Upload Vcode List:</label><br />
+                            <div class="col-sm-5"><label for="export" class="control-label">Download Type:</label> </div>
+                            <div class="col-sm-7">
+                                <select name="downloadType" class="ng-pristine ng-valid form-control" data-ng-model="SelectedDownloadType" data-ng-options="item.cd_name as item.cd_name for item in DownloadType" >
+                                    <option value="">Select Upload Type</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row"><div class="col-sm-12">&nbsp;</div></div>
+                        <div class="row">
+                            <div class="col-sm-5"><label for="export" class="control-label"><span class="asterisk">*</span>&nbsp;Upload Code List:</label><br />
                                 <em class="red">[.xlsx]</em>
                             </div>
                             <div class="col-sm-7">
@@ -631,7 +654,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer" data-ng-hide="uploading">
                         <input type="submit" title="Upload" class="btn btn-primary btn-w-md"  value="Upload" />
                         <button type="button" title="Close" data-ng-click="CloseImportExport()" class="btn btn-primary btn-w-xs">Close</button>
                      </div>
@@ -642,7 +665,7 @@
         </div>
 
         <div id="Comment" data-ng-show="ShowVcodeAddUpdatePopUp">
-            <form class="form-horizontal" role="form" name="vcodeAddUpdateForm" enctype="multipart/form-data" data-ng-submit="addUpdateVcode(vcodeAddUpdateForm.$valid)" novalidate>
+            <form class="form-horizontal" role="form" name="vcodeAddUpdateForm" enctype="multipart/form-data" data-ng-submit="addUpdateVcodePromocode(vcodeAddUpdateForm.$valid)" novalidate>
                 <div class="modal-dialog" style="max-width: 400px">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -650,10 +673,11 @@
                             <h4 class="modal-title">Update Name List</h4>
                         </div>
                         <div class="modal-body">
+                            <img class="col-sm-offset-6" data-ng-hide="loader" src="assets/img/loaders/ajax-loader.gif" >
                             <div class="row">
                                 <div class="col-sm-4"><label for="export" class="control-label"><span class="asterisk">*</span>&nbsp;Operator:</label></div>
                                 <div class="col-sm-8">
-                                    <select name="countryOperator" class="ng-pristine ng-valid form-control" data-ng-model="SelectedCountryOperator" data-ng-options="item.cd_id as item.cd_name for item in CountryOperator" data-ng-change="getVcodeForGeneric(meta.cm_id)" required>
+                                    <select name="countryOperator" class="ng-pristine ng-valid form-control" data-ng-model="SelectedCountryOperator" data-ng-options="item.cd_id as item.cd_name for item in CountryOperator"  data-ng-change="getVcodeForGeneric(meta.cm_id)" required>
                                         <option value="">Select Operator</option>
                                     </select>
                                     <span style="color: red" data-ng-show="vcodeAddUpdateForm.$submitted">
@@ -665,17 +689,44 @@
                                 <div class="col-sm-12">&nbsp;</div>
                             </div>
                             <div class="row">
+                                <div class="col-sm-4"><label for="export" class="control-label">Type:</label> </div>
+                                <div class="col-sm-8">
+                                    <select name="downloadType" class="ng-pristine ng-valid form-control" data-ng-model="SelectedDownloadType" ng-change="getVcodeForGeneric(meta.cm_id)" data-ng-options="item.cd_name as item.cd_name for item in DownloadType" >
+                                        <option value="">Select Upload Type</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">&nbsp;</div>
+                            </div>
+                            <div class="row" ng-show="SelectedDownloadType == 'Vcode'">
                                 <div class="col-sm-4"><label for="export" class="control-label"><span class="asterisk">*</span>&nbsp;Vcode:</label></div>
                                 <div class="col-sm-8">
-                                    <input type="text" name="vcodeName" class="ng-pristine ng-valid form-control" data-ng-model="SelectedVcode" required />
-                                    <span style="color: red" data-ng-show="vcodeAddUpdateForm.$submitted">
+                                    <input type="text" name="vcodeName" class="ng-pristine ng-valid form-control" data-ng-model="SelectedVcode" ng-maxlength="50" required />
+                                    <span style="color: red" data-ng-show="vcodeAddUpdateForm.$submitted || vcodeAddUpdateForm.vcodeName.$dirty || vcodeAddUpdateForm.vcodeName.$touched">
                                         <span data-ng-show="vcodeAddUpdateForm.vcodeName.$error.required">Please enter Vcode for Operator.</span>
+                                        <span data-ng-show="vcodeAddUpdateForm.vcodeName.$error.maxlength ">Valid for 50 characters only.</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <!--<div class="row">
+                                <div class="col-sm-12">&nbsp;</div>
+                            </div>-->
+                            <div class="row" ng-show="SelectedDownloadType == 'Promocode'">
+                                <div class="col-sm-4"><label for="export" class="control-label"><span class="asterisk">*</span>&nbsp;Promocode:</label></div>
+                                <div class="col-sm-8">
+                                    <input type="text" name="promocodeName" class="ng-pristine ng-valid form-control" data-ng-model="SelectedPromocode" ng-maxlength="50" required />
+                                    <span style="color: red" data-ng-show="vcodeAddUpdateForm.$submitted  || vcodeAddUpdateForm.promocodeName.$dirty || vcodeAddUpdateForm.promocodeName.$touched">
+<!--
+                                        <span data-ng-show="vcodeAddUpdateForm.promocodeName.$error.required">Please enter Promocode for Operator.</span>
+-->
+                                        <span data-ng-show="vcodeAddUpdateForm.promocodeName.$error.maxlength ">Valid for 50 characters only.</span>
                                     </span>
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" title="Save" data-ng-click="SubmitVcode()" class="btn btn-primary btn-w-xs">Submit</button>
+                        <div class="modal-footer" data-ng-hide="uploading">
+                            <button type="submit" title="Save" ng-show="hidevcodepromsubmit" data-ng-click="SubmitVcode()" class="btn btn-primary btn-w-xs">Submit</button>
                             <button type="button" title="Close" data-ng-click="CloseImportExport()" class="btn btn-primary btn-w-xs">Close</button>
                         </div>
                     </div>

@@ -1,0 +1,57 @@
+<div class="col-md-12" data-ng-show="ThumbUploadVisible">
+    <form class="form-horizontal" role="form" name="replacefiles" data-ng-submit="upload(replacefiles.$valid)">
+        <div class="form-group" >
+            <label for="firstname" class="col-sm-3 control-label">Select File to Replace</label>
+            <div class="col-sm-9">
+                <div class="col-sm-6">
+                    <input type="file" required class="form-control" data-ngf-select data-ng-model="replaceThumbfile" id="replaceThumbfile" data-ng-change="replaceThumbfileupload()" multiple />
+                </div>
+                <div class="col-sm-3" data-ng-hide="uploading">
+                    <button type="submit" title="Submit" class="btn btn-primary btn-w-md">Submit</button>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="col-sm-3">
+                    &nbsp;
+                </div>
+                <div class="col-sm-9" style="color: red;">
+                    {{Thumbuggestion}}
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div data-ng-show="isThumbExist" class="col-md-12">
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th ng-show="thumbdetail.length > 0" colspan="5" style="text-align: center;">Thumb File Listing</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="file in thumbdetail">
+                <td data-ng-repeat="files in file" style="text-align: center">
+                    <div data-ng-if="files.type == 'thumb'">
+                        <label>{{files.Name}}</label><br />
+                        <span ng-show="files.cf_url != null && files.cf_url != ''"><a class="fancybox" rel="group" href="{{base_url}}{{ files.cf_url }}?{{getTime}}" title="{{files.filename}}">
+                            <img data-ng-src="{{base_url}}{{ files.cf_url }}?{{getTime}}" alt="img1" width="50" height="50" />
+                            <br />
+                            <p class="file-name-length">
+                                {{files.filename}}
+                            </p>
+                        </a></span>
+                        <span ng-hide="files.cf_url != null && files.cf_url != ''" title="{{files.filename}}"><!-- <i class="fa fa-picture-o"   style="color:green" title="View"></i> -->
+                             <img width="50" height="50" src="{{base_url}}assets/img/icons/no_image.gif" />
+                        </span>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+

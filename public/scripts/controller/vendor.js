@@ -170,6 +170,7 @@ myApp.controller('vendorCtrl', function ($scope, $state, $http, $stateParams, ng
                 }
             });
         }
+        $scope.loading = true;
     },
     function (error) {
         toastr.error(error);

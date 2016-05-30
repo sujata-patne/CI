@@ -46,6 +46,7 @@ myApp.controller('masterListCtrl', function ($scope, $window, $http, $state, ngP
                 $scope.SelectedCelebrityRole = data.cmd_entity_detail != null ? _.pluck($scope.SubMasterList, "cmd_entity_detail") : [];
             }
         }
+        $scope.loading = true;
     }, function (error) {
         toastr.error(error);
     });

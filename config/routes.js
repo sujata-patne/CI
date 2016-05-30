@@ -9,8 +9,8 @@ module.exports = function (app) {
     require('../routes/contentfile')(app);
     require('../routes/contentcatalog')(app);
     require('../routes/metadata')(app);
-    require('../routes/contentcatalog')(app);
-    require('../routes/contentfile')(app);
+    //require('../routes/contentcatalog')(app);
+    //require('../routes/contentfile')(app);
     require('../routes/adminlog')(app);
     require('../routes/masterlist')(app);
     require('../routes/excel')(app);

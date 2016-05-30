@@ -1,0 +1,204 @@
+<div data-ng-show="showAudio" class="col-md-12">
+    <div class="col-xs-12" data-ng-show="BulkAudioVisible">
+        <div class="form-group">
+            <label for="firstname" class="col-xs-3 col-sm-3 control-label"  style="text-align: right">Username</label>
+            <div class="col-xs-9 col-sm-9">
+                <div class="col-xs-6 col-sm-6">
+                    <input type="text" class="form-control" id="username" placeholder="Search" data-ng-model="SearchUsername" >
+                </div>
+                <div class="col-xs-3 col-sm-3">
+                    <!-- <button type="button" class="btn btn-primary btn-w-xs" title="Search" data-ng-click="SearchChange()">Search</button>-->
+                    <button type="button" class="btn btn-primary btn-w-xs" title="Reset" data-ng-click="resetSearch()">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12" data-ng-show="FileUploadVisible">
+        <form class="form-horizontal" role="form" name="frmreplacefiles" data-ng-submit="uploadAudio(frmreplacefiles.$valid)">
+            <div class="form-group" >
+                <label for="firstname" class="col-sm-3 control-label">Select Files to Replace</label>
+                <div class="col-sm-9">
+                    <div class="col-sm-6">
+                        <input type="file" required class="form-control" data-ngf-select data-ng-model="replacefile" data-ng-change="replaceAudioFileupload()" multiple />
+                    </div>
+                    <div class="col-sm-3" data-ng-hide="uploading">
+                        <button type="submit" title="Submit" class="btn btn-primary btn-w-md">Submit</button>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="col-sm-3">
+                        &nbsp;
+                    </div>
+                    <div class="col-sm-9" style="color: red;">
+                        {{Filesuggestion}}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div data-ng-hide="showAudio" class="col-md-12" data-ng-show="FileUploadVisible">
+    <form class="form-horizontal" role="form" name="replacefiles" data-ng-submit="upload(replacefiles.$valid)">
+        <div class="form-group" >
+            <label for="firstname" class="col-sm-3 control-label">Select File to Replace </label>
+            <div class="col-sm-9">
+                <div class="col-sm-6">
+                    <input type="file" required class="form-control" data-ngf-select data-ng-model="replacefile" id="replacefile" data-ng-change="replacefileupload()" multiple />
+                </div>
+                <div class="col-sm-3" data-ng-hide="uploading">
+                    <button type="submit" title="Submit" class="btn btn-primary btn-w-md">Submit</button>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="col-sm-3">
+                    &nbsp;
+                </div>
+                <div class="col-sm-9" style="color: red;">
+                    {{Filesuggestion}}
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div data-ng-show="isContentExist" class="col-md-12">
+    <div style="color: #444; font-size: 12px; padding: 8px 0px; font-weight: 800; background-color: #f3f3f3; border: 1px solid #ddd; vertical-align: middle; text-align: center;">Content Listing</div>
+    <div data-ng-hide="showAudio">
+        <table class="table table-bordered table-hover" >
+            <tr  data-ng-repeat="file in filesdetail">
+                <td data-ng-repeat="files in file" style="text-align: center">
+                    <div data-ng-if="files.type == 'wallpaper'" style="align-content: center">
+                        <label>{{files.Name}}</label><br />
+                        <span ng-show="files.cf_url != null && files.cf_url != ''"><a rel="group" href="{{base_url}}{{ files.cf_url }}?{{getTime}}" title="{{files.filename}}">
+                            <div style="position:relative; margin: auto; top: 0; left: 0; right: 0;bottom: 0; height: 150px; width: 150px;">
+                                <img data-ng-src="{{base_url}}{{ files.cf_url }}?{{getTime}}" alt="img1" width="{{files.compresswidth}}" height="{{files.compressheight}}" />
+                            </div>
+                            <br />
+                            <!--{{files.width}}x{{files.height}}-->
+                            <p class="file-name-length">
+                                {{files.filename}}
+                            </p>
+                        </a></span>
+                        <span ng-hide="files.cf_url != null && files.cf_url != ''" title="{{files.filename}}"><!-- <i class="fa fa-picture-o"   style="color:green" title="View"></i> -->
+                             <img width="50" height="50" src="{{base_url}}assets/img/icons/no_image.gif" />
+                        </span>
+                    </div>
+                    <div data-ng-if="files.type == 'video'"  style="align-content: center">
+                        <label>{{files.Name}}</label><br />
+                        <span ng-show="files.cf_url != null && files.cf_url != ''">
+                             <a class="fancybox-video fancybox.iframe" rel="groups" href="{{base_url}}{{ files.cf_url }}?{{getTime}}" title="{{files.filename}}">
+                                <i class="fa fa-play" style="position:relative; margin: 10px; top: 0; left: 0; right: 0;bottom: 0; font-size:48px;color:red"></i>
+                                <p class="file-name-length">
+                                    {{files.filename}}
+                                </p>
+                            </a>
+                        </span>
+                        <span ng-hide="files.cm_thumb_url != '' && cm_thumb_url != 'null'">
+                            <a class="fancybox-video fancybox.iframe" rel="groups" href="{{base_url}}{{ files.cf_url }}?{{getTime}}" title="{{files.filename}}">
+                                <img data-ng-src="{{base_url}}{{ files.cm_thumb_url }}?{{getTime}}" alt="img1" width="100" height="100" />
+                                <br />
+                                <p class="file-name-length">
+                                    {{files.filename}}
+                                </p>
+                            </a>
+                        </span>
+                    </div>
+                    <div data-ng-if="files.type == 'app'">
+                        <label>{{files.Name}}</label><br />
+                        <span ng-show="files.cf_url != null && files.cf_url != ''"><a rel="group" href="{{base_url}}{{ files.cf_url }}?{{getTime}}" title="{{files.filename}}">
+                            <img data-ng-src="{{base_url}}{{ files.cm_thumb_url }}?{{getTime}}" alt="img1" width="100" height="100" />
+                            <br />
+                            <p class="file-name-length">
+                                {{files.filename}}
+                            </p>
+                        </a></span>
+                        <span ng-hide="files.cf_url != null && files.cf_url != ''" title="{{files.filename}}"><!-- <i class="fa fa-picture-o"   style="color:green" title="View"></i> -->
+                             <img width="50" height="50" src="{{base_url}}assets/img/icons/no_image.gif" />
+                        </span>
+                    </div>
+                    <div data-ng-if="files.type == 'text'">
+                        <label>{{files.Name}}</label><br />
+
+                        <span ng-show="files.cf_url != null && files.cf_url != ''"><a class="fancybox" rel="group" href="{{base_url}}{{ files.cf_url }}?{{getTime}}" title="{{files.filename}}">
+                            <img data-ng-src="assets\img\icons\text.png" alt="img1" width="50" height="50" />
+                            <br />
+                            <p class="file-name-length">
+                                {{files.filename}}
+                            </p>
+                        </a></span>
+                        <span ng-hide="files.cf_url != null && files.cf_url != ''" title="{{files.filename}}"><!-- <i class="fa fa-picture-o"   style="color:green" title="View"></i> -->
+                             <img data-ng-src="assets\img\icons\no_image.gif" alt="img1" width="50" height="50" />
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div data-ng-show="showAudio"><td>
+        <table class="table table-bordered table-hover" >
+            <thead>
+            <tr>
+                <th style="text-align: center;">ChildId</th>
+                <th>Name</th>
+                <th style="text-align: center;">High<br />[128 bit]</th>
+                <th style="text-align: center;">Medium<br />[64 bit]</th>
+                <th style="text-align: center;">Low<br />[32 bit]</th>
+            </tr>
+            </thead>
+            <tbody  data-ng-repeat="file in audioFileDetails | filter:{cf_name : SearchUsername} | startFrom:currentPage*pageSize | limitTo:pageSize">
+            <tr data-ng-repeat="files in file | filter:{cf_name : SearchUsername} " data-ng-if="files.type == 'audio'" style="text-align: center">
+                <td>{{files.cf_id}}</td>
+                <td style="text-align: left">{{files.cf_name}}</td>
+                <td><span data-ng-show="files.high_url"><a class="fancybox-audio fancybox.iframe" rel="group" href="{{base_url}}{{ files.high_url }}?{{getTime}}" title="{{files.filename}}"><img data-ng-src="assets\img\icons\audioplay.png" alt="img1" width="20" height="20" />
+                    <br />{{files.high_url.split('/')[3]}}</a></span></td>
+                <td><span data-ng-show="files.medium_url"><a  class="fancybox-audio fancybox.iframe" rel="group" href="{{base_url}}{{ files.medium_url }}?{{getTime}}" title="{{files.filename}}"><img data-ng-src="assets\img\icons\audioplay.png" alt="img1" width="20" height="20" />
+                    <br />{{files.medium_url.split('/')[3]}}</a></span></td>
+                <td><span  data-ng-show="files.low_url" ><a class="fancybox-audio fancybox.iframe" rel="group" href="{{base_url}}{{ files.low_url }}?{{getTime}}" title="{{files.filename}}"><img data-ng-src="assets\img\icons\audioplay.png" alt="img1" width="20" height="20" />
+                    <br />{{files.low_url.split('/')[3]}}</a></span></td>
+            </tr>
+            </tbody>
+         </table>
+
+        <div class="col-xs-12 col-sm-4">
+            <button type="button" class="btn btn-primary btn-w-xs" title="Previous" data-ng-disabled="currentPage == 0" data-ng-click="currentPage=currentPage-1">Previous</button>
+        </div>
+        <div class="col-xs-12 col-sm-4 text-right">
+            <button type="button" class="btn btn-primary btn-w-xs" title="Next" data-ng-disabled="currentPage >= audioFileDetails.length/pageSize - 1" data-ng-click="currentPage=currentPage+1">Next</button>
+        </div>
+    </td></div>
+</div >
+
+
+<script type="text/javascript">
+    $(function () {
+        $('.fancybox').fancybox();
+
+        $('.fancybox-audio').fancybox({
+            afterShow: function() {
+                $('.fancybox-prev').css('width','10%');
+                $('.fancybox-next').css('width','10%');
+
+            },
+            afterClose: function() {
+                $('.fancybox-prev').attr('style','');
+                $('.fancybox-next').attr('style','');
+            }
+        });
+
+        $(".fancybox-video").fancybox({
+            width: '70%',
+            height: '70%',
+            afterShow: function() {
+                $('.fancybox-prev').css('width','10%');
+                $('.fancybox-next').css('width','10%');
+            },
+            afterClose: function() {
+                $('.fancybox-prev').attr('style','');
+                $('.fancybox-next').attr('style','');
+            }
+        });
+
+    });
+</script>
+

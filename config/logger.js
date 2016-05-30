@@ -3,7 +3,6 @@
  */
 var config = require('../config')();
 var winston = require( 'winston' ),
-//var winston = require('winston-daily-rotate-file'),
     fs = require( 'fs' ),
     logDir = config.log_path, // Or read from a configuration
     //logDir = '../../IconLogs/ContentIngestion/', // Or read from a configuration

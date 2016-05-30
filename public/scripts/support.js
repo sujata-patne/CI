@@ -162,7 +162,7 @@ function ExportExcel(data) {
     _.each(keys, function (key) {
         //exportdata.cols.push({ caption: key, type: 'number', width: 30 });
 
-        if(key == 'MetadataId' || key == 'ChildId'){
+        if(key == 'MetadataId' || key == 'ChildId' || key == 'ContentId'){
             exportdata.cols.push({ caption: key, type: 'number', width: 30 });
         }else{
             exportdata.cols.push({ caption: key, type: 'string', width: 30 });
@@ -200,5 +200,35 @@ function ExportExcelNew(data) {
         cnt++;
     });
   //  console.log(exportdata)
+    return exportdata;
+}
+function ExportExcel1(data) {
+    var exportdata = { cols: [], rows: [] };
+    var keys = Object.keys(data[0]);
+    /*exportdata.cols.push({
+        caption: 'Sr No.',
+        captionStyleIndex: 1,
+        type: 'number',
+        width: 5
+    });*/
+    _.each(keys, function (key) {
+        //exportdata.cols.push({ caption: key, type: 'number', width: 30 });
+
+        if(key == 'MetadataId' || key == 'ChildId' || key == 'ContentId'){
+            exportdata.cols.push({ caption: key, type: 'number', width: 30 });
+        }else{
+            exportdata.cols.push({ caption: key, type: 'string', width: 30 });
+        }
+    })
+    var cnt = 1;
+    _.each(data, function (val) {
+        var array = [];
+        //array.push(cnt);
+        _.each(keys, function (key) {
+            array.push(val[key]);
+        })
+        exportdata.rows.push(array);
+        cnt++;
+    });
     return exportdata;
 }

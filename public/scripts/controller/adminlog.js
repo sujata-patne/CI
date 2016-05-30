@@ -21,6 +21,7 @@ myApp.controller('adminLogCtrl', function ($scope, $state, $http, $stateParams, 
     Logs.getAdminLog({ state: $scope.CurrentPage }, function (logs) {
         logs.UserRole === "Super Admin" ? "" : location.href = "/";
         $scope.AdminLogs = GetAdminLogs(logs.AdminLogs);
+        $scope.loading = true;
     },
     function (error) {
         toastr.error(error);

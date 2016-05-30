@@ -88,6 +88,7 @@ myApp.controller('usersCtrl', function ($scope, $http, ngProgress, $timeout, Use
         else {
             location.href = "/";
         }
+        $scope.loading = true;
     }, function (error) {
         toastr.error(error);
     });

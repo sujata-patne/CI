@@ -204,7 +204,7 @@ function Dailyactivityreport() {
                                         ml = ml + 1;
                                         if (LoginData.length == ml) {
                                             var info = {
-                                                userName: req.session.UserName,
+                                                userName: 'User',
                                                 action: 'getadminlog',
                                                 responseCode: 200,
                                                 message: "Daily Report sent to " + Emails.toString() + " successfully."

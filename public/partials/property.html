@@ -8,6 +8,7 @@
             <div class="portlet">
                 <div class="portlet-header">
                     <h3><i class="fa fa-tasks"></i>Field marked with <span class="asterisk">*</span> are Mandatory</h3>
+                    <div loading-spinner></div>
                 </div>
                 <!-- /.portlet-header -->
                 <div class="portlet-content">
@@ -44,12 +45,17 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="userid" class="col-sm-12"><span class="asterisk">*</span>Release Year</label>
+                                            <label for="userid" class="col-sm-12"><span class="asterisk">*</span>Release Date</label>
                                             <div class="col-sm-12">
-                                                <input type="number" name="releaseyear" data-ng-maxlength="4" data-ng-disabled="IsEditPermission" class="ng-pristine ng-valid form-control" id="Title" placeholder="Release Year" data-ng-model="ReleaseYear" required>
+                                                <div class="input-group date">
+                                                    <input type="text" my-enter="" name="releaseyear"  data-ng-disabled="IsEditPermission" bk-auto-focus datepicker-popup="dd-MM-yyyy" class="ng-pristine ng-valid form-control" id="Title" placeholder="Release Date" data-ng-model="ReleaseYear" data-ng-click="openReleaseDatepicker($event)" data-is-open="open" required>
+                                                    <span class="input-group-btn">
+                                                        <button type="button" data-ng-disabled="IsEditPermission" class="btn btn-default" data-ng-click="openReleaseDatepicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                    </span>
+                                                </div>
                                                 <span style="color: red" data-ng-show="propertyForm.$submitted || propertyForm.releaseyear.$touched">
-                                                    <span data-ng-show="propertyForm.releaseyear.$error.required">Please enter Release Year.</span>
-                                                    <span data-ng-show="propertyForm.releaseyear.$error.maxlength">Maximum 4 characters allowed!</span>
+                                                    <span data-ng-show="propertyForm.releaseyear.$error.required">Please enter Release Date.</span>
+                                                    <!-- <span data-ng-show="propertyForm.releaseyear.$error.maxlength">Maximum 4 characters allowed!</span> -->
                                                 </span>
                                             </div>
                                         </div>
@@ -69,7 +75,7 @@
                                             <label for="inputEmail3" class="col-sm-12"><span class="asterisk">*</span>Starts from</label>
                                             <div class="col-sm-12">
                                                 <div class="input-group date">
-                                                    <input my-enter="" type="text" name="startfrom" class="form-control" bk-auto-focus datepicker-popup="MM-dd-yyyy" data-ng-model="StartDate" placeholder="Start date" data-ng-disabled="IsEditPermission" data-ng-click="openDatepicker($event)" data-is-open="open1" required />
+                                                    <input my-enter="" type="text" name="startfrom" class="form-control" bk-auto-focus datepicker-popup="dd-MM-yyyy" data-ng-model="StartDate" placeholder="Start date" data-ng-disabled="IsEditPermission" data-ng-click="openDatepicker($event)" data-is-open="open1" required />
                                                     <span class="input-group-btn">
                                                         <button type="button" data-ng-disabled="IsEditPermission" class="btn btn-default" data-ng-click="openDatepicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                                     </span>
@@ -83,7 +89,7 @@
                                             <label for="inputEmail3" class="col-sm-12"><span class="asterisk">*</span>Expired On</label>
                                             <div class="col-sm-12">
                                                 <div class="input-group date">
-                                                    <input my-enter="" type="text" name="expiredate" class="form-control" bk-auto-focus datepicker-popup="MM-dd-yyyy" data-ng-model="ExpiryDate" placeholder="End date" data-ng-click="openEndDatepicker($event)" data-ng-disabled="IsEditPermission" data-is-open="open2" required />
+                                                    <input my-enter="" type="text" name="expiredate" class="form-control" bk-auto-focus datepicker-popup="dd-MM-yyyy" data-ng-model="ExpiryDate" placeholder="End date" data-ng-click="openEndDatepicker($event)" data-ng-disabled="IsEditPermission" data-is-open="open2" required />
                                                     <span class="input-group-btn">
                                                         <button type="button" data-ng-disabled="IsEditPermission" class="btn btn-default" data-ng-click="openEndDatepicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                                     </span>

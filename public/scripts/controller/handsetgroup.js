@@ -78,6 +78,7 @@ myApp.controller('handsetGroupCtrl', function ($scope, $http, ngProgress, $state
     HandSetGroup.getHandSetGroup({ state: $scope.CurrentPage }, function (handset) {
         $scope.PageAllData = handset;
         BindPageData(handset);
+        $scope.loading = true;
     }, function (error) {
         toastr.error(error);
     });

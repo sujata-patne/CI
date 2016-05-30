@@ -3,6 +3,7 @@
         <div class="content-container">
             <div class="content-header">
                 <h2 class="content-header-title">Add Content Files</h2>
+                <div loading-spinner></div>
             </div>
             <!-- /.content-header -->
             <div class="row">
@@ -46,7 +47,8 @@
                             </div>-->
                             <div class="portlet-content">
                                 <!-- thumb part-->
-                                <div class="form-group" data-ng-hide="BulkAudioVisible">
+                                <div class="form-group">
+<!--                                <div class="form-group" data-ng-hide="BulkAudioVisible">-->
                                     <label for="Currency" class="col-sm-3 control-label">Upload Thumb File</label>
                                     <div class="col-sm-9">
                                         <input type="file" class="form-control" data-ngf-select data-ng-model="thumbfile" id="thumbfile" data-ng-change="thumbfileuploader()" accept="image/*" multiple />
@@ -60,10 +62,9 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <!-- wallpaper part-->
                                 <div class="form-group" data-ng-show="WallpaperPartVisible">
-                                    <label for="Currency" class="col-sm-3 control-label"><span class="asterisk">*</span>Select base physical files</label>
+                                    <label for="Currency" class="col-sm-3 control-label">Select base physical files</label>
                                     <div class="col-sm-9">
                                         <input type="file" class="form-control" data-ngf-select id="wallpaperfile" data-ng-model="wallpaperfile" data-ng-change="wallpaperfileuploader()" accept="image/*" multiple>
                                     </div>
@@ -78,7 +79,7 @@
                                 </div>
                                 <!-- video part-->
                                 <div class="form-group" data-ng-show="VideoPartVisible">
-                                    <label for="Currency" class="col-sm-3 control-label"><span class="asterisk">*</span>Select base physical files</label>
+                                    <label for="Currency" class="col-sm-3 control-label">Select base physical files</label>
                                     <div class="col-sm-9">
 
                                         <input type="file" class="form-control" data-ngf-select id="videofile" data-ng-model="videofile" data-ng-change="videofileuploader()" accept="video/*">
@@ -94,9 +95,10 @@
                                 </div>
                                 <!--audio part-->
                                 <div class="form-group" data-ng-show="AudioPartVisible">
-                                    <div data-ng-show="SingleAudioVisible">
-                                        <label for="Currency" class="col-sm-3 control-label"><span class="asterisk">*</span>Select base physical files</label>
+                                    <div class="row" data-ng-show="SingleAudioVisible">
+                                        <label for="Currency" class="col-sm-3 control-label">Select base physical files</label>
                                         <div class="col-sm-9">
+                                            {{meta}}
                                             <input type="file" data-ngf-select class="form-control" id="audiofile" data-ng-model="audiofile" data-ng-change="audiofileuploader()" accept="audio/*">
                                         </div>
                                         <div class="col-sm-12">
@@ -108,142 +110,71 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12">
+                                    <div class="row">
                                         <div class="col-sm-3">&nbsp;</div>
                                         <div class="col-sm-9" style="color: red;">&nbsp;</div>
                                     </div>
-                                    <div class="col-sm-12"><!-- data-ng-show="BulkAudioVisible"-->
-                                        <div class="form-group">
-                                            <label for="supporting" class="col-sm-3 control-label">Supporting File</label>
-                                            <div class="col-sm-9">
-                                                <input type="file" class="form-control"  data-ngf-select id="supportfile" data-ng-model="supportfile" data-ng-change="supportingfileuploader(this.files)" multiple />
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <div class="col-sm-3">
-                                                    &nbsp;
-                                                </div>
-                                                <div class="col-sm-9" style="color: red;">
-                                                    <!--Image Dimension must be 100x100,125x125 or 150x150.-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--<div class="col-xs-12">
-                                            <div class="table-responsive">
-                                                <div ng-show="LyricsLanguagesMetadata.length > 0">
-                                                    <label>Upload Lyrics Files : </label>
-                                                    <table class="table table-striped table-bordered table-checkable">
-                                                        <tbody>
-                                                        <tr data-ng-repeat="meta in LyricsLanguagesMetadata">
-                                                            <td>{{ meta.cd_name }}</td>
-                                                            <td>{{ meta.MetaId }}</td>
-                                                            <td>
-                                                                <input type="file" data-ngf-select class="form-control textfile" data-ng-model="meta.textfile" id="textfile" data-ng-change="textfileuploader(meta.textfile,meta.cm_id,meta.ct_group_id,meta.cd_name,meta.MetaId,meta.ct_param,meta.ct_param_value)" accept="text/plain" multiple />
-&lt;!&ndash; <input type="file" data-ngf-select class="form-control audiozipfile" data-ng-model="meta.audiofile" id="audiozipfile" data-ng-change="audiozipfileuploader(meta.audiofile,meta.cm_id,meta.ct_group_id,meta.cd_name,meta.MetaId,meta.ct_param,meta.ct_param_value)" accept="application/zip" /> &ndash;&gt;
-                                                            </td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>-->
-                                        <div class="col-xs-12">
-                                            <div class="table-responsive">
-                                                <center>For adding content files, Upload zip file containing .mp3 along with .xlsx through FTP to path: /public/Vendors/{Vendor Name}/Audio/ folder.</center>
-                                            </div>
+                                    <div class="row" data-ng-show="BulkAudioVisible">
+                                        <div class="table-responsive">
+                                            <center>For adding content files, Upload zip file containing .mp3 along with .xlsx through FTP to path: /public/Vendors/{Vendor Name}/Audio/ folder.</center>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!--  game part-->
                                 <div class="form-group" data-ng-show="GamePartVisible">
-                                    <label for="Currency" class="col-sm-3 control-label"><span class="asterisk">*</span>Add Supporting image files</label>
-                                    <div class="col-sm-9">
-                                        <input type="file" class="form-control" data-ngf-select id="gameimagefile" data-ng-model="gameimagefile" data-ng-change="gameimagefileuploader()" accept="image/*" multiple>
-                                    </div>
-                                </div>
-                                <!--  game part-->
-                                <div class="form-group" data-ng-show="GamePartVisible">
-                                    <label for="Currency" class="col-sm-3 control-label"><span class="asterisk">*</span>Add Supporting video files</label>
-                                    <div class="col-sm-9">
-                                        <input type="file" class="form-control" data-ngf-select id="gamevideofile" data-ng-model="gamevideofile" data-ng-change="gamevideofileuploader()" accept="video/*" multiple>
-                                    </div>
-                                </div>
-                                <!--  game part-->
-                                <div class="form-group" data-ng-show="GamePartVisible">
-                                    <label for="Currency" class="col-sm-3 control-label"><span class="asterisk">*</span>Add App files</label>
+                                    <label for="Currency" class="col-sm-3 control-label">Add App files</label>
                                     <div class="col-sm-9">
                                         <input type="file" class="form-control" data-ngf-select id="gameappfile" data-ng-model="gameappfile" data-ng-change="gameappfileuploader()" multiple>
                                     </div>
                                 </div>
-                                <!--  game part-->
-                                <div class="form-group" data-ng-show="GamePartVisible">
-                                    <label for="firstname" class="col-sm-3 control-label"><span class="asterisk">*</span>HandSet Group List</label>
-                                    <div class="col-sm-6">
-                                        <span class="ui-select">
-                                            <select name="handset" class="ng-pristine ng-valid form-control" data-ng-model="SelectedHandsetGroup" data-ng-options="item.chgr_group_id as item.chgr_group_name for item in AllGroups" data-ng-change="HandsetGroupChange()">
-                                                <option value="">Select Handset</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <a href="#handsetgroup">Add / Edit HandSet Group</a>
-                                    </div>
-                                </div>
-                                <!--  game part-->
-                                <div class="row" data-ng-show="GamePartVisible">
-                                    <div class="col-md-5">
-                                        <div class="form-group">
-                                            <label class="col-sm-12">Handset to be mapped with App File</label>
-                                            <div class="col-sm-12">
-                                                <span class="ui-select-list">
-                                                    <select name="handsetmap" class="ng-pristine ng-valid form-control" data-ng-disabled="IsDisable" data-ng-options="item.dc_id as item.dc_model for item in GroupHandset" data-ng-model="SelectedGroupHandset" multiple data-ng-change="handsetMapselect()" size="10">
-                                                    </select>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div class="col-md-2" style="margin-top: 50px; text-align: center;">
-                                        <div class="form-group">
-                                            <input type="button" title="All Move Right" data-ng-disabled="IsDisable" class="btn btn-primary btn-w-md" value="All Move Right" data-ng-click="leftAllclick()" />
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="button" title="Move Right" data-ng-disabled="IsDisable" class="btn btn-primary btn-w-md" value="Move Right" data-ng-click="leftclick()" />
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="button" title="Move left" data-ng-disabled="IsDisable" class="btn btn-primary btn-w-md" value="Move left" data-ng-click="rightclick()" />
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="button" title="All Move left" data-ng-disabled="IsDisable" class="btn btn-primary btn-w-md" value="All Move left" data-ng-click="rightAllclick()" />
-                                        </div>
+                                <!-- <div class="col-sm-12" data-ng-show="BulkAudioVisible"-->
+                                 <!-- text part-->
+                                <div class="form-group">
+                                    <label for="supporting" class="col-sm-3 control-label">Preview File</label>
+                                    <div class="col-sm-9">
+                                        <input type="file" data-ngf-select class="form-control" data-ng-model="commonfile" id="commonfile" data-ng-change="commonfileuploader(this.files)" multiple />
                                     </div>
-                                    <div class="col-md-5">
-                                        <div class="form-group">
-                                            <label class="col-sm-12">Handset as per Selected Group</label>
-                                            <div class="col-sm-12">
-                                                <span class="ui-select-list">
-                                                    <select name="handsetselected" class="ng-pristine ng-valid form-control" data-ng-disabled="IsDisable" data-ng-options="item.dc_id as item.dc_model for item in SelectedCriteriaHandset" data-ng-model="SelectedFilterCriteria" multiple data-ng-change="handsetperSelected()" size="10">
-                                                    </select>
-                                                </span>
-                                            </div>
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-3">
+                                            &nbsp;
+                                        </div>
+                                        <div class="col-sm-9" style="color: red;">
+                                            Upload max. 3 image (.jpg, .gif, .png), 1 video (.mp4) & 1 audio (.mp3) files.
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- text part-->
+                                <div class="form-group">
+                                    <label for="supporting" class="col-sm-3 control-label">Supporting File</label>
+                                    <div class="col-sm-9">
+                                        <input type="file" class="form-control"  data-ngf-select id="supportfile" data-ng-model="supportfile" data-ng-change="supportingfileuploader(this.files)" multiple />
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-3">
+                                            &nbsp;
+                                        </div>
+                                        <div class="col-sm-9" style="color: red;">
+                                            Upload max. 3 image (.jpg, .gif, .png), 1 video (.mp4) & 1 audio (.mp3) files.
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group" data-ng-show="TextPartVisible">
                                     <div class="col-xs-12">
                                         <div class="table-responsive">
                                             <div id="property-exportable">
                                                 <table id="user-signups" class="table table-striped table-bordered table-checkable">
+                                                    <thead>
+                                                    <th colspan="3"> <label for="supporting" class="col-sm-3 control-label">Physical Text File</label></th>
+                                                    </thead>
                                                     <tbody>
-                                                    <tr>
-                                                        <td>Common</td>
+                                                    <!--<tr>
+                                                        <td>Supporting/Common</td>
                                                         <td>{{MetadataId }}</td>
                                                         <td>
                                                             <input type="file" data-ngf-select class="form-control" data-ng-model="commonfile" id="commonfile" data-ng-change="commonfileuploader(this.files)" multiple />
                                                         </td>
-                                                    </tr>
+                                                    </tr>-->
                                                     <tr data-ng-repeat="meta in LanguagesMetadata">
                                                         <td>{{ meta.cd_name }}</td>
                                                         <td>{{ meta.MetaId }}</td>
@@ -257,9 +188,101 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="form-group" ng-show="LyricsLanguagesMetadata.length > 0">
+                                    <div class="col-sm-12">
+                                        <div class="table-responsive">
+                                            <div id="property-exportable">
+                                                <table id="user-signups" class="table table-striped table-bordered table-checkable">
+                                                    <thead>
+                                                        <th colspan="3"><label for="supporting" class="col-sm-3 control-label">Supporting Text File</label></th>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr data-ng-repeat="meta in LyricsLanguagesMetadata">
+                                                        <td>{{ meta.cd_name }}</td>
+                                                        <td>{{ meta.MetaId }}</td>
+                                                        <td>
+                                                            <input type="file" data-ngf-select class="form-control textfile" data-ng-model="meta.langsupportfile" id="langsupportfile_{{meta.MetaId}}" data-ng-change="langSupportFileUploader(meta.langsupportfile,meta.cm_id,meta.ct_group_id,meta.cd_name,meta.MetaId,meta.ct_param,meta.ct_param_value)" accept="text/plain" multiple />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-ng-hide="1"><!--Not required as we are already have this as common feature-->
+                            <!--  game part-->
+                            <div class="form-group"><!--data-ng-show="GamePartVisible"> -->
+                                <label for="Currency" class="col-sm-3 control-label"><span class="asterisk">*</span>Add Supporting image files</label>
+                                <div class="col-sm-9">
+                                    <input type="file" class="form-control" data-ngf-select id="gameimagefile" data-ng-model="gameimagefile" data-ng-change="gameimagefileuploader()" accept="image/*" multiple>
+                                </div>
+                            </div>
+                            <!--  game part-->
+                            <div class="form-group"   ><!--data-ng-show="GamePartVisible"> -->
+                                <label for="Currency" class="col-sm-3 control-label"><span class="asterisk">*</span>Add Supporting video files</label>
+                                <div class="col-sm-9">
+                                    <input type="file" class="form-control" data-ngf-select id="gamevideofile" data-ng-model="gamevideofile" data-ng-change="gamevideofileuploader()" accept="video/*" multiple>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  game part-->
+                        <div class="form-group" data-ng-show="GamePartVisible">
+                            <label for="firstname" class="col-sm-3 control-label"><span class="asterisk">*</span>HandSet Group List</label>
+                            <div class="col-sm-6">
+                                        <span class="ui-select">
+                                            <select name="handset" class="ng-pristine ng-valid form-control" data-ng-model="SelectedHandsetGroup" data-ng-options="item.chgr_group_id as item.chgr_group_name for item in AllGroups" data-ng-change="HandsetGroupChange()">
+                                                <option value="">Select Handset</option>
+                                            </select>
+                                        </span>
+                            </div>
+                            <div class="col-sm-3">
+                                <a href="#handsetgroup">Add / Edit HandSet Group</a>
                             </div>
                         </div>
 
+                        <!--  game part-->
+                        <div class="row" data-ng-show="GamePartVisible">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label class="col-sm-12">Handset to be mapped with App File</label>
+                                    <div class="col-sm-12">
+                                                <span class="ui-select-list">
+                                                    <select name="handsetmap" class="ng-pristine ng-valid form-control" data-ng-disabled="IsDisable" data-ng-options="item.dc_id as item.dc_model for item in GroupHandset" data-ng-model="SelectedGroupHandset" multiple data-ng-change="handsetMapselect()" size="10">
+                                                    </select>
+                                                </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2" style="margin-top: 50px; text-align: center;">
+                                <div class="form-group">
+                                    <input type="button" title="All Move Right" data-ng-disabled="IsDisable" class="btn btn-primary btn-w-md" value="All Move Right" data-ng-click="leftAllclick()" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="button" title="Move Right" data-ng-disabled="IsDisable" class="btn btn-primary btn-w-md" value="Move Right" data-ng-click="leftclick()" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="button" title="Move left" data-ng-disabled="IsDisable" class="btn btn-primary btn-w-md" value="Move left" data-ng-click="rightclick()" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="button" title="All Move left" data-ng-disabled="IsDisable" class="btn btn-primary btn-w-md" value="All Move left" data-ng-click="rightAllclick()" />
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label class="col-sm-12">Handset as per Selected Group</label>
+                                    <div class="col-sm-12">
+                                                <span class="ui-select-list">
+                                                    <select name="handsetselected" class="ng-pristine ng-valid form-control" data-ng-disabled="IsDisable" data-ng-options="item.dc_id as item.dc_model for item in SelectedCriteriaHandset" data-ng-model="SelectedFilterCriteria" multiple data-ng-change="handsetperSelected()" size="10">
+                                                    </select>
+                                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group" data-ng-show="Uploadervisible">
                             <div class="col-sm-offset-3 col-sm-9" data-ng-hide="uploading">
                                 <input type="button" title="Upload" class="btn btn-primary btn-w-md" data-ng-click="upload()" value="Upload" />

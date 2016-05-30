@@ -57,7 +57,9 @@ exports.getproperty = function (req, res, next) {
                         async.parallel({
                             VendorList: function (callback) {
                                 if (req.body.state == "addproperty" || req.body.state == "editproperty") {
-                                    var query = connection_ikon_cms.query('select vd_id,vd_name,vd_created_on,vd_starts_on,vd_end_on,vd_is_active,vp_r_group_id,vp_rights_at_property_level from (select * from icn_vendor_detail) vd inner join (select * from vendor_profile)vp on(vd.vd_id = vp.vp_vendor_id) ' + vendorquery + ' order by vd_name', function (err, VendorList) {
+                                    var query = connection_ikon_cms.query('select vd_id,vd_name,vd_created_on,vd_starts_on,vd_end_on,vd_is_active,vp_r_group_id,vp_rights_at_property_level ' +
+                                        'from (select * from icn_vendor_detail where vd_is_active <> 0) vd ' +
+                                        'inner join (select * from vendor_profile)vp on(vd.vd_id = vp.vp_vendor_id) ' + vendorquery + ' order by vd_name', function (err, VendorList) {
                                         callback(err, VendorList);
                                     });
                                 }
@@ -235,6 +237,7 @@ exports.addeditproperty = function (req, res, next) {
                                 if (result[0].cm_id == req.body.cm_id && req.body.state == "editproperty") {
                                     async.parallel({
                                         EditProperty: function (callback) {
+                                            //console.log('EditProperty')
                                             EditProperty(callback);
                                         },
                                         DeletePropertyRights: function (callback) {
@@ -379,7 +382,8 @@ exports.addeditproperty = function (req, res, next) {
                                             cm_r_group_id: cm_r_group_id,
                                             cm_title: req.body.Title,
                                             cm_short_desc: req.body.Description,
-                                            cm_release_year: req.body.ReleaseYear,
+                                            cm_release_year: new Date(req.body.ReleaseYear).getFullYear(),
+                                            cm_release_date: new Date(req.body.ReleaseYear),
                                             cm_starts_from: new Date(req.body.StartDate),
                                             cm_expires_on: new Date(req.body.ExpiryDate),
                                             cm_display_title: req.body.Title,
@@ -426,7 +430,21 @@ exports.addeditproperty = function (req, res, next) {
                                 }
                                 else {
                                     cm_r_group_id = group[0].groupid != null ? (parseInt(group[0].groupid) + 1) : 1;
-                                    var query = connection_ikon_cms.query('UPDATE content_metadata SET cm_title=?,cm_short_desc=?,cm_r_group_id=?,cm_release_year=?,cm_starts_from=?,cm_expires_on=?,cm_vendor=? ,cm_modified_on =?,cm_modified_by=? where cm_id= ?', [req.body.Title, req.body.Description, cm_r_group_id, req.body.ReleaseYear, new Date(req.body.StartDate), new Date(req.body.ExpiryDate), req.body.Vendor, new Date(), req.session.UserName, req.body.cm_id], function (err, result) {
+                                    var cm_datas = {
+                                        cm_r_group_id: cm_r_group_id,
+                                        cm_vendor: req.body.Vendor,
+                                        cm_title: req.body.Title,
+                                        cm_short_desc: req.body.Description,
+                                        cm_release_year: new Date(req.body.ReleaseYear).getFullYear(),
+                                        cm_release_date: new Date(req.body.ReleaseYear),
+                                        cm_starts_from: new Date(req.body.StartDate),
+                                        cm_expires_on: new Date(req.body.ExpiryDate),
+                                        cm_display_title: req.body.Title,
+                                        cm_modified_by: req.session.UserName,
+                                        cm_modified_on: new Date(),
+                                        cm_crud_isactive: 1
+                                    };
+                                     var query = connection_ikon_cms.query('UPDATE content_metadata SET ? where cm_id= ?' , [cm_datas, req.body.cm_id], function (err, result) {
                                         if (err) {
                                             var error = {
                                                 userName: req.session.UserName,
@@ -445,7 +463,21 @@ exports.addeditproperty = function (req, res, next) {
                             });
                         }
                         else {
-                            var query = connection_ikon_cms.query('UPDATE content_metadata SET cm_title=?,cm_short_desc=?,cm_r_group_id=?,cm_release_year=?,cm_starts_from=?,cm_expires_on=?,cm_vendor=? ,cm_modified_on =?,cm_modified_by=? where cm_id= ?', [req.body.Title, req.body.Description, cm_r_group_id, req.body.ReleaseYear, new Date(req.body.StartDate), new Date(req.body.ExpiryDate), req.body.Vendor, new Date(), req.session.UserName, req.body.cm_id], function (err, result) {
+                            var cm_datas = {
+                                cm_r_group_id: cm_r_group_id,
+                                cm_vendor: req.body.Vendor,
+                                cm_title: req.body.Title,
+                                cm_short_desc: req.body.Description,
+                                cm_release_year: new Date(req.body.ReleaseYear).getFullYear(),
+                                cm_release_date: new Date(req.body.ReleaseYear),
+                                cm_starts_from: new Date(req.body.StartDate),
+                                cm_expires_on: new Date(req.body.ExpiryDate),
+                                cm_display_title: req.body.Title,
+                                cm_modified_by: req.session.UserName,
+                                cm_modified_on: new Date(),
+                                cm_crud_isactive: 1
+                            };
+                            var query = connection_ikon_cms.query('UPDATE content_metadata SET ? where cm_id= ?' , [cm_datas, req.body.cm_id], function (err, result) {
                                 if (err) {
                                     var error = {
                                         userName: req.session.UserName,

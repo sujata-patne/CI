@@ -1,5 +1,5 @@
 
-myApp.controller('metadataCtrl', function ($scope, $state, $http, $stateParams, ngProgress, $window, Metadatas, _, Icon) {
+myApp.controller('metadataCtrl', function ($scope, $state, $http,$window, $stateParams, ngProgress,  Metadatas, _, Icon) {
     $('.removeActiveClass').removeClass('active');
     $('.removeSubactiveClass').removeClass('active');
     $('#addcontentmetadata').addClass('active');
@@ -24,6 +24,8 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http, $stateParams, 
     $scope.OldPlatforms = [];
     $scope.open1 = false;
     $scope.open2 = false;
+    $scope.SelectedBGSongType = '';
+    $scope.BGDisplayTitle = '';
     $scope.openDatepicker = function (evt) {
         $scope.open2 = false;
         evt.preventDefault();
@@ -35,6 +37,13 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http, $stateParams, 
         evt1.preventDefault();
         evt1.stopPropagation();
         $scope.open2 = !$scope.open2;
+    }
+    $scope.openReleaseDatepicker = function (evt) {
+        $scope.open1 = false;
+        $scope.open2 = false;
+        evt.preventDefault();
+        evt.stopPropagation();
+        $scope.open = !$scope.open;
     }
 
     function ReadPermission(Role) {
@@ -59,7 +68,6 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http, $stateParams, 
     //
     //Icon.GetEncode(
     ngProgress.start();
-    console.log($scope.MetaId)
     Metadatas.getMetadata({ Id: $scope.MetaId, state: $scope.CurrentPage }, function (metadata) {
         $scope.UserRole = metadata.UserRole;
         $scope.VendorRights = metadata.VendorRights;
@@ -70,12 +78,16 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http, $stateParams, 
         $scope.IconGroupCountry = metadata.IconGroupCountry;
 
         $scope.AllCountryDistributionRights = metadata.IconCountry;
-        console.log(metadata.filteredMasterList);
         $scope.AllAllowedContentType = _.where(metadata.MasterList, { cm_name: "Content Type" });
         $scope.AllChannelDistributionRights = _.where(metadata.MasterList, { cm_name: "Channel Distribution" });
         $scope.Vendor = metadata.Vendors;
         $scope.AllProperty = metadata.Propertys;
+        $scope.BGSongType = metadata.BGSongType;
+
+
         $scope.SubContentTypes = metadata.MetadataTypes;
+        $scope.ParentContentType = metadata.MetadataTypes[0].parentname;
+
         $scope.Celebrity = _.where(metadata.filteredMasterList, { cm_name: "Celebrity" });
         $scope.Genres = _.where(metadata.filteredMasterList, { cm_name: "Genres" });
         $scope.SubGenres = _.where(metadata.filteredMasterList, { cm_name: "Sub Genres" });
@@ -96,6 +108,7 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http, $stateParams, 
         $scope.SupportAppPurchase = _.where(metadata.MasterList, { cm_name: "InAppPurchase" });
         $scope.Mode = _.where(metadata.MasterList, { cm_name: "Mode" });
         $scope.Platforms = _.where(metadata.MasterList, { cm_name: "Platform Supports" });
+        $scope.loading = true;
         _.each(metadata.CatalogueMaster, function (item) {
             if (item.cm_name == "Photographer") {
                 $scope.photographer_master = item.cm_id;
@@ -111,7 +124,9 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http, $stateParams, 
         if ($scope.CurrentPage.indexOf("edit") > -1) {
             metadata.ContentMetadata.length > 0 ? "" : location.href = "/";
             $scope.OldMetadataRights = metadata.MetadataRights;
+
             metadata.ContentMetadata.forEach(function (item) {
+                $scope.ReleaseYear = item.cm_release_date;
                 $scope.SelectedVendor = item.cm_vendor;
                 $scope.VendorChange();
                 $scope.OldProperty = item.cm_property_id;
@@ -120,11 +135,14 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http, $stateParams, 
                 $scope.isPersonalized = item.cm_ispersonalized;
                 $scope.cm_r_group_id = item.cm_r_group_id;
                 $scope.ContentType = item.cm_content_type;
+
+                $scope.SelectedBGSongType = parseInt (item.bg_sound_type);
+                $scope.BGDisplayTitle = item.bg_song_title;
+
                 $scope.celeb_group_id = item.cm_celebrity;
                 $scope.DisplayTitle = item.cm_title;
                 $scope.Description = item.cm_short_desc;
                 $scope.SelectedGenres = item.cm_genre;
-                $scope.SelectedSubGenres = item.cm_sub_genre;
                 $scope.photographer_id = item.cm_protographer;
                 $scope.PhotoGrapher = item.p_name;
                 $scope.SelectedMood = item.cm_mood;
@@ -145,6 +163,7 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http, $stateParams, 
                 $scope.SelectedRaagTaal = item.cm_raag_tal;
                 $scope.SelectedInstruments = item.cm_instruments;
                 $scope.language_group_id = item.cm_language;
+                $scope.cm_sub_genre_group_id = item.cm_sub_genre;
                 //$scope.SelectedLanguages = item.cm_language;
                 $scope.keyword_group_id = item.cm_key_words;
                 $scope.platform_group_id = item.cm_platform_support;
@@ -155,13 +174,18 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http, $stateParams, 
                 $scope.Startdate = new Date(item.cm_starts_from);
                 $scope.Expirydate = new Date(item.cm_expires_on);
             })
+            
             $scope.OldSingers = metadata.Singers;
             $scope.OldDirectors = metadata.Directors;
             $scope.OldReSingers = metadata.ReSingers;
             $scope.OldLyricsLanguages = metadata.LyricsLanguages;
             $scope.OldCelebrities = metadata.Celebrity;
             $scope.OldLanguages = metadata.Languages;
+            $scope.OldSubGenres = metadata.SubGenres;
             $scope.OldPlatforms = metadata.Platforms;
+
+            $scope.SelectedSubGenres = _.unique(_.pluck($scope.OldSubGenres, "cmd_entity_detail"));
+
             if ($scope.OldLanguages.length > 0) {
                 if ($scope.CurrentPage.indexOf("game") > -1 || $scope.CurrentPage.indexOf("text") > -1) {
                     $scope.SelectedLanguages = _.unique(_.pluck($scope.OldLanguages, "cmd_entity_detail"));
@@ -184,6 +208,7 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http, $stateParams, 
             $scope.PropertyDisable = true;
             $scope.ContentTypeDisable = true;
             $scope.IsDisable = true;
+            $scope.SelectedSubGenres = [];
         }
         else {
             $window.location.href = "/";
@@ -220,6 +245,10 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http, $stateParams, 
             $scope.PropertyEndDate = Prop.cm_expires_on;
             $scope.Startdate = new Date(Prop.cm_starts_from);
             $scope.Expirydate = new Date(Prop.cm_expires_on);
+            $scope.PropertyReleaseDate = new Date(Prop.cm_release_date);
+             if($scope.ReleaseYear == '' || $scope.ReleaseYear == undefined || $scope.ReleaseYear == null){
+                $scope.ReleaseYear = $scope.PropertyReleaseDate;
+            }
         }
         $scope.SelectedCountryRights = [];
         $scope.SelectedChannelRights = [];
@@ -438,8 +467,29 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http, $stateParams, 
     }
     $scope.submitForm = function (isValid) {
         if (isValid) {
+            var year = new Date().getFullYear();
+            var ReleaseYear = new Date($scope.ReleaseYear).getFullYear();
+            if($scope.ParentContentType == 'Audio' && $scope.ReleaseYear){
+                var flag = (Datewithouttime($scope.ReleaseYear) >= Datewithouttime($scope.PropertyReleaseDate))?
+                    (ReleaseYear > 1949 && ReleaseYear < (year + 2)) ?
+                    Datewithouttime($scope.Startdate) <= Datewithouttime($scope.Expirydate) ?
+                    Datewithouttime($scope.PropertyStartDate) <= Datewithouttime($scope.Startdate) && Datewithouttime($scope.PropertyEndDate) >= Datewithouttime($scope.Expirydate) ?
+                    $scope.RightSettingShow ?
+                    $scope.SelectedCountryRights.length > 0 ?
+                    $scope.SelectedChannelRights.length > 0 ?
+                    $scope.Duration ?
+                    DurationCheck($scope.Duration) : ""
+                    : "Please Select Channel Distribution rights." : "Please Select Country Distribution rights."
+                    : "" : "Start & Expiry date should be within limit of Property limits."
+                    : "Expire date must be equal or greater than start date." : "Release Year must be between 1950 to current year + 1.":"Metadata Release Date must be greater than or equal to Property Release date ";
 
-            var flag = Datewithouttime($scope.Startdate) <= Datewithouttime($scope.Expirydate) ? Datewithouttime($scope.PropertyStartDate) <= Datewithouttime($scope.Startdate) && Datewithouttime($scope.PropertyEndDate) >= Datewithouttime($scope.Expirydate) ? $scope.RightSettingShow ? $scope.SelectedCountryRights.length > 0 ? $scope.SelectedChannelRights.length > 0 ? $scope.Duration ? DurationCheck($scope.Duration) : "" : "Please Select Channel Distribution rights." : "Please Select Country Distribution rights." : "" : "Start & Expiry date should be within limit of Property limits." : "Expire date must be equal or greater than start date.";
+             }else {
+                var flag = Datewithouttime($scope.Startdate) <= Datewithouttime($scope.Expirydate) ? Datewithouttime($scope.PropertyStartDate) <= Datewithouttime($scope.Startdate) && Datewithouttime($scope.PropertyEndDate) >= Datewithouttime($scope.Expirydate) ? $scope.RightSettingShow ? $scope.SelectedCountryRights.length > 0 ? $scope.SelectedChannelRights.length > 0 ? $scope.Duration ? DurationCheck($scope.Duration) : "" : "Please Select Channel Distribution rights." : "Please Select Country Distribution rights." : "" : "Start & Expiry date should be within limit of Property limits." : "Expire date must be equal or greater than start date.";
+            }
+
+           /* if (flag != ''){
+                toastr.error(flag);
+            }*/
             if (flag == "") {
                 var Rights = [];
                 if ($scope.RightSettingShow) {
@@ -456,7 +506,8 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http, $stateParams, 
                 }
                 else {
                     var lang = [];
-                    if (!($scope.CurrentPage.indexOf("game") > -1 || $scope.CurrentPage.indexOf("text") > -1)) {
+                    var subGenres = $scope.SelectedSubGenres;
+                     if (!($scope.CurrentPage.indexOf("game") > -1 || $scope.CurrentPage.indexOf("text") > -1)) {
                         if ($scope.SelectedLanguages) {
                             lang.push($scope.SelectedLanguages);
                         }
@@ -464,8 +515,12 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http, $stateParams, 
                     else {
                         lang = $scope.SelectedLanguages;
                     }
-                    var deletedrights = GetDeleteRights($scope.OldMetadataRights, Rights);
+                     var deletedrights = GetDeleteRights($scope.OldMetadataRights, Rights);
                     try {
+                        var rel_date = null;
+                        if($scope.ReleaseYear != ''){
+                            rel_date = getDate($scope.ReleaseYear);
+                        }
                         var meta = {
                             state: $scope.CurrentPage,
                             url: $scope.CurrentPage.indexOf("edit") > -1 ? '/editmetadata' : '/addmetadata',
@@ -479,15 +534,18 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http, $stateParams, 
                             cm_content_type: $scope.ContentType,
                             cm_r_group_id: $scope.cm_r_group_id,
                             cm_genre: $scope.SelectedGenres,
-                            cm_sub_genre: $scope.SelectedSubGenres,
+                            cm_sub_genre: $scope.cm_sub_genre_group_id,
                             cm_title: $scope.DisplayTitle,
                             cm_short_desc: $scope.Description,
                             cm_starts_from: getDate($scope.Startdate),
                             cm_expires_on: getDate($scope.Expirydate),
                             cm_display_title: $scope.DisplayTitle,
                             cm_mood: $scope.SelectedMood,
-                            cm_display_title: $scope.DisplayTitle,
-                            cm_mood: $scope.SelectedMood,
+
+                            cm_release_date: rel_date,
+
+                            bg_sound_type: $scope.SelectedBGSongType,
+                            bg_song_title: $scope.BGDisplayTitle,
                             // cm_language: $scope.SelectedLanguages,
                             cm_nudity: $scope.SelectedNudity,
                             cm_festival_occasion: $scope.SelectedFestival,
@@ -549,8 +607,11 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http, $stateParams, 
                             platform: GetAddMasterlist($scope.OldPlatforms, $scope.SelectedPlatforms),
                             deleteplatform: GetDeleteMasterList($scope.OldPlatforms, $scope.SelectedPlatforms),
 
-
                             selectedlanguage: lang,
+                            selectedsubGenres: subGenres,
+                            subGenres: GetAddMasterlist($scope.OldSubGenres, subGenres),
+                            deletesubGenres: GetDeleteMasterList($scope.OldSubGenres, subGenres),
+
                             cm_language: $scope.language_group_id,
                             language: GetAddMasterlist($scope.OldLanguages, lang),
                             deletelanguage: GetDeleteMasterList($scope.OldLanguages, lang),
@@ -558,7 +619,6 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http, $stateParams, 
                             countryrights: $scope.SelectedCountryRights.length,
                             channelrights: $scope.SelectedCountryRights.length,
                             cm_parental_advisory: null,
-                            cm_release_year: null,
                             cm_signature: null,
                             cm_state: 1,
                             cm_is_active: 1,
@@ -588,13 +648,10 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http, $stateParams, 
                         toastr.error(err.message);
                     }
                 }
-
             }
             else {
                 toastr.error(flag);
             }
-
-
         }
     };
 });

@@ -106,7 +106,21 @@ exports.allAction = function (req, res, next) {
 
 exports.getSitePath = function (req, res, next) {
    // console.log(config)
-    res.send({"site_path": config.site_path});
+    res.send({"site_path": config.site_path,
+        audio_preview_limit:config.audio_preview_limit,
+        audio_download_limit:config.audio_download_limit,
+        video_preview_limit:config.video_preview_limit,
+        video_download_limit:config.video_download_limit,
+        text_preview_limit:config.text_preview_limit,
+        text_download_limit:config.text_download_limit,
+        supporting_image_limit:config.supporting_image_limit,
+        thumb_limit:config.thumb_limit,
+        wallpaper_limit : config.wallpaper_limit,
+        game_limit : config.game_limit,
+        text_limit : config.text_limit,
+        audio_limit : config.audio_limit,
+        video_limit : config.video_limit,
+        log_path:config.log_path});
 }
 
 //Menu Pages
@@ -492,7 +506,7 @@ function getPages(role) {
                       { 'subpagename': 'Video', 'subhref': '#video', 'id': 'video', 'subclass': 'fa fa-bars nav-icon' },
                       { 'subpagename': 'Audio', 'subhref': '#audio', 'id': 'audio', 'subclass': 'fa fa-asterisk nav-icon' },
                       { 'subpagename': 'Apps & Games', 'subhref': '#appsgames', 'id': 'appsgames', 'subclass': 'fa fa-tasks nav-icon' },
-                      { 'subpagename': 'Text', 'subhref': '#text', 'id': 'text', 'subclass': 'fa fa-hdd-o' }
+                      { 'subpagename': ' Text', 'subhref': '#text', 'id': 'text', 'subclass': 'fa fa-hdd-o' }
                 ]
             },
             { 'pagename': 'Add Content File', 'href': '#add-content-files', 'id': 'addcontentfile', 'class': 'fa fa-align-left', 'submenuflag': '0', 'sub': [] },

@@ -1,0 +1,95 @@
+<form class="form-horizontal" role="form" name="replaceSupportingFiles" data-ng-submit="uploadSupportingFile(replaceSupportingFiles.$valid)">
+    <div class="col-md-12 table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th ng-show="supportingFilesDetail.length > 0" colspan="3" style="text-align: center;">Supporting File Listing
+                        <p class="pull-right red">* &nbsp;To replace, upload same name file.</p>
+                    </th>
+                </tr>
+                <tr>
+                    <th>Thumb Image</th>
+                    <th>Add/Replace File</th>
+                    <th style="text-align: center">Size/Bitrate</th>
+                </tr>
+            </thead>
+            <tbody >
+            <tr data-ng-repeat="files in supportingFilesDetail track by $index" style="text-align: center">
+                <td>
+                    <div data-ng-if="files.type == 'otherimage'">
+                        <label>{{files.Name}}</label><br />
+                        <span ng-show="files.cf_url != null && files.cf_url != '' && files.filename !='no_image.gif'">
+                            <a class="fancybox" rel="group" href="{{base_url}}{{ files.cf_url }}?{{getTime}}" title="{{files.filename}}">
+                                <img data-ng-src="{{base_url}}{{ files.cf_url }}?{{getTime}}" alt="img1" width="50" height="50" />
+                                <br />
+                                <p> {{files.filename}} </p>
+                            </a>
+                        </span>
+                        <span ng-hide="files.cf_url != null && files.cf_url != '' && files.filename !='no_image.gif'" title="{{files.filename}}">
+                             <img data-ng-src="assets\img\icons\no_image.gif" alt="img1" width="50" height="50" />
+                        </span>
+                    </div>
+                    <div data-ng-if="files.type == 'otheraudio'">
+                        <label>{{files.Name}}</label><br />
+                        <span ng-show="files.cf_url != null && files.cf_url != ''">
+                             <a class="fancybox-video fancybox.iframe" rel="groups" href="{{base_url}}{{ files.cf_url }}?{{getTime}}" title="{{files.filename}}">
+                                <img data-ng-src="assets\img\icons\audioplay.png" alt="img1" width="50" height="50" />
+                                <p >
+                                    {{files.filename}}
+                                </p>
+                            </a>
+                        </span>
+                        <span ng-hide="files.cf_url != null && files.cf_url != ''" title="{{files.filename}}"><!-- <i class="fa fa-picture-o"   style="color:green" title="View"></i> -->
+                             <img data-ng-src="assets\img\icons\no_image.gif" alt="img1" width="50" height="50" />
+                        </span>
+                    </div>
+                    <div data-ng-if="files.type == 'othervideo'">
+                        <label>{{files.Name}}</label><br />
+                        <span ng-show="files.cf_url != null && files.cf_url != ''">
+                             <a class="fancybox-video fancybox.iframe" rel="groups" href="{{base_url}}{{ files.cf_url }}?{{getTime}}" title="{{files.filename}}">
+                                <!--<i class="fa fa-play" style="position:relative; margin: 10px; top: 0; left: 0; right: 0;bottom: 0; font-size:48px;color:red"></i>-->
+                                <img data-ng-src="assets\img\icons\videoplay.png" alt="img1" width="50" height="50" />
+                                 <p >
+                                    {{files.filename}}
+                                </p>
+                            </a>
+                        </span>
+                        <span ng-hide="files.cf_url != null && files.cf_url != ''" title="{{files.filename}}"><!-- <i class="fa fa-picture-o"   style="color:green" title="View"></i> -->
+                             <img data-ng-src="assets\img\icons\no_image.gif" alt="img1" width="50" height="50" />
+                        </span>
+                    </div>
+                    <div data-ng-if="files.type == 'othertext'">
+                        <label>{{files.ct_param_value}} {{files.Name}}</label><br />
+                        <span ng-show="files.cf_url != null && files.cf_url != ''"><a rel="group" href="{{base_url}}{{ files.cf_url }}?{{getTime}}" title="{{files.filename}}">
+                            <a class="fancybox" target="_blank" rel="groups" href="{{base_url}}{{ files.cf_url }}?{{getTime}}" title="{{files.filename}}">
+                                <img data-ng-src="assets\img\icons\text.png" alt="img1" width="50" height="50" />
+                            </a><br />
+                            <p>
+                                {{files.filename}}
+                            </p>
+                        </a></span>
+
+                        <span ng-hide="files.cf_url != null && files.cf_url != ''" title="{{files.filename}}"><!-- <i class="fa fa-picture-o"   style="color:green" title="View"></i> -->
+                             <img data-ng-src="assets\img\icons\no_image.gif" alt="img1" width="50" height="50" />
+                        </span>
+                    </div>
+                </td>
+                <td><div class="col-md-12" data-ng-show="FileUploadVisible">
+                        <div class="form-group" >
+                             <div class="col-sm-12">
+                                 <input type="file" class="form-control" data-ngf-select  dynamic-model="$index"  data-ng-change="addReplaceSupportingFileUpload(this.replaceSupportingFile{{$index}},files.ct_group_id, files.ct_param_value,{{$index}},files.type,files.indexno)" />
+
+                           <!--<div class="col-sm-12"  style="color: red;">
+                               Filename must be ContentId_Type_Count.extension like [2345_{{files.Name}}_01.{{files.ext}}].
+                            </div>-->
+                        </div>
+                </div></div></td>
+                <td>{{files.cf_bitrate}} {{files.measure}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm-3" data-ng-hide="uploading">
+        <button type="submit" title="Submit" class="btn btn-primary btn-w-md">Submit</button>
+    </div>
+</form>

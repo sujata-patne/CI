@@ -139,7 +139,7 @@
                                                     <label for="userid" class="col-sm-12">Sub Genres</label>
                                                     <div class="col-sm-12">
                                                         <span class="ui-select">
-                                                            <select name="SubGenres" data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in SubGenres" data-ng-model="SelectedSubGenres">
+                                                            <select name="SubGenres" data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in SubGenres" data-ng-model="SelectedSubGenres" multiple>
                                                                 <option value="">Select Sub Genres</option>
                                                             </select>
                                                         </span>
@@ -249,7 +249,7 @@
                                                     <label for="inputEmail3" class="col-sm-12"><span class="asterisk">*</span>Go Live On</label>
                                                     <div class="col-sm-12">
                                                         <div class="input-group date">
-                                                            <input my-enter="" name="startdate" type="text" class="form-control" bk-auto-focus datepicker-popup="MM-dd-yyyy" data-ng-model="Startdate" placeholder="Start date" data-ng-disabled="IsDisable" data-ng-click="openDatepicker($event)" data-is-open="open1" required />
+                                                            <input my-enter="" name="startdate" type="text" class="form-control" bk-auto-focus datepicker-popup="dd-MM-yyyy" data-ng-model="Startdate" placeholder="Start date" data-ng-disabled="IsDisable" data-ng-click="openDatepicker($event)" data-is-open="open1" required />
                                                             <span class="input-group-btn">
                                                                 <button type="button" class="btn btn-default" data-ng-disabled="IsDisable" data-ng-click="openDatepicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                                             </span>

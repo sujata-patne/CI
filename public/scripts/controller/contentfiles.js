@@ -1,5 +1,5 @@
 //HEWITT.H789@yopmail.com
-myApp.controller('content-filesCtrl', function ($scope, $state, $http, $stateParams, ngProgress, $window, ContentFile, _, Icon, Upload,Excel) {
+myApp.controller('content-filesCtrl', function ($scope, $state, $http, $stateParams, ngProgress, $window, ContentFile, _, Icon, Upload,Excel,$q) {
     $('.removeActiveClass').removeClass('active');
     $('.removeSubactiveClass').removeClass('active');
     $('#addcontentfile').addClass('active');
@@ -14,10 +14,18 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
     $scope.GameVideoFiles = [];
     $scope.GameAppFiles = [];
     $scope.TextFiles = [];
+    $scope.LangSupportFiles = [];
+    $scope.LangSupportError = [];
     $scope.TextError = [];
     $scope.AudioZipFiles = [];
     $scope.AudioZipError = [];
+    $scope.BGSongType = [];
     $scope.CommonFiles = [];
+    $scope.SingleAudioVisible = false;
+    $scope.BulkAudioVisible = false;
+    $scope.Main = 1;
+    $scope.Supporting = 2;
+    $scope.Preview = 3;
     function getStatus(UserRole, MetadataExpirydate, VendorExpirydate, PropertyExpirydate, Meta_active, Vendor_active, Property_active, cm_state) {
         var status;
 
@@ -57,14 +65,31 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
     });
 
     ContentFile.getContentFile({}, function (content) {
-
         content.UserRole === "Super Admin" || content.UserRole == "Moderator" ? location.href = "/" : "";
+        $scope.ConfigData = content.ConfigData;
+
+        content.BGSongType.forEach(function (songType) {
+            $scope.BGSongType.push(songType.cd_name);
+        })
+       // console.log($scope.BGSongType)
         $scope.Templates = content.Templates;
         //$scope.ContentType = _.where(content.ContentType, { cm_name: "Content Type" });
         $scope.OtherTemplates = content.OtherTemplates;
+        $scope.OtherTemplates.forEach(function(template){
+            if(template.ct_param_value == "Main"){
+                $scope.Main = template.ct_param;
+            }
+            if(template.ct_param_value == "Supporting"){
+                $scope.Supporting = template.ct_param;
+            }
+            if(template.ct_param_value == "Preview"){
+                $scope.Preview = template.ct_param;
+            }
+        })
         $scope.DeviceModels = content.Devices;
         $scope.HandsetDeviceGroups = content.HandsetDeviceGroups;
         $scope.AllGroups = content.HandsetGroups;
+        $scope.loading = true;
     }, function (error) {
         toastr.error(error);
     });
@@ -170,6 +195,11 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                     ngProgress.start();
                     ContentFile.checkMetadata({ Id: $scope.MetaId, parentid: $scope.SelectedContentType, contenttype: match.cd_name }, function (metadata) {
                         if (metadata.Metadata.length > 0) {
+                            $scope.LyricsLanguagesMetadata = metadata.LyricsLanguages;
+                             _.each($scope.LyricsLanguagesMetadata, function (lang) {
+                                lang.MetaId = Icon.GetEncode(lang.ct_group_id);
+                                lang.file = '';
+                            })
                             var status = getStatus('', metadata.Metadata[0].cm_expires_on, metadata.Metadata[0].vd_end_on, metadata.Metadata[0].propertyexpirydate, '', metadata.Metadata[0].vd_is_active, metadata.Metadata[0].propertyactive, metadata.Metadata[0].cm_state)
                             if (!status) {
                                 $scope.Files = metadata.Files;
@@ -183,11 +213,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                                     })
                                 }
                                 else if ($scope.TypeName == "Audio") {
-                                    $scope.LyricsLanguagesMetadata = metadata.LyricsLanguages;
-                                    _.each($scope.LyricsLanguagesMetadata, function (lang) {
-                                        lang.MetaId = Icon.GetEncode(lang.ct_group_id);
-                                        lang.file = '';
-                                    })
+
                                     //console.log(metadata.Metadata[0].cm_ispersonalized)
                                     if (metadata.Metadata[0].cm_ispersonalized == 1) {
                                         $scope.SingleAudioVisible = false;
@@ -219,7 +245,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             }
             catch (err) {
                 $scope.ContentTypeChange();
-                toastr.error("please enter valid Metadata Id.");
+                toastr.error("Please enter valid Metadata Id.");
             }
         }
     }
@@ -255,34 +281,26 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
     }
 
     $scope.thumbfileuploader = function (files) {
+        var thumb_limit = $scope.ConfigData.thumb_limit;
+
         $scope.thumberror = false;
         $scope.ThumbFiles = [];
         if ($scope.thumbfile) {
             var thumblength = $scope.thumbfile.length;
-            if ((3 - $scope.ThumbDataFiles.length - thumblength) >= 0) {
-
+            if ((thumb_limit - $scope.ThumbDataFiles.length - thumblength) >= 0) {
                 function thumbloop(t) {
                     var reader = new FileReader();
                     var ext = getExtension($scope.thumbfile[t].name).toLowerCase();
-                    console.log(ext)
-                    if (ext == "gif" || ext == "jpg" || ext == "png") {
+                     if (ext == "gif" || ext == "jpg" || ext == "png") {
                         reader.onload = function (e) {
                             var new_file = new Image();
                             new_file.src = e.target.result;
                             new_file.onload = function () {
-
-                                ////if (!((this.height == 100 && this.width == 100) || (this.height == 125 && this.width == 125) || (this.height == 150 && this.width == 150))) {
-                                ////    $scope.thumberror = true;
-                                ////    $scope.thumberrormessage = "Invalid Dimension In " + $scope.thumbfile[t].name + ".";
-                                ////    toastr.error($scope.thumberrormessage);
-                                ////}
-                                ////else {
                                 $scope.ThumbFiles.push({ count: ($scope.ThumbFiles.length + $scope.ThumbDataFiles.length + 1), file: $scope.thumbfile[t], width: this.width, height: this.height });
                                 t = t + 1;
                                 if (!(thumblength == t)) {
                                     thumbloop(t);
                                 }
-                                ////}
                             }
                         }
                         reader.readAsDataURL($scope.thumbfile[t]);
@@ -296,36 +314,34 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             }
             else {
                 $scope.thumberror = true;
-                if ($scope.ThumbDataFiles.length == 3) {
+                if ($scope.ThumbDataFiles.length == thumb_limit) {
                     $scope.thumberrormessage = $scope.ThumbDataFiles.length + " thumb files already uploaded. you can't upload anymore.";
                 }
                 else {
                     if ($scope.ThumbDataFiles.length == 0) {
-                        $scope.thumberrormessage = "you can upload only " + (3 - $scope.ThumbDataFiles.length) + " thumb files.";
+                        $scope.thumberrormessage = "You can upload only " + (thumb_limit - $scope.ThumbDataFiles.length) + " thumb files.";
                     }
                     else {
-                        $scope.thumberrormessage = $scope.ThumbDataFiles.length + " thumb file already uploaded. you can upload only " + (3 - $scope.ThumbDataFiles.length) + " thumb files.";
+                        $scope.thumberrormessage = $scope.ThumbDataFiles.length + " thumb file already uploaded. you can upload only " + (thumb_limit - $scope.ThumbDataFiles.length) + " thumb files.";
                     }
                 }
                 toastr.error($scope.thumberrormessage);
             }
         }
-        console.log($scope.ThumbFiles)
     }
 
     $scope.wallpaperfileuploader = function () {
+        var wallpaper_limit = $scope.ConfigData.wallpaper_limit;
+
         $scope.wallpapererror = false;
         $scope.WallPaperFiles = [];
         if ($scope.wallpaperfile) {
-
-            if ($scope.wallpaperfile.length <= 3) {
+            if ($scope.wallpaperfile.length <= wallpaper_limit) {
                 try {
                     imageloop(0);
                     function imageloop(cnt) {
                         var i = cnt;
-                        console.log($scope.wallpaperfile[i])
                         var ext = getExtension($scope.wallpaperfile[i].name).toLowerCase();
-                        console.log(ext)
                         if (ext == "gif" || ext == "jpg" || ext == "png") {
                             var reader = new FileReader();
                             reader.onload = function (e) {
@@ -341,6 +357,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                                         })
                                         if (match) {
                                             $scope.WallPaperFiles.push({
+                                                fileCategory: $scope.Main,
                                                 file: $scope.wallpaperfile[i],
                                                 type: 'Imagery',
                                                 ct_group_id: match.ct_group_id,
@@ -389,13 +406,15 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
     }
 
     $scope.videofileuploader = function (files) {
+        var video_limit = $scope.ConfigData.video_limit;
+
         $scope.videoerror = false;
         $scope.VideoFiles = [];
         if ($scope.videofile) {
             if (getExtension($scope.videofile.name).toLowerCase() == "mp4") {
                 var match = _.find($scope.Templates, function (val) { return val.width == 640 && val.height == 320 })
                 if (match) {
-                    $scope.VideoFiles.push({ file: $scope.videofile, type: 'Video', ct_group_id: match.ct_group_id, cm_id: $scope.MetaId, width: 640, height: 320, other: null })
+                    $scope.VideoFiles.push({ fileCategory:$scope.Main, file: $scope.videofile, type: 'Video', ct_group_id: match.ct_group_id, cm_id: $scope.MetaId, width: 640, height: 320, other: null })
                 }
             }
             else {
@@ -407,13 +426,16 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
     }
 
     $scope.audiofileuploader = function (files) {
+        var audio_limit = $scope.ConfigData.audio_limit;
+
         $scope.audioerror = false;
         $scope.AudioFiles = [];
         if ($scope.audiofile) {
             if (getExtension($scope.audiofile.name).toLowerCase() == "mp3") {
-                var match = _.find($scope.OtherTemplates, function (val) { return val.ct_param == 128 })
+                //var match = _.find($scope.OtherTemplates, function (val) { return val.ct_param == 128 })
+                var match = _.find($scope.OtherTemplates, function (val) { return val.ct_param_value == 'bitrate' })
                 if (match) {
-                    $scope.AudioFiles.push({ file: $scope.audiofile, type: 'Audio', ct_group_id: match.ct_group_id, cm_id: $scope.MetaId, width: null, height: null, other: 128 })
+                    $scope.AudioFiles.push({fileCategory:$scope.Main, file: $scope.audiofile, type: 'Audio', ct_group_id: match.ct_group_id, cm_id: $scope.MetaId, width: null, height: null, other: 128 })
                 }
             }
             else {
@@ -427,7 +449,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
     $scope.audiozipfileuploader = function (audiofile, cm_id, ct_group_id, cd_name, MetaId, ct_param, ct_param_value) {
         if (audiofile) {
             if (getExtension(audiofile.name).toLowerCase() == "zip") {
-                $scope.AudioZipFiles.push({ file: audiofile, type: 'audiozip', ct_param: ct_param, ct_param_value: ct_param_value, ct_group_id: ct_group_id, cm_id: cm_id, width: null, height: null, other: cd_name, langaugemetaid: MetaId })
+                $scope.AudioZipFiles.push({ fileCategory:$scope.Supporting, file: audiofile, type: 'audiozip', ct_param: ct_param, ct_param_value: ct_param_value, ct_group_id: ct_group_id, cm_id: cm_id, width: null, height: null, other: cd_name, langaugemetaid: MetaId })
             }
             else {
                 $scope.ziperrormessage = "File extension must be zip for language " + cd_name + ".";
@@ -454,18 +476,20 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
     };
 
     $scope.gameimagefileuploader = function () {
+        var supporting_image_limit = $scope.ConfigData.supporting_image_limit;
+
         $scope.gameimageerror = false;
         $scope.GameImageFiles = [];
         if ($scope.gameimagefile) {
-            if ($scope.gameimagefile.length <= 5) {
+            if ($scope.gameimagefile.length <= supporting_image_limit) {
                 try {
                     var otherimages = _.where($scope.Files, { ct_param_value: 'otherimage' });
-                    if (5 - otherimages.length - $scope.gameimagefile.length >= 0) {
+                    if (supporting_image_limit - otherimages.length - $scope.gameimagefile.length >= 0) {
                         var match = _.find($scope.OtherTemplates, function (val) { return val.ct_param_value == 'otherimage' })
                         if (match) {
                             gameimageloop(0);
                             function gameimageloop(gi) {
-                                $scope.GameImageFiles.push({ count: (otherimages.length + $scope.GameImageFiles.length + 1), file: $scope.gameimagefile[gi], type: 'GameImage', ct_group_id: match.ct_group_id, cm_id: $scope.MetaId, width: null, height: null, other: 128 })
+                                $scope.GameImageFiles.push({fileCategory:$scope.Supporting, count: (otherimages.length + $scope.GameImageFiles.length + 1), file: $scope.gameimagefile[gi], type: 'GameImage', ct_group_id: match.ct_group_id, cm_id: $scope.MetaId, width: null, height: null, other: 128 })
                                 gi = gi + 1;
                                 if (!(gi == $scope.gameimagefile.length)) {
                                     gameimageloop(gi);
@@ -475,15 +499,15 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                     }
                     else {
                         $scope.gameimageerror = true;
-                        if (otherimages.length == 5) {
+                        if (otherimages.length >= supporting_image_limit ) {
                             $scope.gameimageerrormessage = otherimages.length + " supporting image file already uploaded. you can't upload anymore.";
                         }
                         else {
-                            if (otherimages.length == 0) {
-                                $scope.gameimageerrormessage = "you can upload only " + (5 - otherimages.length) + " supporting images.";
+                            if (otherimages.length == 0 ) {
+                                $scope.gameimageerrormessage = "You can upload only " + (supporting_image_limit - otherimages.length) + " supporting images.";
                             }
                             else {
-                                $scope.gameimageerrormessage = otherimages.length + " supporting image file already uploaded. you can upload only " + (5 - otherimages.length) + " supporting images.";
+                                $scope.gameimageerrormessage = otherimages.length + " supporting image file already uploaded. You can upload only " + (supporting_image_limit - otherimages.length) + " supporting images.";
                             }
                         }
                         toastr.error($scope.gameimageerrormessage);
@@ -497,25 +521,27 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             }
             else {
                 $scope.gameimageerror = true;
-                $scope.gameimageerrormessage = "Maximum five supporting Image file upload at a time.";
+                $scope.gameimageerrormessage = "Maximum "+supporting_image_limit+" supporting Image file upload at a time.";
                 toastr.error($scope.gameimageerrormessage);
             }
         }
     }
 
     $scope.gamevideofileuploader = function () {
+        var video_download_limit = $scope.ConfigData.video_download_limit;
+
         $scope.gamevideoerror = false;
         $scope.GameVideoFiles = [];
         if ($scope.gamevideofile) {
-            if ($scope.gamevideofile.length <= 2) {
+            if ($scope.gamevideofile.length <= video_download_limit) {
                 try {
                     var othervideos = _.where($scope.Files, { ct_param_value: 'othervideo' });
-                    if ((2 - othervideos.length - $scope.gamevideofile.length) >= 0) {
+                    if ((video_download_limit - othervideos.length - $scope.gamevideofile.length) >= 0) {
                         var match = _.find($scope.OtherTemplates, function (val) { return val.ct_param_value == 'othervideo' })
                         if (match) {
                             gamevideoloop(0);
                             function gamevideoloop(gv) {
-                                $scope.GameVideoFiles.push({ count: (othervideos.length + $scope.GameVideoFiles.length + 1), file: $scope.gamevideofile[gv], type: 'gamevideo', ct_group_id: match.ct_group_id, cm_id: $scope.MetaId, width: null, height: null, other: null })
+                                $scope.GameVideoFiles.push({ fileCategory:$scope.Supporting, count: (othervideos.length + $scope.GameVideoFiles.length + 1), file: $scope.gamevideofile[gv], type: 'gamevideo', ct_group_id: match.ct_group_id, cm_id: $scope.MetaId, width: null, height: null, other: null })
                                 gv = gv + 1;
                                 if (!(gv == $scope.gamevideofile.length)) {
                                     gamevideoloop(gv);
@@ -525,15 +551,15 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                     }
                     else {
                         $scope.gamevideoerror = true;
-                        if (othervideos.length == 2) {
+                        if (othervideos.length == video_download_limit) {
                             $scope.gamevideoerrormessage = othervideos.length + " supporting video file already uploaded. you can't upload anymore.";
                         }
                         else {
                             if (othervideos.length == 0) {
-                                $scope.gamevideoerrormessage = "you can upload only " + (2 - othervideos.length) + " supporting video.";
+                                $scope.gamevideoerrormessage = "you can upload only " + (video_download_limit - othervideos.length) + " supporting video.";
                             }
                             else {
-                                $scope.gamevideoerrormessage = othervideos.length + " supporting video file already uploaded. you can upload only " + (2 - othervideos.length) + " supporting video.";
+                                $scope.gamevideoerrormessage = othervideos.length + " supporting video file already uploaded. you can upload only " + (video_download_limit - othervideos.length) + " supporting video.";
                             }
                         }
                         toastr.error($scope.gamevideoerrormessage);
@@ -547,61 +573,81 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             }
             else {
                 $scope.gamevideoerror = true;
-                $scope.gamevideoerrormessage = "Maximum two supporting video file upload at a time.";
+                $scope.gamevideoerrormessage = "Maximum "+video_download_limit+" supporting video file upload at a time.";
                 toastr.error($scope.gamevideoerrormessage);
             }
         }
     }
 
     $scope.gameappfileuploader = function () {
+        var game_limit = $scope.ConfigData.game_limit;
+
         $scope.gameapperror = false;
         $scope.GameAppFiles = [];
         if ($scope.gameappfile) {
-            try {
-                var apps = _.where($scope.Files, { ct_param_value: 'app' });
-                var match = _.find($scope.OtherTemplates, function (val) { return val.ct_param_value == 'app' })
-                if (match) {
-                    _.each($scope.gameappfile, function (val) {
-                        $scope.GameAppFiles.push({ count: (apps.length + $scope.GameAppFiles.length + 1), file: val, type: 'gameapp', ct_group_id: match.ct_group_id, cm_id: $scope.MetaId, width: null, height: null, other: null })
-                    });
+            if ($scope.gameappfile.length <= game_limit) {
+                try {
+                    var apps = _.where($scope.Files, {ct_param_value: 'app'});
+                    var match = _.find($scope.OtherTemplates, function (val) {
+                        return val.ct_param_value == 'app'
+                    })
+                    if (match) {
+                        _.each($scope.gameappfile, function (val) {
+                            $scope.GameAppFiles.push({
+                                fileCategory:$scope.Main,
+                                count: (apps.length + $scope.GameAppFiles.length + 1),
+                                file: val,
+                                type: 'gameapp',
+                                ct_group_id: match.ct_group_id,
+                                cm_id: $scope.MetaId,
+                                width: null,
+                                height: null,
+                                other: null
+                            })
+                        });
+                    }
                 }
-            }
-            catch (err) {
+                catch (err) {
+                    $scope.gameapperror = true;
+                    $scope.gameapperrormessage = "Invalid App File Format.";
+                    toastr.error($scope.gameapperrormessage);
+                }
+            }else {
                 $scope.gameapperror = true;
-                $scope.gameapperrormessage = "Invalid App File Format.";
+                $scope.gameapperrormessage = "Maximum "+game_limit+" base app file upload at a time.";
                 toastr.error($scope.gameapperrormessage);
             }
         }
     }
 
     $scope.textfileuploader = function (textfile, cm_id, ct_group_id, cd_name, MetaId, ct_param, ct_param_value) {
+        var text_limit = $scope.ConfigData.text_limit;
         if (textfile) {
             var texts = _.where($scope.Files, { ct_group_id: ct_group_id });
-            if ((10 - texts.length - textfile.length) >= 0) {
+            if ((text_limit - texts.length - textfile.length) >= 0) {
                 _.each(textfile, function (val) {
                     var count = _.where($scope.TextFiles, { ct_group_id: ct_group_id });
 
                     if (getExtension(val.name).toLowerCase() == "txt") {
-                        $scope.TextFiles.push({ count: (texts.length + count.length + 1), file: val, type: 'text', ct_param: ct_param, ct_param_value: ct_param_value, ct_group_id: ct_group_id, cm_id: cm_id, width: null, height: null, other: cd_name, langaugemetaid: MetaId })
+                        $scope.TextFiles.push({ fileCategory:$scope.Main, count: (texts.length + count.length + 1), file: val, type: 'text', ct_param: ct_param, ct_param_value: ct_param_value, ct_group_id: ct_group_id, cm_id: cm_id, width: null, height: null, other: cd_name, langaugemetaid: MetaId })
                     }
                     else {
                         $scope.texterrormessage = "Invalid lyrics file extension for " + ct_param_value;
                         $scope.TextError.push({ error: $scope.texterrormessage, ct_group_id: ct_group_id });
                         toastr.error($scope.texterrormessage);
-
                     }
                 });
             }
             else {
-                if (texts.length == 10) {
+                if (texts.length == text_limit) {
                     $scope.texterrormessage = texts.length + " text file already uploaded for " + cd_name + ". you can't upload anymore.";
                 }
                 else {
                     if (texts.length == 0) {
-                        $scope.texterrormessage = "you can upload only " + (10 - texts.length) + " text file for " + cd_name + ".";
+                        $scope.texterrormessage = "You can upload only " + (text_limit - texts.length) + " text file for " + cd_name + ".";
                     }
                     else {
-                        $scope.texterrormessage = texts.length + " text file already uploaded for " + cd_name + ". you can upload only " + (10 - texts.length) + " text file for " + cd_name + ".";
+                        $scope.texterrormessage = texts.length + " text file already uploaded for " + cd_name + ". you can upload only " + (text_limit - texts.length) + " text file for " + cd_name + ".";
                     }
                 }
                 $scope.TextError.push({ error: $scope.texterrormessage, ct_group_id: ct_group_id });
@@ -626,95 +672,201 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
         }
     };
 
+    $scope.langSupportFileUploader = function (langsupportfile, cm_id, ct_group_id, cd_name, MetaId, ct_param, ct_param_value) {
+        var text_limit = $scope.ConfigData.text_limit;
+        //console.log($scope.meta.langsupportfile)
+
+        if (langsupportfile) {
+            var langs = _.where($scope.Files, { ct_group_id: ct_group_id });
+            if ((text_limit - langs.length - langsupportfile.length) >= 0) {
+                _.each(langsupportfile, function (val) {
+                    var count = _.where($scope.LangSupportFiles, { ct_group_id: ct_group_id });
+
+                    if (getExtension(val.name).toLowerCase() == "txt") {
+                        $scope.LangSupportFiles.push({fileCategory:$scope.Supporting, count: (langs.length + count.length + 1), file: val, type: 'text', ct_param: ct_param, ct_param_value: ct_param_value, ct_group_id: ct_group_id, cm_id: cm_id, width: null, height: null, other: cd_name, langaugemetaid: MetaId })
+                    }
+                    else {
+                        $scope.langerrormessage = "Invalid lyrics file extension for " + ct_param_value;
+                        $scope.LangSupportError.push({ error: $scope.langerrormessage, ct_group_id: ct_group_id });
+                        toastr.error($scope.langerrormessage);
+                    }
+                });
+            }
+            else {
+                if (langs.length == text_limit) {
+                    $scope.langerrormessage = langs.length + " language file already uploaded for " + cd_name + ". you can't upload anymore.";
+                }
+                else {
+                    if (langs.length == 0) {
+                        $scope.langerrormessage = "You can upload only " + (text_limit - langs.length) + " text file for " + cd_name + ".";
+                    }
+                    else {
+                        $scope.langerrormessage = langs.length + " language file already uploaded for " + cd_name + ". You can upload only " + (text_limit - langs.length) + " language file for " + cd_name + ".";
+                    }
+                }
+                $scope.LangSupportError.push({ error: $scope.langerrormessage, ct_group_id: ct_group_id });
+                toastr.error($scope.langerrormessage);
+            }
+        }
+        else {
+            var temperror = [];
+            _.each($scope.LangSupportError, function (err) {
+                if (!(err.ct_group_id == ct_group_id)) {
+                    temperror.push(err);
+                }
+            });
+            $scope.LangSupportError = temperror;
+            var tempfiles = [];
+            _.each($scope.LangSupportFiles, function (val) {
+                if (!(val.ct_group_id == ct_group_id)) {
+                    tempfiles.push(val);
+                }
+            });
+            $scope.LangSupportFiles = tempfiles;
+        }
+    };
+
     $scope.supportingfileuploader = function (files) {
-        $scope.commonfileerror = false;
-        $scope.CommonFiles = [];
+        var supporting_image_limit = $scope.ConfigData.supporting_image_limit;
+        var video_download_limit = $scope.ConfigData.video_download_limit;
+        var audio_download_limit = $scope.ConfigData.audio_download_limit;
+         $scope.supportingfileerrormessage = '';
+         $scope.supportingfileerror = false;
+        //$scope.CommonFiles = [];
+        $scope.SupportingFiles = [];
+
         if ($scope.supportfile) {
             var imagecount = 0;
+            var audiocount = 0;
             var videocount = 0;
             _.each($scope.supportfile, function (val) {
-                if (isImage(val.name)) {
+                if (getExtension(val.name).toLowerCase() == "mp3") {
+                    audiocount++;
+                }
+                else if (isImage(val.name)) {
                     imagecount++;
                 }
                 else if (isVideo(val.name)) {
                     videocount++;
                 }
                 else {
-                    $scope.commonfileerror = true;
-                    $scope.commonfileerrormessage = "Invalid Common File Extension.";
-                    toastr.error($scope.commonfileerrormessage);
+                    $scope.supportingfileerror = true;
+                    $scope.supportingfileerrormessage = "Invalid File Extension.";
+                    toastr.error($scope.supportingfileerrormessage);
                 }
             })
-            if (!$scope.commonfileerror) {
+            if (!$scope.supportingfileerror) {
                 var flag = true;
-                var otherimages = _.where($scope.Files, { ct_param_value: 'otherimage' });
-                var othervideos = _.where($scope.Files, { ct_param_value: 'othervideo' });
+                var otherimages = _.where($scope.Files, { ct_param_value: 'otherimage',file_category_id:$scope.Supporting });
+                var otheraudio = _.where($scope.Files, { ct_param_value: 'otheraudio',file_category_id:$scope.Supporting  });
+                var othervideos = _.where($scope.Files, { ct_param_value: 'othervideo',file_category_id:$scope.Supporting  });
+
                 if (imagecount != 0) {
-                    if (!((3 - otherimages.length - imagecount) >= 0)) {
+                    if (!((supporting_image_limit - otherimages.length - imagecount) >= 0)) {
                         flag = false;
-                        $scope.commonfileerror = true;
-                        if (otherimages.length == 3) {
-                            $scope.commonfileerrormessage = otherimages.length + " supporting image file already uploaded. you can't upload anymore.";
+                        $scope.supportingfileerror = true;
+                        if (otherimages.length >= supporting_image_limit) {
+                            $scope.supportingfileerrormessage = otherimages.length + " supporting image file already uploaded. You can't upload anymore.";
                         }
                         else {
                             if (otherimages.length == 0) {
-                                $scope.commonfileerrormessage = "you can upload only " + (3 - otherimages.length) + " supporting images.";
+                                $scope.supportingfileerrormessage = "You can upload only " + (supporting_image_limit - otherimages.length) + " supporting images.";
                             }
                             else {
-                                $scope.commonfileerrormessage = otherimages.length + " supporting image file already uploaded. you can upload only " + (3 - otherimages.length) + " supporting images.";
+                                $scope.supportingfileerrormessage = otherimages.length + " supporting image file already uploaded. You can upload only " + (supporting_image_limit - otherimages.length) + " supporting images.";
                             }
                         }
-                        toastr.error($scope.commonfileerrormessage);
+                        $scope.supportfile = '';
+                        toastr.error($scope.supportingfileerrormessage);
+                    }
+                }
+                else if (audiocount != 0) {
+                    if (!((audio_download_limit - otheraudio.length - audiocount) == 0)) {
+                        flag = false;
+                        $scope.supportingfileerror = true;
+                        if (otheraudio.length >= audio_download_limit) {
+                            $scope.supportingfileerrormessage = otheraudio.length + " supporting audio file already uploaded. You can't upload anymore.";
+                        }
+                        else {
+                            if (otheraudio.length == 0) {
+                                $scope.supportingfileerrormessage = "You can upload only " + (audio_download_limit - otheraudio.length) + " supporting audio.";
+                            }
+                            else {
+                                $scope.supportingfileerrormessage = otheraudio.length + " supporting audio file already uploaded. You can upload only " + (audio_download_limit - otheraudio.length) + " supporting audio.";
+                            }
+                        }
+                        $scope.supportfile = '';
+                        toastr.error($scope.supportingfileerrormessage);
                     }
                 }
                 else {
-                    if (!((1 - othervideos.length - videocount) >= 0)) {
+                    if (!((video_download_limit - othervideos.length - videocount) == 0)) {
                         flag = false;
-                        $scope.commonfileerror = true;
-                        if (othervideos.length == 1) {
-                            $scope.commonfileerrormessage = othervideos.length + " supporting video file already uploaded. you can't upload anymore.";
+                        $scope.supportingfileerror = true;
+                        if (othervideos.length >= video_download_limit) {
+                            $scope.supportingfileerrormessage = othervideos.length + " supporting video file already uploaded. You can't upload anymore.";
                         }
                         else {
                             if (othervideos.length == 0) {
-                                $scope.commonfileerrormessage = "you can upload only " + (1 - othervideos.length) + " supporting video.";
+                                $scope.supportingfileerrormessage = "You can upload only " + (video_download_limit - othervideos.length) + " supporting video.";
                             }
                             else {
-                                $scope.commonfileerrormessage = othervideos.length + " supporting video file already uploaded. you can upload only " + (1 - othervideos.length) + " supporting video.";
+                                $scope.supportingfileerrormessage = othervideos.length + " supporting video file already uploaded. You can upload only " + (video_download_limit - othervideos.length) + " supporting video.";
                             }
                         }
-                        toastr.error($scope.commonfileerrormessage);
+                        $scope.supportfile = '';
+                        toastr.error($scope.supportingfileerrormessage);
                     }
                 }
+                console.log($scope.supportfile)
+
                 if (flag) {
                     _.each($scope.supportfile, function (val) {
                         if (isImage(val.name)) {
-                            var count = _.where($scope.CommonFiles, { type: 'image' });
+                            var count = _.where($scope.SupportingFiles, { type: 'image' });
                             var match = _.find($scope.OtherTemplates, function (item) { return item.ct_param_value == 'otherimage' })
                             if (match) {
-                                $scope.CommonFiles.push({ count: (otherimages.length + count.length + 1), file: val, type: 'image', ct_group_id: match.ct_group_id, cm_id: $scope.MetaId, width: null, height: null, other: 'common' })
+                                $scope.SupportingFiles.push({fileCategory:$scope.Supporting,  count: (otherimages.length + count.length + 1), file: val, type: 'image', ct_group_id: match.ct_group_id, cm_id: $scope.MetaId, width: null, height: null, other: 'common' })
+                            }
+                        }else if(getExtension(val.name).toLowerCase() == "mp3") {
+
+                            var count = _.where($scope.SupportingFiles, { type: 'audio' });
+                            var match = _.find($scope.OtherTemplates, function (item) { return item.ct_param_value == 'bitrate' })
+                            if (match) {
+                                $scope.SupportingFiles.push({fileCategory:$scope.Supporting,  count: (otheraudio.length + count.length + 1), file: val, type: 'audio', ct_group_id: match.ct_group_id, cm_id: $scope.MetaId, width: null, height: null, other: 'common' })
                             }
                         }
                         else if (isVideo(val.name)) {
-                            var count = _.where($scope.CommonFiles, { type: 'video' });
+                            var count = _.where($scope.SupportingFiles, { type: 'video' });
                             var match = _.find($scope.OtherTemplates, function (item) { return item.ct_param_value == 'othervideo' })
                             if (match) {
-                                $scope.CommonFiles.push({ count: (othervideos.length + count.length + 1), file: val, type: 'video', ct_group_id: match.ct_group_id, cm_id: $scope.MetaId, width: null, height: null, other: 'common' })
+                                $scope.SupportingFiles.push({fileCategory:$scope.Supporting,  count: (othervideos.length + count.length + 1), file: val, type: 'video', ct_group_id: match.ct_group_id, cm_id: $scope.MetaId, width: null, height: null, other: 'common' })
                             }
                         }
                     })
                 }
+                console.log($scope.SupportingFiles)
+
             }
         }
     }
 
     $scope.commonfileuploader = function (files) {
+        var supporting_image_limit = $scope.ConfigData.supporting_image_limit;
+        var video_download_limit = $scope.ConfigData.video_download_limit;
+        var audio_download_limit = $scope.ConfigData.audio_download_limit;
         $scope.commonfileerror = false;
         $scope.CommonFiles = [];
         if ($scope.commonfile) {
+            var audiocount = 0;
             var imagecount = 0;
             var videocount = 0;
+
             _.each($scope.commonfile, function (val) {
-                if (isImage(val.name)) {
+                if (getExtension(val.name).toLowerCase() == "mp3") {
+                    audiocount++;
+                }
+                else if (isImage(val.name)) {
                     imagecount++;
                 }
                 else if (isVideo(val.name)) {
@@ -728,712 +880,249 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             })
             if (!$scope.commonfileerror) {
                 var flag = true;
-                var otherimages = _.where($scope.Files, { ct_param_value: 'otherimage' });
-                var othervideos = _.where($scope.Files, { ct_param_value: 'othervideo' });
+                var otherimages = _.where($scope.Files, { ct_param_value: 'otherimage',file_category_id:$scope.Preview  });
+                var otheraudio = _.where($scope.Files, { ct_param_value: 'otheraudio',file_category_id:$scope.Preview });
+                var othervideos = _.where($scope.Files, { ct_param_value: 'othervideo',file_category_id:$scope.Preview });
+
                 if (imagecount != 0) {
-                    if (!((5 - otherimages.length - imagecount) >= 0)) {
+                    if (!((supporting_image_limit - otherimages.length - imagecount) >= 0)) {
                         flag = false;
                         $scope.commonfileerror = true;
-                        if (otherimages.length == 5) {
-                            $scope.commonfileerrormessage = otherimages.length + " common image file already uploaded. you can't upload anymore.";
+                        if (otherimages.length >= supporting_image_limit) {
+                            $scope.commonfileerrormessage = otherimages.length + " preview image file already uploaded. you can't upload anymore.";
                         } else {
                             if (otherimages.length == 0) {
-                                $scope.commonfileerrormessage = "you can upload only " + (5 - otherimages.length) + " common images.";
+                                $scope.commonfileerrormessage = "You can upload only " + (supporting_image_limit - otherimages.length) + " preview images.";
                             }
                             else {
-                                $scope.commonfileerrormessage = otherimages.length + " common image file already uploaded. you can upload only " + (5 - otherimages.length) + " common images.";
+                                if(supporting_image_limit > otherimages.length){
+                                    $scope.commonfileerrormessage = otherimages.length + " preview image file already uploaded. You can upload only " + Math.abs(supporting_image_limit - otherimages.length) + " common images.";
+                                }else{
+                                    $scope.commonfileerrormessage = otherimages.length + " preview image file already uploaded. You can't upload anymore.";
+                                }
                             }
 
                         }
+                        $scope.commonfile = '';
+                        toastr.error($scope.commonfileerrormessage);
+                    }
+                }
+                else if (audiocount != 0) {
+                    if (!((audio_download_limit - otheraudio.length - audiocount) == 0)) {
+                        flag = false;
+                        $scope.commonfileerror = true;
+                        if (otheraudio.length >= audio_download_limit) {
+                            $scope.commonfileerrormessage = otheraudio.length + " preview audio file already uploaded. You can't upload anymore.";
+                        }
+                        else {
+                            if (otheraudio.length == 0) {
+                                $scope.commonfileerrormessage = "You can upload only " + (audio_download_limit - otheraudio.length) + " preview audio.";
+                            }
+                            else {
+                                $scope.commonfileerrormessage = otheraudio.length + " preview audio file already uploaded. You can upload only " + (audio_download_limit - otheraudio.length) + " preview audio.";
+                            }
+                        }
+                        $scope.commonfile = '';
                         toastr.error($scope.commonfileerrormessage);
                     }
                 }
                 else {
-                    if (!((2 - othervideos.length - videocount) >= 0)) {
+                    if (!((video_download_limit - othervideos.length - videocount) >= 0)) {
                         flag = false;
                         $scope.commonfileerror = true;
-                        if (othervideos.length == 2) {
-                            $scope.commonfileerrormessage = othervideos.length + " common video file already uploaded. you can't upload anymore.";
+                        if (othervideos.length >= video_download_limit) {
+                            $scope.commonfileerrormessage = othervideos.length + " preview video file already uploaded. You can't upload anymore.";
                         }
                         else {
                             if (othervideos.length == 0) {
-                                $scope.commonfileerrormessage = "you can upload only " + (2 - othervideos.length) + " common video.";
+                                $scope.commonfileerrormessage = "You can upload only " + (video_download_limit - othervideos.length) + " preview video.";
                             }
                             else {
-                                $scope.commonfileerrormessage = othervideos.length + " common video file already uploaded. you can upload only " + (2 - othervideos.length) + " common video.";
+                                if(video_download_limit > othervideos.length){
+                                    $scope.commonfileerrormessage = othervideos.length + " preview video file already uploaded. you can upload only " + Math.abs(video_download_limit - othervideos.length) + " common video.";
+                                }else{
+                                    $scope.commonfileerrormessage = othervideos.length + " preview video file already uploaded. You can't upload anymore.";
+                                }
                             }
                         }
+                        $scope.commonfile = '';
                         toastr.error($scope.commonfileerrormessage);
                     }
                 }
-                if (flag) {
+                //console.log($scope.commonfile)
 
-                    _.each($scope.commonfile, function (val) {
+                if (flag) {
+                    _.each($scope.commonfile, function (val, index) {
                         if (isImage(val.name)) {
+
                             var count = _.where($scope.CommonFiles, { type: 'image' });
                             var match = _.find($scope.OtherTemplates, function (item) { return item.ct_param_value == 'otherimage' })
                             if (match) {
-                                $scope.CommonFiles.push({ count: (otherimages.length + count.length + 1), file: val, type: 'image', ct_group_id: match.ct_group_id, cm_id: $scope.MetaId, width: null, height: null, other: 'common' })
+                               // $scope.CommonFiles.push({fileCategory:$scope.Preview,  count: (otherimages.length + count.length + 1), file: val, type: 'image', ct_group_id: match.ct_group_id, cm_id: $scope.MetaId, width: null, height: null, other: 'common' })
+                                $scope.CommonFiles.push({fileCategory:$scope.Preview,  count: (otherimages.length + count.length + 1), file: val, type: 'image', ct_group_id: match.ct_group_id, cm_id: $scope.MetaId, width: null, height: null, other: 'common' })
+                            }
+                        }else if(getExtension(val.name).toLowerCase() == "mp3") {
+
+                            var count = _.where($scope.CommonFiles, { type: 'audio' });
+                            var match = _.find($scope.OtherTemplates, function (item) { return item.ct_param_value == 'bitrate' })
+                            if (match) {
+                                $scope.CommonFiles.push({fileCategory:$scope.Preview,  count: (otheraudio.length + count.length + 1), file: val, type: 'audio', ct_group_id: match.ct_group_id, cm_id: $scope.MetaId, width: null, height: null, other: 'common' })
                             }
                         }
+
                         else if (isVideo(val.name)) {
                             var count = _.where($scope.CommonFiles, { type: 'video' });
                             var match = _.find($scope.OtherTemplates, function (item) { return item.ct_param_value == 'othervideo' })
                             if (match) {
-                                $scope.CommonFiles.push({ count: (othervideos.length + count.length + 1), file: val, type: 'video', ct_group_id: match.ct_group_id, cm_id: $scope.MetaId, width: null, height: null, other: 'common' })
+                                $scope.CommonFiles.push({fileCategory:$scope.Preview,  count: (othervideos.length + count.length + 1), file: val, type: 'video', ct_group_id: match.ct_group_id, cm_id: $scope.MetaId, width: null, height: null, other: 'common' })
                             }
                         }
                     })
                 }
+                console.log($scope.CommonFiles)
+
             }
         }
     }
 
     $scope.upload = function (files) {
+        //console.log($scope.TypeName)
         if ($scope.TypeName == "Imagery") {
-            if ($scope.wallpaperfile || $scope.thumbfile) {
+           // if ($scope.wallpaperfile  || $scope.CommonFiles.length > 0 || $scope.thumbfile) {
                 if ($scope.thumberror || $scope.wallpapererror) {
                     toastr.error($scope.thumberror ? $scope.thumberrormessage : $scope.wallpapererrormessage);
                 }
                 else {
-                    function wallpaperthumbupload(tu) {
-                        ContentFile.Upload('/uploadThumb', { count: $scope.ThumbFiles[tu].count, file: $scope.ThumbFiles[tu].file, cm_title: $scope.cm_title, TypeName: $scope.TypeName, MetaDataId: $scope.MetadataId, cm_id: $scope.MetaId, other: null, width: $scope.ThumbFiles[tu].width, height: $scope.ThumbFiles[tu].height, ct_group_id: null }, function (resp) {
-                            $scope.ThumbDataFiles = resp.data.ThumbFiles;
-                            toastr.success(resp.config.data.file.name + ' Thumb file uploaded successfully.');
-                            tu = tu + 1;
-                            if (tu == $scope.ThumbFiles.length) {
-                                /*if ($scope.wallpaperfile) {
-                                 WallpaperUpload(0);
-                                 }
-                                 else {*/
-                                $("#thumbfile").val("");
-                                $scope.ThumbFiles = [];
-                                $scope.thumbfile = null;
-                                $scope.uploading = false;
-                                ngProgress.complete();
-                                // }
-                            }
-                            else {
-                                wallpaperthumbupload(tu);
-                            }
-                        }, function (error) {
-                            toastr.error(error);
-                            $scope.uploading = false;
-                            ngProgress.complete();
-                        });
-                    }
-                    function WallpaperUpload(wu) {
-                        var data = $scope.WallPaperFiles[wu];
-                        ContentFile.Upload('/upload' + $scope.TypeName, { file: data.file, cm_title: $scope.cm_title, other: data.other, TypeName: $scope.TypeName, MetaDataId: $scope.MetadataId, cm_id: $scope.MetaId, width: data.width, height: data.height, ct_group_id: data.ct_group_id }, function (resp) {
-                            $scope.Files = resp.data.Files;
-                            toastr.success(resp.config.data.file.name + ' Base file uploaded successfully.');
-                            wu = wu + 1;
-                            if (wu == $scope.WallPaperFiles.length) {
-                                $("#thumbfile").val("");
-                                $("#wallpaperfile").val("");
-                                $scope.WallPaperFiles = [];
-                                $scope.thumbfile = null;
-                                $scope.wallpaperfile = null;
-                                $scope.uploading = false;
-                                ngProgress.complete();
-                            }
-                            else {
-                                WallpaperUpload(wu);
-                            }
-                        }, function (error) {
-                            toastr.error(error);
-                            $scope.uploading = false;
-                            ngProgress.complete();
-                        });
-                    }
                     ngProgress.start();
                     $scope.uploading = true;
-                    if ($scope.thumbfile) {
-                        wallpaperthumbupload(0);
-                    }else {
-                        $scope.uploading = false;
-                        ngProgress.complete();
-                    }
+                    ThumbUpload(0, {upload:'thumb'}, function (data) {
+                        WallpaperUpload(0, {upload:'main'}, function (data) {
+                            SupportingUpload(0, {upload:'supporting'}, function (data) {
+                                PreviewUpload(0, {upload:'preview'}, function (data) {
+                                    SupportingTextFileUpload(0, {upload: 'text'}, function (data) {
+                                        ngProgress.complete();
+                                        $scope.uploading = false;
 
-                    if ($scope.wallpaperfile) {
-                        WallpaperUpload(0);
-                    }else {
-                        $scope.uploading = false;
-                        ngProgress.complete();
-                    }
+                                    });
+                                })
+                            });
+                        });
+                    });
                 }
-            }
+            /*}
             else {
                 toastr.error("Please upload base wallpaper file.");
-            }
+            }*/
         }
         else if ($scope.TypeName == "Video") {
-            if ($scope.videofile || $scope.thumbfile) {
+            //if ($scope.videofile || $scope.CommonFiles.length > 0 || $scope.thumbfile) {
                 if ($scope.thumberror || $scope.videoerror) {
                     toastr.error($scope.thumberror ? $scope.thumberrormessage : $scope.videoerrormessage);
                 }
                 else {
-                    function videothumbupload(tu) {
-                        ContentFile.Upload('/uploadThumb', { count: $scope.ThumbFiles[tu].count, file: $scope.ThumbFiles[tu].file, cm_title: $scope.cm_title, TypeName: $scope.TypeName, MetaDataId: $scope.MetadataId, cm_id: $scope.MetaId, other: null, width: $scope.ThumbFiles[tu].width, height: $scope.ThumbFiles[tu].height, ct_group_id: null }, function (resp) {
-                            $scope.ThumbDataFiles = resp.data.ThumbFiles;
-                            toastr.success(resp.config.data.file.name + ' Thumb file uploaded successfully.');
-                            tu = tu + 1;
-                            if (tu == $scope.ThumbFiles.length) {
-                                /*if ($scope.videofile) {
-                                 VideoUpload(0);
-                                 }
-                                 else {*/
-                                $("#thumbfile").val("");
-                                $scope.ThumbFiles = [];
-                                $scope.thumbfile = null;
-                                $scope.uploading = false;
-                                ngProgress.complete();
-                                //}
-                            }
-                            else {
-                                videothumbupload(tu);
-                            }
-                        }, function (error) {
-                            toastr.error(error);
-                            $scope.uploading = false;
-                            ngProgress.complete();
-                        });
-                    }
-                    function VideoUpload(vu) {
-                        var data = $scope.VideoFiles[vu];
-                        ContentFile.Upload('/upload' + $scope.TypeName, { file: data.file, cm_title: $scope.cm_title, other: data.other, TypeName: $scope.TypeName, MetaDataId: $scope.MetadataId, cm_id: $scope.MetaId, width: data.width, height: data.height, ct_group_id: data.ct_group_id }, function (resp) {
-                            if (resp.data.success) {
-                                $scope.Files = resp.data.Files;
-                                toastr.success(resp.config.data.file.name + ' Base file uploaded successfully.');
-                                vu = vu + 1;
-                                if (vu == $scope.VideoFiles.length) {
-                                    $("#thumbfile").val("");
-                                    $("#videofile").val("");
-                                    $scope.videofile = null;
-                                    $scope.uploading = false;
-                                    ngProgress.complete();
-                                }
-                                else {
-                                    VideoUpload(vu);
-                                }
-                            }
-                            else {
-                                $("#thumbfile").val("");
-                                $("#videofile").val("");
-                                $scope.thumbfile = null;
-                                $scope.videofile = null;
-                                toastr.error(resp.data.message);
-                                $scope.uploading = false;
-                                ngProgress.complete();
-                            }
-                        }, function (error) {
-                            toastr.error(error);
-                            $scope.uploading = false;
-                            ngProgress.complete();
-                        });
-                    }
                     ngProgress.start();
                     $scope.uploading = true;
-                    if ($scope.thumbfile) {
-                        videothumbupload(0);
-                    }else {
-                        $scope.uploading = false;
-                        ngProgress.complete();
-                    }
-
-                    if ($scope.videofile) {
-                        VideoUpload(0);
-                    }else {
-                        $scope.uploading = false;
-                        ngProgress.complete();
-                    }
+                    ThumbUpload(0, {upload:'thumb'}, function (data) {
+                        VideoUpload(0, {upload:'main'}, function (data) {
+                            SupportingUpload(0, {upload:'supporting'}, function (data) {
+                                PreviewUpload(0, {upload:'preview'}, function (data) {
+                                    SupportingTextFileUpload(0, {upload:'text'}, function (data) {
+                                        ngProgress.complete();
+                                        $scope.uploading = false;
+                                    })
+                                });
+                            });
+                        });
+                    });
                 }
-            }
+            /*}
             else {
                 toastr.error("Please upload base video file.");
-            }
+            }*/
         }
         else if ($scope.TypeName == "Audio") {
-            //if ($scope.AudioZipError.length == 0) {
-            console.log($scope.CommonFiles.length)
-            if ($scope.audiofile || $scope.CommonFiles.length || $scope.thumbfile || $scope.TextFiles.length > 0 || ($scope.AudioZipFiles.length > 0)) {
                 if ($scope.thumberror || $scope.audioerror) {
                     toastr.error($scope.thumberror ? $scope.thumberrormessage : $scope.audioerrormessage);
                 } else {
-                    function audiothumbupload(tu) {
-                        ContentFile.Upload('/uploadThumb', {
-                            bulkAudioVisible: $scope.BulkAudioVisible,
-                            count: $scope.ThumbFiles[tu].count,
-                            file: $scope.ThumbFiles[tu].file,
-                            cm_title: $scope.cm_title,
-                            TypeName: $scope.TypeName,
-                            MetaDataId: $scope.MetadataId,
-                            cm_id: $scope.MetaId,
-                            other: null,
-                            width: $scope.ThumbFiles[tu].width,
-                            height: $scope.ThumbFiles[tu].height,
-                            ct_group_id: null
-                        }, function (resp) {
-                            $scope.ThumbDataFiles = resp.data.ThumbFiles;
-                            toastr.success(resp.config.data.file.name + ' Thumb file uploaded successfully.');
-                            tu = tu + 1;
-                            if (tu == $scope.ThumbFiles.length) {
-                                $("#thumbfile").val("");
-                                $scope.thumbfile = null;
-                                $scope.ThumbFiles = [];
-                                $scope.uploading = false;
-                                ngProgress.complete();
-                            }
-                            else {
-                                audiothumbupload(tu);
-                            }
-                        }, function (error) {
-                            toastr.error(error);
-                            $scope.uploading = false;
-                            ngProgress.complete();
-                        });
-                    }
-
-                    function AudioUpload(au) {
-                        var data = $scope.AudioFiles[au];
-                        ContentFile.Upload('/upload' + $scope.TypeName, {
-                            file: data.file,
-                            cm_title: $scope.cm_title,
-                            other: data.other,
-                            TypeName: $scope.TypeName,
-                            MetaDataId: $scope.MetadataId,
-                            cm_id: $scope.MetaId,
-                            width: data.width,
-                            height: data.height,
-                            ct_group_id: data.ct_group_id
-                        }, function (resp) {
-                            if (resp.data.success) {
-                                $scope.Files = resp.data.Files;
-                                toastr.success(resp.config.data.file.name + ' Base file uploaded successfully.');
-                                au = au + 1;
-                                console.log('file')
-                                console.log(au)
-                                if (au == $scope.AudioFiles.length) {
-                                    $("#audiofile").val("");
-                                    $scope.AudioFiles = [];
-                                    $scope.audiofile = null;
-                                    $scope.uploading = false;
-                                    ngProgress.complete();
-                                }
-                                else {
-                                    AudioUpload(au);
-                                }
-                            }
-                        }, function (error) {
-                            toastr.error(error);
-                            $scope.uploading = false;
-                            ngProgress.complete();
-                        });
-                    }
-
-                    function AudioCommonUpload(tcu) {
-                        console.log(tcu)
-                        var data = $scope.CommonFiles[tcu];
-                        ContentFile.Upload('/uploadotherfiles', {
-                            count: data.count,
-                            file: data.file,
-                            cm_title: $scope.cm_title,
-                            other: data.other,
-                            type: data.type,
-                            TypeName: $scope.TypeName,
-                            MetaDataId: $scope.MetadataId,
-                            cm_id: $scope.MetaId,
-                            width: data.width,
-                            height: data.height,
-                            ct_group_id: data.ct_group_id
-                        }, function (resp) {
-                            $scope.Files = resp.data.Files;
-                            toastr.success(resp.config.data.file.name + ' supporting file uploaded successfully.');
-                            tcu = tcu + 1;
-                            if (tcu == $scope.CommonFiles.length) {
-                                $("#supportfile").val("");
-                                $scope.CommonFiles = [];
-                                $scope.supportfile = null;
-                                $scope.uploading = false;
-                                ngProgress.complete();
-
-                            }
-                            else {
-                                AudioCommonUpload(tcu);
-                            }
-                        }, function (error) {
-                            toastr.error(error);
-                            $scope.uploading = false;
-                            ngProgress.complete();
-                        });
-                    }
-
-                    function LyricsTextFileUpload(tuf) {
-                        var data = $scope.TextFiles[tuf];
-                        ContentFile.Upload('/uploadText', {
-                            count: data.count,
-                            file: data.file,
-                            cm_title: $scope.cm_title,
-                            langaugemetaid: data.langaugemetaid,
-                            TypeName: $scope.TypeName,
-                            MetaDataId: $scope.MetadataId,
-                            cm_id: $scope.MetaId,
-                            width: data.width,
-                            height: data.height,
-                            ct_group_id: data.ct_group_id,
-                            ct_param: data.ct_param,
-                            ct_param_value: data.ct_param_value
-                        }, function (resp) {
-                            $scope.Files = resp.data.Files;
-                            toastr.success(resp.config.data.file.name + ' text file uploaded successfully.');
-                            tuf = tuf + 1;
-                            if (tuf == $scope.TextFiles.length) {
-                                $(".textfile").val("");
-                                $scope.TextFiles = [];
-                                ngProgress.complete();
-                                $scope.uploading = false;
-                            }
-                            else {
-                                LyricsTextFileUpload(tuf);
-                            }
-                        }, function (error) {
-                            toastr.error(error);
-                            $scope.uploading = false;
-                            ngProgress.complete();
-                        });
-                    }
-
                     ngProgress.start();
                     $scope.uploading = true;
-
-                    if ($scope.thumbfile) {
-                        audiothumbupload(0);
-                    }else {
-                        //$scope.uploading = false;
-                        // ngProgress.complete();
-                    }
-                    if ($scope.audiofile != undefined) {
-                        AudioUpload(0);
-                    }else {
-                        //  $scope.uploading = false;
-                        // ngProgress.complete();
-                    }
-                    if ($scope.CommonFiles.length > 0) {
-                        AudioCommonUpload(0);
-                    }else {
-                        //$scope.uploading = false;
-                        //ngProgress.complete();
-                    }
-                    if ($scope.TextError.length == 0 && $scope.TextFiles.length > 0) {
-                        LyricsTextFileUpload(0);
-                    }else {
-                        //$scope.uploading = false;
-                        //ngProgress.complete();
-                    }
-
-                    /*if ($scope.AudioZipFiles.length > 0) {
-                     AudioZipUpload(0);
-                     }else {
-                     $scope.uploading = false;
-                     ngProgress.complete();
-                     }*/
-
+                    ThumbUpload(0, {upload:'thumb'}, function (data) {
+                        AudioUpload(0, {upload:'main'}, function (data) {
+                            SupportingUpload(0, {upload:'supporting'}, function (data) {
+                                PreviewUpload(0, {upload:'preview'}, function (data) {
+                                    SupportingTextFileUpload(0, {upload:'text'}, function (data) {
+                                        ngProgress.complete();
+                                        $scope.uploading = false;
+                                    })
+                                });
+                            });
+                        });
+                    });
                 }
-            }
+            /*}
             else {
                 toastr.error("Please upload base audio file.");
-            }
-            /*}
-             else {
-             toastr.error($scope.AudioZipError[0].error);
-             }*/
+            }*/
         }
         else if ($scope.TypeName == "AppsGames") {
-            if ($scope.thumbfile || $scope.gameimagefile || $scope.gamevideofile || $scope.gameappfile) {
+            //if ($scope.thumbfile || $scope.gameimagefile || $scope.gamevideofile || $scope.gameappfile) {
                 if ($scope.thumberror || $scope.gameimageerror || $scope.gamevideoerror || $scope.gameapperror) {
                     toastr.error($scope.thumberror ? $scope.thumberrormessage : $scope.gameimageerror ? $scope.gameimageerrormessage : $scope.gamevideoerror ? $scope.gamevideoerrormessage : $scope.gameapperrormessage);
                 }
                 else if (!$scope.gameappfile || ($scope.gameappfile && $scope.GroupHandset.length > 0)) {
-                    function gamethumbupload(tu) {
-                        ContentFile.Upload('/uploadThumb', { count: $scope.ThumbFiles[tu].count, file: $scope.ThumbFiles[tu].file, cm_title: $scope.cm_title, TypeName: $scope.TypeName, MetaDataId: $scope.MetadataId, cm_id: $scope.MetaId, other: null, width: $scope.ThumbFiles[tu].width, height: $scope.ThumbFiles[tu].height, ct_group_id: null }, function (resp) {
-                            $scope.ThumbDataFiles = resp.data.ThumbFiles;
-                            toastr.success(resp.config.data.file.name + ' Thumb file uploaded successfully.');
-                            tu = tu + 1;
-                            if (tu == $scope.ThumbFiles.length) {
-                                /*if ($scope.gameimagefile) {
-                                 GameImageUpload(0);
-                                 }
-                                 else if ($scope.gamevideofile) {
-                                 GameVideoUpload(0);
-                                 }
-                                 else if ($scope.gameappfile) {
-                                 GameAppUpload(0);
-                                 }
-                                 else {*/
-                                $("#thumbfile").val("");
-                                $scope.ThumbFiles = [];
-                                $scope.thumbfile = null;
-                                $scope.uploading = false;
-                                ngProgress.complete();
-                                // }
-                            }
-                            else {
-                                gamethumbupload(tu);
-                            }
-                        }, function (error) {
-                            toastr.error(error);
-                            $scope.uploading = false;
-                            ngProgress.complete();
-                        });
-                    }
-                    function GameImageUpload(gi) {
-                        var data = $scope.GameImageFiles[gi];
-                        ContentFile.Upload('/uploadotherfiles', { count: data.count, file: data.file, cm_title: $scope.cm_title, other: data.other, type: 'image', TypeName: $scope.TypeName, MetaDataId: $scope.MetadataId, cm_id: $scope.MetaId, width: data.width, height: data.height, ct_group_id: data.ct_group_id }, function (resp) {
-                            $scope.Files = resp.data.Files;
-                            toastr.success(resp.config.data.file.name + ' Game Image file uploaded successfully.');
-                            gi = gi + 1;
-                            if (gi == $scope.GameImageFiles.length) {
-                                /*if ($scope.gamevideofile) {
-                                 GameVideoUpload(0);
-                                 }
-                                 else if ($scope.gameappfile) {
-                                 GameAppUpload(0);
-                                 }
-                                 else {*/
-                                $("#thumbfile").val("");
-                                $("#gameimagefile").val("");
-                                $scope.GameImageFiles = [];
-                                $scope.thumbfile = null;
-                                $scope.gameimagefile = null;
-                                $scope.uploading = false;
-                                ngProgress.complete();
-                                // }
-                            }
-                            else {
-                                GameImageUpload(gi);
-                            }
-                        }, function (error) {
-                            toastr.error(error);
-                            $scope.uploading = false;
-                            ngProgress.complete();
-                        });
-                    }
-                    function GameVideoUpload(gv) {
-                        var data = $scope.GameVideoFiles[gv];
-                        ContentFile.Upload('/uploadotherfiles', { count: data.count, file: data.file, cm_title: $scope.cm_title, other: data.other, type: 'video', TypeName: $scope.TypeName, MetaDataId: $scope.MetadataId, cm_id: $scope.MetaId, width: data.width, height: data.height, ct_group_id: data.ct_group_id }, function (resp) {
-                            $scope.Files = resp.data.Files;
-                            toastr.success(resp.config.data.file.name + ' Game Video file uploaded successfully.');
-                            gv = gv + 1;
-                            if (gv == $scope.GameVideoFiles.length) {
-                                /*if ($scope.gameappfile) {
-                                 GameAppUpload(0);
-                                 }
-                                 else {*/
-                                $("#thumbfile").val("");
-                                $("#gameimagefile").val("");
-                                $("#gamevideofile").val("");
-                                $scope.GameVideoFiles = [];
-                                $scope.thumbfile = null;
-                                $scope.gameimagefile = null;
-                                $scope.gamevideofile = null;
-                                $scope.uploading = false;
-                                ngProgress.complete();
-                                // }
-                            }
-                            else {
-                                GameVideoUpload(gv);
-                            }
-                        }, function (error) {
-                            toastr.error(error);
-                            $scope.uploading = false;
-                            ngProgress.complete();
-                        });
-                    }
-                    function GameAppUpload(ga) {
-                        var data = $scope.GameAppFiles[ga];
-                        var handsets = _.unique(_.pluck($scope.GroupHandset, "dc_id"));
-                        ContentFile.Upload('/upload' + $scope.TypeName, { count: data.count, Handsets: handsets.toString(), file: data.file, cm_title: $scope.cm_title, other: data.other, type: 'app', TypeName: $scope.TypeName, MetaDataId: $scope.MetadataId, cm_id: $scope.MetaId, width: data.width, height: data.height, ct_group_id: data.ct_group_id }, function (resp) {
-                            $scope.Files = resp.data.Files;
-                            toastr.success(resp.config.data.file.name + ' Game App file uploaded successfully.');
-                            ga = ga + 1;
-                            if (ga == $scope.GameAppFiles.length) {
-                                $("#thumbfile").val("");
-                                $("#gameimagefile").val("");
-                                $("#gamevideofile").val("");
-                                $("#gameappfile").val("");
-                                $scope.GameAppFiles = [];
-                                $scope.thumbfile = null;
-                                $scope.gameimagefile = null;
-                                $scope.gamevideofile = null;
-                                $scope.gameappfile = null;
-                                $scope.uploading = false;
-                                $scope.SelectedHandsetGroup = "";
-                                $scope.HandsetGroupChange();
-
-                                ngProgress.complete();
-                            }
-                            else {
-                                GameAppUpload(ga);
-                            }
-                        }, function (error) {
-                            toastr.error(error);
-                            $scope.uploading = false;
-                            ngProgress.complete();
-                        });
-                    }
                     ngProgress.start();
                     $scope.uploading = true;
-                    if ($scope.thumbfile) {
-                        gamethumbupload(0);
-                    }else {
-                        $scope.uploading = false;
-                        ngProgress.complete();
-                    }
-                    if ($scope.gameimagefile) {
-                        GameImageUpload(0);
-                    }else {
-                        $scope.uploading = false;
-                        ngProgress.complete();
-                    }
-                    if ($scope.gamevideofile) {
-                        GameVideoUpload(0);
-                    }
-                    if ($scope.gameappfile) {
-                        GameAppUpload(0);
-                    }else {
-                        $scope.uploading = false;
-                        ngProgress.complete();
-                    }
+                    ThumbUpload(0, {upload:'thumb'}, function (data) {
+                        GameAppUpload(0, {upload:'main'}, function (data) {
+                            SupportingUpload(0, {upload:'supporting'}, function (data) {
+                                PreviewUpload(0, {upload:'preview'}, function (data) {
+                                    SupportingTextFileUpload(0, {upload:'text'}, function (data) {
+                                        ngProgress.complete();
+                                        $scope.uploading = false;
+                                    })
+                                });
+                            });
+                        });
+                    });
                 }
                 else {
                     toastr.error("Please add Handset for map with App File.");
                 }
-            }
+            /*}
             else {
                 toastr.error("Please upload app file or supporting files.");
-            }
+            }*/
             $scope.GamePartVisible = true;
         }
         else if ($scope.TypeName == "Text") {
             if ($scope.TextError.length == 0) {
-                if ($scope.thumbfile ||  ($scope.CommonFiles.length >0)  || ($scope.TextFiles.length > 0 || $scope.commonfileerror)) {
-                    if ($scope.thumberror || $scope.commonfileerror) {
+               // if ($scope.thumbfile ||  ($scope.CommonFiles.length >0)  || ($scope.TextFiles.length > 0 || $scope.commonfileerror)) {
+               /*if ($scope.thumberror || $scope.supportingfileerror || $scope.commonfileerror) {
+                 toastr.error($scope.thumberror ? $scope.thumberrormessage : $scope.commonfileerror ?  $scope.commonfileerrormessage : $scope.supportingfileerrormessage);
+               }*/
+                if ($scope.thumberror || $scope.commonfileerror) {
                         toastr.error($scope.thumberror ? $scope.thumberrormessage : $scope.commonfileerrormessage);
                     }
                     else {
-                        function textthumbupload(tu) {
-                            ContentFile.Upload('/uploadThumb', { count: $scope.ThumbFiles[tu].count, file: $scope.ThumbFiles[tu].file, cm_title: $scope.cm_title, TypeName: $scope.TypeName, MetaDataId: $scope.MetadataId, cm_id: $scope.MetaId, other: null, width: $scope.ThumbFiles[tu].width, height: $scope.ThumbFiles[tu].height, ct_group_id: null }, function (resp) {
-                                $scope.ThumbDataFiles = resp.data.ThumbFiles;
-                                toastr.success(resp.config.data.file.name + ' Thumb file uploaded successfully.');
-                                tu = tu + 1;
-                                if (tu == $scope.ThumbFiles.length) {
-                                    /* if ($scope.CommonFiles.length >0) {
-                                     TextCommonUpload(0);
-                                     }
-                                     else if ($scope.TextFiles.length > 0) {
-                                     TextFileUpload(0);
-                                     }
-                                     else {*/
-                                    $("#thumbfile").val("");
-                                    $scope.ThumbFiles = [];
-                                    $scope.thumbfile = null;
-                                    $scope.uploading = false;
-                                    ngProgress.complete();
-                                    // }
-                                }
-                                else {
-                                    textthumbupload(tu);
-                                }
-                            }, function (error) {
-                                toastr.error(error);
-                                $scope.uploading = false;
-                                ngProgress.complete();
-                            });
-                        }
-                        function TextCommonUpload(tcu) {
-
-                            var data = $scope.CommonFiles[tcu];
-                            ContentFile.Upload('/uploadotherfiles', { count: data.count, file: data.file, cm_title: $scope.cm_title, other: data.other, type: data.type, TypeName: $scope.TypeName, MetaDataId: $scope.MetadataId, cm_id: $scope.MetaId, width: data.width, height: data.height, ct_group_id: data.ct_group_id }, function (resp) {
-                                $scope.Files = resp.data.Files;
-                                toastr.success(resp.config.data.file.name + ' common file uploaded successfully.');
-                                tcu = tcu + 1;
-                                if (tcu == $scope.CommonFiles.length) {
-                                    /* if ($scope.TextFiles.length > 0) {
-                                     TextFileUpload(0);
-                                     }
-                                     else {*/
-                                    $("#thumbfile").val("");
-                                    $("#commonfile").val("");
-                                    $scope.CommonFiles = [];
-                                    $scope.thumbfile = null;
-                                    $scope.commonfile = null;
-                                    $scope.uploading = false;
-                                    ngProgress.complete();
-                                    //}
-                                }
-                                else {
-                                    TextCommonUpload(tcu);
-                                }
-                            }, function (error) {
-                                toastr.error(error);
-                                $scope.uploading = false;
-                                ngProgress.complete();
-                            });
-                        }
-
-                        function TextFileUpload(tuf) {
-
-                            var data = $scope.TextFiles[tuf];
-                            ContentFile.Upload('/upload' + $scope.TypeName, { count: data.count, file: data.file, cm_title: $scope.cm_title, langaugemetaid: data.langaugemetaid, TypeName: $scope.TypeName, MetaDataId: $scope.MetadataId, cm_id: $scope.MetaId, width: data.width, height: data.height, ct_group_id: data.ct_group_id, ct_param: data.ct_param, ct_param_value: data.ct_param_value }, function (resp) {
-                                $scope.Files = resp.data.Files;
-                                toastr.success(resp.config.data.file.name + ' text file uploaded successfully.');
-                                tuf = tuf + 1;
-                                if (tuf == $scope.TextFiles.length) {
-                                    $("#thumbfile").val("");
-                                    $(".textfile").val("");
-                                    $("#commonfile").val("");
-                                    $scope.thumbfile = null;
-                                    $scope.TextFiles = [];
-                                    $scope.commonfile = null;
-                                    ngProgress.complete();
-                                    $scope.uploading = false;
-                                }
-                                else {
-                                    TextFileUpload(tuf);
-                                }
-                            }, function (error) {
-                                toastr.error(error);
-                                $scope.uploading = false;
-                                ngProgress.complete();
-                            });
-                        }
                         ngProgress.start();
                         $scope.uploading = true;
-                        if ($scope.thumbfile) {
-                            textthumbupload(0);
-                        }else {
-                            $scope.uploading = false;
-                            ngProgress.complete();
-                        }
-
-                        if ($scope.CommonFiles.length > 0) {
-                            TextCommonUpload(0);
-                        }else {
-                            $scope.uploading = false;
-                            ngProgress.complete();
-                        }
-
-                        if ($scope.TextFiles.length > 0) {
-                            TextFileUpload(0);
-                        }else {
-                            $scope.uploading = false;
-                            ngProgress.complete();
-                        }
+                        ThumbUpload(0, {upload:'thumb'}, function (data) {
+                            TextFileUpload(0, {upload:'main'}, function (data) {
+                                SupportingUpload(0, {upload:'supporting'}, function (data) {
+                                    PreviewUpload(0, {upload:'preview'}, function (data) {
+                                        SupportingTextFileUpload(0, {upload: 'text'}, function (data) {
+                                            ngProgress.complete();
+                                            $scope.uploading = false;
+                                        });
+                                    })
+                                });
+                            });
+                        });
                     }
-                }
+                /*}
                 else {
                     toastr.error("Please upload common files or text files.");
-                }
+                }*/
             }
             else {
                 toastr.error($scope.TextError[0].error);
@@ -1441,6 +1130,404 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             }
         }
     }
+    function ThumbUpload(tu,item,success) {
+        if(item.upload === 'thumb' && $scope.ThumbFiles && $scope.ThumbFiles.length > 0) {
+            ContentFile.Upload('/uploadThumb', {
+                bulkAudioVisible: $scope.BulkAudioVisible,
+                count: $scope.ThumbFiles[tu].count,
+                file: $scope.ThumbFiles[tu].file,
+                cm_title: $scope.cm_title,
+                TypeName: $scope.TypeName,
+                MetaDataId: $scope.MetadataId,
+                cm_id: $scope.MetaId,
+                other: null,
+                width: $scope.ThumbFiles[tu].width,
+                height: $scope.ThumbFiles[tu].height,
+                ct_group_id: null
+            }, function (resp) {
+                $scope.ThumbDataFiles = resp.data.ThumbFiles;
+                toastr.success(resp.config.data.file.name + ' Thumb file uploaded successfully.');
+                tu = tu + 1;
+                if (tu == $scope.ThumbFiles.length) {
 
+                    $("#thumbfile").val("");
+                    $scope.thumbfile = null;
+                    $scope.ThumbFiles = [];
+                  //  $scope.uploading = false;
+                 //   ngProgress.complete();
+                    success(item.upload);
+                }
+                else {
+                    ThumbUpload(tu,item,success);
+                }
+            }, function (error) {
+                toastr.error(error);
+                $scope.uploading = false;
+                ngProgress.complete();
+            });
+        }else{
+            success(item.upload);
+        }
+    }
+    function WallpaperUpload(wu,item,success) {
+        if(item.upload === 'main' && $scope.WallPaperFiles && $scope.WallPaperFiles.length > 0 ) {
+            var data = $scope.WallPaperFiles[wu];
+            ContentFile.Upload('/upload' + $scope.TypeName, {
+                fileCategory: data.fileCategory,
+                file: data.file,
+                cm_title: $scope.cm_title,
+                other: data.other,
+                TypeName: $scope.TypeName,
+                MetaDataId: $scope.MetadataId,
+                cm_id: $scope.MetaId,
+                width: data.width,
+                height: data.height,
+                ct_group_id: data.ct_group_id
+            }, function (resp) {
+                $scope.Files = resp.data.Files;
+                toastr.success(resp.config.data.file.name + ' Base file uploaded successfully.');
+                wu = wu + 1;
+                if (wu == $scope.WallPaperFiles.length) {
+                    $("#thumbfile").val("");
+                    $("#wallpaperfile").val("");
+                    $scope.WallPaperFiles = [];
+                    $scope.thumbfile = null;
+                    $scope.wallpaperfile = null;
+                   // $scope.uploading = false;
+                  //  ngProgress.complete();
+                    success(item.upload);
+                }
+                else {
+                    WallpaperUpload(wu,item,success);
+                }
+            }, function (error) {
+                toastr.error(error);
+                $scope.uploading = false;
+                ngProgress.complete();
+            });
+        }else {
+           /// toastr.error("Please upload base imagery file.");
+            success(item.upload);
+        }
+    }
+    function VideoUpload(vu,item,success) {
+        if(item.upload === 'main' && $scope.VideoFiles && $scope.VideoFiles.length > 0 ) {
+            var data = $scope.VideoFiles[vu];
+            ContentFile.Upload('/upload' + $scope.TypeName, {
+                fileCategory: data.fileCategory,
+                file: data.file,
+                cm_title: $scope.cm_title,
+                other: data.other,
+                TypeName: $scope.TypeName,
+                MetaDataId: $scope.MetadataId,
+                cm_id: $scope.MetaId,
+                width: data.width,
+                height: data.height,
+                ct_group_id: data.ct_group_id
+            }, function (resp) {
+                if (resp.data.success) {
+                    $scope.Files = resp.data.Files;
+                    toastr.success(resp.config.data.file.name + ' Base file uploaded successfully.');
+                    vu = vu + 1;
+                    if (vu == $scope.VideoFiles.length) {
+                        $("#thumbfile").val("");
+                        $("#videofile").val("");
+                        $scope.videofile = null;
+                       // $scope.uploading = false;
+                       // ngProgress.complete();
+                        success(item.upload);
+                    }
+                    else {
+                        VideoUpload(vu,item,success);
+                    }
+                }
+                else {
+                    $("#thumbfile").val("");
+                    $("#videofile").val("");
+                    $scope.thumbfile = null;
+                    $scope.videofile = null;
+                    toastr.error(resp.data.message);
+                   // $scope.uploading = false;
+                   // ngProgress.complete();
+                    success(item.upload);
+                }
+            }, function (error) {
+                toastr.error(error);
+                $scope.uploading = false;
+                ngProgress.complete();
+            });
+        }else {
+           // toastr.error("Please upload base video file.");
+            success(item.upload);
+        }
+}
+    function AudioUpload(au,item,success) {
+        if(item.upload === 'main' && $scope.AudioFiles && $scope.AudioFiles.length > 0 ) {
+            var data = $scope.AudioFiles[au];
+            ContentFile.Upload('/upload' + $scope.TypeName, {
+                fileCategory: data.fileCategory,
+                file: data.file,
+                cm_title: $scope.cm_title,
+                other: data.other,
+                TypeName: $scope.TypeName,
+                MetaDataId: $scope.MetadataId,
+                cm_id: $scope.MetaId,
+                width: data.width,
+                height: data.height,
+                ct_group_id: data.ct_group_id
+            }, function (resp) {
+                if (resp.data.success) {
+                    $scope.Files = resp.data.Files;
+                    toastr.success(resp.config.data.file.name + ' Base file uploaded successfully.');
+                    au = au + 1;
+                    if (au == $scope.AudioFiles.length) {
+
+                        $("#audiofile").val("");
+                        $scope.AudioFiles = [];
+                        $scope.audiofile = null;
+                        success(item.upload);
+                    }
+                    else {
+                        AudioUpload(au, item, success);
+                    }
+                }
+            }, function (error) {
+                toastr.error(error);
+                $scope.uploading = false;
+                ngProgress.complete();
+            });
+        }else{
+          //  toastr.error("Please upload base audio file.");
+            success(item.upload);
+        }
+    }
+    function GameAppUpload(ga,item,success) {
+        if(item.upload === 'main' && $scope.GameAppFiles && $scope.GameAppFiles.length > 0 ) {
+
+            var data = $scope.GameAppFiles[ga];
+            var handsets = _.unique(_.pluck($scope.GroupHandset, "dc_id"));
+            ContentFile.Upload('/upload' + $scope.TypeName, {
+                fileCategory: data.fileCategory,
+                count: data.count,
+                Handsets: handsets.toString(),
+                file: data.file,
+                cm_title: $scope.cm_title,
+                other: data.other,
+                type: 'app',
+                TypeName: $scope.TypeName,
+                MetaDataId: $scope.MetadataId,
+                cm_id: $scope.MetaId,
+                width: data.width,
+                height: data.height,
+                ct_group_id: data.ct_group_id
+            }, function (resp) {
+                $scope.Files = resp.data.Files;
+                toastr.success(resp.config.data.file.name + ' Game App file uploaded successfully.');
+                ga = ga + 1;
+                if (ga == $scope.GameAppFiles.length) {
+                    $("#thumbfile").val("");
+                    $("#gameimagefile").val("");
+                    $("#gamevideofile").val("");
+                    $("#gameappfile").val("");
+                    $scope.GameAppFiles = [];
+                    $scope.thumbfile = null;
+                    $scope.gameimagefile = null;
+                    $scope.gamevideofile = null;
+                    $scope.gameappfile = null;
+                    //$scope.uploading = false;
+                    $scope.SelectedHandsetGroup = "";
+                    $scope.HandsetGroupChange();
+                    success(item.upload);
+
+                    //ngProgress.complete();
+                }
+                else {
+                    GameAppUpload(ga,item,success);
+                }
+            }, function (error) {
+                toastr.error(error);
+                $scope.uploading = false;
+                ngProgress.complete();
+            });
+        }else{
+           // toastr.error("Please upload app file.");
+            success(item.upload);
+        }
+    }
+    function TextFileUpload(tuf,item,success) {
+        if(item.upload === 'main' && $scope.TextFiles && $scope.TextFiles.length > 0 ) {
+            var data = $scope.TextFiles[tuf];
+            ContentFile.Upload('/upload' + $scope.TypeName, {
+                fileCategory: data.fileCategory,
+                count: data.count,
+                file: data.file,
+                cm_title: $scope.cm_title,
+                langaugemetaid: data.langaugemetaid,
+                TypeName: $scope.TypeName,
+                MetaDataId: $scope.MetadataId,
+                cm_id: $scope.MetaId,
+                width: data.width,
+                height: data.height,
+                ct_group_id: data.ct_group_id,
+                ct_param: data.ct_param,
+                ct_param_value: data.ct_param_value
+            }, function (resp) {
+                $scope.Files = resp.data.Files;
+                toastr.success(resp.config.data.file.name + ' text file uploaded successfully.');
+                tuf = tuf + 1;
+                if (tuf == $scope.TextFiles.length) {
+                    $("#thumbfile").val("");
+                    $(".textfile").val("");
+                    $("#commonfile").val("");
+                    $scope.thumbfile = null;
+                    $scope.TextFiles = [];
+                    $scope.commonfile = null;
+                  //  ngProgress.complete();
+                  //  $scope.uploading = false;
+                    success(item.upload);
+
+                }
+                else {
+                    TextFileUpload(tuf, item, success);
+                }
+            }, function (error) {
+                toastr.error(error);
+                $scope.uploading = false;
+                ngProgress.complete();
+            });
+        }else{
+            //toastr.error("Please upload text file.");
+            success(item.upload);
+
+        }
+    }
+    function SupportingUpload(tcu,item,success) {
+
+        if(item.upload === 'supporting' && $scope.SupportingFiles && $scope.SupportingFiles.length > 0) {
+            var data = $scope.SupportingFiles[tcu];
+             ContentFile.Upload('/uploadotherfiles', {
+                fileCategory: data.fileCategory,
+                count: data.count,
+                file: data.file,
+                cm_title: $scope.cm_title,
+                other: data.other,
+                type: data.type,
+                TypeName: $scope.TypeName,
+                MetaDataId: $scope.MetadataId,
+                cm_id: $scope.MetaId,
+                width: data.width,
+                height: data.height,
+                ct_group_id: data.ct_group_id
+            }, function (resp) {
+                $scope.Files = resp.data.Files;
+                toastr.success(resp.config.data.file.name + ' Supporting file uploaded successfully.');
+                tcu = tcu + 1;
+                if (tcu == $scope.SupportingFiles.length) {
+                    $("#supportfile").val("");
+                    $scope.SupportingFiles = [];
+                 //   $scope.commonfile = null;
+                    $scope.supportfile = null;
+                    success(item.upload);
+                }
+                else {
+                    SupportingUpload(tcu, item, success);
+                }
+            }, function (error) {
+                toastr.error(error);
+                $scope.uploading = false;
+                ngProgress.complete();
+            });
+        }else{            //or supporting files
+            //toastr.error("Please upload supporting files.");
+            success(item.upload);
+        }
+    }
+    function PreviewUpload(tcu,item,success) {
+        if(item.upload === 'preview' && $scope.CommonFiles && $scope.CommonFiles.length > 0) {
+            var data = $scope.CommonFiles[tcu];
+           // var filetype = (data.fileCategory == 2)? 'Supporting' : 'Preview';
+            ContentFile.Upload('/uploadotherfiles', {
+                fileCategory: data.fileCategory,
+                count: data.count,
+                file: data.file,
+                cm_title: $scope.cm_title,
+                other: data.other,
+                type: data.type,
+                TypeName: $scope.TypeName,
+                MetaDataId: $scope.MetadataId,
+                cm_id: $scope.MetaId,
+                width: data.width,
+                height: data.height,
+                ct_group_id: data.ct_group_id
+            }, function (resp) {
+                $scope.Files = resp.data.Files;
+                toastr.success(resp.config.data.file.name + ' Preview file uploaded successfully.');
+                tcu = tcu + 1;
+                if (tcu == $scope.CommonFiles.length) {
+                    $("#commonfile").val("");
+                    $scope.CommonFiles = [];
+                    $scope.commonfile = null;
+                   // $scope.supportfile = null;
+                    success(item.upload);
+                }
+                else {
+                    PreviewUpload(tcu, item, success);
+                }
+            }, function (error) {
+                toastr.error(error);
+                $scope.uploading = false;
+                ngProgress.complete();
+            });
+        }else{            //or supporting files
+            //toastr.error("Please upload supporting files.");
+            success(item.upload);
+        }
+    }
+    function SupportingTextFileUpload(tuf,item,success) {
+        if(item.upload === 'text' && $scope.LangSupportFiles && $scope.LangSupportFiles.length > 0) {
+            var data = $scope.LangSupportFiles[tuf];
+            var filetype = (data.fileCategory == 2)? 'Supporting' : 'Preview';
+
+            var languageMetadata = data.langaugemetaid;
+            ContentFile.Upload('/uploadText', {
+                fileCategory: data.fileCategory,
+                count: data.count,
+                file: data.file,
+                cm_title: $scope.cm_title,
+                langaugemetaid: data.langaugemetaid,
+                TypeName: $scope.TypeName,
+                MetaDataId: $scope.MetadataId,
+                cm_id: $scope.MetaId,
+                width: data.width,
+                height: data.height,
+                ct_group_id: data.ct_group_id,
+                ct_param: data.ct_param,
+                ct_param_value: data.ct_param_value
+            }, function (resp) {
+                $scope.Files = resp.data.Files;
+                toastr.success(resp.config.data.file.name + ' ' + filetype+' language file uploaded successfully.');
+                tuf = tuf + 1;
+                $("#langsupportfile_"+languageMetadata).val("");
+
+                if (tuf == $scope.LangSupportFiles.length) {
+                    $scope.LangSupportFiles = [];
+                   // ngProgress.complete();
+                    //$scope.uploading = false;
+                    success(item.upload);
+                }
+                else {
+                    SupportingTextFileUpload(tuf, item, success);
+                }
+            }, function (error) {
+                console.log('error')
+                toastr.error(error);
+                $scope.uploading = false;
+                ngProgress.complete();
+            });
+        }else{
+           // toastr.error("Please upload supporting text files.");
+            success(item.upload);
+        }
+    }
 });
 

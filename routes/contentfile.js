@@ -26,6 +26,8 @@ module.exports = function (app) {
      .post(contentfile.uploadotherfiles);
     app.route('/replaceFile')
     .post(contentfile.replaceFile);
+    app.route('/replaceThumbFile')
+    .post(contentfile.replaceThumbFile);
 
 }
 

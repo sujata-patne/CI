@@ -34,7 +34,7 @@ exports.allAction = function (req, res, next) {
 }
 
 exports.getuserdata = function (req, res, next) {
-    console.log('process ID : '+process.pid)
+    //console.log('process ID : '+process.pid)
     try {
         if (req.session) {
             if (req.session.UserName) {
@@ -126,7 +126,7 @@ exports.getuserdata = function (req, res, next) {
 }
 
 exports.addedituser = function (req, res, next) {
-    console.log('process ID : '+process.pid)
+    //console.log('process ID : '+process.pid)
 
     try {
         if (req.session) {
