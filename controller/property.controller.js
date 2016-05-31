@@ -18,7 +18,12 @@ function Pad(padString, value, length) {
 
     return str;
 }
-
+/**
+ * @class
+ * @classdesc create a log file if not exist.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.allAction = function (req, res, next) {
     var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
     if (wlogger.logDate == currDate) {
@@ -35,7 +40,12 @@ exports.allAction = function (req, res, next) {
         next();
     }
 }
-
+/**
+ * @class
+ * @classdesc get property details.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.getproperty = function (req, res, next) {
     try {
         if (req.session) {
@@ -153,7 +163,38 @@ exports.getproperty = function (req, res, next) {
                             },
                             UserRole: function (callback) {
                                 callback(null, req.session.UserRole);
-                            }
+                            },
+                            OtherTemplates: function (callback) {
+                                var query = connection_ikon_cms.query('select * from (select * from content_template where ct_param_value in ("bitrate","otherimage","othervideo","otheraudio","app","utf 16", "Preview","Supporting","Main"))other', function (err, OtherTemplates) {
+                                    callback(err, OtherTemplates);
+                                });
+                            },
+                            Files: function (callback) {
+                                var query = 'select * from (SELECT cm_id FROM content_metadata where cm_id =? )meta ' +
+                                    'inner join(select * from content_files where cf_cm_id = ? and cf_original_processed = 1)files on(files.cf_cm_id = meta.cm_id) ' +
+                                    'inner join(select ct_group_id ,group_concat(ct_param) as ct_param,group_concat(ct_param_value) as ct_param_value ' +
+                                    'from content_template group by ct_group_id)template on(template.ct_group_id =files.cf_template_id )';
+                                connection_ikon_cms.query(query, [req.body.Id, req.body.Id], function (err, Files) {
+                                    callback(err, Files);
+                                });
+                            },
+                            ConfigData: function (callback) {
+                                callback(null, {
+                                    audio_preview_limit:config.audio_preview_limit,
+                                    audio_download_limit:config.audio_download_limit,
+                                    video_preview_limit:config.video_preview_limit,
+                                    video_download_limit:config.video_download_limit,
+                                    text_preview_limit:config.text_preview_limit,
+                                    text_download_limit:config.text_download_limit,
+                                    supporting_image_limit:config.supporting_image_limit,
+                                    thumb_limit:config.thumb_limit,
+                                    wallpaper_limit : config.wallpaper_limit,
+                                    game_limit : config.game_limit,
+                                    text_limit : config.text_limit,
+                                    audio_limit : config.audio_limit,
+                                    video_limit : config.video_limit,
+                                    log_path:config.log_path})
+                            },
                         }, function (err, results) {
                             if (err) {
                                 var error = {
@@ -214,7 +255,12 @@ exports.getproperty = function (req, res, next) {
         res.status(500).json(err.message);
     }
 }
-
+/**
+ * @class
+ * @classdesc add and update property.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.addeditproperty = function (req, res, next) {
     try {
         if (req.session) {
@@ -266,7 +312,7 @@ exports.addeditproperty = function (req, res, next) {
                                             }
                                             wlogger.info(info); // for information
                                             connection_ikon_cms.release();
-                                            res.send({ success: true, message: "Property updated successfully." });
+                                            res.send({ success: true, cm_id :  req.body.cm_id, message: "Property updated successfully." });
                                         }
                                     });
                                 }
@@ -326,7 +372,7 @@ exports.addeditproperty = function (req, res, next) {
                                         UserRole: function (callback) {
                                             callback(null, req.session.UserRole);
                                         }
-                                    }, function (err, results) {
+                                    }, function (err, results) { 
                                         if (err) {
                                             var error = {
                                                 userName: req.session.UserName,
@@ -346,7 +392,7 @@ exports.addeditproperty = function (req, res, next) {
                                             }
                                             wlogger.info(info); // for information
                                             connection_ikon_cms.release();
-                                            res.send({ success: true, message: "Property added successfully." });
+                                            res.send({ success: true, cm_id : results.AddProperty.cm_id, message: "Property added successfully." });
                                         }
                                     });
                                 }
@@ -403,7 +449,7 @@ exports.addeditproperty = function (req, res, next) {
                                                     message: JSON.stringify(err.message)
                                                 }
                                                 wlogger.error(error); // for error
-                                                callback(err, null);
+                                                callback(err, {'cm_id':cm_id});
                                             }
                                             else {
                                                 AddPropertyRights(callback, cm_r_group_id, cm_id);
@@ -548,7 +594,7 @@ exports.addeditproperty = function (req, res, next) {
                                             message: JSON.stringify(err.message)
                                         }
                                         wlogger.error(error); // for error
-                                        callback(err, null);
+                                        callback(err, {cm_id:cm_id});
                                     }
                                     else {
                                         var r_id = result[0].id != null ? (parseInt(result[0].id) + 1) : 1;
@@ -576,7 +622,7 @@ exports.addeditproperty = function (req, res, next) {
                                                     message: JSON.stringify(err.message)
                                                 }
                                                 wlogger.error(error); // for error
-                                                callback(err, null);
+                                                callback(err, {cm_id:cm_id});
                                             }
                                             else {
                                                 var query = connection_ikon_cms.query('SELECT MAX(cmd_id) AS id FROM multiselect_metadata_detail', function (err, result) {
@@ -588,7 +634,7 @@ exports.addeditproperty = function (req, res, next) {
                                                             message: JSON.stringify(err.message)
                                                         }
                                                         wlogger.error(error); // for error
-                                                        callback(err, null);
+                                                        callback(err, {cm_id:cm_id});
                                                     }
                                                     else {
                                                         var cmd_data = {
@@ -607,7 +653,7 @@ exports.addeditproperty = function (req, res, next) {
                                                                     message: JSON.stringify(err.message)
                                                                 }
                                                                 wlogger.error(error); // for error
-                                                                callback(err, null);
+                                                                callback(err, {cm_id:cm_id});
                                                             }
                                                             else {
                                                                 cnt = cnt + 1;
@@ -621,7 +667,7 @@ exports.addeditproperty = function (req, res, next) {
                                                                                 message: JSON.stringify(err.message)
                                                                             }
                                                                             wlogger.error(error); // for error
-                                                                            callback(err, null);
+                                                                            callback(err, {cm_id:cm_id});
                                                                         }
                                                                         else {
                                                                             var info = {
@@ -632,7 +678,7 @@ exports.addeditproperty = function (req, res, next) {
                                                                             }
                                                                             wlogger.info(info); // for information
                                                                             AdminLog.adminlog(connection_ikon_cms, req.body.Title + ' property ' + req.body.state == "addproperty" ? "added" : "updated" + ' successfully and PropertyId is ' + cm_id + ".", req.body.state == "addproperty" ? "Add" : "Update" + " Property", req.session.UserName, false);
-                                                                            callback(null, []);
+                                                                            callback(null, {cm_id:cm_id});
                                                                         }
                                                                     });
                                                                 }
@@ -659,7 +705,7 @@ exports.addeditproperty = function (req, res, next) {
                                         message: JSON.stringify(err.message)
                                     }
                                     wlogger.error(error); // for error
-                                    callback(err, null);
+                                    callback(err, {cm_id:cm_id});
                                 }
                                 else {
                                     var info = {
@@ -670,12 +716,11 @@ exports.addeditproperty = function (req, res, next) {
                                     }
                                     wlogger.info(info); // for information
                                     AdminLog.adminlog(connection_ikon_cms, req.body.Title + ' property ' + req.body.state == "addproperty" ? "added" : "updated" + ' successfully and PropertyId is ' + cm_id + ".", req.body.state == "addproperty" ? "Add" : "Update" + " Property", req.session.UserName, false);
-                                    callback(null, []);
+                                    callback(null, {'cm_id':cm_id});
                                 }
                             });
                         }
                     }
-
                 });
             }
             else {
@@ -711,7 +756,12 @@ exports.addeditproperty = function (req, res, next) {
         res.status(500).json(err.message);
     }
 }
-
+/**
+ * @class
+ * @classdesc block and unblock property.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.blockunblockproperty = function (req, res, next) {
     try {
         if (req.session) {

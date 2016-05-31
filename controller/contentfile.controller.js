@@ -135,7 +135,7 @@ exports.getcontentfile = function (req, res, next) {
                                         text_limit : config.text_limit,
                                         audio_limit : config.audio_limit,
                                         video_limit : config.video_limit,
-                                        log_path:config.log_path})
+                                        log_path: config.log_path})
                                 },
                                 BGSongType: function (callback) {
                                     var query = connection_ikon_cms.query('select * from catalogue_detail as cd ' +
@@ -199,6 +199,13 @@ exports.getcontentfile = function (req, res, next) {
     }
 }
 
+/**
+ * @class
+ * @classdesc get metadata details.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ * @param {function} next - callback function.
+ */
 exports.checkmetadata = function (req, res, next) {
     try {
         if (req.session) {
@@ -323,7 +330,13 @@ exports.checkmetadata = function (req, res, next) {
         res.status(500).json(err.message);
     }
 }
-
+/**
+ * @class
+ * @classdesc upload thumbnail file.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ * @param {function} next - callback function.
+ */
 exports.uploadthumb = function (req, res, next) {
     try {
         if (req.session) {
@@ -509,6 +522,13 @@ exports.uploadthumb = function (req, res, next) {
     }
 }
 
+/**
+ * @class
+ * @classdesc upload imagery content type file.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ * @param {function} next - callback function.
+ */
 exports.uploadimagery = function (req, res, next) {
     try {
         if (req.session) {
@@ -1202,7 +1222,13 @@ exports.uploadimagery = function (req, res, next) {
         res.status(500).json(err.message);
     }
 }
-
+/**
+ * @class
+ * @classdesc upload video content type file.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ * @param {function} next - callback function.
+ */
 exports.uploadvideo = function (req, res, next) {
     try {
         if (req.session) {
@@ -1903,7 +1929,13 @@ exports.uploadvideo = function (req, res, next) {
         res.status(500).json(err.message);
     }
 }
-
+/**
+ * @class
+ * @classdesc upload audio content type file.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ * @param {function} next - callback function.
+ */
 exports.uploadaudio = function (req, res, next) {
     try {
         if (req.session) {
@@ -2205,7 +2237,13 @@ exports.uploadaudio = function (req, res, next) {
         res.status(500).json(err.message);
     }
 }
-
+/**
+ * @class
+ * @classdesc upload apps & games content type file.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ * @param {function} next - callback function.
+ */
 exports.uploadappsgame = function (req, res, next) {
     try {
         if (req.session) {
@@ -2601,7 +2639,13 @@ exports.uploadappsgame = function (req, res, next) {
         res.status(500).json(err.message);
     }
 }
-
+/**
+ * @class
+ * @classdesc upload text content type files.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ * @param {function} next - callback function.
+ */
 exports.uploadtext = function (req, res, next) {
     try {
         if (req.session) {
@@ -2968,7 +3012,13 @@ exports.uploadtext = function (req, res, next) {
         res.status(500).json(err.message);
     }
 }
-
+/**
+ * @class
+ * @classdesc upload imagery/audio/video content type files as supporting and preview.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ * @param {function} next - callback function.
+ */
 exports.uploadotherfiles = function (req, res, next) {
     try {
         if (req.session) {
@@ -2989,7 +3039,6 @@ exports.uploadotherfiles = function (req, res, next) {
 
                         var filenamedata = (fields.type != 'text')? (fields.cm_id + '_' + fields.type + preview + '_' + Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase() : (fields.cm_id + '_' + fields.ct_param_value + '_' + Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase();
                         var save_path = (fields.type == 'image' ? config.site_wallpaper_path : (fields.type == 'audio' ? config.site_audio_path :(fields.type == 'video' ? config.site_video_path:config.site_text_path ))) + filenamedata;
-
                         var new_path = config.site_base_path + save_path;
 
                         fs.readFile(old_path, function (err, data) {
@@ -3088,7 +3137,7 @@ exports.uploadotherfiles = function (req, res, next) {
                                                                 cf_modified_by: req.session.UserName,
                                                                 cf_crud_isactive: 1
                                                             };
-                                                            //console.log(file)
+                                                         //   console.log(file)
                                                             var query = connection_ikon_cms.query('INSERT INTO content_files SET ?', file, function (err, result) {
                                                                 //console.log(query.sql);
                                                                 if (err) {
@@ -3185,6 +3234,13 @@ exports.uploadotherfiles = function (req, res, next) {
     }
 }
 
+/**
+ * @class
+ * @classdesc replave existing file of any content type.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ * @param {function} next - callback function.
+ */
 exports.replaceFile = function (req, res, next) {
     try {
         if (req.session) {
@@ -3352,6 +3408,13 @@ exports.replaceFile = function (req, res, next) {
         res.status(500).json(err.message); }
 }
 
+/**
+ * @class
+ * @classdesc replace thumbnail file.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ * @param {function} next - callback function.
+ */
 exports.replaceThumbFile = function (req, res, next) {
     try {
         if (req.session) {
@@ -3574,7 +3637,6 @@ function addUpdateAudioFile(connection_ikon_cms, save_path, fields, templateID, 
         }
     })
 }
-
 
 /**
  * Get file inforamtion like width,height,bit_rate,duration, size  of given filepath

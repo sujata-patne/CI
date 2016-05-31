@@ -23,6 +23,12 @@ function Pad(padString, value, length) {
     return str;
 }
 
+/**
+ * @class
+ * @classdesc create a log file if not exist.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.allAction = function (req, res, next) {
     var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
     if (wlogger.logDate == currDate) {
@@ -117,6 +123,13 @@ function CronActivity() {
     }
 }
 
+/**
+ * @class
+ * @classdesc bulk upload of metadata details.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ * @param {function} next - callback function.
+ */
 exports.bulkupload = function (req, res, next) {
     try {
         res.send({ success: false, message: 'upload process in progress' });

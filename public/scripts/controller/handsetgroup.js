@@ -6,7 +6,8 @@ myApp.controller('handsetGroupCtrl', function ($scope, $http, ngProgress, $state
     ngProgress.color('yellowgreen');
     ngProgress.height('3px');
     $scope.CurrentPage = $state.current.name;
-
+//ngProgress.start();
+    $scope.uploading = true;
     function FilterData() {
         var query = "";
         if ($scope.Selectedbrand) {
@@ -76,6 +77,8 @@ myApp.controller('handsetGroupCtrl', function ($scope, $http, ngProgress, $state
     }
 
     HandSetGroup.getHandSetGroup({ state: $scope.CurrentPage }, function (handset) {
+        // ngProgress.complete();
+        $scope.uploading = false;
         $scope.PageAllData = handset;
         BindPageData(handset);
         $scope.loading = true;

@@ -15,7 +15,12 @@ function Pad(padString, value, length) {
 
     return str;
 }
-
+/**
+ * @class
+ * @classdesc create a log file if not exist.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.allAction = function (req, res, next) {
     var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
     if (wlogger.logDate == currDate) {
@@ -32,7 +37,12 @@ exports.allAction = function (req, res, next) {
         next();
     }
 }
-
+/**
+ * @class
+ * @classdesc get user details.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.getuserdata = function (req, res, next) {
     //console.log('process ID : '+process.pid)
     try {
@@ -124,7 +134,12 @@ exports.getuserdata = function (req, res, next) {
         res.status(500).json(err.message);
     }
 }
-
+/**
+ * @class
+ * @classdesc add and update user data.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.addedituser = function (req, res, next) {
     //console.log('process ID : '+process.pid)
 
@@ -602,7 +617,12 @@ exports.addedituser = function (req, res, next) {
     }
 }
 
-
+/**
+ * @class
+ * @classdesc block and unblock user.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.blockunblockuser = function (req, res, next) {
     try {
         if (req.session) {

@@ -10,7 +10,8 @@ myApp.controller('usersCtrl', function ($scope, $http, ngProgress, $timeout, Use
     $scope.OldVendors = [];
     $scope.currentPage = 0;
     $scope.pageSize = 50;
-
+//  ngProgress.start();
+    $scope.uploading = true;
 
 
     function GetVendors(UserId, Vendors) {
@@ -62,6 +63,8 @@ myApp.controller('usersCtrl', function ($scope, $http, ngProgress, $timeout, Use
     }
 
     Users.getUsers({ Id: $stateParams.id, state: $scope.CurrentPage }, function (users) {
+        //  ngProgress.complete();
+        $scope.uploading = false;
         if (users.RoleUser === "Super Admin") {
             $scope.UserRole = angular.copy(users.UserRole);
             $scope.Vendor = angular.copy(users.VendorList);

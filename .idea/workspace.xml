@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="31eb2154-d91d-4476-9085-3dc72472b6ef" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/CI.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Models/AdminLog.js" afterPath="$PROJECT_DIR$/Models/AdminLog.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Models/contentCatalogue.model.js" afterPath="$PROJECT_DIR$/Models/contentCatalogue.model.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Models/contentType.js" afterPath="$PROJECT_DIR$/Models/contentType.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Models/contentfile.model.js" afterPath="$PROJECT_DIR$/Models/contentfile.model.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Models/country.model.js" afterPath="$PROJECT_DIR$/Models/country.model.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/adminlog.controller.js" afterPath="$PROJECT_DIR$/controller/adminlog.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/bulkupload.controller.js" afterPath="$PROJECT_DIR$/controller/bulkupload.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/contentcatalog.controller.js" afterPath="$PROJECT_DIR$/controller/contentcatalog.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/contentfile.controller.js" afterPath="$PROJECT_DIR$/controller/contentfile.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/dailyactivity.controller.js" afterPath="$PROJECT_DIR$/controller/dailyactivity.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/excel.controller.js" afterPath="$PROJECT_DIR$/controller/excel.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/handsetgroup.controller.js" afterPath="$PROJECT_DIR$/controller/handsetgroup.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/index.controller.js" afterPath="$PROJECT_DIR$/controller/index.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/masterlist.controller.js" afterPath="$PROJECT_DIR$/controller/masterlist.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/metadata.controller.js" afterPath="$PROJECT_DIR$/controller/metadata.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/property.controller.js" afterPath="$PROJECT_DIR$/controller/property.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/user.controller.js" afterPath="$PROJECT_DIR$/controller/user.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/vendor.controller.js" afterPath="$PROJECT_DIR$/controller/vendor.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/css/custom.css" afterPath="$PROJECT_DIR$/public/assets/css/custom.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/partials/content-catalog-listing.html" afterPath="$PROJECT_DIR$/public/partials/content-catalog-listing.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/partials/content-catalog.html" afterPath="$PROJECT_DIR$/public/partials/content-catalog.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/partials/edituser.html" afterPath="$PROJECT_DIR$/public/partials/edituser.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/partials/handsetgroup.html" afterPath="$PROJECT_DIR$/public/partials/handsetgroup.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/partials/master-list.html" afterPath="$PROJECT_DIR$/public/partials/master-list.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/partials/pc-apps-games.html" afterPath="$PROJECT_DIR$/public/partials/pc-apps-games.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/partials/property.html" afterPath="$PROJECT_DIR$/public/partials/property.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/partials/submitmeta.html" afterPath="$PROJECT_DIR$/public/partials/submitmeta.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/partials/vendor.html" afterPath="$PROJECT_DIR$/public/partials/vendor.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/partials/views/loading.html" afterPath="$PROJECT_DIR$/public/partials/views/loading.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scripts/controller/adminlog.js" afterPath="$PROJECT_DIR$/public/scripts/controller/adminlog.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scripts/controller/contentcatalog.js" afterPath="$PROJECT_DIR$/public/scripts/controller/contentcatalog.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scripts/controller/contentfiles.js" afterPath="$PROJECT_DIR$/public/scripts/controller/contentfiles.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scripts/controller/contentlisting.js" afterPath="$PROJECT_DIR$/public/scripts/controller/contentlisting.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scripts/controller/handsetgroup.js" afterPath="$PROJECT_DIR$/public/scripts/controller/handsetgroup.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scripts/controller/masterlist.js" afterPath="$PROJECT_DIR$/public/scripts/controller/masterlist.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scripts/controller/metadata.js" afterPath="$PROJECT_DIR$/public/scripts/controller/metadata.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scripts/controller/property.js" afterPath="$PROJECT_DIR$/public/scripts/controller/property.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scripts/controller/submitmeta.js" afterPath="$PROJECT_DIR$/public/scripts/controller/submitmeta.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scripts/controller/users.js" afterPath="$PROJECT_DIR$/public/scripts/controller/users.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scripts/controller/vendor.js" afterPath="$PROJECT_DIR$/public/scripts/controller/vendor.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scripts/directives/common.js" afterPath="$PROJECT_DIR$/public/scripts/directives/common.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/index.ejs" afterPath="$PROJECT_DIR$/views/index.ejs" />
+    </list>
+    <ignored path="CI.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="CI" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER">
+    <package-json value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="31eb2154-d91d-4476-9085-3dc72472b6ef" name="Default" comment="" />
+      <created>1464686334512</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1464686334512</updated>
+      <workItem from="1464686337447" duration="38000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="38000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+</project>

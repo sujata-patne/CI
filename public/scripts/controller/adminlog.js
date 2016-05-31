@@ -1,7 +1,6 @@
 
 myApp.controller('adminLogCtrl', function ($scope, $state, $http, $stateParams, ngProgress, $window, Logs, _, Excel) {
-    ngProgress.color('yellowgreen');
-    ngProgress.height('3px');
+    
     $scope.CurrentPage = $state.current.name;
     $('.removeSubactiveClass').removeClass('active');
     $('.removeActiveClass').removeClass('active');
@@ -10,6 +9,9 @@ myApp.controller('adminLogCtrl', function ($scope, $state, $http, $stateParams, 
     $scope.adminlogpageSize = 50;
     $scope.currentPage = 0;
     $scope.pageSize = 50;
+    //ngProgress.start();
+    $scope.uploading = true;
+
     function GetAdminLogs(AdminLogs) {
         _.each(AdminLogs, function (log) {
             log.ald_created_on = getDate(log.ald_created_on) + " " + getTime(log.ald_created_on);
@@ -19,6 +21,8 @@ myApp.controller('adminLogCtrl', function ($scope, $state, $http, $stateParams, 
     }
 
     Logs.getAdminLog({ state: $scope.CurrentPage }, function (logs) {
+      //  ngProgress.complete();
+        $scope.uploading = false;
         logs.UserRole === "Super Admin" ? "" : location.href = "/";
         $scope.AdminLogs = GetAdminLogs(logs.AdminLogs);
         $scope.loading = true;

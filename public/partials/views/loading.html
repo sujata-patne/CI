@@ -1,7 +1,7 @@
-<div class="col-md-12">
-    <center>
-        <span ng-show='$root.requestLoading' class='request-loading center-block' >
-            <i class='fa fa-spinner fa-spin'></i>
-        </span>
-    </center>
+<div id="loader" data-ng-show="uploading">
+    <div class="modal-dialog" style="max-width: 400px">
+        <div class="modal-content">
+            <div class="modal-body"><h6 class="modal-title text-center"><i class="fa fa-3x fa-spinner fa-spin"></i>&nbsp;&nbsp;Loading.... Please Wait!</h6></div>
+        </div>
+    </div>
 </div>

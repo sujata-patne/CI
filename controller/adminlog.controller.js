@@ -12,7 +12,12 @@ function Pad(padString, value, length) {
 
     return str;
 }
-
+/**
+ * @class
+ * @classdesc create a log file if not exist.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.allAction = function (req, res, next) {
     var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
     if (wlogger.logDate == currDate) {
@@ -29,7 +34,13 @@ exports.allAction = function (req, res, next) {
         next();
     }
 }
-
+/**
+ * @class
+ * @classdesc get log of user actions.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ * @param {function} next - callback function.
+ */
 exports.getadminlog = function (req, res, next) {
     try {
         if (req.session) {

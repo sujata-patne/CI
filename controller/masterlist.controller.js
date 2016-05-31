@@ -16,6 +16,12 @@ function Pad(padString, value, length) {
 
     return str;
 }
+/**
+ * @class
+ * @classdesc create a log file if not exist.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 
 exports.allAction = function (req, res, next) {
     var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
@@ -33,6 +39,12 @@ exports.allAction = function (req, res, next) {
         next();
     }
 }
+/**
+ * @class
+ * @classdesc get master list.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 
 exports.getmasterlist = function (req, res, next) {
     try {
@@ -151,6 +163,12 @@ exports.getmasterlist = function (req, res, next) {
         res.status(500).json(err.message);
     }
 }
+/**
+ * @class
+ * @classdesc add and update master list data.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 
 exports.addeditmasterlist = function (req, res, next) {
     try {
@@ -633,6 +651,12 @@ exports.addeditmasterlist = function (req, res, next) {
         res.status(500).json(err.message);
     }
 }
+/**
+ * @class
+ * @classdesc delete master list data.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 
 exports.deletemasterlist = function (req, res, next) {
     try {

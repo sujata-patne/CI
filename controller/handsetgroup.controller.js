@@ -19,7 +19,12 @@ function Pad(padString, value, length) {
 
     return str;
 }
-
+/**
+ * @class
+ * @classdesc create a log file if not exist.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.allAction = function (req, res, next) {
     var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
     if (wlogger.logDate == currDate) {
@@ -36,7 +41,12 @@ exports.allAction = function (req, res, next) {
         next();
     }
 }
-
+/**
+ * @class
+ * @classdesc get handset group details.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.gethandsetgroup = function (req, res, next) {
     try {
         if (req.session) {
@@ -123,7 +133,12 @@ exports.gethandsetgroup = function (req, res, next) {
         res.status(500).json(err.message);
     }
 }
-
+/**
+ * @class
+ * @classdesc add and update handset details.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.addedithandset = function (req, res, next) {
     try {
         if (req.session) {

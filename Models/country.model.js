@@ -1,6 +1,13 @@
 /**
  * Created by sujata.patne on 29-12-2015.
  */
+/**
+ * @class
+ * @classdesc get country rights details.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
+
 exports.getCountryRights = function( dbConnection, callback ) {
     var query = dbConnection.query('select distinct cd_id,cd_name from (select CASE  WHEN groupid is null THEN icn_cnt_name ELSE country_name  END AS country_name, ' +
         'CASE  WHEN groupid is null THEN icn_cnt ELSE countryid  END AS country_id,groupid from (SELECT cd_id as icn_cnt,cd_name as icn_cnt_name ,cd_cm_id as icn_cd_cm_id FROM catalogue_detail)cd ' +
@@ -10,6 +17,13 @@ exports.getCountryRights = function( dbConnection, callback ) {
         callback(err, CountryRights);
     });
 }
+/**
+ * @class
+ * @classdesc get country group details.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
+
 exports.getCountryGroups = function( dbConnection, callback ) {
     dbConnection.query('select cm_group.cm_id,cm_group.cm_name, g_cd.cd_id as cd_id, cd_group.cd_name as cd_name ' +
         'from catalogue_detail as cd ' +
@@ -21,6 +35,13 @@ exports.getCountryGroups = function( dbConnection, callback ) {
         callback(err, IconGroupCountry);
     });
 }
+/**
+ * @class
+ * @classdesc get list of all iCON country list.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
+
 exports.getIconCountry = function( dbConnection, callback ) {
     dbConnection.query('select case when groupname is null then icc_country_name ELSE cd.cd_name END AS cd_name, '+
             'case when groupname is null then icc_country_id ELSE cd.cd_id END AS cd_id, '+

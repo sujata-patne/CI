@@ -1,3 +1,10 @@
+/**
+ * @class
+ * @classdesc insert log details
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
+
 exports.adminlog = function (dbConnection, Message, Action, UserName, Isrelease) {
     var query = dbConnection.query('SELECT MAX(ald_id) AS id FROM icn_admin_log_detail', function (err, result) {
         if (err) {

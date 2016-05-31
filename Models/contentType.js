@@ -1,3 +1,9 @@
+/**
+ * @class
+ * @classdesc get parent content type list.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 
 exports.getAllContentTypes = function( dbConnection, callback ) {
 	dbConnection.query( "SELECT "+
@@ -14,8 +20,13 @@ exports.getAllContentTypes = function( dbConnection, callback ) {
 			callback( err, contentTypes );
 		}
 	);
-}						
-
+}
+/**
+ * @class
+ * @classdesc get all templates list for imagery.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 
 exports.getAllTemplates = function( dbConnection, callback ) {
 	dbConnection.query( "SELECT "+
@@ -30,7 +41,13 @@ exports.getAllTemplates = function( dbConnection, callback ) {
 			callback( err, contentTemplates );
 		}
 	);
-}	
+}
+/**
+ * @class
+ * @classdesc get all templates list for supporting and preview files.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 
 exports.getOtherTemplates = function( dbConnection, callback ) {
 	dbConnection.query( "SELECT " +
@@ -43,7 +60,13 @@ exports.getOtherTemplates = function( dbConnection, callback ) {
 			callback( err, otherTemplates );
 		}
 	);
-}	
+}
+/**
+ * @class
+ * @classdesc get handeset devide group details.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 
 exports.getAllHandsetDeviceGroups = function( dbConnection, callback ) {
 	dbConnection.query( "SELECT "+

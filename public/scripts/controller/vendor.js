@@ -15,6 +15,8 @@ myApp.controller('vendorCtrl', function ($scope, $state, $http, $stateParams, ng
     $scope.pageSize = 50;
     $scope.open1 = false;
     $scope.open2 = false;
+    //  ngProgress.start();
+    $scope.uploading = true;
     $scope.openDatepicker = function (evt) {
         $scope.open2 = false;
         evt.preventDefault();
@@ -129,6 +131,8 @@ myApp.controller('vendorCtrl', function ($scope, $state, $http, $stateParams, ng
     }
 
     Vendors.GetVendors({ Id: $stateParams.id, state: $scope.CurrentPage }, function (vendordata) {
+        //  ngProgress.complete();
+        $scope.uploading = false;
         vendordata.UserRole === "Content Manager" ? location.href = "/" : "";
         vendordata.UserRole === "Super Admin" && $scope.CurrentPage == "addvendor" ? location.href = "/" : "";
 

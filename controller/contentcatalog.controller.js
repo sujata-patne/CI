@@ -39,6 +39,13 @@ function Pad(padString, value, length) {
 
     return str;
 }
+
+/**
+ * @class
+ * @classdesc create a log file if not exist.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.allAction = function (req, res, next) {
     var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
     if (wlogger.logDate == currDate) {
@@ -55,7 +62,13 @@ exports.allAction = function (req, res, next) {
         next();
     }
 }
-
+/**
+ * @class
+ * @classdesc get content catalog details by id.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ * @param {function} next - callback function.
+ */
 exports.getcontentcatalog = function (req, res, next) {
     try {
         if (req.session) {
@@ -207,7 +220,13 @@ exports.getcontentcatalog = function (req, res, next) {
         res.status(500).json(err.message);
     }
 }
-
+/**
+ * @class
+ * @classdesc update content metadata state.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ * @param {function} next - callback function.
+ */
 exports.updatestate = function (req, res, next) {
     try {
         if (req.session) {
@@ -275,7 +294,13 @@ exports.updatestate = function (req, res, next) {
         res.status(500).json(err.message);
     }
 }
-
+/**
+ * @class
+ * @classdesc get content listing for metadata.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ * @param {function} next - callback function.
+ */
 exports.getcontentlisting = function (req, res, next) {
     try {
         if (req.session) {
@@ -645,7 +670,13 @@ exports.getcontentlisting = function (req, res, next) {
         res.status(500).json(err.message);
     }
 }
-
+/**
+ * @class
+ * @classdesc add and update Promocode.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ * @param {function} next - callback function.
+ */
 exports.addUpdatePromocode = function(req, res, next) {
     try {
         if (req.session) {
@@ -757,7 +788,13 @@ exports.addUpdatePromocode = function(req, res, next) {
         res.status(500).json(err.message);
     }
 }
-
+/**
+ * @class
+ * @classdesc add and update Vcode.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ * @param {function} next - callback function.
+ */
 exports.addUpdateVcode = function(req, res, next) {
     try {
         if (req.session) {
@@ -869,7 +906,13 @@ exports.addUpdateVcode = function(req, res, next) {
         res.status(500).json(err.message);
     }
 }
-
+/**
+ * @class
+ * @classdesc import and add/update vcode from excel sheet.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ * @param {function} next - callback function.
+ */
 exports.importVcode = function(req, res, next) {
     try {
         if (req.session) {
@@ -1033,7 +1076,13 @@ exports.importVcode = function(req, res, next) {
         res.status(500).json(err.message);
     }
 }
-
+/**
+ * @class
+ * @classdesc import and add/update promocode from excel sheet.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ * @param {function} next - callback function.
+ */
 exports.importPromocode = function(req, res, next) {
     try {
         if (req.session) {
@@ -1199,7 +1248,13 @@ exports.importPromocode = function(req, res, next) {
         res.status(500).json(err.message);
     }
 }
-
+/**
+ * add and update operator wise vcode and promocode
+ * @param {String} file_path
+ * @param {String} file_type
+ * @param {Array} session
+ * @return {Function} callback
+ */
 function addEditVcodeOperator(connection_ikon_cms, obj, session, callback){
     //console.log(obj)
     if(obj.hasOwnProperty('vcode')){
@@ -1285,7 +1340,13 @@ function addEditVcodeOperator(connection_ikon_cms, obj, session, callback){
         }
     });
 }
-
+/**
+ * @class
+ * @classdesc get personalized data for vcode and promocode.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ * @param {function} next - callback function.
+ */
 exports.getPersonalizedDataForVcode = function (req, res, next) {
     try {
         if (req.session) {

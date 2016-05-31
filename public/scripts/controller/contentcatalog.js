@@ -16,6 +16,8 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
     $scope.ShowImportPopUp = false;
     $scope.ShowVcodeAddUpdatePopUp = false;
     $scope.hidevcodepromsubmit = $scope.ShowExportPopUpSubmit= false;
+    //ngProgress.start();
+    $scope.uploading = true;
     // get status & color & edit
     function getStatus(UserRole, MetadataExpirydate, VendorExpirydate, PropertyExpirydate, Meta_active, Vendor_active, Property_active, cm_state) {
         var data = { color: "chartreuse", cm_state: cm_state, IsEdit: true, status: 'Active', IsBlock: false };
@@ -62,6 +64,8 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
     }
 
     ContentCatalog.getContentCatalog({ Id: $scope.PropertyId, state: $scope.CurrentPage }, function (content) {
+        //ngProgress.complete();
+        $scope.uploading = false;
         $scope.AllMetadata = content.ContentMetadata;
         _.each($scope.AllMetadata, function (meta) {
             var data = getStatus(content.UserRole, meta.cm_expires_on, meta.vd_end_on, meta.propertyexpirydate, meta.cm_state, meta.vd_is_active, meta.propertyactive, meta.cm_state)
@@ -788,7 +792,7 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             })
         }
     }
-   $scope.ShowPopupForVcode = function (cm_id) {
+    $scope.ShowPopupForVcode = function (cm_id) {
         $scope.MetadataId = cm_id;
 
         $scope.SelectedVcode = '';

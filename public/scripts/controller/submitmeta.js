@@ -8,7 +8,8 @@ myApp.controller('submitmetaCtrl', function ($scope, $state, $http, $stateParams
     ngProgress.height('3px');
     $scope.MetaDataId;
     $scope.CurrentPage = $state.current.name;
-
+    ngProgress.start();
+    $scope.uploading = true;
     $scope.MetaId;
     if ($stateParams.status.indexOf("add") > -1 || $stateParams.status.indexOf("edit") > -1 || $stateParams.status.indexOf("error") > -1) {
         if ($stateParams.mode == "a" || $stateParams.mode == "e") {
@@ -40,9 +41,9 @@ myApp.controller('submitmetaCtrl', function ($scope, $state, $http, $stateParams
         $scope.errorvisible = true;
     }
 
-
-
     Metadatas.SubmitMetadata({ Id: $scope.MetaId, state: $scope.CurrentPage, contenttype: $stateParams.contenttype }, function (metadata) {
+        ngProgress.complete();
+        $scope.uploading = false;
         metadata.MasterList.length > 0 ? "" : location.href = "/";
         if (metadata.Languages.length > 0) {
             $scope.LanguagesMetadata = metadata.Languages;

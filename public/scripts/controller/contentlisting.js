@@ -11,7 +11,7 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
     $scope.base_url = $rootScope.base_url;
     $scope.replacefile = '';
     $scope.success = "Metadata files uploaded successfully.";
-    $scope.uploading = false;
+
     $scope.currentPage = 0;
     $scope.pageSize = 3;
     $scope.FileUploadVisible = false;
@@ -28,7 +28,13 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
     $scope.Preview = 3;
     $scope.Thumbuggestion = "Filename must be ContentId_thumb_Width_Height.extension like [2345_thumb_240_360.gif].";
 
+    //ngProgress.start();
+    $scope.uploading = true;
+
     ContentListing.getContentListing({ Id: $stateParams.id, isProperty:$stateParams.isProperty }, function (content) {
+       // ngProgress.complete();
+        $scope.uploading = false;
+        
         content.ContentMetadata.length > 0 ? "" : location.href = "/";
         $scope.UserRole == "Super Admin"
         $scope.FileUploadVisible = $scope.UserRole == "Super Admin" ? false : $scope.FileUploadVisible;

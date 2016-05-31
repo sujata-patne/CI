@@ -580,16 +580,15 @@
         <!-- Deleted Wallpaper Listing ends -->
         <!-- Comment Pop-Up Starts-->
         <div id="Export" data-ng-show="ShowExportPopUp">
-
             <div class="modal-dialog" style="max-width: 400px">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-ng-click="CloseImportExport()" aria-label="Close"><span aria-hidden="true">x</span></button>
+                        <!--<button type="button" class="close" data-ng-click="CloseImportExport()" aria-label="Close"><span aria-hidden="true">x</span></button>-->
                         <h4 class="modal-title">Download Name List</h4>
                     </div>
                     <div class="modal-body">
-                        <img class="col-sm-offset-6" data-ng-hide="loader" src="assets/img/loaders/ajax-loader.gif" >
-
+                        <!--<img class="col-sm-offset-6" data-ng-hide="loader" src="assets/img/loaders/ajax-loader.gif" >-->
+                        <div loading-spinner></div>
                         <div class="row">
                             <div class="col-sm-5"><label for="export" class="control-label">Download Type:</label> </div>
                             <div class="col-sm-7">
@@ -622,12 +621,12 @@
             <div class="modal-dialog" style="max-width: 400px">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-ng-click="CloseImportExport()" aria-label="Close"><span aria-hidden="true">x</span></button>
+                        <!--<button type="button" class="close" data-ng-click="CloseImportExport()" aria-label="Close"><span aria-hidden="true">x</span></button>-->
                         <h4 class="modal-title">Upload Vcode for Name List</h4>
                     </div>
                     <div class="modal-body">
-                        <img class="col-sm-offset-6" data-ng-hide="loader" src="assets/img/loaders/ajax-loader.gif" >
-
+                        <!--<img class="col-sm-offset-6" data-ng-hide="loader" src="assets/img/loaders/ajax-loader.gif" >-->
+                        <div loading-spinner></div>
                         <div class="row">
                             <div class="col-sm-5"><label for="export" class="control-label">Download Type:</label> </div>
                             <div class="col-sm-7">
@@ -669,11 +668,12 @@
                 <div class="modal-dialog" style="max-width: 400px">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-ng-click="CloseImportExport()" aria-label="Close"><span aria-hidden="true">x</span></button>
+                            <!--<button type="button" class="close" data-ng-click="CloseImportExport()" aria-label="Close"><span aria-hidden="true">x</span></button>-->
                             <h4 class="modal-title">Update Name List</h4>
                         </div>
                         <div class="modal-body">
-                            <img class="col-sm-offset-6" data-ng-hide="loader" src="assets/img/loaders/ajax-loader.gif" >
+                            <div loading-spinner></div>
+                            <!--<img class="col-sm-offset-6" data-ng-hide="loader" src="assets/img/loaders/ajax-loader.gif" >-->
                             <div class="row">
                                 <div class="col-sm-4"><label for="export" class="control-label"><span class="asterisk">*</span>&nbsp;Operator:</label></div>
                                 <div class="col-sm-8">

@@ -3,12 +3,11 @@
         <div class="content-container">
             <div class="content-header">
                 <h2 class="content-header-title">{{PageTitle}} Property</h2>
-
+                <div loading-spinner></div>
             </div>
             <div class="portlet">
                 <div class="portlet-header">
                     <h3><i class="fa fa-tasks"></i>Field marked with <span class="asterisk">*</span> are Mandatory</h3>
-                    <div loading-spinner></div>
                 </div>
                 <!-- /.portlet-header -->
                 <div class="portlet-content">
@@ -57,6 +56,15 @@
                                                     <span data-ng-show="propertyForm.releaseyear.$error.required">Please enter Release Date.</span>
                                                     <!-- <span data-ng-show="propertyForm.releaseyear.$error.maxlength">Maximum 4 characters allowed!</span> -->
                                                 </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="supporting" class="col-sm-12">Preview File</label>
+                                            <div class="col-sm-12">
+                                                <input type="file" data-ngf-select class="form-control" data-ng-model="commonfile" id="commonfile" data-ng-change="commonfileuploader(this.files)" multiple />
+                                            </div>
+                                            <div class="col-sm-12"  style="color: red;">
+                                                Upload max. 3 image (.jpg, .gif, .png), 1 video (.mp4) & 1 audio (.mp3) files.
                                             </div>
                                         </div>
                                     </div>
@@ -156,7 +164,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-12">
-                                    <div class="col-sm-offset-5 col-sm-7">
+                                    <div class="col-sm-offset-5 col-sm-7" data-ng-hide="uploading">
                                         <input type="submit" data-ng-hide="IsEditPermission" title="Submit" class="btn btn-primary btn-w-md" value="Submit" />
                                         <input type="reset" data-ng-hide="IsDisable" title="Reset" data-ng-click="resetform()" value="Reset" class="btn btn-default btn-w-md" />
                                         <a href="#property-list">

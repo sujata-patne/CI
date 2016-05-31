@@ -82,7 +82,12 @@ function GetContentType(state) {
     }
     return { contenttype: contenttype, contenttype1: contenttype1 };
 }
-
+/**
+ * @class
+ * @classdesc create a log file if not exist.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.allAction = function (req, res, next) {
     var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
     if (wlogger.logDate == currDate) {
@@ -99,7 +104,12 @@ exports.allAction = function (req, res, next) {
         next();
     }
 }
-
+/**
+ * @class
+ * @classdesc get metadata detials.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.getmetadata = function (req, res, next) {
     try {
         if (req.session) {
@@ -390,7 +400,12 @@ exports.getmetadata = function (req, res, next) {
         wlogger.error(error); // for error        res.status(500).json(err.message);
     }
 }
-
+/**
+ * @class
+ * @classdesc add and update metadata details.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.addeditmetadata = function (req, res, next) {
     try {
         if (req.session) {
@@ -2073,7 +2088,12 @@ exports.addeditmetadata = function (req, res, next) {
         res.status(500).json(err.message);
     }
 }
-
+/**
+ * @class
+ * @classdesc get metadata detials for updating existing details.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.submitmeta = function (req, res, next) {
     try {
         if (req.session) {

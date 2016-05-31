@@ -17,7 +17,12 @@ function Pad(padString, value, length) {
 
     return str;
 }
-
+/**
+ * @class
+ * @classdesc create a log file if not exist.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.allAction = function (req, res, next) {
     var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
     if (wlogger.logDate == currDate) {
@@ -34,7 +39,12 @@ exports.allAction = function (req, res, next) {
         next();
     }
 }
-
+/**
+ * @class
+ * @classdesc download/export excel file for vcode.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.exportVcode = function (req, res, next) {
     try {
         if (req.session) {
@@ -125,7 +135,12 @@ exports.exportVcode = function (req, res, next) {
         res.status(500).json(err.message);
     }
 }
-
+/**
+ * @class
+ * @classdesc download/export excel file for content metadata.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.exportexcel = function (req, res, next) {
     try {
         if (req.session) {
@@ -175,7 +190,12 @@ exports.exportexcel = function (req, res, next) {
         res.status(500).json(err.message);
     }
 }
-
+/**
+ * @class
+ * @classdesc download/export pdf file containing Content Ingestion's latest version document .
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.pdf = function (req, res) {
     var url = "public/help/help.pdf";
     res.download(url);

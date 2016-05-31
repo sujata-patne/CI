@@ -780,7 +780,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                         toastr.error($scope.supportingfileerrormessage);
                     }
                 }
-                else if (audiocount != 0) {
+                if (audiocount != 0) {
                     if (!((audio_download_limit - otheraudio.length - audiocount) == 0)) {
                         flag = false;
                         $scope.supportingfileerror = true;
@@ -799,7 +799,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                         toastr.error($scope.supportingfileerrormessage);
                     }
                 }
-                else {
+                if (videocount != 0) {
                     if (!((video_download_limit - othervideos.length - videocount) == 0)) {
                         flag = false;
                         $scope.supportingfileerror = true;
@@ -818,7 +818,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                         toastr.error($scope.supportingfileerrormessage);
                     }
                 }
-                console.log($scope.supportfile)
+                //console.log($scope.supportfile)
 
                 if (flag) {
                     _.each($scope.supportfile, function (val) {
@@ -845,16 +845,15 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                         }
                     })
                 }
-                console.log($scope.SupportingFiles)
-
+               // console.log($scope.SupportingFiles)
             }
         }
     }
 
     $scope.commonfileuploader = function (files) {
         var supporting_image_limit = $scope.ConfigData.supporting_image_limit;
-        var video_download_limit = $scope.ConfigData.video_download_limit;
-        var audio_download_limit = $scope.ConfigData.audio_download_limit;
+        var video_preview_limit = $scope.ConfigData.video_preview_limit;
+        var audio_preview_limit = $scope.ConfigData.audio_preview_limit;
         $scope.commonfileerror = false;
         $scope.CommonFiles = [];
         if ($scope.commonfile) {
@@ -907,39 +906,39 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                         toastr.error($scope.commonfileerrormessage);
                     }
                 }
-                else if (audiocount != 0) {
-                    if (!((audio_download_limit - otheraudio.length - audiocount) == 0)) {
+                if (audiocount != 0) {
+                    if (!((audio_preview_limit - otheraudio.length - audiocount) == 0)) {
                         flag = false;
                         $scope.commonfileerror = true;
-                        if (otheraudio.length >= audio_download_limit) {
+                        if (otheraudio.length >= audio_preview_limit) {
                             $scope.commonfileerrormessage = otheraudio.length + " preview audio file already uploaded. You can't upload anymore.";
                         }
                         else {
                             if (otheraudio.length == 0) {
-                                $scope.commonfileerrormessage = "You can upload only " + (audio_download_limit - otheraudio.length) + " preview audio.";
+                                $scope.commonfileerrormessage = "You can upload only " + (audio_preview_limit - otheraudio.length) + " preview audio.";
                             }
                             else {
-                                $scope.commonfileerrormessage = otheraudio.length + " preview audio file already uploaded. You can upload only " + (audio_download_limit - otheraudio.length) + " preview audio.";
+                                $scope.commonfileerrormessage = otheraudio.length + " preview audio file already uploaded. You can upload only " + (audio_preview_limit - otheraudio.length) + " preview audio.";
                             }
                         }
                         $scope.commonfile = '';
                         toastr.error($scope.commonfileerrormessage);
                     }
                 }
-                else {
-                    if (!((video_download_limit - othervideos.length - videocount) >= 0)) {
+                if (videocount != 0) {
+                    if (!((video_preview_limit - othervideos.length - videocount) >= 0)) {
                         flag = false;
                         $scope.commonfileerror = true;
-                        if (othervideos.length >= video_download_limit) {
+                        if (othervideos.length >= video_preview_limit) {
                             $scope.commonfileerrormessage = othervideos.length + " preview video file already uploaded. You can't upload anymore.";
                         }
                         else {
                             if (othervideos.length == 0) {
-                                $scope.commonfileerrormessage = "You can upload only " + (video_download_limit - othervideos.length) + " preview video.";
+                                $scope.commonfileerrormessage = "You can upload only " + (video_preview_limit - othervideos.length) + " preview video.";
                             }
                             else {
-                                if(video_download_limit > othervideos.length){
-                                    $scope.commonfileerrormessage = othervideos.length + " preview video file already uploaded. you can upload only " + Math.abs(video_download_limit - othervideos.length) + " common video.";
+                                if(video_preview_limit > othervideos.length){
+                                    $scope.commonfileerrormessage = othervideos.length + " preview video file already uploaded. you can upload only " + Math.abs(video_preview_limit - othervideos.length) + " common video.";
                                 }else{
                                     $scope.commonfileerrormessage = othervideos.length + " preview video file already uploaded. You can't upload anymore.";
                                 }

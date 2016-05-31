@@ -86,6 +86,12 @@ function Pad(padString, value, length) {
 
     return str;
 }
+/**
+ * @class
+ * @classdesc create a log file if not exist.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 
 exports.allAction = function (req, res, next) {
     var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
@@ -103,6 +109,12 @@ exports.allAction = function (req, res, next) {
         next();
     }
 }
+/**
+ * @class
+ * @classdesc get data from env.json file.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 
 exports.getSitePath = function (req, res, next) {
    // console.log(config)
@@ -122,6 +134,13 @@ exports.getSitePath = function (req, res, next) {
         video_limit : config.video_limit,
         log_path:config.log_path});
 }
+
+/**
+ * @class
+ * @classdesc get menu pages details.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 
 //Menu Pages
 exports.pages = function (req, res, next) {
@@ -165,6 +184,13 @@ exports.pages = function (req, res, next) {
         res.redirect('/accountlogin');
     }
 }
+
+/**
+ * @class
+ * @classdesc check user is logged or not.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 
 //Login Page Get
 exports.login = function (req, res, next) {
@@ -275,6 +301,12 @@ exports.login = function (req, res, next) {
     }
 }
 
+/**
+ * @class
+ * @classdesc logout user.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 //LogOut Page Get
 exports.logout = function (req, res, next) {
     try {
@@ -347,6 +379,12 @@ exports.logout = function (req, res, next) {
     }
 }
 
+/**
+ * @class
+ * @classdesc authenticate user by username and password.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 //Login Page Post
 exports.authenticate = function (req, res, next) {
     try {
@@ -547,6 +585,12 @@ function getPages(role) {
     return pagesjson;
 }
 
+/**
+ * @class
+ * @classdesc get user details to retrieve forgotten password.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 //Forgot Password Page Get
 exports.viewForgotPassword = function (req, res, next) {
     if (req.session) {
@@ -606,7 +650,12 @@ exports.viewForgotPassword = function (req, res, next) {
         }
     }
 }
-
+/**
+ * @class
+ * @classdesc authenticate user to send forgotten password
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 //Forgot Password Post
 exports.forgotPassword = function (req, res, next) {
     try {
@@ -688,6 +737,12 @@ exports.forgotPassword = function (req, res, next) {
     }
 }
 
+/**
+ * @class
+ * @classdesc get user details to change existing password.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 //Change Pasword Get
 exports.viewChangePassword = function (req, res, next) {
     req.session = null;
@@ -739,7 +794,12 @@ exports.viewChangePassword = function (req, res, next) {
         res.status(500).json(err.message);
     }
 };*/
-
+/**
+ * @class
+ * @classdesc change user password and send email.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.changePassword = function (req, res) {
     try {
         if (req.session) {
@@ -841,6 +901,12 @@ exports.changePassword = function (req, res) {
     }
 };
 
+/**
+ * @class
+ * @classdesc get dashboard data to create chart and grid.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 //Get DashBoard Data
 exports.getdashboarddata = function (req, res) {
     try {

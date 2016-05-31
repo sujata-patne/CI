@@ -26,6 +26,8 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http,$window, $state
     $scope.open2 = false;
     $scope.SelectedBGSongType = '';
     $scope.BGDisplayTitle = '';
+    //ngProgress.start();
+    $scope.uploading = true;
     $scope.openDatepicker = function (evt) {
         $scope.open2 = false;
         evt.preventDefault();
@@ -69,6 +71,8 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http,$window, $state
     //Icon.GetEncode(
     ngProgress.start();
     Metadatas.getMetadata({ Id: $scope.MetaId, state: $scope.CurrentPage }, function (metadata) {
+        // ngProgress.complete();
+        $scope.uploading = false;
         $scope.UserRole = metadata.UserRole;
         $scope.VendorRights = metadata.VendorRights;
         $scope.PropertyRights = metadata.PropertyRights;

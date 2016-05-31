@@ -14,9 +14,11 @@ myApp.controller('masterListCtrl', function ($scope, $window, $http, $state, ngP
     $scope.chunkedFilterData = [];
     $scope.currentPage = 0;
     $scope.pageSize = 34;
-    ngProgress.color('yellowgreen');
-    ngProgress.height('3px');
+   // ngProgress.start();
+    $scope.uploading = true;
     MasterLists.getMasterList({ Id: $stateParams.id, state: $scope.CurrentPage }, function (master) {
+      //  ngProgress.complete();
+        $scope.uploading = false;
         master.UserRole === "Content Manager" ? location.href = "/" : "";
         $scope.IsEditPermission = master.UserRole === "Moderator" ? false : true;
         $scope.MasterList = master.MasterList;

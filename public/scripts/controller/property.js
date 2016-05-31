@@ -1,10 +1,10 @@
 
-myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngProgress, $stateParams, Propertys, _, Excel) {
+myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngProgress, $stateParams, Propertys, _, Excel,ContentFile) {
     $('.removeActiveClass').removeClass('active');
     $('.removeSubactiveClass').removeClass('active');
     $('#manageproperty').addClass('active');
-    ngProgress.color('yellowgreen');
-    ngProgress.height('3px');
+    //ngProgress.start();
+    $scope.uploading = true;
     $scope.CurrentPage = $state.current.name;
 
     $scope.CurrentPage == "addproperty" ? $('#addproperty').addClass('active') : '';
@@ -18,6 +18,99 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
     $scope.open2 = false;
     $scope.open = false;
     $scope.IsDisable = $scope.CurrentPage == "addproperty" ? false : true;
+    $scope.Main = 1;
+    $scope.Supporting = 2;
+    $scope.Preview = 3;
+    Propertys.getPropertys({ Id: $stateParams.id, state: $scope.CurrentPage }, function (property) {
+       // ngProgress.complete();
+        $scope.uploading = false;
+        $scope.ConfigData = property.ConfigData;
+        $scope.Files = property.Files;
+        $scope.OtherTemplates = property.OtherTemplates;
+        $scope.OtherTemplates.forEach(function(template){
+            if(template.ct_param_value == "Main"){
+                $scope.Main = template.ct_param;
+            }
+            if(template.ct_param_value == "Supporting"){
+                $scope.Supporting = template.ct_param;
+            }
+            if(template.ct_param_value == "Preview"){
+                $scope.Preview = template.ct_param;
+            }
+        })
+    //    console.log($scope.Files)
+        var flag = ((property.UserRole == "Moderator" || property.UserRole == "Super Admin") && $scope.CurrentPage == "addproperty") ? location.href = "/" : "";
+        if ($scope.CurrentPage == "property" || $scope.CurrentPage == "vendorproperty") {
+            $scope.IsBlockPermission = property.UserRole == "Moderator" ? true : false;
+            $scope.PropertyList = [];
+            property.PropertyList.forEach(function (prop) {
+                prop.cm_created_on = setDate(prop.cm_created_on);
+                prop.UserRole = property.UserRole;
+                prop.title = GetTitle(prop.UserRole, prop.vd_is_active, prop.vd_end_on, prop.cm_is_active, prop.cm_expires_on);
+                prop.propertystatus = PropertyStatus(prop.UserRole, prop.vd_is_active, prop.vd_end_on, prop.cm_is_active, prop.cm_expires_on);
+                prop.IsEditvisible = EditVisible(prop.UserRole, prop.vd_is_active, prop.vd_end_on, prop.cm_is_active, prop.cm_expires_on);
+                prop.buttoncolor = ButtonColor(prop.UserRole, prop.vd_is_active, prop.vd_end_on, prop.cm_is_active, prop.cm_expires_on);
+                $scope.PropertyList.push(prop);
+            });
+        }
+        else if ($scope.CurrentPage == "editproperty") {
+            property.PropertyList.length > 0 ? "" : location.href = "/";
+            $scope.IsEditPermission = (property.UserRole == "Moderator" || property.UserRole == "Super Admin") ? true : false;
+            $scope.Vendors = angular.copy(property.VendorList);
+            $scope.VendorRights = angular.copy(property.VendorRights);
+            $scope.OldPropertyRights = $scope.PropertyRights = property.PropertyRights;
+
+            $scope.CountryGroups = _.where(property.IconCountry, { group_status: "group" });
+            $scope.IconOnlyCountry = _.where(property.IconCountry, { group_status: null })
+            $scope.IconGroupCountry = property.IconGroupCountry;
+
+            $scope.AllCountryDistributionRights = property.IconCountry;
+
+            $scope.AllAllowedContentType = _.where(property.MasterRights, { cm_name: "Content Type" });
+            $scope.AllChannelDistributionRights = _.where(property.MasterRights, { cm_name: "Channel Distribution" });
+            var propertycontent = _.find(property.MasterRights, function (prop) { return prop.cm_name == "Property" });
+            if (propertycontent) {
+                $scope.property_content_type = propertycontent.cd_id;
+            }
+            property.PropertyList.forEach(function (prop) {
+                $scope.SelectedVendor = prop.cm_vendor;
+                $scope.OldVendor = prop.cm_vendor;
+                $scope.Title = prop.cm_title;
+                $scope.ShortDescription = prop.cm_short_desc;
+                $scope.ReleaseYear = prop.cm_release_date;
+
+                $scope.StartDate = new Date(prop.cm_starts_from);
+                $scope.ExpiryDate = new Date(prop.cm_expires_on);
+                $scope.property_group = prop.cm_r_group_id;
+            });
+            $scope.VendorChange();
+        }
+        else if ($scope.CurrentPage == "addproperty" && property.UserRole == "Content Manager") {
+            $scope.Checked = 1;
+            $scope.Vendors = angular.copy(property.VendorList);
+            $scope.VendorRights = angular.copy(property.VendorRights);
+
+            $scope.CountryGroups = _.where(property.IconCountry, { group_status: "group" });
+            $scope.IconOnlyCountry = _.where(property.IconCountry, { group_status: null })
+            $scope.IconGroupCountry = property.IconGroupCountry;
+
+            $scope.AllCountryDistributionRights = property.IconCountry;
+
+            $scope.AllAllowedContentType = _.where(property.MasterRights, { cm_name: "Content Type" });
+            $scope.AllChannelDistributionRights = _.where(property.MasterRights, { cm_name: "Channel Distribution" });
+            var propertycontent = _.find(property.MasterRights, function (prop) { return prop.cm_name == "Property" });
+            if (propertycontent) {
+                $scope.property_content_type = propertycontent.cd_id;
+            }
+        }
+        else {
+            $window.location.href = "/";
+        }
+        $scope.loading = true;
+    }, function (error) {
+        toastr.error(error);
+    });
+
     $scope.openReleaseDatepicker = function (evt) {
         $scope.open1 = false;
         $scope.open2 = false;
@@ -77,7 +170,36 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
         });
          return DeleteArray;
     }
+    function getExtension(filename) {
+        var parts = filename.split('.');
+        return parts[parts.length - 1];
+    }
 
+    function isImage(filename) {
+        var ext = getExtension(filename);
+        switch (ext.toLowerCase()) {
+            case 'jpg':
+            case 'gif':
+            case 'bmp':
+            case 'png':
+                //etc
+                return true;
+        }
+        return false;
+    }
+
+    function isVideo(filename) {
+        var ext = getExtension(filename);
+        switch (ext.toLowerCase()) {
+            case 'm4v':
+            case 'avi':
+            case 'mpg':
+            case 'mp4':
+                // etc
+                return true;
+        }
+        return false;
+    }
     $scope.resetform = function () {
         $scope.propertyForm.$setPristine();
     }
@@ -166,79 +288,6 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
             });
         }
     }
-
-    Propertys.getPropertys({ Id: $stateParams.id, state: $scope.CurrentPage }, function (property) {
-        var flag = ((property.UserRole == "Moderator" || property.UserRole == "Super Admin") && $scope.CurrentPage == "addproperty") ? location.href = "/" : "";
-        if ($scope.CurrentPage == "property" || $scope.CurrentPage == "vendorproperty") {
-            $scope.IsBlockPermission = property.UserRole == "Moderator" ? true : false;
-            $scope.PropertyList = [];
-            property.PropertyList.forEach(function (prop) {
-                prop.cm_created_on = setDate(prop.cm_created_on);
-                prop.UserRole = property.UserRole;
-                prop.title = GetTitle(prop.UserRole, prop.vd_is_active, prop.vd_end_on, prop.cm_is_active, prop.cm_expires_on);
-                prop.propertystatus = PropertyStatus(prop.UserRole, prop.vd_is_active, prop.vd_end_on, prop.cm_is_active, prop.cm_expires_on);
-                prop.IsEditvisible = EditVisible(prop.UserRole, prop.vd_is_active, prop.vd_end_on, prop.cm_is_active, prop.cm_expires_on);
-                prop.buttoncolor = ButtonColor(prop.UserRole, prop.vd_is_active, prop.vd_end_on, prop.cm_is_active, prop.cm_expires_on);
-                $scope.PropertyList.push(prop);
-            });
-        }
-        else if ($scope.CurrentPage == "editproperty") {
-            property.PropertyList.length > 0 ? "" : location.href = "/";
-            $scope.IsEditPermission = (property.UserRole == "Moderator" || property.UserRole == "Super Admin") ? true : false;
-            $scope.Vendors = angular.copy(property.VendorList);
-            $scope.VendorRights = angular.copy(property.VendorRights);
-            $scope.OldPropertyRights = $scope.PropertyRights = property.PropertyRights;
-
-            $scope.CountryGroups = _.where(property.IconCountry, { group_status: "group" });
-            $scope.IconOnlyCountry = _.where(property.IconCountry, { group_status: null })
-            $scope.IconGroupCountry = property.IconGroupCountry;
-
-            $scope.AllCountryDistributionRights = property.IconCountry;
-
-            $scope.AllAllowedContentType = _.where(property.MasterRights, { cm_name: "Content Type" });
-            $scope.AllChannelDistributionRights = _.where(property.MasterRights, { cm_name: "Channel Distribution" });
-            var propertycontent = _.find(property.MasterRights, function (prop) { return prop.cm_name == "Property" });
-            if (propertycontent) {
-                $scope.property_content_type = propertycontent.cd_id;
-            }
-            property.PropertyList.forEach(function (prop) {
-                $scope.SelectedVendor = prop.cm_vendor;
-                $scope.OldVendor = prop.cm_vendor;
-                $scope.Title = prop.cm_title;
-                $scope.ShortDescription = prop.cm_short_desc;
-                $scope.ReleaseYear = prop.cm_release_date;
-
-                $scope.StartDate = new Date(prop.cm_starts_from);
-                $scope.ExpiryDate = new Date(prop.cm_expires_on);
-                $scope.property_group = prop.cm_r_group_id;
-            });
-            $scope.VendorChange();
-        }
-        else if ($scope.CurrentPage == "addproperty" && property.UserRole == "Content Manager") {
-            $scope.Checked = 1;
-            $scope.Vendors = angular.copy(property.VendorList);
-            $scope.VendorRights = angular.copy(property.VendorRights);
-
-            $scope.CountryGroups = _.where(property.IconCountry, { group_status: "group" });
-            $scope.IconOnlyCountry = _.where(property.IconCountry, { group_status: null })
-            $scope.IconGroupCountry = property.IconGroupCountry;
-
-            $scope.AllCountryDistributionRights = property.IconCountry;
-
-            $scope.AllAllowedContentType = _.where(property.MasterRights, { cm_name: "Content Type" });
-            $scope.AllChannelDistributionRights = _.where(property.MasterRights, { cm_name: "Channel Distribution" });
-            var propertycontent = _.find(property.MasterRights, function (prop) { return prop.cm_name == "Property" });
-            if (propertycontent) {
-                $scope.property_content_type = propertycontent.cd_id;
-            }
-        }
-        else {
-            $window.location.href = "/";
-        }
-        $scope.loading = true;
-    }, function (error) {
-        toastr.error(error);
-    });
 
     $scope.VendorChange = function () {
         var newAllowedContentType = [];
@@ -353,6 +402,138 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
         $scope.searchpropertyquery = $scope.propertyquery;
     }
 
+    $scope.commonfileuploader = function (files) {
+        var supporting_image_limit = $scope.ConfigData.supporting_image_limit;
+        var video_preview_limit = $scope.ConfigData.video_preview_limit;
+        var audio_preview_limit = $scope.ConfigData.audio_preview_limit;
+        $scope.commonfileerror = false;
+        $scope.CommonFiles = [];
+      //  console.log($scope.Files)
+        if ($scope.commonfile) {
+            var audiocount = 0;
+            var imagecount = 0;
+            var videocount = 0;
+            _.each($scope.commonfile, function (val) {
+                if (getExtension(val.name).toLowerCase() == "mp3") {
+                    audiocount++;
+                }
+                else if (isImage(val.name)) {
+                    imagecount++;
+                }
+                else if (isVideo(val.name)) {
+                    videocount++;
+                }
+                else {
+                    $scope.commonfileerror = true;
+                    $scope.commonfileerrormessage = "Invalid Common File Extension.";
+                    toastr.error($scope.commonfileerrormessage);
+                }
+             //   console.log(audiocount)
+            })
+            if (!$scope.commonfileerror) {
+                var flag = true;
+                var otherimages = _.where($scope.Files, { ct_param_value: 'otherimage',file_category_id:$scope.Preview  });
+                var otheraudio = _.where($scope.Files, { ct_param_value: 'otheraudio',file_category_id:$scope.Preview });
+                var othervideos = _.where($scope.Files, { ct_param_value: 'othervideo',file_category_id:$scope.Preview });
+                if (imagecount != 0) {
+                    if (!((supporting_image_limit - otherimages.length - imagecount) >= 0)) {
+                        flag = false;
+                        $scope.commonfileerror = true;
+                        if (otherimages.length >= supporting_image_limit) {
+                            $scope.commonfileerrormessage = otherimages.length + " preview image file already uploaded. you can't upload anymore.";
+                        } else {
+                            if (otherimages.length == 0) {
+                                $scope.commonfileerrormessage = "You can upload only " + (supporting_image_limit - otherimages.length) + " preview images.";
+                            }
+                            else {
+                                if(supporting_image_limit > otherimages.length){
+                                    $scope.commonfileerrormessage = otherimages.length + " preview image file already uploaded. You can upload only " + Math.abs(supporting_image_limit - otherimages.length) + " common images.";
+                                }else{
+                                    $scope.commonfileerrormessage = otherimages.length + " preview image file already uploaded. You can't upload anymore.";
+                                }
+                            }
+
+                        }
+                        $scope.commonfile = '';
+                        toastr.error($scope.commonfileerrormessage);
+                    }
+                }
+                if (audiocount != 0) {
+                    if (!((audio_preview_limit - otheraudio.length - audiocount) == 0)) {
+                        flag = false;
+                        $scope.commonfileerror = true;
+                        if (otheraudio.length >= audio_preview_limit) {
+                            $scope.commonfileerrormessage = otheraudio.length + " preview audio file already uploaded. You can't upload anymore.";
+                        }
+                        else {
+                            if (otheraudio.length == 0) {
+                                $scope.commonfileerrormessage = "You can upload only " + (audio_preview_limit - otheraudio.length) + " preview audio.";
+                            }
+                            else {
+                                $scope.commonfileerrormessage = otheraudio.length + " preview audio file already uploaded. You can upload only " + (audio_preview_limit - otheraudio.length) + " preview audio.";
+                            }
+                        }
+                        $scope.commonfile = '';
+                        toastr.error($scope.commonfileerrormessage);
+                    }
+                }
+                if (videocount != 0) {
+                    if (!((video_preview_limit - othervideos.length - videocount) >= 0)) {
+                        flag = false;
+                        $scope.commonfileerror = true;
+                        if (othervideos.length >= video_preview_limit) {
+                            $scope.commonfileerrormessage = othervideos.length + " preview video file already uploaded. You can't upload anymore.";
+                        }
+                        else {
+                            if (othervideos.length == 0) {
+                                $scope.commonfileerrormessage = "You can upload only " + (video_preview_limit - othervideos.length) + " preview video.";
+                            }
+                            else {
+                                if(video_preview_limit > othervideos.length){
+                                    $scope.commonfileerrormessage = othervideos.length + " preview video file already uploaded. you can upload only " + Math.abs(video_preview_limit - othervideos.length) + " common video.";
+                                }else{
+                                    $scope.commonfileerrormessage = othervideos.length + " preview video file already uploaded. You can't upload anymore.";
+                                }
+                            }
+                        }
+                        $scope.commonfile = '';
+                        toastr.error($scope.commonfileerrormessage);
+                    }
+                }
+               
+                //console.log($scope.commonfile)
+
+                if (flag) {
+                    _.each($scope.commonfile, function (val, index) {
+                        if (isImage(val.name)) {
+                            var count = _.where($scope.CommonFiles, { type: 'image' });
+                            var match = _.find($scope.OtherTemplates, function (item) { return item.ct_param_value == 'otherimage' })
+                            if (match) {
+                                // $scope.CommonFiles.push({fileCategory:$scope.Preview,  count: (otherimages.length + count.length + 1), file: val, type: 'image', ct_group_id: match.ct_group_id, cm_id: $scope.MetaId, width: null, height: null, other: 'common' })
+                                $scope.CommonFiles.push({fileCategory:$scope.Preview,  count: (otherimages.length + count.length + 1), file: val, type: 'image', ct_group_id: match.ct_group_id, cm_id: $scope.MetaId, width: null, height: null, other: 'common' })
+                            }
+                        }else if(getExtension(val.name).toLowerCase() == "mp3") {
+
+                            var count = _.where($scope.CommonFiles, { type: 'audio' });
+                            var match = _.find($scope.OtherTemplates, function (item) { return item.ct_param_value == 'bitrate' })
+                            if (match) {
+                                $scope.CommonFiles.push({fileCategory:$scope.Preview,  count: (otheraudio.length + count.length + 1), file: val, type: 'audio', ct_group_id: match.ct_group_id, cm_id: $scope.MetaId, width: null, height: null, other: 'common' })
+                            }
+                        }
+                        else if (isVideo(val.name)) {
+                            var count = _.where($scope.CommonFiles, { type: 'video' });
+                            var match = _.find($scope.OtherTemplates, function (item) { return item.ct_param_value == 'othervideo' })
+                            if (match) {
+                                $scope.CommonFiles.push({fileCategory:$scope.Preview,  count: (othervideos.length + count.length + 1), file: val, type: 'video', ct_group_id: match.ct_group_id, cm_id: $scope.MetaId, width: null, height: null, other: 'common' })
+                            }
+                        }
+                    })
+                }
+                console.log($scope.CommonFiles)
+            }
+        }
+    }
+
     $scope.BlockUnBlockProperty = function (Id, Status, classtext) {
         if (classtext !== "darkorange") {
             bootbox.confirm("Are you sure want to " + Status + " this property?", function (result) {
@@ -392,7 +573,6 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
         if (isValid) {
             var year = new Date().getFullYear();
             var ReleaseYear = new Date($scope.ReleaseYear).getFullYear();
-
             var flag = (ReleaseYear > 1949 && ReleaseYear < (year + 2)) ? Datewithouttime($scope.StartDate) <= Datewithouttime($scope.ExpiryDate) ? Datewithouttime($scope.VendorStartDate) <= Datewithouttime($scope.StartDate) && Datewithouttime($scope.VendorEndDate) >= Datewithouttime($scope.ExpiryDate) ? $scope.RightsShow == true ? $scope.SelectedAllowedContentType.length > 0 ? $scope.SelectedCountryDistributionRights.length > 0 ? $scope.SelectedChannelDistributionRights.length > 0 ? "" : "Please Select Channel Distribution rights." : "Please Select Country Distribution rights." : "Please Select Allowed Content Type." : "" : "Start & Expiry date should be within limit of Vendor limits." : "Expire date must be equal or greater than start date." : "Release Year must be between 1950 to current year + 1.";
             if (flag == "") {
                 var NewRightsData = [];
@@ -432,13 +612,23 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
                 }
                  Propertys.AddEditProperty(property, function (data) {
                     if (data.success) {
-                        toastr.success(data.message);
-                        $window.location.href = "#property-list";
+                        $scope.MetaId = data.cm_id;
+
+                        PreviewUpload(0, {upload:'preview'}, function (data1) {
+                            console.log(data)
+
+                            ngProgress.complete();
+                            $scope.uploading = false;
+                            toastr.success(data.message);
+                            $window.location.href = "#property-list";
+                        })
                     }
                     else {
                         toastr.error(data.message);
+                        ngProgress.complete();
+                        $scope.uploading = false;
                     }
-                    ngProgress.complete();
+                   // ngProgress.complete();
                 }, function (err) {
                     toastr.error(err);
                     ngProgress.complete();
@@ -449,4 +639,46 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
             }
         }
     };
+
+    function PreviewUpload(tcu,item,success) {
+        if(item.upload === 'preview' && $scope.CommonFiles && $scope.CommonFiles.length > 0) {
+            var data = $scope.CommonFiles[tcu];
+            // var filetype = (data.fileCategory == 2)? 'Supporting' : 'Preview';
+            ContentFile.Upload('/uploadotherfiles', {
+                fileCategory: data.fileCategory,
+                count: data.count,
+                file: data.file,
+                cm_title: $scope.cm_title,
+                other: data.other,
+                type: data.type,
+                TypeName: $scope.TypeName,
+                MetaDataId: $scope.MetadataId,
+                cm_id: $scope.MetaId,
+                width: data.width,
+                height: data.height,
+                ct_group_id: data.ct_group_id
+            }, function (resp) {
+                $scope.Files = resp.data.Files;
+                toastr.success(resp.config.data.file.name + ' Preview file uploaded successfully.');
+                tcu = tcu + 1;
+                if (tcu == $scope.CommonFiles.length) {
+                    $("#commonfile").val("");
+                    $scope.CommonFiles = [];
+                    $scope.commonfile = null;
+                    // $scope.supportfile = null;
+                    success(item.upload);
+                }
+                else {
+                    PreviewUpload(tcu, item, success);
+                }
+            }, function (error) {
+                toastr.error(error);
+                $scope.uploading = false;
+                ngProgress.complete();
+            });
+        }else{            //or supporting files
+            //toastr.error("Please upload supporting files.");
+            success(item.upload);
+        }
+    }
 })

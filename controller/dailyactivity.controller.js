@@ -68,7 +68,12 @@ function setDate(val) {
     }
     return selectdate;
 }
-
+/**
+ * @class
+ * @classdesc create a log file if not exist.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.allAction = function (req, res, next) {
     var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
     if (wlogger.logDate == currDate) {
@@ -235,7 +240,12 @@ function Dailyactivityreport() {
         });
     });
 }
-
+/**
+ * @class
+ * @classdesc run cron to send email to respective moderator.
+ * @param {object} req - http requset object.
+ * @param {object} res - http response object.
+ */
 exports.dailyactivity = function (req, res, next) {
     try {
         if (req.session) {
