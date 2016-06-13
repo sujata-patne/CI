@@ -41,6 +41,7 @@ myApp.controller('submitmetaCtrl', function ($scope, $state, $http, $stateParams
         $scope.errorvisible = true;
     }
 
+    // save metadata form for different content types like imagery, audio, video, text ,games/apps
     Metadatas.SubmitMetadata({ Id: $scope.MetaId, state: $scope.CurrentPage, contenttype: $stateParams.contenttype }, function (metadata) {
         ngProgress.complete();
         $scope.uploading = false;
@@ -55,13 +56,6 @@ myApp.controller('submitmetaCtrl', function ($scope, $state, $http, $stateParams
     }, function (error) {
         toastr.error(error);
     })
-
-
-
-
-
-
-
 });
 
  

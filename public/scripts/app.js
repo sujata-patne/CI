@@ -183,72 +183,9 @@ myApp.config(function ($stateProvider,$httpProvider) {
          controller: "adminLogCtrl",
          url: "/admin-log"
     })
-
-    /*.state('contentlisting.thumb', {
-        templateUrl: 'partials/content-file-list.html'
-    })
-    .state('contentlisting.thumb', {
-        templateUrl: 'partials/content-file-list.html'
-    })
-    .state('contentlisting.content', {
-        templateUrl: 'partials/content-file-list.html'
-    })
-    .state('contentlisting.image', {
-        templateUrl: 'partials/content-file-list.html'
-    })
-    .state('contentlisting.audio', {
-        templateUrl: 'partials/content-file-list.html'
-    })
-    .state('contentlisting.video', {
-        templateUrl: 'partials/content-file-list.html'
-    })*/
 }).run(function ($state,$http,$rootScope) {
-        $state.go("dashboard");
-        $http.get("/getSitePath").success(function (configData) {
-            $rootScope.base_url = configData.site_path;
-        })
+    $state.go("dashboard");
+    $http.get("/getSitePath").success(function (configData) {
+        $rootScope.base_url = configData.site_path;
     })
-	
-myApp.directive('myEnter', function () {
-    return function (scope, element, attrs) {
-        element.bind("keydown keypress", function (event) {
-			 return false;
-        });
-    };
-});
-
-
-myApp.filter('filterWithOr', function ($filter) {
-    var comparator = function (actual, expected) {
-        if (angular.isUndefined(actual)) {
-            // No substring matching against `undefined`
-            return false;
-        }
-        if ((actual === null) || (expected === null)) {
-            // No substring matching against `null`; only match against `null`
-            return actual === expected;
-        }
-        if ((angular.isObject(expected) && !angular.isArray(expected)) || (angular.isObject(actual) && !hasCustomToString(actual))) {
-            // Should not compare primitives against objects, unless they have custom `toString` method
-            return false;
-        }
-
-        actual = angular.lowercase('' + actual);
-        if (angular.isArray(expected)) {
-            var match = false;
-            expected.forEach(function (e) {
-                e = angular.lowercase('' + e);
-                if (actual.indexOf(e) !== -1) {
-                    match = true;
-                }
-            });
-            return match;
-        } else {
-            expected = angular.lowercase('' + expected);
-            return actual.indexOf(expected) !== -1;
-        }
-    };
-    return function (campaigns, filters) {
-        return $filter('filter')(campaigns, filters, comparator);
-    };
-});
+})

@@ -30,7 +30,7 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
 
     //ngProgress.start();
     $scope.uploading = true;
-
+    //  Get Content listing data to display content like main, supporting, preview and thumb files uploaded
     ContentListing.getContentListing({ Id: $stateParams.id, isProperty:$stateParams.isProperty }, function (content) {
        // ngProgress.complete();
         $scope.uploading = false;
@@ -125,7 +125,7 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
     }, function (error) {
         toastr.error(error);
     });
-
+    //  Get Content listing data to display thumb files uploaded
     $scope.getThumbFiles = function () {
         if ($scope.ThumbFiles.length > 0) {
             $scope.Thumbs = [];
@@ -147,6 +147,7 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
             $scope.ThumbUploadVisible = $scope.UserRole == "Super Admin" ? false : $scope.ThumbUploadVisible;
         }
     }
+    //  Get Content listing data to display imagery, video, text,games/apps files uploaded
     $scope.getContentFiles = function () {
         if ($scope.WallpaperFiles.length > 0 || $scope.AppFiles.length > 0 || $scope.TextFiles.length > 0 || $scope.VideoFiles.length > 0) {
             $scope.Files = [];
@@ -204,6 +205,7 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
         }
        // console.log($scope.filesdetail);
     }
+    //  Get Content listing data to display audio files uploaded
     $scope.getAudioData = function () {
         $scope.audioBitrateFiles = [];
         _.each($scope.AudioFiles, function (val) {
@@ -228,6 +230,7 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
         var parts = filename.split('.');
         return parts[parts.length - 1];
     }
+    //  Get Content listing data to display all types supporting files uploaded
     $scope.getSupportingFiles = function () {
         if($scope.SupportingImages.length > 0){
             var j = 0;
@@ -436,7 +439,7 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
         //console.log($scope.SupportingFiles);
         $scope.FileUploadVisible =  ($scope.supportingFilesDetail.length > 0 )? true : $scope.FileUploadVisible;
     }
-
+    //  Get Content listing data to display all types preview files uploaded
     $scope.getPreviewFiles = function () {
         if($scope.PreviewImages.length > 0){
             var j = 0;

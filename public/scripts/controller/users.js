@@ -61,7 +61,7 @@ myApp.controller('usersCtrl', function ($scope, $http, ngProgress, $timeout, Use
         });
         return AddArray;
     }
-
+//Get User details list
     Users.getUsers({ Id: $stateParams.id, state: $scope.CurrentPage }, function (users) {
         //  ngProgress.complete();
         $scope.uploading = false;
@@ -95,7 +95,7 @@ myApp.controller('usersCtrl', function ($scope, $http, ngProgress, $timeout, Use
     }, function (error) {
         toastr.error(error);
     });
-
+//Export/Download User details list in Excel file
     $scope.ExportExcel = function () {
         if ($scope.UserList.length > 0) {
             var array = [];
@@ -112,11 +112,12 @@ myApp.controller('usersCtrl', function ($scope, $http, ngProgress, $timeout, Use
             });
         }
     }
-
+//go back to User Detail list page
     $scope.BackToList = function () {
         $window.location.href = "#user";
     }
 
+//Block and unblock users
     $scope.BlockUnBlockUser = function (Id, Status, classtext) {
         bootbox.confirm("Are you sure want to " + Status + " this user?", function (result) {
             if (result) {
@@ -147,11 +148,11 @@ myApp.controller('usersCtrl', function ($scope, $http, ngProgress, $timeout, Use
         });
 
     }
-
+// REset user form
     $scope.resetform = function () {
         $scope.userform.$setPristine();
     }
-
+//save User details
     $scope.SaveUserDetails = function (isValid) {
 
         if (isValid) {
@@ -219,7 +220,7 @@ myApp.controller('ChangerPasswordCtrl', function ($scope, $http, ngProgress, $ti
 
     ngProgress.color('yellowgreen');
     ngProgress.height('3px');
-
+//Save Changed password
     $scope.SaveChangedPassword = function (isValid) {
         if (isValid) {
             if ($scope.NewPassword == $scope.ConfirmPassword) {
@@ -253,12 +254,12 @@ myApp.controller('ChangerPasswordCtrl', function ($scope, $http, ngProgress, $ti
             }
         }
     };
-
+//Reset change password form
     $scope.Resetclick = function () {
         $scope.successvisible = false;
         $scope.errorvisible = false;
     };
-
+//Change whether password visibility
     $scope.Passwordvisible = function (val) {
         if (val == 1) {
             $scope.passwordtype = $scope.passwordtype == "password" ? "text" : "password";
@@ -272,13 +273,6 @@ myApp.controller('ChangerPasswordCtrl', function ($scope, $http, ngProgress, $ti
     }
 });
 
-myApp.filter('startFrom', function () {
-    return function (input, start) {
-        if (!input || !input.length) { return; }
-        start = +start; //parse to int
-        return input.slice(start);
-    }
-});
 
 function validateEmail(email) {
     var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;

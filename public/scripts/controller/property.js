@@ -21,6 +21,7 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
     $scope.Main = 1;
     $scope.Supporting = 2;
     $scope.Preview = 3;
+    //Get Property details list
     Propertys.getPropertys({ Id: $stateParams.id, state: $scope.CurrentPage }, function (property) {
        // ngProgress.complete();
         $scope.uploading = false;
@@ -110,7 +111,7 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
     }, function (error) {
         toastr.error(error);
     });
-
+//
     $scope.openReleaseDatepicker = function (evt) {
         $scope.open1 = false;
         $scope.open2 = false;

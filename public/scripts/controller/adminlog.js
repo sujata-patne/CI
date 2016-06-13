@@ -19,7 +19,7 @@ myApp.controller('adminLogCtrl', function ($scope, $state, $http, $stateParams, 
         });
         return AdminLogs;
     }
-
+// Get admin logs details
     Logs.getAdminLog({ state: $scope.CurrentPage }, function (logs) {
       //  ngProgress.complete();
         $scope.uploading = false;
@@ -31,6 +31,7 @@ myApp.controller('adminLogCtrl', function ($scope, $state, $http, $stateParams, 
         toastr.error(error);
     });
 
+// Export/Download excel for admin log
     $scope.ExportExcel = function () {
         if ($scope.AdminLogs.length > 0) {
             var array = [];

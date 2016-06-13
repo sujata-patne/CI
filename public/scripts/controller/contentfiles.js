@@ -57,13 +57,13 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
 
         return status;
     }
-
+    //  get data to display chart and grid on dashbard page
     Icon.GetDashBoardData(function (dashboard) {
         $scope.ContentType = _.where( dashboard.ContentType, { cm_name: "Content Type" });
     }, function (error) {
         toastr.error(error);
     });
-
+    //  get data to render on add content file form
     ContentFile.getContentFile({}, function (content) {
         content.UserRole === "Super Admin" || content.UserRole == "Moderator" ? location.href = "/" : "";
         $scope.ConfigData = content.ConfigData;
@@ -93,6 +93,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
     }, function (error) {
         toastr.error(error);
     });
+    //  get data to populate handset group dropdown
 
     $scope.HandsetGroupChange = function () {
         if (!$scope.SelectedHandsetGroup || $scope.SelectedHandsetGroup == "") {
@@ -112,6 +113,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
         }
     }
 
+    //  click to move selected data to left side
     $scope.leftclick = function () {
         _.each($scope.SelectedGroupHandset, function (selected) {
             var index = _.findIndex($scope.GroupHandset, function (cnt) { return cnt.dc_id == selected })
@@ -122,6 +124,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
         })
         $scope.SelectedGroupHandset = [];
     }
+    //  click to move selected data to right side
     $scope.rightclick = function () {
         _.each($scope.SelectedFilterCriteria, function (selected) {
             var index = _.findIndex($scope.SelectedCriteriaHandset, function (cnt) { return cnt.dc_id == selected })
@@ -132,22 +135,26 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
         })
         $scope.SelectedFilterCriteria = [];
     }
+    //  click to move all data to left side
     $scope.leftAllclick = function () {
         _.each($scope.GroupHandset, function (selected) {
             $scope.SelectedCriteriaHandset.push(selected);
         })
         $scope.GroupHandset = [];
     }
+    //  click to move data to right side
     $scope.rightAllclick = function () {
         _.each($scope.SelectedCriteriaHandset, function (selected) {
             $scope.GroupHandset.push(selected);
         })
         $scope.SelectedCriteriaHandset = [];
     }
+    //  on content type change
     $scope.ContentTypeChange = function () {
         $scope.FileUploadVisible = false;
         $scope.Uploadervisible = false;
     }
+    //  reset form
     $scope.Suggestions = function () {
         $scope.FileUploadVisible = true;
         $("#thumbfile").val("");
@@ -184,7 +191,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             $scope.TextPartVisible = true;
         }
     }
-    // check metadata
+    // serach metadata
     $scope.SearchMetadata = function (isvalid) {
         if (isvalid) {
             try {
@@ -249,6 +256,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             }
         }
     }
+
     function getExtension(filename) {
         var parts = filename.split('.');
         return parts[parts.length - 1];
@@ -279,10 +287,9 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
         }
         return false;
     }
-
+//  validate thumbnail uploader
     $scope.thumbfileuploader = function (files) {
         var thumb_limit = $scope.ConfigData.thumb_limit;
-
         $scope.thumberror = false;
         $scope.ThumbFiles = [];
         if ($scope.thumbfile) {
@@ -329,7 +336,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             }
         }
     }
-
+//  validate imagery uploader
     $scope.wallpaperfileuploader = function () {
         var wallpaper_limit = $scope.ConfigData.wallpaper_limit;
 
@@ -404,7 +411,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
 
         }
     }
-
+//  validate video uploader
     $scope.videofileuploader = function (files) {
         var video_limit = $scope.ConfigData.video_limit;
 
@@ -424,7 +431,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             }
         }
     }
-
+//  validate audio uploader
     $scope.audiofileuploader = function (files) {
         var audio_limit = $scope.ConfigData.audio_limit;
 
@@ -445,7 +452,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             }
         }
     }
-
+//  validate audio zip file uploader
     $scope.audiozipfileuploader = function (audiofile, cm_id, ct_group_id, cd_name, MetaId, ct_param, ct_param_value) {
         if (audiofile) {
             if (getExtension(audiofile.name).toLowerCase() == "zip") {
@@ -474,7 +481,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
         }
 
     };
-
+//  validate game supporting image file uploader
     $scope.gameimagefileuploader = function () {
         var supporting_image_limit = $scope.ConfigData.supporting_image_limit;
 
@@ -526,7 +533,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             }
         }
     }
-
+//  validate game supporting video file uploader
     $scope.gamevideofileuploader = function () {
         var video_download_limit = $scope.ConfigData.video_download_limit;
 
@@ -578,7 +585,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             }
         }
     }
-
+//  validate game app file uploader
     $scope.gameappfileuploader = function () {
         var game_limit = $scope.ConfigData.game_limit;
 
@@ -619,7 +626,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             }
         }
     }
-
+//  validate text file uploader
     $scope.textfileuploader = function (textfile, cm_id, ct_group_id, cd_name, MetaId, ct_param, ct_param_value) {
         var text_limit = $scope.ConfigData.text_limit;
         if (textfile) {
@@ -671,13 +678,12 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             $scope.TextFiles = tempfiles;
         }
     };
-
+//  validate language text file uploader
     $scope.langSupportFileUploader = function (langsupportfile, cm_id, ct_group_id, cd_name, MetaId, ct_param, ct_param_value) {
         var text_limit = $scope.ConfigData.text_limit;
-        //console.log($scope.meta.langsupportfile)
-
-        if (langsupportfile) {
+         if (langsupportfile) {
             var langs = _.where($scope.Files, { ct_group_id: ct_group_id });
+
             if ((text_limit - langs.length - langsupportfile.length) >= 0) {
                 _.each(langsupportfile, function (val) {
                     var count = _.where($scope.LangSupportFiles, { ct_group_id: ct_group_id });
@@ -725,13 +731,13 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             $scope.LangSupportFiles = tempfiles;
         }
     };
-
+//  validate audio, video, image supporting files uploader
     $scope.supportingfileuploader = function (files) {
         var supporting_image_limit = $scope.ConfigData.supporting_image_limit;
         var video_download_limit = $scope.ConfigData.video_download_limit;
         var audio_download_limit = $scope.ConfigData.audio_download_limit;
-         $scope.supportingfileerrormessage = '';
-         $scope.supportingfileerror = false;
+        $scope.supportingfileerrormessage = '';
+        $scope.supportingfileerror = false;
         //$scope.CommonFiles = [];
         $scope.SupportingFiles = [];
 
@@ -849,7 +855,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             }
         }
     }
-
+//  validate audio, video, image preview files uploader
     $scope.commonfileuploader = function (files) {
         var supporting_image_limit = $scope.ConfigData.supporting_image_limit;
         var video_preview_limit = $scope.ConfigData.video_preview_limit;
@@ -983,7 +989,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             }
         }
     }
-
+//  upload audio, video, image, thumb, games, text main/supporting/preview files uploader
     $scope.upload = function (files) {
         //console.log($scope.TypeName)
         if ($scope.TypeName == "Imagery") {
@@ -1401,7 +1407,6 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
         }
     }
     function SupportingUpload(tcu,item,success) {
-
         if(item.upload === 'supporting' && $scope.SupportingFiles && $scope.SupportingFiles.length > 0) {
             var data = $scope.SupportingFiles[tcu];
              ContentFile.Upload('/uploadotherfiles', {
@@ -1486,12 +1491,14 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
         if(item.upload === 'text' && $scope.LangSupportFiles && $scope.LangSupportFiles.length > 0) {
             var data = $scope.LangSupportFiles[tuf];
             var filetype = (data.fileCategory == 2)? 'Supporting' : 'Preview';
-
+console.log('data')
+console.log(data)
             var languageMetadata = data.langaugemetaid;
-            ContentFile.Upload('/uploadText', {
+            ContentFile.Upload('/uploadotherfiles', {
                 fileCategory: data.fileCategory,
                 count: data.count,
                 file: data.file,
+                type: item.upload,
                 cm_title: $scope.cm_title,
                 langaugemetaid: data.langaugemetaid,
                 TypeName: $scope.TypeName,

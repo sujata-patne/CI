@@ -63,6 +63,7 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
         return data;
     }
 
+// Get Content Catalog details to render on 'content-catalog-search' page
     ContentCatalog.getContentCatalog({ Id: $scope.PropertyId, state: $scope.CurrentPage }, function (content) {
         //ngProgress.complete();
         $scope.uploading = false;
@@ -275,7 +276,7 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             $scope.loading = true;
         }
     }
-        //serach content by
+    //serach content by
     $scope.SearchContentBy = function () {
         if ($scope.SearchContent && $scope.SearchContent != "" && $scope.SelectedSearchContentBy) {
             $scope.FilterData = _.filter($scope.MetaDatas, function (val) {
@@ -321,6 +322,7 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
         $scope.currentPage = 0;
     }
 
+    // get previous page
     $scope.PreviousClick = function () {
         var ChangedData = _.filter($scope.FilterData, function (item) { return item.SelectedPublishReject === 4 || item.SelectedPublishReject === 5; })
         if (ChangedData.length > 0) {
@@ -338,7 +340,7 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             $scope.currentPage = parseInt($scope.currentPage) - 1;
         }
     }
-
+    // get next page
     $scope.NextClick = function () {
         var ChangedData = _.filter($scope.FilterData, function (item) { return item.SelectedPublishReject === 4 || item.SelectedPublishReject === 5; })
         if (ChangedData.length > 0) {
@@ -394,7 +396,7 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             });
         }
     }
-
+    // delete metadata
     $scope.DeleteMetadata = function (Id, Title, state) {
         bootbox.confirm("Are you sure want to delete Content Metadata ?", function (result) {
             if (result) {
@@ -425,7 +427,7 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             }
         });
     }
-
+    // publish all metadata
     $scope.PublishAll = function () {
         if ($scope.FilterData.length > 0) {
             bootbox.confirm("Are you sure want to publish All Content Metadata ?", function (result) {
@@ -462,7 +464,7 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
 
         }
     }
-
+    // publish all metadata on current page
     $scope.PublishAllFromCurrentPage = function (Id, Status, classtext) {
         if ($scope.FilterData.length > 0) {
             var begin = ($scope.currentPage * $scope.pageSize), end = begin + $scope.pageSize;
@@ -502,7 +504,7 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             }
         }
     }
-
+    // save metadata events
     $scope.Submit = function (Id, Status, classtext) {
         if ($scope.FilterData.length > 0) {
             var begin = ($scope.currentPage * $scope.pageSize), end = begin + $scope.pageSize;
@@ -560,7 +562,7 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             }
         }
     }
-
+    // reset search criteria
     $scope.Reset = function (Id, Status, classtext) {
         if (scope.FilterData.length > 0) {
             var begin = ($scope.currentPage * $scope.pageSize), end = begin + $scope.pageSize;
@@ -571,14 +573,15 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             })
         }
     }
+    // set vcode file uploader
     $scope.vcodefileuploader = function () {
         $scope.vcodeError = false;
         $scope.VcodeFiles = [];
         if ($scope.vcodefile) {
-            console.log($scope.vcodefile)
-                //$scope.upload($scope.vcodefile);
+            //console.log($scope.vcodefile)
         }
     };
+    // upload excel for importing vcode and promocode
     $scope.upload = function (isValid) {
         if(isValid && $scope.vcodefile.name == $scope.MetadataId+'_'+$scope.SelectedDownloadType+'_NameList.xlsx') {
             var operators = {};
@@ -635,6 +638,7 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             toastr.error('Invalid Excel file extension or naming conventions.');
         }
     };
+    // add and update vcode and promocode
     $scope.addUpdateVcodePromocode = function (isValid) {
         if ($scope.SelectedCountryOperator) {
             if ($scope.SelectedDownloadType == 'Vcode') {
@@ -707,6 +711,7 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             }
         }
     }
+    // add and update vcode
     $scope.addUpdateVcode123 = function (isValid) {
         if(isValid) {
             ContentCatalog.addUpdateVcode({
@@ -738,11 +743,13 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             });
         }
     }
+    //  close popup of import/export
     $scope.CloseImportExport = function () {
         $scope.ShowExportPopUp = false;
         $scope.ShowImportPopUp = false;
         $scope.ShowVcodeAddUpdatePopUp = false;
     }
+    //  open popup of  export
     $scope.ShowPopupForExport = function (cm_id) {
          $scope.MetadataId = cm_id;
         $scope.ShowExportPopUp = true;
@@ -750,6 +757,7 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
         $scope.SelectedCountryOperator = '';
         $scope.hidevcodepromsubmit = $scope.ShowExportPopUpSubmit =  false;
     }
+    //  open popup of import
     $scope.ShowPopupForImport = function (cm_id) {
          $scope.MetadataId = cm_id;
         $scope.ShowImportPopUp = true;
@@ -760,7 +768,7 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
         $scope.MetadataId = cm_id;
         $scope.ShowVcodeAddUpdatePopUp = true;
     }*/
-
+    //  get vcode for generic type metadata
     $scope.getVcodeForGeneric = function (cm_id) {
         var operators = {};
         if($scope.SelectedDownloadType && $scope.SelectedCountryOperator){
@@ -792,6 +800,8 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             })
         }
     }
+
+    //  open popup of importing vcode
     $scope.ShowPopupForVcode = function (cm_id) {
         $scope.MetadataId = cm_id;
 
@@ -804,7 +814,8 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
         $scope.hidevcodepromsubmit = $scope.ShowExportPopUpSubmit =  false;
 
     }
-    
+    //  open popup of exporting vcode
+
     $scope.showExportpopupsubmit = function () {
         if ($scope.SelectedDownloadType) {
             $scope.ShowExportPopUpSubmit = true;
@@ -818,6 +829,7 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
         var parts = filename.split('.');
         return parts[parts.length - 1];
     }
+    //  export/download into excelsheet for vcode mapping
 
     $scope.ExportForVcode = function () {
          $scope.ShowExportPopUp = false;
@@ -847,7 +859,7 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
                     contentForExport.push(_.extend({'MetadataId' : val.MetadataId, 'ChildId': val.ContentFileId, 'Username': val.Username },obj));
                 })
 
-                var data = ExportExcel1(contentForExport);
+                var data = ExportExcelVcodePromocode(contentForExport);
 
                 Excel.ExportExcel({ data: data, 'FileName': $scope.MetadataId+'_'+$scope.SelectedDownloadType+'_NameList.xlsx' }, function (data) {
                     var blob = new Blob([data], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8" });
@@ -872,7 +884,7 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             toastr.error(error);
         });
     }
-
+    //  export/download into excelsheet for metadata
     $scope.ExportExcel = function () {
         if ($scope.FilterData.length > 0) {
             var array = [];

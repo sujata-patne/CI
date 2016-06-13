@@ -17,19 +17,20 @@ myApp.controller('vendorCtrl', function ($scope, $state, $http, $stateParams, ng
     $scope.open2 = false;
     //  ngProgress.start();
     $scope.uploading = true;
+    //open datepicker for start date
     $scope.openDatepicker = function (evt) {
         $scope.open2 = false;
         evt.preventDefault();
         evt.stopPropagation();
         $scope.open1 = !$scope.open1;
     }
+    //open datepicker for end date
     $scope.openEndDatepicker = function (evt1) {
         $scope.open1 = false;
         evt1.preventDefault();
         evt1.stopPropagation();
         $scope.open2 = !$scope.open2;
     }
-
 
     function GetTitle(expirydate, active) {
         return active != 1 ? "UnBlock" : (Datewithouttime(expirydate) < Datewithouttime(new Date()) ? "Expired" : "Block");
@@ -52,6 +53,7 @@ myApp.controller('vendorCtrl', function ($scope, $state, $http, $stateParams, ng
         });
         return Vendors;
     }
+    //Export/download vendors list in excel file
     $scope.ExportExcel = function () {
         if ($scope.vendorlist.length > 0) {
             var array = [];
@@ -129,7 +131,7 @@ myApp.controller('vendorCtrl', function ($scope, $state, $http, $stateParams, ng
         country = _.unique(country);
         return country;
     }
-
+// get Vendor details list
     Vendors.GetVendors({ Id: $stateParams.id, state: $scope.CurrentPage }, function (vendordata) {
         //  ngProgress.complete();
         $scope.uploading = false;
@@ -179,9 +181,11 @@ myApp.controller('vendorCtrl', function ($scope, $state, $http, $stateParams, ng
     function (error) {
         toastr.error(error);
     });
+    // create search query for vendors
     $scope.SearchVendorclick = function (data) {
         $scope.searchvendorquery = $scope.vendorquery;
     }
+    //reset search form
     $scope.resetform = function () {
         $scope.vendorForm.$setPristine();
     }
@@ -206,9 +210,8 @@ myApp.controller('vendorCtrl', function ($scope, $state, $http, $stateParams, ng
         });
         return DeleteArray;
     }
-
+    //Block and unblock vendors
     $scope.BlockUnBlockVendor = function (Id, Status, classtext) {
-
         if (Status !== "Expired" && classtext !== "darkorange") {
             bootbox.confirm("Are you sure want to " + Status + " this vendor?", function (result) {
                 if (result) {
@@ -241,9 +244,8 @@ myApp.controller('vendorCtrl', function ($scope, $state, $http, $stateParams, ng
         }
 
     }
-
+    //Save vendor details
     $scope.submitForm = function (isValid) {
-
         if (isValid) {
             if (parseInt($scope.PersonMobileNo).toString().length == 10) {
                 if (Datewithouttime($scope.StartDate) <= Datewithouttime($scope.ExpiryDate)) {

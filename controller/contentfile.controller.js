@@ -2661,11 +2661,13 @@ exports.uploadtext = function (req, res, next) {
                         var index = old_path.lastIndexOf('/') + 1;
                         var file_name = old_path.substr(index);
                         var file_namepath = files.file.name.substring(0, files.file.name.indexOf('.'));
-                      
-                        var filenamedata = (fields.cm_id + '_' + fields.ct_param_value + '_' + Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase();
-                        var save_path = config.site_text_path + filenamedata;
-                        var new_path = config.site_base_path + save_path;
+                        var fileCategory = (fields.fileCategory == 1) ?  '':(fields.fileCategory == 2) ?'_supporting':'_preview';
 
+                        var filenamedata = (fields.cm_id + '_' + fields.ct_param_value + fileCategory + '_' + Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase();
+                        var save_path = ((fields.fileCategory == 1) ? config.site_text_path :(fields.fileCategory == 2) ? config.supporting_text_path : config.preview_text_path)  + filenamedata;
+                       // console.log(save_path); process.exit(0);
+                       //var save_path = config.site_text_path + filenamedata;
+                        var new_path = config.site_base_path + save_path;
                         fs.readFile(old_path, function (err, data) {
                             if (err) {
                                 var error = {
@@ -2950,7 +2952,7 @@ exports.uploadtext = function (req, res, next) {
                                                                 cf_modified_by: req.session.UserName,
                                                                 cf_crud_isactive: 1
                                                             };
-                                                            console.log(file)
+                                                            //console.log(file)
                                                             var query = connection_ikon_cms.query('INSERT INTO content_files SET ?', file, function (err, result) {
                                                                 if (err) {
                                                                     var error = {
@@ -3012,6 +3014,7 @@ exports.uploadtext = function (req, res, next) {
         res.status(500).json(err.message);
     }
 }
+
 /**
  * @class
  * @classdesc upload imagery/audio/video content type files as supporting and preview.
@@ -3025,7 +3028,8 @@ exports.uploadotherfiles = function (req, res, next) {
             if (req.session.UserName) {
                 var form = new formidable.IncomingForm();
                 form.parse(req, function (err, fields, files) {
-                    //console.log(fields);
+                    console.log('uploadotherfiles');
+
                     if (files.file) {
                         var date = new Date();
                         var ticks = date.getTime();
@@ -3035,10 +3039,14 @@ exports.uploadotherfiles = function (req, res, next) {
                         var index = old_path.lastIndexOf('/') + 1;
                         var file_name = old_path.substr(index);
                         var file_namepath = files.file.name.substring(0, files.file.name.indexOf('.'));
-                        var preview = (fields.fileCategory == 3) ?  '_preview':'';
+                        var fileCategory = (fields.fileCategory == 1) ?  '':(fields.fileCategory == 2) ?'_supporting':'_preview';
 
-                        var filenamedata = (fields.type != 'text')? (fields.cm_id + '_' + fields.type + preview + '_' + Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase() : (fields.cm_id + '_' + fields.ct_param_value + '_' + Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase();
-                        var save_path = (fields.type == 'image' ? config.site_wallpaper_path : (fields.type == 'audio' ? config.site_audio_path :(fields.type == 'video' ? config.site_video_path:config.site_text_path ))) + filenamedata;
+                        var filenamedata = (fields.type != 'text')? (fields.cm_id + '_' + fields.type + fileCategory + '_' + Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase() : (fields.cm_id + '_' + fields.ct_param_value + fileCategory + '_' + Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase();
+                        //var filenamedata = (fields.type != 'text')? (fields.cm_id + '_' + fields.type +  preview + '_' + Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase() : (fields.cm_id + '_' + fields.ct_param_value + preview + '_' + Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase();
+
+                        var save_path = ((fields.fileCategory == 1) ?  (fields.type == 'image' ? config.site_wallpaper_path : (fields.type == 'audio' ? config.site_audio_path :(fields.type == 'video' ? config.site_video_path:config.site_text_path ))) :(fields.fileCategory == 2) ? (fields.type == 'image' ? config.supporting_image_path : (fields.type == 'audio' ? config.supporting_audio_path :(fields.type == 'video' ? config.supporting_video_path:config.supporting_text_path ))) :(fields.type == 'image' ? config.preview_image_path : (fields.type == 'audio' ? config.preview_audio_path :(fields.type == 'video' ? config.preview_video_path:config.preview_text_path ))) ) + filenamedata;
+//console.log(save_path); process.exit(0);
+                        //var save_path = (fields.type == 'image' ? config.site_wallpaper_path : (fields.type == 'audio' ? config.site_audio_path :(fields.type == 'video' ? config.site_video_path:config.site_text_path ))) + filenamedata;
                         var new_path = config.site_base_path + save_path;
 
                         fs.readFile(old_path, function (err, data) {
@@ -3247,8 +3255,9 @@ exports.replaceFile = function (req, res, next) {
             if (req.session.UserName) {
                 var form = new formidable.IncomingForm();
                 form.parse(req, function (err, fields, files) {
-                    console.log(fields)
+                    //console.log(fields)
                     if (files.file) {
+                        var filename = files.file.name;
                         var old_path = files.file.path;
                         new_path = config.site_base_path + fields.filepath;
                         fs.readFile(old_path, function (err, data) {
@@ -3276,8 +3285,11 @@ exports.replaceFile = function (req, res, next) {
                                         res.status(500).json(err.message);
                                     } else {
                                         temp_path = config.site_temp_path;
-                                        shell.exec('cp "' + new_path + '" "' + temp_path + '"');
-                                        shell.exec('chmod 777 ' + temp_path);
+                                        shell.exec('cp "' + new_path + '" "' + temp_path + filename+'"');
+                                        shell.exec('chmod 777 ' + temp_path+filename);
+
+                                       // shell.exec('cp "' + new_path + '" "' + temp_path + '"');
+                                       // shell.exec('chmod 777 ' + temp_path);
                                         fs.unlink(old_path, function (err) {
                                             if (err) {
                                                 var error = {
@@ -3422,16 +3434,26 @@ exports.replaceThumbFile = function (req, res, next) {
                 var form = new formidable.IncomingForm();
                 form.parse(req, function (err, fields, files) {
                     if (files.file) {
+                        //console.log(files.file)
+                        var filecname = files.file.name;
                         var old_path = files.file.path;
-                        new_path = config.site_base_path + fields.filepath;
+                        var new_path = config.site_base_path + fields.filepath;
                         fs.readFile(old_path, function (err, data) {
                             if (err) {
                                 res.status(500).json(err.message);
                             } else {
+                                shell.exec('chmod 777 ' + new_path);
+
                                 fs.writeFile(new_path, data, function (err) {
                                     if (err) {
                                         res.status(500).json(err.message);
                                     } else {
+                                        var temp_path = config.site_temp_path;
+                                        //shell.exec('cp "' + copyFrom + '" "' + config.site_base_path + newpath128 + '"');
+
+                                        //console.log(temp_path)
+                                        shell.exec('cp "' + new_path + '" "' + temp_path + filename+'"');
+                                        shell.exec('chmod 777 ' + temp_path+filename);
                                         fs.unlink(old_path, function (err) {
                                             if (err) {
                                                 res.status(500).json(err.message);

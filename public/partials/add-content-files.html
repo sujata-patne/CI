@@ -199,7 +199,8 @@
                                                     </thead>
                                                     <tbody>
                                                     <tr data-ng-repeat="meta in LyricsLanguagesMetadata">
-                                                        <td>{{ meta.cd_name }}</td>
+
+                                                        <td>{{ meta.cd_name }} </td>
                                                         <td>{{ meta.MetaId }}</td>
                                                         <td>
                                                             <input type="file" data-ngf-select class="form-control textfile" data-ng-model="meta.langsupportfile" id="langsupportfile_{{meta.MetaId}}" data-ng-change="langSupportFileUploader(meta.langsupportfile,meta.cm_id,meta.ct_group_id,meta.cd_name,meta.MetaId,meta.ct_param,meta.ct_param_value)" accept="text/plain" multiple />

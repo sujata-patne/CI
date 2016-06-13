@@ -369,8 +369,10 @@ exports.getcontentlisting = function (req, res, next) {
                                             }
                                         },
                                         VideoFiles: function (callback) {
+
                                             if (ContentMetadata[0].parentname == "Video") {
-                                                var query = connection_ikon_cms.query('select * from (select cm_id from content_metadata where cm_id = ?)meta inner join (SELECT * FROM content_files  )cm_files on(meta.cm_id = cm_files.cf_cm_id ) inner join(select  ct_group_id, ct_param  as width from content_template where ct_param_value ="width" )ct_width on(ct_width.ct_group_id =cm_files.cf_template_id) left outer join(select  ct_group_id, ct_param  as height from content_template where ct_param_value ="height" )ct_height on(ct_height.ct_group_id =cm_files.cf_template_id) left join(select MIN(cft_thumbnail_img_browse) as cm_thumb_url,cft_cm_id from content_files_thumbnail where cft_cm_id = ? group by cft_cm_id)cth on(cth.cft_cm_id =meta.cm_id)', [req.body.Id, req.body.Id], function (err, TextFiles) {
+                                                var query = connection_ikon_cms.query('select * from (select cm_id from content_metadata where cm_id = ?)meta ' +
+                                                    'inner join (SELECT * FROM content_files  )cm_files on(meta.cm_id = cm_files.cf_cm_id and (file_category_id = 1 OR ISNULL(file_category_id))) inner join(select  ct_group_id, ct_param  as width from content_template where ct_param_value ="width" )ct_width on(ct_width.ct_group_id =cm_files.cf_template_id) left outer join(select  ct_group_id, ct_param  as height from content_template where ct_param_value ="height" )ct_height on(ct_height.ct_group_id =cm_files.cf_template_id) left join(select MIN(cft_thumbnail_img_browse) as cm_thumb_url,cft_cm_id from content_files_thumbnail where cft_cm_id = ? group by cft_cm_id)cth on(cth.cft_cm_id =meta.cm_id)', [req.body.Id, req.body.Id], function (err, TextFiles) {
                                                     callback(err, TextFiles);
                                                 });
                                             }
@@ -398,7 +400,7 @@ exports.getcontentlisting = function (req, res, next) {
                                             if (ContentMetadata[0].parentname == "Audio") {
                                                 var query = 'select meta.cm_id, cm_files.*, ct_bitrate_high.high_url, ct_bitrate_high.high_bitrate, ct_bitrate_medium.medium_url, ct_bitrate_medium.medium_bitrate, ct_bitrate_low.low_url, ct_bitrate_low.low_bitrate, cth.* ' +
                                                     'from content_metadata  as meta '+
-                                                    'left join content_files as cm_files on(meta.cm_id = cm_files.cf_cm_id ) '+
+                                                    'left join content_files as cm_files on(meta.cm_id = cm_files.cf_cm_id and (file_category_id = 1 OR ISNULL(file_category_id))) '+
                                                     'inner join(select  ct_group_id, ct_param  as bitrate from content_template where ct_param_value ="bitrate" )ct_bitrate on(ct_bitrate.ct_group_id =cm_files.cf_template_id) ' +
                                                     'left JOIN(select cf_name,cf_cm_id, ct_param  as high_bitrate, cf_url as high_url from content_files as high join content_template  on( cf_template_id = ct_group_id ) where ct_param_value ="bitrate" and ct_param = 128 )ct_bitrate_high on(cm_files.cf_cm_id =ct_bitrate_high.cf_cm_id and cm_files.cf_name =ct_bitrate_high.cf_name) '+
                                                     'left JOIN(select cf_name,cf_cm_id, ct_group_id, ct_param  as medium_bitrate, cf_url as medium_url from content_files  as medium join content_template  on( cf_template_id = ct_group_id ) where ct_param_value ="bitrate" and ct_param = 64 )ct_bitrate_medium on(ct_bitrate_medium.cf_cm_id =cm_files.cf_cm_id and ct_bitrate_medium.cf_name =cm_files.cf_name) '+
@@ -406,7 +408,7 @@ exports.getcontentlisting = function (req, res, next) {
                                                     'left JOIN(select MIN(cft_thumbnail_img_browse) as cm_thumb_url,cft_cm_id from content_files_thumbnail) as cth on(cth.cft_cm_id = cm_files.cf_cm_id) '+
                                                     'where cm_files.cf_cm_id = ? GROUP BY cm_files.cf_name, CASE WHEN cm_files.cf_name IS NULL THEN cm_files.cf_id ELSE 0 END ' +
                                                     'ORDER BY cm_files.cf_id';
-                                                //console.log(query)
+                                                console.log(query)
                                                 connection_ikon_cms.query(query, [req.body.Id], function (err, AudioFiles) {
                                                   //  console.log(AudioFiles)
 
@@ -449,7 +451,9 @@ exports.getcontentlisting = function (req, res, next) {
                                             var query ='select * from (select cm_id from content_metadata where cm_id = ? )meta ' +
                                                 'left join (SELECT * FROM content_files  )cm_files on(meta.cm_id = cm_files.cf_cm_id and file_category_id = 2 )' +
                                                 'right join(select ct_group_id,ct_param_value, ct_param  as otheraudio from content_template ' +
-                                                'where ct_param_value ="bitrate" and ct_param = 128 )ct_image on(ct_image.ct_group_id =cm_files.cf_template_id) ';
+                                                //'where ct_param_value ="bitrate" and ct_param = 128 )ct_image on(ct_image.ct_group_id =cm_files.cf_template_id) ';
+                                                'where ct_param_value ="otheraudio" )ct_image on(ct_image.ct_group_id =cm_files.cf_template_id) ';
+
                                             //console.log(query);
                                             connection_ikon_cms.query(query, [req.body.Id], function (err, OtherVideos) {
 
@@ -517,7 +521,9 @@ exports.getcontentlisting = function (req, res, next) {
                                             var query ='select * from (select cm_id from content_metadata where cm_id = ? )meta ' +
                                                 'left join (SELECT * FROM content_files  )cm_files on(meta.cm_id = cm_files.cf_cm_id and file_category_id = 3 )' +
                                                 'right join(select ct_group_id,ct_param_value, ct_param  as otheraudio from content_template ' +
-                                                'where ct_param_value ="bitrate" and ct_param = 128 )ct_image on(ct_image.ct_group_id =cm_files.cf_template_id) ';
+                                                'where ct_param_value ="otheraudio" )ct_image on(ct_image.ct_group_id =cm_files.cf_template_id) ';
+
+                                            //'where ct_param_value ="bitrate" and ct_param = 128 )ct_image on(ct_image.ct_group_id =cm_files.cf_template_id) ';
 
                                             connection_ikon_cms.query(query, [req.body.Id], function (err, OtherVideos) {
                                                 //console.log(OtherVideos);

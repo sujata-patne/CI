@@ -21,4 +21,13 @@ poolCluster.add('SITE', {
     database: config.db_name_site_user
 });
 
+/*var getConnection = function(clusterName,callback) {
+    pool.getConnection(function(err, connection) {
+        console.log('created connection')
+        callback(err, connection);
+    });
+};
+ module.exports = getConnection;
+ */
+
 exports.pool = poolCluster;

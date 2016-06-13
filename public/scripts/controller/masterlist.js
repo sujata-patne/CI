@@ -16,6 +16,7 @@ myApp.controller('masterListCtrl', function ($scope, $window, $http, $state, ngP
     $scope.pageSize = 34;
    // ngProgress.start();
     $scope.uploading = true;
+    //  Get masterlist details
     MasterLists.getMasterList({ Id: $stateParams.id, state: $scope.CurrentPage }, function (master) {
       //  ngProgress.complete();
         $scope.uploading = false;
@@ -52,6 +53,7 @@ myApp.controller('masterListCtrl', function ($scope, $window, $http, $state, ngP
     }, function (error) {
         toastr.error(error);
     });
+    //  Download/export master list data into excel file
     $scope.ExportExcel = function () {
         if ($scope.MasterlistExportData.length > 0) {
             var array = [];
@@ -126,6 +128,8 @@ myApp.controller('masterListCtrl', function ($scope, $window, $http, $state, ngP
             createChunks();
         }
     }
+
+    //  get search data
     $scope.FilterContent = function (data) {
         $scope.searchcontentquery = $scope.Searchquery;
         createChunks();
