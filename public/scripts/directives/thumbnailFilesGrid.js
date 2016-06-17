@@ -7,6 +7,8 @@ myApp.directive('thumbFileListGrid', function () {
         tranclude: true,
         templateUrl: '../../partials/views/thumb-file-list.html',
         controller: function ($scope, ngProgress, Upload, ContentFile) {
+            $scope.IsEditPermission = ($scope.UserRole == "Moderator" || $scope.UserRole == "Super Admin") ? true : false;
+
             $scope.upload = function (isvalid) {
                 if (isvalid) {
                     if ($scope.replaceThumbfile) {

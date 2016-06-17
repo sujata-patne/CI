@@ -122,6 +122,31 @@
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <div class="form-group">
+                                                    <label for="firstname" class="col-sm-12">Supporting Languages</label>
+                                                    <div class="col-sm-12">
+                                                    <span class="ui-select">
+                                                        <select size="2" name="lyricslanguages"  data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in Languages" data-ng-model="SelectedLyricsLanguages" multiple>
+                                                        </select>
+                                                    </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="userid" class="col-sm-12">Support In APP purchase</label>
+                                                    <div class="col-sm-12">
+                                                        <span class="ui-select">
+                                                            <select name="SupportAppPurchase" data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in SupportAppPurchase" data-ng-model="SelectedSupportAppPurchase">
+                                                                <option value="">Select Support</option>
+                                                            </select>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
                                                     <label for="userid" class="col-sm-12"><span class="asterisk">*</span>Genres</label>
                                                     <div class="col-sm-12">
                                                         <span class="ui-select">
@@ -134,32 +159,22 @@
                                                         </span>
                                                     </div>
                                                 </div>
-                                            </div>
+                                                </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="userid" class="col-sm-12">Sub Genres</label>
                                                     <div class="col-sm-12">
                                                         <span class="ui-select">
-                                                            <select name="SubGenres" data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in SubGenres" data-ng-model="SelectedSubGenres" multiple>
+                                                            <select name="SubGenres"  size="2" data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in SubGenres" data-ng-model="SelectedSubGenres" multiple>
                                                                 <option value="">Select Sub Genres</option>
                                                             </select>
                                                         </span>
                                                     </div>
                                                 </div>
+
                                             </div>
                                         </div>
 
-
-                                        <div class="form-group">
-                                            <label for="userid" class="col-sm-12">Support In APP purchase</label>
-                                            <div class="col-sm-12">
-                                                <span class="ui-select">
-                                                    <select name="SupportAppPurchase" data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in SupportAppPurchase" data-ng-model="SelectedSupportAppPurchase">
-                                                        <option value="">Select Support</option>
-                                                    </select>
-                                                </span>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6" style="padding: 0px;">

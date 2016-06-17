@@ -1,10 +1,21 @@
-
+/**
+ * @memberof myApp
+ * @name content-catalogCtrl
+ * @desc Content Catalog Controller
+ * @param $scope {service} controller scope
+ * @param $state {service} controller scope
+ * @param $http {service} controller scope
+ */
 myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateParams, ngProgress, $window, ContentCatalog, $q, _, Icon, Excel, Upload,FileSaver) {
     $('.removeActiveClass').removeClass('active');
     $('.removeSubactiveClass').removeClass('active');
     $('#contentcatelog').addClass('active');
     ngProgress.color('yellowgreen');
     ngProgress.height('3px');
+    /**
+     * @name loader
+     * @type {boolean}
+     */
     $scope.loader = true;
     $scope.uploading = false;
     $scope.CurrentPage = $state.current.name;
@@ -18,8 +29,18 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
     $scope.hidevcodepromsubmit = $scope.ShowExportPopUpSubmit= false;
     //ngProgress.start();
     $scope.uploading = true;
-    // get status & color & edit
-    function getStatus(UserRole, MetadataExpirydate, VendorExpirydate, PropertyExpirydate, Meta_active, Vendor_active, Property_active, cm_state) {
+    /**
+     * @name getStatus
+     * @desc Get status & color & edit
+     * @param MetadataExpirydate
+     * @param VendorExpirydate
+     * @param PropertyExpirydate
+     * @param Vendor_active
+     * @param Property_active
+     * @param cm_state
+     * @returns {{color: string, cm_state: *, IsEdit: boolean, status: string, IsBlock: boolean}}
+     */
+    function getStatus(MetadataExpirydate, VendorExpirydate, PropertyExpirydate, Vendor_active, Property_active, cm_state) {
         var data = { color: "chartreuse", cm_state: cm_state, IsEdit: true, status: 'Active', IsBlock: false };
         if (cm_state == 7 || cm_state == 5 || cm_state == 1 || cm_state == 2) {
         }
@@ -63,7 +84,11 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
         return data;
     }
 
-// Get Content Catalog details to render on 'content-catalog-search' page
+    /**
+     * @name ContentCatalog.getContentCatalog
+     * @desc Get Content Catalog details to render on 'content-catalog-search' page
+     * @memberOf Factories/Services ContentCatalog
+     */
     ContentCatalog.getContentCatalog({ Id: $scope.PropertyId, state: $scope.CurrentPage }, function (content) {
         //ngProgress.complete();
         $scope.uploading = false;
@@ -73,8 +98,7 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             meta.color = data.color;
             meta.MetaId = Icon.GetEncode(meta.cm_id);
 			meta.cm_thumb_url = meta.cm_thumb_url != null && meta.cm_thumb_url ?meta.cm_thumb_url.split(',')[0]:'';
-			
-            meta.IsEdit = data.IsEdit;
+			meta.IsEdit = data.IsEdit;
             meta.status = data.status;
             meta.edit = GetEditContentType(meta.parentname);
             meta.UserRole = content.UserRole;
@@ -127,8 +151,11 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
     }, function (error) {
         toastr.error(error);
     });
-
-    // grid hide & show event
+    /**
+     * @name SwitchCaseForGrid
+     * @param state
+     * @desc To hide & show grid
+     */
     function SwitchCaseForGrid(state) {
         switch (state) {
             case 'File Upload Pending':
@@ -204,10 +231,14 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
                 $scope.DeletedContentShow = false;
                 break;
         }
-
-
     }
-    // get string for edit
+
+    /**
+     * @name GetEditContentType
+     * @param state
+     * @returns {string}
+     * @desc Set page state according to Content Type
+     */
     function GetEditContentType(state) {
         var contenttype = '';
         switch (state) {
@@ -229,7 +260,11 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
         }
         return contenttype;
     };
-    //content status change
+    /**
+     * $desc content status change
+     * @name StatusChange
+     */ 
+
     $scope.StatusChange = function () {
 
         if ($scope.SelectedContentStatus) {
@@ -276,7 +311,7 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             $scope.loading = true;
         }
     }
-    //serach content by
+    //search content by
     $scope.SearchContentBy = function () {
         if ($scope.SearchContent && $scope.SearchContent != "" && $scope.SelectedSearchContentBy) {
             $scope.FilterData = _.filter($scope.MetaDatas, function (val) {

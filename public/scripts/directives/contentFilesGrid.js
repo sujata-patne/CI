@@ -7,6 +7,8 @@ myApp.directive('contentFileListGrid', function () {
         tranclude: true,
         templateUrl: '../../partials/views/content-file-list.html',
         controller: function ($scope, ngProgress, Upload, ContentFile) {
+            $scope.IsEditPermission = ($scope.UserRole == "Moderator" || $scope.UserRole == "Super Admin") ? true : false;
+
             $scope.uploadAudio = function (isvalid) {
                 if (isvalid) {
                     if ($scope.replacefile) {
@@ -164,16 +166,11 @@ myApp.directive('contentFileListGrid', function () {
                     val.filename_128 = (val.high_url) ? val.high_url.substring(val.high_url.lastIndexOf("/") + 1).toLowerCase() : '';
                     val.filename_64 = (val.medium_url) ? val.medium_url.substring(val.medium_url.lastIndexOf("/") + 1).toLowerCase() : '';
                     val.filename_32 = (val.low_url) ? val.low_url.substring(val.low_url.lastIndexOf("/") + 1).toLowerCase() : '';
-
                     if (val.filename_128 != '' || val.filename_64 != '' || val.filename_32 != '') {
                         $scope.audioBitrateFiles.push(val);
                     }
                 });
-
                 $scope.audioFileDetails = BindMasterList($scope.audioBitrateFiles);
-                //$scope.filesdetail = BindMasterList($scope.audioBitrateFiles);
-                console.log($scope.audioFileDetails);
-
             }
             $scope.resetSearch = function () {
                 $scope.currentPage = 0;

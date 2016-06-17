@@ -54,6 +54,8 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
             }
         })
         var meta = content.ContentMetadata[0];
+        console.log('meta.parentname ')
+        console.log(meta.parentname)
         var data = getStatus(content.UserRole, meta.cm_expires_on, meta.vd_end_on, meta.propertyexpirydate, meta.cm_state, meta.vd_is_active, meta.propertyactive, meta.cm_state);
         if (data) {
             $scope.error = data;
@@ -64,6 +66,10 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
         }
         else if (meta.parentname == "Video") {
             $scope.Filesuggestion = "Filename must be ContentId_Width_Height.extension like [2345_240x360.mp4].";
+        }else if (meta.parentname == "Text") {
+            $scope.Filesuggestion = "Filename must be ContentId_Language_Index.extension like [2345_hindi_02.txt].";
+        }else if (meta.parentname == "AppsGames") {
+            $scope.Filesuggestion = "Filename must be ContentId_App/Game_Index.extension like [2345_app_01.apk].";
         }
 
         $scope.MetaId = $stateParams.id;
@@ -154,14 +160,14 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
             $scope.FileUploadVisible = true;
             $scope.isContentExist = false;
             _.each($scope.WallpaperFiles, function (val) {
-                val.compressheight = "100%";
-                val.compresswidth = "100%";
+                val.compressheight = "100";
+                val.compresswidth = "100";
                 if (val.height > val.width) {
-                    val.compressheight = "100%"
+                    val.compressheight = "100"
                     val.compresswidth = (((val.width * 100) / val.height).toFixed(2)).toString() + "%";
                 }
                 else if (val.width > val.height) {
-                    val.compresswidth = "100%"
+                    val.compresswidth = "100"
                     val.compressheight = (((val.height * 100) / val.width).toFixed(2)).toString() + "%";
                 }
                 val.type = 'wallpaper';
@@ -235,7 +241,7 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
         if($scope.SupportingImages.length > 0){
             var j = 0;
             _.each($scope.SupportingImages, function (val,index) {
-                console.log(val.cf_name_alias)
+                //console.log(val.cf_name_alias)
                 val.type = 'otherimage';
                 val.Name = 'Image';
                 val.indexno = $scope.SupportingFiles.length+1;

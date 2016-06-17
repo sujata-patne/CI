@@ -516,7 +516,7 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
                         }else if(getExtension(val.name).toLowerCase() == "mp3") {
 
                             var count = _.where($scope.CommonFiles, { type: 'audio' });
-                            var match = _.find($scope.OtherTemplates, function (item) { return item.ct_param_value == 'bitrate' })
+                            var match = _.find($scope.OtherTemplates, function (item) { return item.ct_param_value == 'otheraudio' })
                             if (match) {
                                 $scope.CommonFiles.push({fileCategory:$scope.Preview,  count: (otheraudio.length + count.length + 1), file: val, type: 'audio', ct_group_id: match.ct_group_id, cm_id: $scope.MetaId, width: null, height: null, other: 'common' })
                             }

@@ -547,6 +547,8 @@ exports.uploadimagery = function (req, res, next) {
                         var filenamedata = (fields.cm_id + '_' + fields.width + "_" + fields.height + '.' + file_ext).toLowerCase();
                         var save_path = config.site_wallpaper_path + filenamedata;
                         var new_path = config.site_base_path + save_path;
+                        var temp_path = config.site_temp_path + filenamedata;
+
                         fs.readFile(old_path, function (err, data) {
                             if (err) {
                                 var error = {
@@ -569,6 +571,9 @@ exports.uploadimagery = function (req, res, next) {
                                         wlogger.error(error); // for error
                                         res.status(500).json(err.message);
                                     } else {
+                                        shell.exec('chmod 777 ' + new_path);
+                                        shell.exec('cp "' + new_path + '" "' + temp_path + '"');
+                                        shell.exec('chmod 777 ' + temp_path);
                                         fs.unlink(old_path, function (err) {
                                             if (err) {
                                                 var error = {
@@ -1247,6 +1252,8 @@ exports.uploadvideo = function (req, res, next) {
                         var filenamedata = (fields.cm_id + '_' + fields.width + "_" + fields.height + '.' + file_ext).toLowerCase();
                         var save_path = config.site_video_path + filenamedata;
                         var new_path = config.site_base_path + save_path;
+                        var temp_path = config.site_temp_path + filenamedata;
+
                         var data = shell.exec('ffprobe -v error -show_entries stream=width,height  -of default=noprint_wrappers=1 ' + old_path);
                         if (data.code == 0) {
                             var val1 = data.output;
@@ -1276,6 +1283,9 @@ exports.uploadvideo = function (req, res, next) {
                                                 wlogger.error(error); // for information
                                                 res.status(500).json(err.message);
                                             } else {
+                                                shell.exec('chmod 777 ' + new_path);
+                                                shell.exec('cp "' + new_path + '" "' + temp_path + '"');
+                                                shell.exec('chmod 777 ' + temp_path);
                                                 fs.unlink(old_path, function (err) {
                                                     if (err) {
                                                         var error = {
@@ -2262,6 +2272,8 @@ exports.uploadappsgame = function (req, res, next) {
                         var filenamedata = (fields.cm_id + '_' + 'app' + '_' + Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase();
                         var save_path = config.site_game_path + filenamedata;
                         var new_path = config.site_base_path + save_path;
+                        var temp_path = config.site_temp_path + filenamedata;
+
                         fs.readFile(old_path, function (err, data) {
                             if (err) {
                                 var error = {
@@ -2284,6 +2296,9 @@ exports.uploadappsgame = function (req, res, next) {
                                         wlogger.error(error); // for err
                                         res.status(500).json(err.message);
                                     } else {
+                                        shell.exec('chmod 777 ' + new_path);
+                                        shell.exec('cp "' + new_path + '" "' + temp_path + '"');
+                                        shell.exec('chmod 777 ' + temp_path);
                                         fs.unlink(old_path, function (err) {
                                             if (err) {
                                                 res.status(500).json(err.message);
@@ -2668,6 +2683,8 @@ exports.uploadtext = function (req, res, next) {
                        // console.log(save_path); process.exit(0);
                        //var save_path = config.site_text_path + filenamedata;
                         var new_path = config.site_base_path + save_path;
+                        var temp_path = config.site_temp_path + filenamedata;
+
                         fs.readFile(old_path, function (err, data) {
                             if (err) {
                                 var error = {
@@ -2690,6 +2707,9 @@ exports.uploadtext = function (req, res, next) {
                                         wlogger.error(error); // for err
                                         res.status(500).json(err.message);
                                     } else {
+                                        shell.exec('chmod 777 ' + new_path);
+                                        shell.exec('cp "' + new_path + '" "' + temp_path + '"');
+                                        shell.exec('chmod 777 ' + temp_path);
                                         fs.unlink(old_path, function (err) {
                                             if (err) {
                                                 var error = {
@@ -3043,10 +3063,8 @@ exports.uploadotherfiles = function (req, res, next) {
 
                         var filenamedata = (fields.type != 'text')? (fields.cm_id + '_' + fields.type + fileCategory + '_' + Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase() : (fields.cm_id + '_' + fields.ct_param_value + fileCategory + '_' + Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase();
                         //var filenamedata = (fields.type != 'text')? (fields.cm_id + '_' + fields.type +  preview + '_' + Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase() : (fields.cm_id + '_' + fields.ct_param_value + preview + '_' + Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase();
-
                         var save_path = ((fields.fileCategory == 1) ?  (fields.type == 'image' ? config.site_wallpaper_path : (fields.type == 'audio' ? config.site_audio_path :(fields.type == 'video' ? config.site_video_path:config.site_text_path ))) :(fields.fileCategory == 2) ? (fields.type == 'image' ? config.supporting_image_path : (fields.type == 'audio' ? config.supporting_audio_path :(fields.type == 'video' ? config.supporting_video_path:config.supporting_text_path ))) :(fields.type == 'image' ? config.preview_image_path : (fields.type == 'audio' ? config.preview_audio_path :(fields.type == 'video' ? config.preview_video_path:config.preview_text_path ))) ) + filenamedata;
-//console.log(save_path); process.exit(0);
-                        //var save_path = (fields.type == 'image' ? config.site_wallpaper_path : (fields.type == 'audio' ? config.site_audio_path :(fields.type == 'video' ? config.site_video_path:config.site_text_path ))) + filenamedata;
+                         //var save_path = (fields.type == 'image' ? config.site_wallpaper_path : (fields.type == 'audio' ? config.site_audio_path :(fields.type == 'video' ? config.site_video_path:config.site_text_path ))) + filenamedata;
                         var new_path = config.site_base_path + save_path;
 
                         fs.readFile(old_path, function (err, data) {
@@ -3101,6 +3119,7 @@ exports.uploadotherfiles = function (req, res, next) {
                                                         }
                                                         else {
                                                             var data = shell.exec('ffprobe -v error -show_entries stream=width,height,bit_rate,duration -show_entries format=size -of default=noprint_wrappers=1 ' + new_path);
+                                                            console.log(data);
 
                                                             if (data.code == 0) {
                                                                 var endOfLine = require('os').EOL;
@@ -3138,7 +3157,7 @@ exports.uploadotherfiles = function (req, res, next) {
                                                                 cf_template_id: fields.ct_group_id,
                                                                 cf_name: null,
                                                                 cf_bitrate: bitRate,
-                                                                cf_name_alias: fields.count,
+                                                               // cf_name_alias: fields.count,
                                                                 cf_created_on: new Date(),
                                                                 cf_created_by: req.session.UserName,
                                                                 cf_modified_on: new Date(),
@@ -3321,7 +3340,7 @@ exports.replaceFile = function (req, res, next) {
                                                         }
                                                         else {
                                                             var data = shell.exec('ffprobe -v error -show_entries stream=width,height,bit_rate,duration -show_entries format=size -of default=noprint_wrappers=1 ' + new_path);
-
+                                                            console.log(data);
                                                             if (data.code == 0) {
                                                                 var endOfLine = require('os').EOL;
                                                                 var fileInfo = data.output.split(endOfLine);
@@ -3347,7 +3366,8 @@ exports.replaceFile = function (req, res, next) {
                                                             }else{
                                                                 var bitRate = '';
                                                             }
-
+                                                            console.log(fields.TypeName);
+                                                            console.log(bitRate);
                                                             var file = {
                                                                 cf_id: fields.cf_id,
                                                                 cf_cm_id: fields.cm_id,                                                                
@@ -3435,7 +3455,7 @@ exports.replaceThumbFile = function (req, res, next) {
                 form.parse(req, function (err, fields, files) {
                     if (files.file) {
                         //console.log(files.file)
-                        var filecname = files.file.name;
+                        var filename = files.file.name;
                         var old_path = files.file.path;
                         var new_path = config.site_base_path + fields.filepath;
                         fs.readFile(old_path, function (err, data) {

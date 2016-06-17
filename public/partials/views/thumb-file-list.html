@@ -7,7 +7,7 @@
                     <input type="file" required class="form-control" data-ngf-select data-ng-model="replaceThumbfile" id="replaceThumbfile" data-ng-change="replaceThumbfileupload()" multiple />
                 </div>
                 <div class="col-sm-3" data-ng-hide="uploading">
-                    <button type="submit" title="Submit" class="btn btn-primary btn-w-md">Submit</button>
+                    <button data-ng-hide="IsEditPermission" type="submit" title="Submit" class="btn btn-primary btn-w-md">Submit</button>
                 </div>
             </div>
             <div class="col-sm-12">

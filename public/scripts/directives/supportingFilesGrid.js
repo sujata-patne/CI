@@ -10,6 +10,7 @@ myApp.directive('supportingFileListGrid', function () {
             $scope.uploadFiles = [];
             $scope.replaceSupportingFile = [];
             $scope.tempFiles = [];
+            $scope.IsEditPermission = ($scope.UserRole == "Moderator" || $scope.UserRole == "Super Admin") ? true : false;
 
             function getExtension(filename) {
                 var parts = filename.split('.');
@@ -47,9 +48,7 @@ myApp.directive('supportingFileListGrid', function () {
 
                         var match = _.find($scope.SupportingFiles, function (val) {
                             return val.filename == $scope.replaceSupportingFile[cnt].file.name.toLowerCase()
-                        });
-                        console.log('match');
-                        console.log(match);
+                        }); 
                         if (match) {
                             ngProgress.start();
                             $scope.uploading = true;
@@ -185,9 +184,7 @@ myApp.directive('supportingFileListGrid', function () {
                         });
                     });
                 }
-            }
-            console.log('$scope.SupportingFiles')
-            console.log($scope.SupportingFiles)
+            } 
             $scope.addReplaceSupportingFileUpload = function (files, templateId, ct_param_value, file_order, file_type,indexno) {
                 if (files) {
                     var val = files;
@@ -196,8 +193,7 @@ myApp.directive('supportingFileListGrid', function () {
                     var otheraudio = _.where(files, {type: 'otheraudio'});
                     var othervideos = _.where(files, {type: 'othervideo'});
                     var othertext = _.where(files, {type: 'othertext'});
-                    console.log('$scope.SupportingFiles')
-                    console.log($scope.SupportingFiles)
+                    
                     if (isImage(val.name) && file_type == 'otherimage') {
                         var count = _.where($scope.uploadFiles, {type: 'image'});
                         var match = _.find($scope.OtherTemplates, function (item) {
@@ -217,7 +213,8 @@ myApp.directive('supportingFileListGrid', function () {
                                 toastr.error('To replace a file, name & extension should be same');
                             }
                         }
-                    }else if (getExtension(val.name).toLowerCase() == "mp3" && file_type == 'otheraudio') { //otheraudio
+                    }
+                    else if (getExtension(val.name).toLowerCase() == "mp3" && file_type == 'otheraudio') { //otheraudio
                         var count = _.where($scope.uploadFiles, {type: 'audio'});
                         var match = _.find($scope.OtherTemplates, function (item) {
                             return item.ct_param_value == 'otheraudio'
@@ -271,17 +268,8 @@ myApp.directive('supportingFileListGrid', function () {
                     } else {
                         toastr.error('select proper file for upload');
                     }
-                    console.log('$scope.uploadFiles if')
-                    console.log($scope.uploadFiles)
-                    console.log('$scope.replaceSupportingFile if')
-                    console.log($scope.replaceSupportingFile)
                 }
                 else{
-                    console.log('$scope.uploadFiles else')
-                    console.log($scope.uploadFiles)
-                    console.log('$scope.replaceSupportingFile else')
-                    console.log($scope.replaceSupportingFile)
-
                     if($scope.tempFiles) {
                         if (_.where($scope.tempFiles, {action: 'replace',index:file_order}).length > 0) {
                             $scope.replaceSupportingFile[file_order] = null;

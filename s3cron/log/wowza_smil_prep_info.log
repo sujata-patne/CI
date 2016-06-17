@@ -1,0 +1,2068 @@
+2016-06-10/15:32:53.615  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/icon/content_ingestion/public/temp/2123_video_supporting_01.mp4
+2016-06-10/15:32:53.629  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-10/15:34:47.941  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/icon/content_ingestion/public/temp/2123_video_supporting_01.mp4
+2016-06-10/15:34:47.942  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-10/15:38:02.791  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/icon/content_ingestion/public/temp/2123_video_supporting_01.mp4
+2016-06-10/15:38:02.792  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-10/15:39:06.846  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/icon/content_ingestion/public/temp/2123_video_supporting_01.mp4
+2016-06-10/15:39:06.847  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-10/15:39:32.542  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/icon/content_ingestion/public/temp/2123_video_supporting_01.mp4
+2016-06-10/15:39:32.543  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-10/15:44:01.240  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/icon/content_ingestion/public/temp/2123_video_supporting_01.mp4
+2016-06-10/15:44:01.241  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-10/15:47:08.480  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/icon/content_ingestion/public/temp/2123_video_supporting_01.mp4
+2016-06-10/15:47:08.481  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-10/15:48:08.149  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/icon/content_ingestion/public/temp/2123_video_supporting_01.mp4
+2016-06-10/15:48:08.150  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-10/15:49:53.573  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/icon/content_ingestion/public/temp/2123_video_supporting_01.mp4
+2016-06-10/15:49:53.574  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-10/16:22:19.831  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/icon/content_ingestion/public/temp/2123_video_supporting_01.mp4
+2016-06-10/16:22:19.831  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-10/16:23:15.791  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/icon/content_ingestion/public/temp/2123_video_supporting_01.mp4
+2016-06-10/16:23:15.792  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-10/16:24:52.044  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/icon/content_ingestion/public/temp/2123_video_supporting_01.mp4
+2016-06-10/16:24:52.044  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-10/16:26:18.401  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/icon/content_ingestion/public/temp/2123_video_supporting_01.mp4
+2016-06-10/16:26:18.402  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-10/16:26:59.277  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/icon/content_ingestion/public/temp/2123_video_supporting_01.mp4
+2016-06-10/16:26:59.278  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-10/16:28:02.765  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-10/16:28:02.766  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-10/16:28:46.607  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-10/16:28:46.608  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-10/16:28:49.997  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-10/16:28:49.997  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-10/16:32:07.823  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-10/16:32:07.824  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-10/16:32:10.468  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-10/16:32:10.468  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/10:04:31.033  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/10:04:31.056  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/10:04:31.303  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:04:35.332  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/10:04:35.333  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:04:40.786  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/10:04:40.786  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:04:46.498  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/10:04:46.498  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:04:51.777  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/10:04:51.777  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:04:57.251  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/10:04:57.690  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/10:10:02.649  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/10:10:02.654  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/10:10:02.809  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:10:07.403  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/10:10:07.403  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:10:13.098  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/10:10:13.099  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:10:18.519  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/10:10:18.519  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:10:24.493  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/10:10:24.493  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:10:29.855  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/10:10:29.904  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/10:12:22.257  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/10:12:22.259  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/10:12:22.419  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:12:26.901  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/10:12:26.901  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:12:32.372  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/10:12:32.372  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:12:38.470  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/10:12:38.470  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:12:44.122  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/10:12:44.122  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:12:49.655  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/10:12:49.714  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/10:14:00.383  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/10:14:00.385  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/10:14:00.636  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:14:05.157  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/10:14:05.157  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:14:10.616  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/10:14:10.616  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:14:16.039  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/10:14:16.040  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:14:21.430  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/10:14:21.431  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:14:26.872  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/10:14:26.923  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/10:16:26.988  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/10:16:26.989  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/10:16:27.153  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:16:31.608  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/10:16:31.608  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:16:36.930  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/10:16:36.930  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:16:42.278  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/10:16:42.278  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:16:48.360  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/10:16:48.360  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:16:53.832  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/10:16:53.878  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/10:27:32.882  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/10:27:32.883  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/10:27:33.061  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:27:38.223  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/10:27:38.223  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:27:43.706  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/10:27:43.707  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:27:49.438  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/10:27:49.438  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:27:55.068  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/10:27:55.068  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:28:00.640  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/10:28:00.689  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/10:31:14.681  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/10:31:14.682  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/10:31:14.845  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:31:18.783  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/10:31:18.783  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:31:24.165  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/10:31:24.166  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:31:30.143  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/10:31:30.143  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:31:35.532  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/10:31:35.533  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:31:41.284  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/10:31:41.342  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/10:33:30.738  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/10:33:30.739  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/10:33:30.884  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:33:35.595  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/10:33:35.595  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:33:41.082  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/10:33:41.083  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:33:46.834  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/10:33:46.834  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:33:52.182  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/10:33:52.182  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:33:57.890  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/10:33:57.939  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/10:39:54.379  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/10:39:54.380  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/10:39:54.554  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:39:59.009  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/10:39:59.010  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:40:04.985  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/10:40:04.985  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:40:10.513  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/10:40:10.513  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:40:15.857  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/10:40:15.857  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:40:21.154  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/10:40:21.204  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/10:43:59.174  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/10:43:59.175  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/10:43:59.337  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:44:04.008  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/10:44:04.009  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:44:09.692  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/10:44:09.693  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:44:15.198  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/10:44:15.198  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:44:20.652  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/10:44:20.652  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:44:25.977  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/10:44:26.025  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/10:45:09.601  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/10:45:09.602  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/10:45:09.786  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:45:13.457  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/10:45:13.457  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:45:19.299  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/10:45:19.299  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:45:24.724  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/10:45:24.724  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:45:30.313  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/10:45:30.313  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:45:35.780  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/10:45:35.832  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/10:47:20.201  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/10:47:20.202  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/10:47:20.348  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:47:24.784  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/10:47:24.784  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:47:30.193  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/10:47:30.193  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:47:35.792  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/10:47:35.792  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:47:41.260  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/10:47:41.260  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:47:46.755  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/10:47:46.808  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/10:49:04.647  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/10:49:04.648  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/10:49:04.799  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:49:08.909  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/10:49:08.909  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:49:14.675  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/10:49:14.675  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:49:20.227  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/10:49:20.227  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:49:25.549  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/10:49:25.549  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:49:31.132  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/10:49:31.181  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/10:51:28.021  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/10:51:28.022  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/10:51:28.195  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:51:32.494  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/10:51:32.494  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:51:37.936  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/10:51:37.936  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:51:43.525  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/10:51:43.525  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:51:49.303  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/10:51:49.303  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:51:54.705  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/10:51:54.759  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/10:54:53.231  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/10:54:53.232  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/10:54:53.384  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:54:57.686  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/10:54:57.686  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:55:03.085  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/10:55:03.085  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:55:09.243  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/10:55:09.243  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:55:14.919  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/10:55:14.919  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:55:20.773  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/10:55:20.832  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/10:59:51.166  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/10:59:51.167  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/10:59:51.332  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/10:59:55.622  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/10:59:55.622  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:00:01.229  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/11:00:01.229  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:00:07.174  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/11:00:07.174  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:00:13.008  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/11:00:13.009  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:00:18.508  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/11:00:18.559  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/11:02:28.312  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/11:02:28.313  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/11:02:28.456  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:02:33.268  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/11:02:33.268  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:02:38.960  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/11:02:38.960  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:02:44.827  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/11:02:44.827  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:02:50.793  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/11:02:50.794  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:02:56.331  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/11:02:56.379  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/11:04:40.046  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/11:04:40.047  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/11:04:40.220  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:04:44.567  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/11:04:44.567  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:04:50.255  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/11:04:50.256  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:04:55.696  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/11:04:55.696  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:05:01.436  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/11:05:01.437  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:05:07.825  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/11:05:07.874  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/11:08:54.511  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/11:08:54.512  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/11:08:54.666  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:08:59.081  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/11:08:59.081  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:09:04.767  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/11:09:04.767  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:09:10.151  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/11:09:10.152  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:09:15.943  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/11:09:15.943  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:09:21.707  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/11:09:21.756  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/11:12:20.115  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/11:12:20.116  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/11:12:20.273  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:12:24.618  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/11:12:24.618  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:12:30.016  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/11:12:30.016  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:12:35.487  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/11:12:35.487  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:12:40.980  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/11:12:40.980  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:12:46.656  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/11:12:46.718  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/11:15:01.762  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/11:15:01.763  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/11:15:01.931  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:15:06.014  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/11:15:06.014  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:15:11.510  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/11:15:11.510  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:15:17.142  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/11:15:17.142  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:15:22.750  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/11:15:22.750  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:15:28.341  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/11:15:28.388  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/11:25:02.646  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/11:25:02.647  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/11:25:02.886  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:25:07.349  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/11:25:07.349  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:25:12.680  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/11:25:12.680  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:25:18.122  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/11:25:18.122  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:25:23.995  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/11:25:23.995  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:25:29.562  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/11:25:29.615  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/11:31:22.890  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/11:31:22.891  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/11:31:23.051  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:31:27.741  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/11:31:27.741  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:31:33.280  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/11:31:33.281  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:31:38.796  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/11:31:38.796  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:31:44.149  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/11:31:44.149  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:31:49.718  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/11:31:49.767  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/11:34:10.942  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/11:34:10.943  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/11:34:11.098  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:34:15.593  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/11:34:15.593  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:34:21.121  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/11:34:21.121  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:34:26.604  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/11:34:26.605  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:34:32.410  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/11:34:32.410  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:34:37.741  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/11:34:37.790  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/11:40:30.524  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/11:40:30.525  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/11:40:30.675  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:40:35.250  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/11:40:35.250  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:40:40.818  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/11:40:40.818  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:40:46.383  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/11:40:46.383  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:40:52.138  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/11:40:52.138  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:40:57.726  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/11:40:57.779  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/11:43:20.135  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/11:43:20.136  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/11:43:20.304  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:43:24.600  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/11:43:24.600  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:43:29.971  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/11:43:29.971  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:43:35.313  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/11:43:35.313  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:43:40.646  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/11:43:40.646  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:43:46.083  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/11:43:46.149  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/11:50:36.758  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/11:50:36.759  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/11:50:36.922  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:50:41.407  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/11:50:41.408  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:50:47.152  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/11:50:47.152  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:50:52.672  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/11:50:52.673  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:50:58.283  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/11:50:58.284  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:51:04.028  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/11:51:04.094  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/11:55:04.969  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/11:55:04.970  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/11:55:05.130  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:55:10.262  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/11:55:10.263  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:55:16.091  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/11:55:16.091  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:55:22.128  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/11:55:22.129  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:55:27.791  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/11:55:27.792  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/11:55:33.449  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/11:55:33.502  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/12:26:07.096  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/12:26:07.097  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/12:26:07.278  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/12:26:11.841  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/12:26:11.842  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/12:26:17.000  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/12:26:17.000  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :640x360
+ 	vidCodec :libx264
+ 	vidFps :25
+ 	vidBitRate :480000
+ 	audioCodec :aac
+ 	audioResolution :64k
+ 	profile :Main
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/12:26:29.961  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 640x360 -y -strict experimental -acodec aac -ab 64k -ac 2 -ar 48000 -vcodec libx264 -vprofile Main -level 30 -g 48 -b 480000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/12:26:29.961  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :854x480
+ 	vidCodec :libx264
+ 	vidFps :25
+ 	vidBitRate :640000
+ 	audioCodec :aac
+ 	audioResolution :64k
+ 	profile :Main
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/12:26:51.258  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 854x480 -y -strict experimental -acodec aac -ab 64k -ac 2 -ar 48000 -vcodec libx264 -vprofile Main -level 30 -g 48 -b 640000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/12:26:51.258  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :854x480
+ 	vidCodec :libx264
+ 	vidFps :25
+ 	vidBitRate :640000
+ 	audioCodec :aac
+ 	audioResolution :64k
+ 	profile :Main
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/12:27:11.552  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 854x480 -y -strict experimental -acodec aac -ab 64k -ac 2 -ar 48000 -vcodec libx264 -vprofile Main -level 30 -g 48 -b 640000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/12:27:11.611  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/12:44:34.542  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/12:44:34.543  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/12:44:34.691  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/12:44:39.164  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/12:44:39.164  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/12:44:44.597  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/12:44:44.597  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/12:44:50.151  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/12:44:50.152  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/12:44:56.223  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/12:44:56.223  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/12:45:01.967  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/12:45:02.025  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/12:47:44.427  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/12:47:44.430  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/12:47:44.582  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/12:47:48.666  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/12:47:48.666  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/12:47:54.029  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/12:47:54.029  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/12:47:59.519  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/12:47:59.519  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/12:48:05.401  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/12:48:05.401  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/12:48:10.900  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/12:48:10.962  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/12:55:22.499  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4
+2016-06-13/12:55:22.502  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/12:55:22.654  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/12:55:27.100  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_160p.mp4
+2016-06-13/12:55:27.101  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/12:55:32.943  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_240p.mp4
+2016-06-13/12:55:32.943  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/12:55:38.867  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_360p.mp4
+2016-06-13/12:55:38.867  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/12:55:44.524  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_480p.mp4
+2016-06-13/12:55:44.524  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/12:55:49.966  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_supporting_01_720p.mp4
+2016-06-13/12:55:50.014  INFO: smil.WowzaFeedSmil - File saved!2123_video_supporting_01.smil
+2016-06-13/13:44:11.357  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2123_video_preview_01.mp4
+2016-06-13/13:44:11.358  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/13:44:11.516  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/13:44:15.741  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_preview_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_preview_01_160p.mp4
+2016-06-13/13:44:15.742  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/13:44:21.605  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_preview_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_preview_01_240p.mp4
+2016-06-13/13:44:21.607  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/13:44:27.070  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_preview_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_preview_01_360p.mp4
+2016-06-13/13:44:27.070  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/13:44:32.657  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_preview_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_preview_01_480p.mp4
+2016-06-13/13:44:32.657  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/13:44:38.574  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2123_video_preview_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2123_video_preview_01_720p.mp4
+2016-06-13/13:44:38.632  INFO: smil.WowzaFeedSmil - File saved!2123_video_preview_01.smil
+2016-06-13/15:09:58.290  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2149_video_preview_01.mp4
+2016-06-13/15:09:58.291  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/15:09:58.442  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/15:10:02.314  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2149_video_preview_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2149_video_preview_01_160p.mp4
+2016-06-13/15:10:02.315  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/15:10:07.757  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2149_video_preview_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2149_video_preview_01_240p.mp4
+2016-06-13/15:10:07.758  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/15:10:13.400  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2149_video_preview_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2149_video_preview_01_360p.mp4
+2016-06-13/15:10:13.400  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/15:10:18.846  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2149_video_preview_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2149_video_preview_01_480p.mp4
+2016-06-13/15:10:18.847  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/15:10:24.422  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2149_video_preview_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2149_video_preview_01_720p.mp4
+2016-06-13/15:10:24.470  INFO: smil.WowzaFeedSmil - File saved!2149_video_preview_01.smil
+2016-06-13/15:10:50.386  INFO: smil.WowzaFeedSmil - Source File to be processed :/var/www/ContentIngestion/public/temp/2149_video_supporting_01.mp4
+2016-06-13/15:10:50.387  INFO: smil.WowzaFeedSmil - Target File to be put at :/usr/local/WowzaStreamingEngine-4.1.1/content/
+2016-06-13/15:10:50.608  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :284x160
+ 	vidCodec :libx264
+ 	vidFps :12
+ 	vidBitRate :40000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_160p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/15:10:54.686  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2149_video_supporting_01.mp4 -s 284x160 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 40000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2149_video_supporting_01_160p.mp4
+2016-06-13/15:10:54.686  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :360x240
+ 	vidCodec :libx264
+ 	vidFps :20
+ 	vidBitRate :120000
+ 	audioCodec :aac
+ 	audioResolution :32k
+ 	profile :BaseLine
+ 	fileExtension :_240p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/15:11:00.115  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2149_video_supporting_01.mp4 -s 360x240 -y -strict experimental -acodec aac -ab 32k -ac 2 -ar 48000 -vcodec libx264 -vprofile BaseLine -level 30 -g 48 -b 120000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2149_video_supporting_01_240p.mp4
+2016-06-13/15:11:00.115  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :640x360
+ 	vidCodec :libx264
+ 	vidFps :25
+ 	vidBitRate :480000
+ 	audioCodec :aac
+ 	audioResolution :64k
+ 	profile :Main
+ 	fileExtension :_360p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/15:11:13.200  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2149_video_supporting_01.mp4 -s 640x360 -y -strict experimental -acodec aac -ab 64k -ac 2 -ar 48000 -vcodec libx264 -vprofile Main -level 30 -g 48 -b 480000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2149_video_supporting_01_360p.mp4
+2016-06-13/15:11:13.200  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :854x480
+ 	vidCodec :libx264
+ 	vidFps :25
+ 	vidBitRate :640000
+ 	audioCodec :aac
+ 	audioResolution :64k
+ 	profile :Main
+ 	fileExtension :_480p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/15:11:33.599  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2149_video_supporting_01.mp4 -s 854x480 -y -strict experimental -acodec aac -ab 64k -ac 2 -ar 48000 -vcodec libx264 -vprofile Main -level 30 -g 48 -b 640000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2149_video_supporting_01_480p.mp4
+2016-06-13/15:11:33.599  INFO: smil.WowzaFeedSmil - configs from the property file
+ vidResolution :854x480
+ 	vidCodec :libx264
+ 	vidFps :25
+ 	vidBitRate :640000
+ 	audioCodec :aac
+ 	audioResolution :64k
+ 	profile :Main
+ 	fileExtension :_720p.mp4
+ 	execContentCreateCommand :null
+2016-06-13/15:11:53.963  INFO: smil.WowzaFeedSmil - ffmpeg command to be firedffmpeg -y -i /var/www/ContentIngestion/public/temp/2149_video_supporting_01.mp4 -s 854x480 -y -strict experimental -acodec aac -ab 64k -ac 2 -ar 48000 -vcodec libx264 -vprofile Main -level 30 -g 48 -b 640000 -threads 2 /usr/local/WowzaStreamingEngine-4.1.1/content/2149_video_supporting_01_720p.mp4
+2016-06-13/15:11:54.040  INFO: smil.WowzaFeedSmil - File saved!2149_video_supporting_01.smil

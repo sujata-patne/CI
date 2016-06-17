@@ -1,6 +1,13 @@
 /**
 * Created by sujata.patne on 24-07-2015.
 */
+/**
+ * The `ContentCatalog` service provides functions like  getContentCatalog, addUpdateVcode, addUpdatePromocode, addUpdatePromocode,
+ * getPersonalizedDataForVcode, UpdateState, Upload content files.
+ *
+ * @param {$http} $http dependency.
+ * @param {Upload} ngFileUpload dependency.
+ */
 myApp.service('ContentCatalog', ['$http','Upload', function ($http,Upload) {
     var service = {};
     service.baseRestUrl = '';

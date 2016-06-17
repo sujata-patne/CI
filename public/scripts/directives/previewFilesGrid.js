@@ -1,21 +1,35 @@
 /**
  * Created by sujata.patne on 22-04-2016.
  */
-
+/**
+ * @name previewFileListGrid
+ * @desc <preview-file-list-grid> Directive
+ */
 myApp.directive('previewFileListGrid', function () {
     return {
         scope: true,
         transclude: true,
         templateUrl: '../../partials/views/preview-file-list.html',
-        controller: function ($scope, $attrs, ngProgress, Upload, ContentFile, $window) {
+        controller: function ($scope, $attrs, ngProgress, Upload, ContentFile) {
             $scope.uploadFiles = [];
             $scope.replaceSupportingFile = [];
             $scope.tempFiles = [];
-
+            $scope.IsEditPermission = ($scope.UserRole == "Moderator" || $scope.UserRole == "Super Admin") ? true : false;
+            /**
+             * @func getExtension
+             * @param {String} filename
+             * @returns {String}
+             */
             function getExtension(filename) {
                 var parts = filename.split('.');
                 return parts[parts.length - 1];
             }
+
+            /**
+             * @name isImage
+             * @param {String} filename
+             * @returns {Boolean}
+             */
             function isImage(filename) {
                 var ext = getExtension(filename);
                 switch (ext.toLowerCase()) {
@@ -29,6 +43,11 @@ myApp.directive('previewFileListGrid', function () {
                 }
                 return false;
             }
+            /**
+             * @name isVideo
+             * @param {String} filename
+             * @returns {Boolean}
+             */
             function isVideo(filename) {
                 var ext = getExtension(filename);
                 switch (ext.toLowerCase()) {
@@ -42,6 +61,11 @@ myApp.directive('previewFileListGrid', function () {
                 return false;
             }
 
+            /**
+             * @name replacePreviewFileUpload
+             * @param {Number} cnt
+             * @param {Function} success
+             */
             $scope.replacePreviewFileUpload = function (cnt, success) {
                 if ($scope.replaceSupportingFile && $scope.replaceSupportingFile.length > 0) {
                     if($scope.replaceSupportingFile[cnt]) {
@@ -100,6 +124,11 @@ myApp.directive('previewFileListGrid', function () {
                     success();
                 }
             }
+            /**
+             * @name addPreviewFileUpload
+             * @param {Number} tcu
+             * @param {Function} success
+             */
             $scope.addPreviewFileUpload = function (tcu, success) {
 
                 if ($scope.uploadFiles && $scope.uploadFiles.length > 0) {
@@ -164,13 +193,12 @@ myApp.directive('previewFileListGrid', function () {
                     success();
                 }
             }
+            /**
+             * @name uploadSupportingFile
+             * @param {Boolean} isvalid
+             */
             $scope.uploadSupportingFile = function (isvalid) {
                 if (isvalid) {
-                    //angular.element("input[type='file']").val(null);
-                   // $scope.replaceSupportingFile = $scope.replaceSupportingFile.filter(Boolean);
-                   // $scope.uploadFiles = $scope.uploadFiles.filter(Boolean);
-                    //console.log($scope.uploadFiles);
-
                     $scope.replacePreviewFileUpload(0, function () {
                         $scope.addPreviewFileUpload(0, function () {
                             $scope.PreviewFiles.forEach(function (item, key) {
@@ -180,6 +208,17 @@ myApp.directive('previewFileListGrid', function () {
                     });
                 }
             }
+
+            /**
+             * @name addReplacePreviewFileUpload
+             * @desc add or update uploaded Preview File.
+             * @param {Object} files
+             * @param {Number} templateId
+             * @param {Number} ct_param_value
+             * @param {Number} file_order
+             * @param {String} file_type
+             * @param {Number} indexno
+             */
             $scope.addReplacePreviewFileUpload = function (files, templateId, ct_param_value, file_order, file_type,indexno) {
                 if (files) {
                     var val = files;
@@ -188,8 +227,7 @@ myApp.directive('previewFileListGrid', function () {
                     var othervideos = _.where(files, {type: 'othervideo'});
                     var othertext = _.where(files, {type: 'othertext'});
                     if (isImage(val.name) && file_type == 'otherimage') {
-
-                        //var count = _.where($scope.uploadFiles, {type: 'image'});
+                        var count = _.where($scope.uploadFiles, {type: 'image'});
                         var match = _.find($scope.OtherTemplates, function (item) {
                             return item.ct_param_value == 'otherimage'
                         });

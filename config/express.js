@@ -16,19 +16,17 @@ module.exports = function(){
     // view engine setup
     app.set('views', path.join('./views'));
     app.set('view engine', 'ejs');
-    //app.use(favicon(path.join(__dirname,'../public/favicon.ico')));
     app.use(logger('dev'));
     app.use(bodyParser.json({limit: '1gb'}));
     app.use(bodyParser.urlencoded({extended:false,limit: '1gb'}));
     app.use(methodOverride('_method'));
     app.use(cookieParser());
-    //app.use(require('stylus').middleware(path.join(__dirname, '/public/')));
+// parse static files in public derictory
     app.use(express.static(path.join(__dirname,'../public/')));
     app.use(session({
         keys: ['key1', 'key2', 'key3']
     }));
-    //app.use(express.static(path.join(__dirname, '../public/partials')));
-
+ 
     // error handlers
 // development error handler will print stacktrace
     if (app.get('env') === 'development') {

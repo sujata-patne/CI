@@ -1,0 +1,163 @@
+[13-Jun-2016 16:45:11 Asia/Kolkata] ==3850== Already in progress...
+[13-Jun-2016 16:45:18 Asia/Kolkata] ==26405== Lock acquired, processing the job...
+[13-Jun-2016 16:45:19 Asia/Kolkata] ==26405== Releasing lock...
+[13-Jun-2016 16:46:34 Asia/Kolkata] ==2269== Lock acquired, processing the job...
+[13-Jun-2016 16:46:35 Asia/Kolkata] ==2269== Releasing lock...
+[13-Jun-2016 16:48:44 Asia/Kolkata] ==3850== Lock acquired, processing the job...
+[13-Jun-2016 16:48:44 Asia/Kolkata]  filename.../var/www/ContentIngestion/public/temp/2150_english_01.txt
+[13-Jun-2016 16:48:44 Asia/Kolkata]  filename.../var/www/ContentIngestion/public/temp/2150_english_02.txt
+[13-Jun-2016 16:48:44 Asia/Kolkata]  filename.../var/www/ContentIngestion/public/temp/2150_english_03.txt
+[13-Jun-2016 16:48:44 Asia/Kolkata]  filename.../var/www/ContentIngestion/public/temp/2150_english_04.txt
+[13-Jun-2016 16:48:44 Asia/Kolkata]  filename.../var/www/ContentIngestion/public/temp/2150_english_05.txt
+[13-Jun-2016 16:48:44 Asia/Kolkata]  filename.../var/www/ContentIngestion/public/temp/2150_english_06.txt
+[13-Jun-2016 16:48:44 Asia/Kolkata]  filename.../var/www/ContentIngestion/public/temp/2150_english_07.txt
+[13-Jun-2016 16:48:44 Asia/Kolkata]  filename.../var/www/ContentIngestion/public/temp/2150_english_08.txt
+[13-Jun-2016 16:48:44 Asia/Kolkata]  filename.../var/www/ContentIngestion/public/temp/2150_english_09.txt
+[13-Jun-2016 16:48:44 Asia/Kolkata]  filename.../var/www/ContentIngestion/public/temp/2150_english_10.txt
+[13-Jun-2016 16:48:44 Asia/Kolkata]  filename.../var/www/ContentIngestion/public/temp/2150_hindi_01.txt
+[13-Jun-2016 16:48:44 Asia/Kolkata]  filename.../var/www/ContentIngestion/public/temp/2150_hindi_02.txt
+[13-Jun-2016 16:48:44 Asia/Kolkata]  filename.../var/www/ContentIngestion/public/temp/2150_hindi_03.txt
+[13-Jun-2016 16:48:44 Asia/Kolkata]  filename.../var/www/ContentIngestion/public/temp/2150_hindi_04.txt
+[13-Jun-2016 16:48:45 Asia/Kolkata]  filename.../var/www/ContentIngestion/public/temp/2150_hindi_05.txt
+[13-Jun-2016 16:48:45 Asia/Kolkata]  filename.../var/www/ContentIngestion/public/temp/2150_hindi_06.txt
+[13-Jun-2016 16:48:45 Asia/Kolkata]  filename.../var/www/ContentIngestion/public/temp/2150_hindi_07.txt
+[13-Jun-2016 16:48:45 Asia/Kolkata]  filename.../var/www/ContentIngestion/public/temp/2150_hindi_08.txt
+[13-Jun-2016 16:48:45 Asia/Kolkata]  filename.../var/www/ContentIngestion/public/temp/2150_hindi_09.txt
+[13-Jun-2016 16:48:45 Asia/Kolkata]  filename.../var/www/ContentIngestion/public/temp/2150_hindi_10.txt
+[13-Jun-2016 16:48:45 Asia/Kolkata] ==3850== Releasing lock...
+[13-Jun-2016 16:50:13 Asia/Kolkata] ==4183== Lock acquired, processing the job...
+[13-Jun-2016 16:50:13 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_01.txt
+[13-Jun-2016 16:50:13 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_02.txt
+[13-Jun-2016 16:50:13 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_03.txt
+[13-Jun-2016 16:50:13 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_04.txt
+[13-Jun-2016 16:50:13 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_05.txt
+[13-Jun-2016 16:50:13 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_06.txt
+[13-Jun-2016 16:50:13 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_07.txt
+[13-Jun-2016 16:50:13 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_08.txt
+[13-Jun-2016 16:50:13 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_09.txt
+[13-Jun-2016 16:50:13 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_10.txt
+[13-Jun-2016 16:50:13 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_01.txt
+[13-Jun-2016 16:50:13 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_02.txt
+[13-Jun-2016 16:50:13 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_03.txt
+[13-Jun-2016 16:50:13 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_04.txt
+[13-Jun-2016 16:50:13 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_05.txt
+[13-Jun-2016 16:50:14 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_06.txt
+[13-Jun-2016 16:50:14 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_07.txt
+[13-Jun-2016 16:50:14 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_08.txt
+[13-Jun-2016 16:50:14 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_09.txt
+[13-Jun-2016 16:50:14 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_10.txt
+[13-Jun-2016 16:50:14 Asia/Kolkata] ==4183== Releasing lock...
+[13-Jun-2016 16:51:00 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_01.txt
+[13-Jun-2016 16:51:00 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_02.txt
+[13-Jun-2016 16:51:00 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_03.txt
+[13-Jun-2016 16:51:00 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_04.txt
+[13-Jun-2016 16:51:01 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_05.txt
+[13-Jun-2016 16:51:01 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_06.txt
+[13-Jun-2016 16:51:01 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_07.txt
+[13-Jun-2016 16:51:01 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_08.txt
+[13-Jun-2016 16:51:01 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_09.txt
+[13-Jun-2016 16:51:01 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_10.txt
+[13-Jun-2016 16:51:01 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_01.txt
+[13-Jun-2016 16:51:01 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_02.txt
+[13-Jun-2016 16:51:01 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_03.txt
+[13-Jun-2016 16:51:01 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_04.txt
+[13-Jun-2016 16:51:01 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_05.txt
+[13-Jun-2016 16:51:01 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_06.txt
+[13-Jun-2016 16:51:01 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_07.txt
+[13-Jun-2016 16:51:01 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_08.txt
+[13-Jun-2016 16:51:01 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_09.txt
+[13-Jun-2016 16:51:01 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_10.txt
+[13-Jun-2016 16:52:43 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_01.txt
+[13-Jun-2016 16:52:43 Asia/Kolkata] PHP Catchable fatal error:  Object of class UploadTempData could not be converted to string in /var/www/s3cron/s3Cron.php on line 168
+[13-Jun-2016 16:54:23 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_01.txt
+[13-Jun-2016 16:54:23 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:54:23 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_02.txt
+[13-Jun-2016 16:54:23 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:54:23 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_03.txt
+[13-Jun-2016 16:54:23 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:54:23 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_04.txt
+[13-Jun-2016 16:54:23 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:54:23 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_05.txt
+[13-Jun-2016 16:54:23 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:54:23 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_06.txt
+[13-Jun-2016 16:54:23 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:54:23 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_07.txt
+[13-Jun-2016 16:54:23 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:54:23 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_08.txt
+[13-Jun-2016 16:54:23 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:54:23 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_09.txt
+[13-Jun-2016 16:54:23 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:54:23 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_10.txt
+[13-Jun-2016 16:54:23 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:54:23 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_01.txt
+[13-Jun-2016 16:54:23 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:54:23 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_02.txt
+[13-Jun-2016 16:54:23 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:54:23 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_03.txt
+[13-Jun-2016 16:54:23 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:54:23 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_04.txt
+[13-Jun-2016 16:54:23 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:54:23 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_05.txt
+[13-Jun-2016 16:54:23 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:54:23 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_06.txt
+[13-Jun-2016 16:54:23 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:54:23 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_07.txt
+[13-Jun-2016 16:54:23 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:54:23 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_08.txt
+[13-Jun-2016 16:54:23 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:54:23 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_09.txt
+[13-Jun-2016 16:54:23 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:54:23 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_10.txt
+[13-Jun-2016 16:54:23 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:55:28 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_01.txt
+[13-Jun-2016 16:55:28 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:55:34 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_02.txt
+[13-Jun-2016 16:55:34 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:55:35 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_03.txt
+[13-Jun-2016 16:55:35 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:55:36 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_04.txt
+[13-Jun-2016 16:55:36 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:55:36 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_05.txt
+[13-Jun-2016 16:55:36 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:55:37 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_06.txt
+[13-Jun-2016 16:55:37 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:55:38 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_07.txt
+[13-Jun-2016 16:55:38 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:55:39 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_08.txt
+[13-Jun-2016 16:55:39 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:55:39 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_09.txt
+[13-Jun-2016 16:55:39 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:55:40 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_english_10.txt
+[13-Jun-2016 16:55:40 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:55:41 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_01.txt
+[13-Jun-2016 16:55:41 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:55:41 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_02.txt
+[13-Jun-2016 16:55:41 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:55:42 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_03.txt
+[13-Jun-2016 16:55:42 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:55:43 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_04.txt
+[13-Jun-2016 16:55:43 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:55:43 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_05.txt
+[13-Jun-2016 16:55:43 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:55:44 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_06.txt
+[13-Jun-2016 16:55:44 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:55:45 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_07.txt
+[13-Jun-2016 16:55:45 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:55:45 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_08.txt
+[13-Jun-2016 16:55:46 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:55:47 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_09.txt
+[13-Jun-2016 16:55:47 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 16:55:47 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2150_hindi_10.txt
+[13-Jun-2016 16:55:47 Asia/Kolkata]  object : application/octet-stream, downloading
+[13-Jun-2016 17:10:04 Asia/Kolkata] ==3208== Lock acquired, processing the job...
+[13-Jun-2016 17:10:04 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2149_hindi_supporting_01.txt
+[13-Jun-2016 17:10:04 Asia/Kolkata]  object : text/plain, downloading
+[13-Jun-2016 17:10:11 Asia/Kolkata] ==3208== Releasing lock...
+[13-Jun-2016 17:11:42 Asia/Kolkata] ==2767== Lock acquired, processing the job...
+[13-Jun-2016 17:11:42 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2149_hindi_supporting_01.txt
+[13-Jun-2016 17:11:42 Asia/Kolkata]  object : text/plain, downloading
+[13-Jun-2016 17:11:49 Asia/Kolkata] ==2767== Releasing lock...
+[13-Jun-2016 17:12:31 Asia/Kolkata] ==4089== Lock acquired, processing the job...
+[13-Jun-2016 17:12:31 Asia/Kolkata]  Processing file : /var/www/ContentIngestion/public/temp/2149_hindi_supporting_01.txt
+[13-Jun-2016 17:12:32 Asia/Kolkata]  object : text/plain, downloading
+[13-Jun-2016 17:12:38 Asia/Kolkata] ==4089== Releasing lock...

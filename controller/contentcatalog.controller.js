@@ -360,7 +360,7 @@ exports.getcontentlisting = function (req, res, next) {
                                         WallpaperFiles: function (callback) {
                                             //if (ContentMetadata[0].parentname == "Wallpaper") {
                                             if (ContentMetadata[0].parentname == "Imagery") {
-                                                var query = connection_ikon_cms.query('select * from (select cm_id from content_metadata where cm_id = ?)meta inner join (SELECT * FROM content_files  )cm_files on(meta.cm_id = cm_files.cf_cm_id ) inner join(select  ct_group_id, ct_param  as width from content_template where ct_param_value ="width" )ct_width on(ct_width.ct_group_id =cm_files.cf_template_id) left outer join(select  ct_group_id, ct_param  as height from content_template where ct_param_value ="height" )ct_height on(ct_height.ct_group_id =cm_files.cf_template_id)', [req.body.Id], function (err, ContentFiles) {
+                                                var query = connection_ikon_cms.query('select * from (select cm_id from content_metadata where cm_id = ?)meta inner join (SELECT * FROM content_files  )cm_files on(meta.cm_id = cm_files.cf_cm_id and (file_category_id = 1 OR ISNULL(file_category_id))) inner join(select  ct_group_id, ct_param  as width from content_template where ct_param_value ="width" )ct_width on(ct_width.ct_group_id =cm_files.cf_template_id) left outer join(select  ct_group_id, ct_param  as height from content_template where ct_param_value ="height" )ct_height on(ct_height.ct_group_id =cm_files.cf_template_id)', [req.body.Id], function (err, ContentFiles) {
                                                     callback(err, ContentFiles);
                                                 });
                                             }
@@ -369,26 +369,9 @@ exports.getcontentlisting = function (req, res, next) {
                                             }
                                         },
                                         VideoFiles: function (callback) {
-
                                             if (ContentMetadata[0].parentname == "Video") {
                                                 var query = connection_ikon_cms.query('select * from (select cm_id from content_metadata where cm_id = ?)meta ' +
                                                     'inner join (SELECT * FROM content_files  )cm_files on(meta.cm_id = cm_files.cf_cm_id and (file_category_id = 1 OR ISNULL(file_category_id))) inner join(select  ct_group_id, ct_param  as width from content_template where ct_param_value ="width" )ct_width on(ct_width.ct_group_id =cm_files.cf_template_id) left outer join(select  ct_group_id, ct_param  as height from content_template where ct_param_value ="height" )ct_height on(ct_height.ct_group_id =cm_files.cf_template_id) left join(select MIN(cft_thumbnail_img_browse) as cm_thumb_url,cft_cm_id from content_files_thumbnail where cft_cm_id = ? group by cft_cm_id)cth on(cth.cft_cm_id =meta.cm_id)', [req.body.Id, req.body.Id], function (err, TextFiles) {
-                                                    callback(err, TextFiles);
-                                                });
-                                            }
-                                            else {
-                                                callback(null, []);
-                                            }
-                                        },
-                                        AudioFiles1: function (callback) {
-                                            if (ContentMetadata[0].parentname == "Audio") {
-                                                var query = connection_ikon_cms.query('select * from (select cm_id from content_metadata where cm_id = ?)meta ' +
-                                                    'inner join (SELECT * FROM content_files  )cm_files on(meta.cm_id = cm_files.cf_cm_id ) ' +
-                                                    'inner join(select  ct_group_id, ct_param  as bitrate from content_template ' +
-                                                    'where ct_param_value ="bitrate" )ct_bitrate on(ct_bitrate.ct_group_id =cm_files.cf_template_id)  ' +
-                                                    'left join(select MIN(cft_thumbnail_img_browse) as cm_thumb_url,cft_cm_id ' +
-                                                    'from content_files_thumbnail where cft_cm_id = ? ' +
-                                                    'group by cft_cm_id)cth on(cth.cft_cm_id =meta.cm_id)', [req.body.Id, req.body.Id], function (err, TextFiles) {
                                                     callback(err, TextFiles);
                                                 });
                                             }
@@ -408,7 +391,7 @@ exports.getcontentlisting = function (req, res, next) {
                                                     'left JOIN(select MIN(cft_thumbnail_img_browse) as cm_thumb_url,cft_cm_id from content_files_thumbnail) as cth on(cth.cft_cm_id = cm_files.cf_cm_id) '+
                                                     'where cm_files.cf_cm_id = ? GROUP BY cm_files.cf_name, CASE WHEN cm_files.cf_name IS NULL THEN cm_files.cf_id ELSE 0 END ' +
                                                     'ORDER BY cm_files.cf_id';
-                                                console.log(query)
+                                               // console.log(query)
                                                 connection_ikon_cms.query(query, [req.body.Id], function (err, AudioFiles) {
                                                   //  console.log(AudioFiles)
 
@@ -421,7 +404,17 @@ exports.getcontentlisting = function (req, res, next) {
                                         },
                                         AppFiles: function (callback) {
                                             if (ContentMetadata[0].parentname == "AppsGames") {
-                                                var query = connection_ikon_cms.query('select * from (select cm_id from content_metadata where cm_id = ?)meta inner join (SELECT * FROM content_files  )cm_files on(meta.cm_id = cm_files.cf_cm_id ) inner join(select  ct_group_id, ct_param  as app from content_template where ct_param_value ="app" )ct_app on(ct_app.ct_group_id =cm_files.cf_template_id)  left join(select MIN(cft_thumbnail_img_browse) as cm_thumb_url,cft_cm_id from content_files_thumbnail where cft_cm_id = ? group by cft_cm_id)cth on(cth.cft_cm_id =meta.cm_id)', [req.body.Id, req.body.Id], function (err, TextFiles) {
+                                                var query = connection_ikon_cms.query('select * from (select cm_id from content_metadata where cm_id = ?)meta inner join (SELECT * FROM content_files  )cm_files on(meta.cm_id = cm_files.cf_cm_id and (file_category_id = 1 OR ISNULL(file_category_id))) inner join(select  ct_group_id, ct_param  as app from content_template where ct_param_value ="app" )ct_app on(ct_app.ct_group_id =cm_files.cf_template_id)  left join(select MIN(cft_thumbnail_img_browse) as cm_thumb_url,cft_cm_id from content_files_thumbnail where cft_cm_id = ? group by cft_cm_id)cth on(cth.cft_cm_id =meta.cm_id)', [req.body.Id, req.body.Id], function (err, TextFiles) {
+                                                    callback(err, TextFiles);
+                                                });
+                                            }
+                                            else {
+                                                callback(null, []);
+                                            }
+                                        },
+                                        TextFiles: function (callback) {
+                                            if (ContentMetadata[0].parentname == "Text") {
+                                                var query = connection_ikon_cms.query('select * from (SELECT cm_id,cm_language FROM content_metadata where cm_id =? and NOT ISNULL(cm_language))meta inner join(select * from multiselect_metadata_detail)mlm on(mlm.cmd_group_id = meta.cm_language) inner join(select * from catalogue_detail )cd on(cd.cd_id = mlm.cmd_entity_detail) inner join(select * from catalogue_master where cm_name in ("Languages"))cm on(cm.cm_id =cd.cd_cm_id)inner join(select * from content_template)ct on(ct.ct_param =  mlm.cmd_entity_detail and ct.ct_param_value = cd.cd_name) inner join (SELECT * FROM content_files  )cm_files on(meta.cm_id = cm_files.cf_cm_id and (file_category_id = 1 OR ISNULL(file_category_id)) and ct.ct_group_id = cm_files.cf_template_id) left join(select MIN(cft_thumbnail_img_browse) as cm_thumb_url,cft_cm_id from content_files_thumbnail where cft_cm_id = ? group by cft_cm_id)cth on(cth.cft_cm_id =meta.cm_id)', [req.body.Id, req.body.Id], function (err, TextFiles) {
                                                     callback(err, TextFiles);
                                                 });
                                             }
@@ -498,7 +491,6 @@ exports.getcontentlisting = function (req, res, next) {
                                              callback(null, []);
                                              }*/
                                         },
-
                                         PreviewImages: function (callback) {
                                             //if (ContentMetadata[0].parentname == "AppsGames" || ContentMetadata[0].parentname == "Audio" || ContentMetadata[0].parentname == "Text") {
                                             var query ='select * from (select cm_id from content_metadata where cm_id = ? )meta ' +
@@ -568,20 +560,26 @@ exports.getcontentlisting = function (req, res, next) {
                                              callback(null, []);
                                              }*/
                                         },
-                                        TextFiles: function (callback) {
-                                            if (ContentMetadata[0].parentname == "Text") {
-                                                var query = connection_ikon_cms.query('select * from (SELECT cm_id,cm_language FROM content_metadata where cm_id =? and NOT ISNULL(cm_language))meta inner join(select * from multiselect_metadata_detail)mlm on(mlm.cmd_group_id = meta.cm_language) inner join(select * from catalogue_detail )cd on(cd.cd_id = mlm.cmd_entity_detail) inner join(select * from catalogue_master where cm_name in ("Languages"))cm on(cm.cm_id =cd.cd_cm_id)inner join(select * from content_template)ct on(ct.ct_param =  mlm.cmd_entity_detail and ct.ct_param_value = cd.cd_name) inner join (SELECT * FROM content_files  )cm_files on(meta.cm_id = cm_files.cf_cm_id and ct.ct_group_id = cm_files.cf_template_id) left join(select MIN(cft_thumbnail_img_browse) as cm_thumb_url,cft_cm_id from content_files_thumbnail where cft_cm_id = ? group by cft_cm_id)cth on(cth.cft_cm_id =meta.cm_id)', [req.body.Id, req.body.Id], function (err, TextFiles) {
+                                        ThumbFiles: function (callback) {
+                                            var query = connection_ikon_cms.query('select * from (SELECT cm_id FROM content_metadata where cm_id = ?)meta inner join(select cft_thumbnail_img_browse, cft_thumbnail_size,cft_cm_id from content_files_thumbnail where cft_cm_id = ?)cth on(cth.cft_cm_id =meta.cm_id)', [req.body.Id, req.body.Id], function (err, ThumbFiles) {
+                                                callback(err, ThumbFiles);
+                                            });
+                                        },
+                                        AudioFiles1: function (callback) {
+                                            if (ContentMetadata[0].parentname == "Audio") {
+                                                var query = connection_ikon_cms.query('select * from (select cm_id from content_metadata where cm_id = ?)meta ' +
+                                                    'inner join (SELECT * FROM content_files  )cm_files on(meta.cm_id = cm_files.cf_cm_id ) ' +
+                                                    'inner join(select  ct_group_id, ct_param  as bitrate from content_template ' +
+                                                    'where ct_param_value ="bitrate" )ct_bitrate on(ct_bitrate.ct_group_id =cm_files.cf_template_id)  ' +
+                                                    'left join(select MIN(cft_thumbnail_img_browse) as cm_thumb_url,cft_cm_id ' +
+                                                    'from content_files_thumbnail where cft_cm_id = ? ' +
+                                                    'group by cft_cm_id)cth on(cth.cft_cm_id =meta.cm_id)', [req.body.Id, req.body.Id], function (err, TextFiles) {
                                                     callback(err, TextFiles);
                                                 });
                                             }
                                             else {
                                                 callback(null, []);
                                             }
-                                        },
-                                        ThumbFiles: function (callback) {
-                                            var query = connection_ikon_cms.query('select * from (SELECT cm_id FROM content_metadata where cm_id = ?)meta inner join(select cft_thumbnail_img_browse, cft_thumbnail_size,cft_cm_id from content_files_thumbnail where cft_cm_id = ?)cth on(cth.cft_cm_id =meta.cm_id)', [req.body.Id, req.body.Id], function (err, ThumbFiles) {
-                                                callback(err, ThumbFiles);
-                                            });
                                         },
                                         UserRole: function (callback) {
                                             callback(null, req.session.UserRole);
