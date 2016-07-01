@@ -1,14 +1,23 @@
 /**
  * Created by Sujata.Halwai on 01-06-2016.
  */
+/**
+ * @memberof myApp
+ * @type {directive|angular.Directive}
+ * @name thumbFileListGrid
+ * @desc <thumb-file-list-grid> Directive
+ */
 myApp.directive('thumbFileListGrid', function () {
     return {
-        scope: true,
+        scope: false,
         tranclude: true,
         templateUrl: '../../partials/views/thumb-file-list.html',
         controller: function ($scope, ngProgress, Upload, ContentFile) {
             $scope.IsEditPermission = ($scope.UserRole == "Moderator" || $scope.UserRole == "Super Admin") ? true : false;
-
+            /**
+             * @desc Upload Thumbnail files To Replace Files
+             * @param isvalid
+             */
             $scope.upload = function (isvalid) {
                 if (isvalid) {
                     if ($scope.replaceThumbfile) {
@@ -49,6 +58,9 @@ myApp.directive('thumbFileListGrid', function () {
                     }
                 }
             }
+            /**
+             * @desc Validate File for Thumb Replacement
+             */
             $scope.replaceThumbfileupload = function () {
                 $scope.InvalidFileError = false;
                 if ($scope.replaceThumbfile) {
@@ -71,6 +83,9 @@ myApp.directive('thumbFileListGrid', function () {
                     }
                 }
             }
+            /**
+             * @desc Reset/Clear Forms
+             */
             $scope.resetSearch = function () {
                 $scope.currentPage = 0;
                 $scope.SearchUsername = '';

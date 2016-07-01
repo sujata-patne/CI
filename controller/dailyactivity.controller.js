@@ -11,63 +11,8 @@ var fs = require("fs");
 var wlogger = require("../config/logger");
 var reload = require('require-reload')(require);
 var config = require('../config')();
-function getDate() {
-    var d = new Date();
-    var dt = d.getDate();
-    var month = d.getMonth() + 1;
-    var year = d.getFullYear();
-    var selectdate = year + '-' + Pad("0", month, 2) + '-' + Pad("0", dt, 2);
-    return selectdate;
-}
-function getTime(val) {
-    var d = new Date(val);
-    var minite = d.getMinutes();
-    var hour = d.getHours();
-    var second = d.getSeconds();
-    var selectdate = Pad("0", hour, 2) + ':' + Pad("0", minite, 2) + ':' + Pad("0", second, 2);
-    return selectdate;
-}
-function Pad(padString, value, length) {
-    var str = value.toString();
-    while (str.length < length)
-        str = padString + str;
+var common = require('../helpers/common');
 
-    return str;
-}
-
-function setDate(val) {
-    var d = new Date(val);
-    var date = d.getDate();
-    var month = d.getMonth() + 1;
-    var year = d.getFullYear();
-    var selectdate;
-    if (month == 1) {
-        selectdate = date + '-Jan-' + year;
-    } else if (month == 2) {
-        selectdate = date + '-Feb-' + year;
-    } else if (month == 3) {
-        selectdate = date + '-Mar-' + year;
-    } else if (month == 4) {
-        selectdate = date + '-Apr-' + year;
-    } else if (month == 5) {
-        selectdate = date + '-May-' + year;
-    } else if (month == 6) {
-        selectdate = date + '-Jun-' + year;
-    } else if (month == 7) {
-        selectdate = date + '-Jul-' + year;
-    } else if (month == 8) {
-        selectdate = date + '-Aug-' + year;
-    } else if (month == 9) {
-        selectdate = date + '-Sep-' + year;
-    } else if (month == 10) {
-        selectdate = date + '-Oct-' + year;
-    } else if (month == 11) {
-        selectdate = date + '-Nov-' + year;
-    } else if (month == 12) {
-        selectdate = date + '-Dec-' + year;
-    }
-    return selectdate;
-}
 /**
  * @class
  * @classdesc create a log file if not exist.
@@ -75,7 +20,7 @@ function setDate(val) {
  * @param {object} res - http response object.
  */
 exports.allAction = function (req, res, next) {
-    var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
+    var currDate = common.Pad("0",parseInt(new Date().getDate()), 2)+'_'+common.Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
     if (wlogger.logDate == currDate) {
         var logDir = config.log_path;
         var filePath = logDir + 'logs_'+currDate+'.log';
@@ -171,7 +116,7 @@ function Dailyactivityreport() {
                                         Mail += " <td style=\"padding: 8px;    line-height: 1.42857143;    vertical-align: top;    border-top: 1px solid #ddd; color: #428bca;    border-left: none;text-decoration: none; border: 1px solid #ddd; border-bottom: 2px solid #ddd;\">" + val.cm_title + "</td>";
                                         Mail += " <td style=\"padding: 8px;    line-height: 1.42857143;    vertical-align: top;    border-top: 1px solid #ddd; color: #428bca;    border-left: none;text-decoration: none; border: 1px solid #ddd; border-bottom: 2px solid #ddd;\">" + val.vd_name + "</td>";
                                         Mail += " <td style=\"padding: 8px;    line-height: 1.42857143;    vertical-align: top;    border-top: 1px solid #ddd; color: #428bca;    border-left: none;text-decoration: none; border: 1px solid #ddd; border-bottom: 2px solid #ddd;\">" + val.propertyname + "</td>";
-                                        Mail += " <td style=\"padding: 8px;    line-height: 1.42857143;    vertical-align: top;    border-top: 1px solid #ddd; color: #428bca;    border-left: none;text-decoration: none; border: 1px solid #ddd; border-bottom: 2px solid #ddd;\">" + setDate(val.cm_expires_on) + "</td>";
+                                        Mail += " <td style=\"padding: 8px;    line-height: 1.42857143;    vertical-align: top;    border-top: 1px solid #ddd; color: #428bca;    border-left: none;text-decoration: none; border: 1px solid #ddd; border-bottom: 2px solid #ddd;\">" + common.setDate(val.cm_expires_on) + "</td>";
                                         Mail += " <td style=\"padding: 8px;    line-height: 1.42857143;    vertical-align: top;    border-top: 1px solid #ddd; color: #428bca;    border-left: none;text-decoration: none; border: 1px solid #ddd; border-bottom: 2px solid #ddd;\">" + val.status + "</td>";
                                         Mail += " </tr>"
                                     });
@@ -326,7 +271,7 @@ exports.dailyactivity = function (req, res, next) {
                                                     Mail += " <td style=\"padding: 8px;    line-height: 1.42857143;    vertical-align: top;    border-top: 1px solid #ddd; color: #428bca;    border-left: none;text-decoration: none; border: 1px solid #ddd; border-bottom: 2px solid #ddd;\">" + val.cm_title + "</td>";
                                                     Mail += " <td style=\"padding: 8px;    line-height: 1.42857143;    vertical-align: top;    border-top: 1px solid #ddd; color: #428bca;    border-left: none;text-decoration: none; border: 1px solid #ddd; border-bottom: 2px solid #ddd;\">" + val.vd_name + "</td>";
                                                     Mail += " <td style=\"padding: 8px;    line-height: 1.42857143;    vertical-align: top;    border-top: 1px solid #ddd; color: #428bca;    border-left: none;text-decoration: none; border: 1px solid #ddd; border-bottom: 2px solid #ddd;\">" + val.propertyname + "</td>";
-                                                    Mail += " <td style=\"padding: 8px;    line-height: 1.42857143;    vertical-align: top;    border-top: 1px solid #ddd; color: #428bca;    border-left: none;text-decoration: none; border: 1px solid #ddd; border-bottom: 2px solid #ddd;\">" + setDate(val.cm_expires_on) + "</td>";
+                                                    Mail += " <td style=\"padding: 8px;    line-height: 1.42857143;    vertical-align: top;    border-top: 1px solid #ddd; color: #428bca;    border-left: none;text-decoration: none; border: 1px solid #ddd; border-bottom: 2px solid #ddd;\">" + common.setDate(val.cm_expires_on) + "</td>";
                                                     Mail += " <td style=\"padding: 8px;    line-height: 1.42857143;    vertical-align: top;    border-top: 1px solid #ddd; color: #428bca;    border-left: none;text-decoration: none; border: 1px solid #ddd; border-bottom: 2px solid #ddd;\">" + val.status + "</td>";
                                                     Mail += " </tr>"
                                                 });

@@ -88,10 +88,6 @@
                                                 <span data-ng-show="metaform.longdesc.$error.maxlength">Maximum 800 characters allowed!</span>
                                             </span>
                                         </div>
-
-
-                                    </div>
-                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="firstname" class="col-sm-12">Celebrity</label>
                                             <div class="col-sm-12">
@@ -99,6 +95,10 @@
                                                 </select>
                                             </div>
                                         </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+
                                         <div class="form-group">
                                             <label for="language" class="col-sm-12"><span class="asterisk">*</span>Languages</label>
                                             <div class="col-sm-12">
@@ -109,7 +109,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                         <div class="form-group">
                                             <label for="platform" class="col-sm-12"><span class="asterisk">*</span>PlatForm Supports</label>
                                             <div class="col-sm-12">
                                                 <select name="platforms" size="2" required data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in Platforms" data-ng-model="SelectedPlatforms" multiple>
@@ -120,18 +120,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label for="firstname" class="col-sm-12">Supporting Languages</label>
-                                                    <div class="col-sm-12">
-                                                    <span class="ui-select">
-                                                        <select size="2" name="lyricslanguages"  data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in Languages" data-ng-model="SelectedLyricsLanguages" multiple>
-                                                        </select>
-                                                    </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label for="userid" class="col-sm-12">Support In APP purchase</label>
                                                     <div class="col-sm-12">
@@ -145,7 +134,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label for="userid" class="col-sm-12"><span class="asterisk">*</span>Genres</label>
                                                     <div class="col-sm-12">
@@ -159,8 +148,6 @@
                                                         </span>
                                                     </div>
                                                 </div>
-                                                </div>
-                                            <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="userid" class="col-sm-12">Sub Genres</label>
                                                     <div class="col-sm-12">
@@ -171,14 +158,11 @@
                                                         </span>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="col-sm-6" style="padding: 0px;">
-
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="userid" class="col-sm-12"><span class="asterisk">*</span>Nudity / Parental Advisory</label>
@@ -293,13 +277,17 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="firstname" class="col-sm-12">Lyrics Languages</label>
-                                                <div class="col-sm-12">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="firstname" class="col-sm-12">Lyrics Languages</label>
+                                                    <div class="col-sm-12">
                                                         <span class="ui-select">
-                                                            <select name="lyricslanguages"  data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in Languages" data-ng-model="SelectedLyricsLanguages" multiple>
+                                                            <select size="2" name="lyricslanguages"  data-ng-disabled="IsDisable" class="ng-pristine ng-valid form-control" data-ng-options="item.cd_id as item.cd_name for item in Languages" data-ng-model="SelectedLyricsLanguages" multiple>
                                                             </select>
                                                         </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

@@ -1,4 +1,10 @@
-// date convert in 00:00:00 format
+/**
+ * @name Datewithouttime
+ * @param val
+ * @returns {Date}
+ * @constructor
+ * @desc date convert in 00:00:00 format
+ */
 function Datewithouttime(val) {
     var d = new Date(val);
     var dt = d.getDate();
@@ -7,7 +13,15 @@ function Datewithouttime(val) {
     var selectdate = year + '-' + Pad("0", month, 2) + '-' + Pad("0", dt, 2);
     return new Date(selectdate);
 }
-// Date convert into two digit 
+/**
+ * @name Pad
+ * @param padString
+ * @param value
+ * @param length
+ * @returns {*}
+ * @constructor
+ * @desc Date convert into two digit
+ */
 function Pad(padString, value, length) {
     var str = value.toString();
     while (str.length < length)
@@ -15,6 +29,11 @@ function Pad(padString, value, length) {
 
     return str;
 }
+/**
+ *
+ * @param second
+ * @returns {String}
+ */
 function toMinites(second) {
     if (second) {
         var sec_num = parseInt(second, 10); // don't forget the second param
@@ -31,6 +50,11 @@ function toMinites(second) {
     }
     return second;
 }
+/**
+ *
+ * @param str
+ * @returns {Number}
+ */
 function toSeconds(str) {
     if (str) {
         var pieces = str.split(":");
@@ -39,7 +63,12 @@ function toSeconds(str) {
     }
     return str;
 }
-//HighChart For File Status
+/**
+ *
+ * @param data
+ * @constructor
+ * @desc HighChart For File Status
+ */
 function HighchartBind(data) {
     // Build the chart
     $('#high-charts').highcharts({
@@ -70,7 +99,11 @@ function HighchartBind(data) {
         series: [data]
     });
 }
-
+/**
+ *
+ * @param val
+ * @returns {String}
+ */
 function setDate(val) {
     var d = new Date(val);
     var date = d.getDate();
@@ -104,7 +137,11 @@ function setDate(val) {
     }
     return selectdate;
 }
-
+/**
+ *
+ * @param val
+ * @returns {string}
+ */
 function getDate(val) {
     var d = new Date(val);
     var dt = d.getDate();
@@ -113,7 +150,11 @@ function getDate(val) {
     var selectdate = Pad("0", month, 2) + '-' + Pad("0", dt, 2) + '-' + year;
     return selectdate;
 }
-
+/**
+ *
+ * @param val
+ * @returns {string}
+ */
 function getTime(val) {
     var d = new Date(val);
     var minite = d.getMinutes();
@@ -122,10 +163,15 @@ function getTime(val) {
     var selectdate = Pad("0", hour, 2) + ':' + Pad("0", minite, 2) + ':' + Pad("0", second, 2);
     return selectdate;
 }
-
+/**
+ *
+ * @param data
+ * @param colLength
+ * @returns {Array}
+ * @constructor
+ */
 function BindMasterList(data, colLength) {
-    var result = [],
-          row;
+    var result = [], row;
     if (typeof (colLength) === 'undefined') colLength = 3;
     for (var i = 0, j = data.length; i < j; i++) {
         if (i % colLength === 0) {
@@ -136,15 +182,17 @@ function BindMasterList(data, colLength) {
         }
         row.push(data[i]);
     }
-
     if (row) {
         result.push(row);
     }
-
     return result;
-
 };
-
+/**
+ *
+ * @param data
+ * @returns {{cols: Array, rows: Array}}
+ * @constructor
+ */
 function ExportExcel(data) {
     var exportdata = { cols: [], rows: [] };
     var keys = Object.keys(data[0]);
@@ -175,6 +223,12 @@ function ExportExcel(data) {
     });
     return exportdata;
 }
+/**
+ *
+ * @param data
+ * @returns {Array}
+ * @constructor
+ */
 function ExportExcelNew(data) {
     var exportdata = [];
     var keys = Object.keys(data[0]);
@@ -197,6 +251,12 @@ function ExportExcelNew(data) {
   //  console.log(exportdata)
     return exportdata;
 }
+/**
+ *
+ * @param data
+ * @returns {{cols: Array, rows: Array}}
+ * @constructor
+ */
 function ExportExcelVcodePromocode(data) {
     var exportdata = { cols: [], rows: [] };
     var keys = Object.keys(data[0]);
@@ -226,4 +286,65 @@ function ExportExcelVcodePromocode(data) {
         cnt++;
     });
     return exportdata;
+}
+/**
+ * @desc Get file Extension
+ * @param filename
+ * @returns {String}
+ */
+function getExtension(filename) {
+    var parts = filename.split('.');
+    return parts[parts.length - 1];
+}
+
+/**
+ * @desc Validate Image File
+ * @param filename
+ * @returns {Boolean}
+ */
+function isImage(filename) {
+    var ext = getExtension(filename);
+    switch (ext.toLowerCase()) {
+        case 'jpg':
+        case 'gif':
+        case 'bmp':
+        case 'png':
+            //etc
+            return true;
+    }
+    return false;
+}
+/**
+ * @desc Validate Video file
+ * @param filename
+ * @returns {Boolean}
+ */
+function isVideo(filename) {
+    var ext = getExtension(filename);
+    switch (ext.toLowerCase()) {
+        case 'm4v':
+        case 'avi':
+        case 'mpg':
+        case 'mp4':
+            // etc
+            return true;
+    }
+    return false;
+}
+
+/**
+ * @desc Validate Text file
+ * @param filename
+ * @returns {boolean}
+ */
+function isText(filename) {
+    var ext = getExtension(filename);
+    //if (getExtension(val.name).toLowerCase() == "txt" || getExtension(val.name).toLowerCase() == "json" || getExtension(val.name).toLowerCase() == "xml") {
+    switch (ext.toLowerCase()) {
+        case 'txt':
+        case 'json':
+        case 'xml':
+            return true;
+    }
+    return false;
 }

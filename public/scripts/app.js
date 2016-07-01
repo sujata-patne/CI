@@ -1,4 +1,14 @@
+"use strict";
+/**
+ * @class angular_module.MyModule
+ * @memberOf angular_module
+ * @desc set the module
+ */
 var myApp = angular.module('myApp', ['ui.router', 'ngProgress', 'ui.bootstrap', 'underscore', 'ngFileUpload','ngFileSaver']);
+/**
+ * @memberOf myApp
+ * @type {{closeButton: boolean, debug: boolean, newestOnTop: boolean, progressBar: boolean, positionClass: string, preventDuplicates: boolean, onclick: null, showDuration: string, hideDuration: string, timeOut: string, extendedTimeOut: string, showEasing: string, hideEasing: string, showMethod: string, hideMethod: string}}
+ */
 toastr.options = {
     "closeButton": false,
     "debug": false,
@@ -16,6 +26,10 @@ toastr.options = {
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
 }
+/**
+ * @class angular_module.myApp.Config
+ * @memberOf myApp
+ */
 myApp.config(function ($stateProvider,$httpProvider) {
     $stateProvider
     .state("dashboard", {

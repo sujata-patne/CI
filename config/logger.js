@@ -2,6 +2,7 @@
  * Created by sujata.patne on 05-04-2016.
  */
 var config = require('../config')();
+var common = require('../helpers/common');
 var winston = require( 'winston' ),
     fs = require( 'fs' ),
     logDir = config.log_path, // Or read from a configuration
@@ -13,7 +14,7 @@ winston.setLevels( winston.config.npm.levels );
 winston.addColors( winston.config.npm.colors );
 
 var twoDigit = '2-digit';
-var filename = logDir + 'logs_'+Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear()+'.log';
+var filename = logDir + 'logs_'+common.Pad("0",parseInt(new Date().getDate()), 2)+'_'+common.Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear()+'.log';
 var options = {
     day: twoDigit,
     month: twoDigit,
@@ -22,53 +23,6 @@ var options = {
     minute: twoDigit,
     second: twoDigit
 };
-
-function Pad(padString, value, length) {
-    var str = value.toString();
-    while (str.length < length)
-        str = padString + str;
-
-    return str;
-}
-function getDate(val) {
-    if (val) {
-        var d = new Date(val);
-        //var d = moment(new Date(val), "Asia/Kolkata").format("YYYY-MM-DD");
-        var dt = d.getDate();
-        var month = d.getMonth() + 1;
-        var year = d.getFullYear();
-        var selectdate = Pad("0", dt, 2)+ '-' + Pad("0", month, 2) + '-' + year  ;
-        return selectdate;
-    }
-    else {
-        var d = new Date();
-        //var d = moment(curDate, "Asia/Kolkata");
-        var dt = d.getDate();
-        var month = d.getMonth() + 1;
-        var year = d.getFullYear();
-        var selectdate = Pad("0", dt, 2)+ '-' + Pad("0", month, 2) + '-' + year  ;
-        return selectdate;
-    }
-}
-
-function getTime(val) {
-    var d = new Date(val);
-    //var d = moment(new Date(val), "Asia/Kolkata");
-    var minite = d.getMinutes();
-    var hour = d.getHours();
-    var second = d.getSeconds();
-    var selectdate = Pad("0", hour, 2) + ':' + Pad("0", minite, 2) + ':' + Pad("0", second, 2);
-    return selectdate;
-}
-
-function formatter(args) {
-
-    var d = new Date();
-    var date = getDate(d);
-    var time = getTime(d);
-    var logMessage = date +" "+ time ;
-    return logMessage;
-}
 
 if ( !fs.existsSync( logDir ) ) {
     // Create the directory if it does not exist
@@ -81,7 +35,7 @@ var debug = new winston.Logger({
     },
     transports: [
         new (winston.transports.File)({
-            timestamp:formatter,
+            timestamp:common.formatter,
             level: env === 'development' || env === 'production'  ? 'debug' : 'info',
             filename: filename,
             maxsize: 1024 * 1024 * 10
@@ -98,7 +52,7 @@ var info = new winston.Logger({
         new (winston.transports.File)({
             level: env === 'development' || env === 'production'  ? 'info' : 'debug',
             filename: filename,
-            timestamp:formatter,
+            timestamp:common.formatter,
             maxsize: 1024 * 1024 * 10
         }),
         new (winston.transports.Console)({level: 'info'})
@@ -113,7 +67,7 @@ var error = new winston.Logger({
         new (winston.transports.File)({
             level: env === 'development' || env === 'production'  ? 'error' : 'debug',
             filename: filename,
-            timestamp:formatter,
+            timestamp:common.formatter,
             maxsize: 1024 * 1024 * 10
         }),
         new (winston.transports.Console)({level: 'error'})
@@ -134,7 +88,7 @@ var wlogger = {
         var lvl = wlogger[level];
         lvl(msg);
     },
-    logDate: Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear()
+    logDate: common.Pad("0",parseInt(new Date().getDate()), 2)+'_'+common.Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear()
 };
 
 module.exports = wlogger;

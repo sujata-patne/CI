@@ -2,12 +2,14 @@
  * Created by sujata.patne on 22-04-2016.
  */
 /**
+ * @memberof myApp
+ * @type {directive|angular.Directive}
  * @name previewFileListGrid
  * @desc <preview-file-list-grid> Directive
  */
 myApp.directive('previewFileListGrid', function () {
     return {
-        scope: true,
+        scope: false,
         transclude: true,
         templateUrl: '../../partials/views/preview-file-list.html',
         controller: function ($scope, $attrs, ngProgress, Upload, ContentFile) {
@@ -15,52 +17,6 @@ myApp.directive('previewFileListGrid', function () {
             $scope.replaceSupportingFile = [];
             $scope.tempFiles = [];
             $scope.IsEditPermission = ($scope.UserRole == "Moderator" || $scope.UserRole == "Super Admin") ? true : false;
-            /**
-             * @func getExtension
-             * @param {String} filename
-             * @returns {String}
-             */
-            function getExtension(filename) {
-                var parts = filename.split('.');
-                return parts[parts.length - 1];
-            }
-
-            /**
-             * @name isImage
-             * @param {String} filename
-             * @returns {Boolean}
-             */
-            function isImage(filename) {
-                var ext = getExtension(filename);
-                switch (ext.toLowerCase()) {
-                    case 'jpg':
-                    case 'jpeg':
-                    case 'gif':
-                    case 'bmp':
-                    case 'png':
-                        //etc
-                        return true;
-                }
-                return false;
-            }
-            /**
-             * @name isVideo
-             * @param {String} filename
-             * @returns {Boolean}
-             */
-            function isVideo(filename) {
-                var ext = getExtension(filename);
-                switch (ext.toLowerCase()) {
-                    case 'm4v':
-                    case 'avi':
-                    case 'mpg':
-                    case 'mp4':
-                        // etc
-                        return true;
-                }
-                return false;
-            }
-
             /**
              * @name replacePreviewFileUpload
              * @param {Number} cnt
@@ -155,8 +111,7 @@ myApp.directive('previewFileListGrid', function () {
                             $scope.PreviewFiles[tcu].filename = filename;
                             $scope.PreviewFiles[tcu].cf_bitrate = resp.data.Files.cf_bitrate;
                             $scope.PreviewFiles[tcu].cf_url = resp.data.Files.cf_url;
-                            console.log('data.ct_param_value')
-                            console.log(data.ct_param_value)
+                             
                             if(data.ct_param_value == 'otherimage'){
                                 $scope.PreviewFiles[tcu].measure = 'pixels';
                             }else if( data.ct_param_value == 'bitrate'){

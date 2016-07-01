@@ -1,4 +1,8 @@
-
+/**
+ * @memberof myApp
+ * @type {controller|angular.Controller}
+ * @desc Metadata List Controller
+ */
 myApp.controller('metadataCtrl', function ($scope, $state, $http,$window, $stateParams, ngProgress,  Metadatas, _, Icon) {
     $('.removeActiveClass').removeClass('active');
     $('.removeSubactiveClass').removeClass('active');
@@ -28,18 +32,30 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http,$window, $state
     $scope.BGDisplayTitle = '';
     //ngProgress.start();
     $scope.uploading = true;
+    /**
+     * @desc Open Start Datepicker
+     * @param evt
+     */
     $scope.openDatepicker = function (evt) {
         $scope.open2 = false;
         evt.preventDefault();
         evt.stopPropagation();
         $scope.open1 = !$scope.open1;
     }
+    /**
+     * @desc Open End Datepicker
+     * @param evt1
+     */
     $scope.openEndDatepicker = function (evt1) {
         $scope.open1 = false;
         evt1.preventDefault();
         evt1.stopPropagation();
         $scope.open2 = !$scope.open2;
     }
+    /**
+     * @desc Open Release Datepicker
+     * @param evt
+     */
     $scope.openReleaseDatepicker = function (evt) {
         $scope.open1 = false;
         $scope.open2 = false;
@@ -48,16 +64,6 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http,$window, $state
         $scope.open = !$scope.open;
     }
 
-    function ReadPermission(Role) {
-        if (Role == "Super Admin") {
-            $scope.IsReadPermission = true;
-            $scope.IsDisable = true;
-        }
-        $scope.VendorDisable = true;
-        $scope.PropertyDisable = true;
-        $scope.ContentTypeDisable = true;
-        $scope.ResetVisible = true;
-    }
     $scope.MetaId;
     try {
         if ($stateParams.id) {
@@ -67,9 +73,12 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http,$window, $state
     catch (err) {
         $window.location.href = err.message
     }
-    //
+
     //Icon.GetEncode(
     ngProgress.start();
+    /**
+     * @desc Get Matadata details
+     */
     Metadatas.getMetadata({ Id: $scope.MetaId, state: $scope.CurrentPage }, function (metadata) {
         // ngProgress.complete();
         $scope.uploading = false;
@@ -222,7 +231,10 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http,$window, $state
         toastr.error(error);
         ngProgress.complete();
     })
-
+    /**
+     * @desc Change Vendor
+     * @constructor
+     */
     $scope.VendorChange = function () {
         $scope.PropertyDisable = $scope.SelectedVendor ? false : true;
         $scope.SelectedProperty = "";
@@ -233,12 +245,17 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http,$window, $state
         $scope.Startdate = "";
         $scope.Expirydate = "";
     }
-
-
+    /**
+     * @desc Go Back to Content Catalog Page
+     * @constructor
+     */
     $scope.BackToContentCatalog = function () {
         $window.location.href = "#/content-catalog";
     }
-
+    /**
+     * @desc Change Property
+     * @constructor
+     */
     $scope.PropertyChange = function () {
         $scope.IsDisable = $scope.SelectedProperty ? false : true;
         $scope.ContentTypeDisable = $scope.SelectedProperty ? false : true;
@@ -263,6 +280,27 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http,$window, $state
             $scope.SelectedChannelRights = _.unique(_.pluck($scope.OldMetadataRights, "r_channel_distribution_rights"));
         }
     }
+    /**
+     * @desc Read Permissions for Super Admin
+     * @param Role
+     * @constructor
+     */
+    function ReadPermission(Role) {
+        if (Role == "Super Admin") {
+            $scope.IsReadPermission = true;
+            $scope.IsDisable = true;
+        }
+        $scope.VendorDisable = true;
+        $scope.PropertyDisable = true;
+        $scope.ContentTypeDisable = true;
+        $scope.ResetVisible = true;
+    }
+    /**
+     * @desc Check Icon Country Group
+     * @param selectedcountry
+     * @returns {Array}
+     * @constructor
+     */
     function CheckGroupSelection(selectedcountry) {
         var country = [];
         var tempcountry1 = [];
@@ -299,6 +337,12 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http,$window, $state
         return country;
     }
 
+    /**
+     * @desc Get Seelcted Country List
+     * @param selectedcountry
+     * @returns {Array}
+     * @constructor
+     */
     function GetSelectedCountry(selectedcountry) {
         var country = [];
         var group = [];
@@ -324,6 +368,12 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http,$window, $state
         return country;
     }
 
+    /**
+     * @desc Get Selected Property Country List
+     * @param selectedcountry
+     * @returns {Array}
+     * @constructor
+     */
     function GetPropertyCountry(selectedcountry) {
         var country = [];
         var tempcountry1 = [];
@@ -359,6 +409,10 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http,$window, $state
         return country;
     }
 
+    /**
+     * @desc Get Propeerty Rights List
+     * @constructor
+     */
     function PropertyRights() {
         $scope.CountryRights = [];
         $scope.ChannelRights = [];
@@ -397,6 +451,9 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http,$window, $state
         }
     }
 
+    /**
+     * @desc Reset / Clear Form
+     */
     $scope.resetform = function () {
         $scope.SelectedVendor = "";
         $scope.PropertyDisable = true;
@@ -405,7 +462,13 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http,$window, $state
         $scope.metaform.$setPristine();
 
     }
-
+    /**
+     * @desc Get added Master List Data
+     * @param OldData
+     * @param SelectedData
+     * @returns {Array}
+     * @constructor
+     */
     function GetAddMasterlist(OldData, SelectedData) {
         var AddArray = [];
         _.each(SelectedData, function (selected) {
@@ -417,6 +480,13 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http,$window, $state
         return AddArray;
     }
 
+    /**
+     * @desc get Deleted Master List Data
+     * @param OldData
+     * @param SelectedData
+     * @returns {Array}
+     * @constructor
+     */
     function GetDeleteMasterList(OldData, SelectedData) {
         var DeleteArray = [];
         _.each(OldData, function (old) {
@@ -428,6 +498,13 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http,$window, $state
         return DeleteArray;
     }
 
+    /**
+     * @desc Get Added Rights data
+     * @param OldData
+     * @param SelectedData
+     * @returns {Array}
+     * @constructor
+     */
     function GetAddRights(OldData, SelectedData) {
         var AddArray = [];
         _.each(SelectedData, function (selected) {
@@ -439,6 +516,13 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http,$window, $state
         return AddArray;
     }
 
+    /**
+     * @desc Get Deleted Rights Data
+     * @param OldData
+     * @param SelectedData
+     * @returns {Array}
+     * @constructor
+     */
     function GetDeleteRights(OldData, SelectedData) {
         var DeleteArray = [];
         _.each(OldData, function (old) {
@@ -450,6 +534,12 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http,$window, $state
         return DeleteArray;
     }
 
+    /**
+     * @desc Check Duration Validity
+     * @param duration
+     * @returns {*}
+     * @constructor
+     */
     function DurationCheck(duration) {
         if (duration) {
             var pieces = duration.split(":");
@@ -469,6 +559,11 @@ myApp.controller('metadataCtrl', function ($scope, $state, $http,$window, $state
             return "";
         }
     }
+
+    /**
+     * @desc Save Matadata Form
+     * @param isValid
+     */
     $scope.submitForm = function (isValid) {
         if (isValid) {
             var year = new Date().getFullYear();

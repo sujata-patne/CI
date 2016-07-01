@@ -1,7 +1,11 @@
 /**
  * Created by Sujata.Halwai on 01-06-2016.
  */
-
+/**
+ * @class angular_module.myApp
+ * @memberof myApp
+ * @type {filter|angular.Filter}
+ */
 myApp.filter('startFrom', function () {
     return function (input, start) {
         if (!input || !input.length) { return; }
@@ -9,7 +13,10 @@ myApp.filter('startFrom', function () {
         return input.slice(start);
     }
 });
-
+/**
+ * @name filterWithOr
+ * @type {filter|angular.Filter}
+ */
 myApp.filter('filterWithOr', function ($filter) {
     var comparator = function (actual, expected) {
         if (angular.isUndefined(actual)) {

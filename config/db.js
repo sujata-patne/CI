@@ -7,7 +7,9 @@ var config = require('../config')();
 
 var poolCluster = mysql.createPoolCluster();
 
-// add configurations
+/**
+ * @desc Add configurations to Pool clusters
+ */
 poolCluster.add('CMS', {
     host: config.db_host_ikon_cms,
     user: config.db_user_ikon_cms,

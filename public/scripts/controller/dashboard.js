@@ -1,4 +1,8 @@
-
+/**
+ * @memberof myApp
+ * @type {controller|angular.Controller}
+ * @desc Dashboard Page Controller
+ */
 var site_base_path = '';
 //var site_base_path = 'http://dailymagic.in';
 
@@ -9,7 +13,34 @@ myApp.controller('dashboardCtrl', function ($scope, $http, ngProgress, Icon, _) 
     $('#dashboard').addClass('active');
     ngProgress.color('yellowgreen');
     ngProgress.height('3px');
-    // Left Grid & HighChart Data 
+
+    /**
+     * @desc Get Dashboard Data
+     */
+    Icon.GetDashBoardData(function (dashboard) {
+        $scope.FileNames = [];
+        $scope.FilesStatus = [];
+        _.each(dashboard.FileStatus, function (status) {
+            if (status.cd_cm_id == 1) {
+                $scope.FilesStatus.push(status);
+            }
+            else if (status.cd_cm_id == 2) {
+                $scope.FileNames.push(status);
+            }
+        })
+        $scope.Vendors = dashboard.Vendors;
+        $scope.StatusFiles = MakeFileStatusList($scope.FilesStatus, $scope.Vendors, dashboard.VendorFiles);
+        $scope.VendorGridData = MakeVendorStatusList($scope.FileNames, $scope.Vendors, dashboard.VendorFiles);
+        var data = GetStatusFiles($scope.FilesStatus, $scope.StatusFiles);
+        $scope.FileGridData = data.FileGridData;
+        HighchartBind(data.chartdata);
+        $scope.loading = true;
+    }, function (error) {
+        toastr.error(error);
+    });
+    /**
+     * @desc Left Grid & HighChart Data
+     */
     function GetStatusFiles(filestatus, files) {
         var NewArray = [];
         var ChartArray = [];
@@ -31,7 +62,14 @@ myApp.controller('dashboardCtrl', function ($scope, $http, ngProgress, Icon, _) 
         return Finaldata;
     }
 
-    //Get Metadata With Inactive Status
+    /**
+     * @desc Get Metadata With Inactive Status
+     * @param StatusList
+     * @param Vendors
+     * @param Metadata
+     * @returns {Array}
+     * @constructor
+     */
     function MakeFileStatusList(StatusList, Vendors, Metadata) {
         var state1 = 0;
         var state2 = 0;
@@ -90,7 +128,14 @@ myApp.controller('dashboardCtrl', function ($scope, $http, ngProgress, Icon, _) 
         return NewArray;
     }
 
-    //Vendor Grid
+    /**
+     * @desc get Vendor Details for Grid
+     * @param ContentType
+     * @param Vendors
+     * @param Metadata
+     * @returns {Array}
+     * @constructor
+     */
     function MakeVendorStatusList(ContentType, Vendors, Metadata) {
         //_.each(Metadata, function (meta) {
         //    if (meta.cm_state == 5 || meta.cm_state == 7 || meta.cm_state == 6) {
@@ -137,28 +182,5 @@ myApp.controller('dashboardCtrl', function ($scope, $http, ngProgress, Icon, _) 
 
         return DataArray;
     }
-
-    Icon.GetDashBoardData(function (dashboard) {
-        $scope.FileNames = [];
-        $scope.FilesStatus = [];
-        _.each(dashboard.FileStatus, function (status) {
-            if (status.cd_cm_id == 1) {
-                $scope.FilesStatus.push(status);
-            }
-            else if (status.cd_cm_id == 2) {
-                $scope.FileNames.push(status);
-            }
-        })
-        $scope.Vendors = dashboard.Vendors;
-  //      console.log($scope.Vendors)
-        $scope.StatusFiles = MakeFileStatusList($scope.FilesStatus, $scope.Vendors, dashboard.VendorFiles);
-        $scope.VendorGridData = MakeVendorStatusList($scope.FileNames, $scope.Vendors, dashboard.VendorFiles);
-        var data = GetStatusFiles($scope.FilesStatus, $scope.StatusFiles);
-        $scope.FileGridData = data.FileGridData;
-        HighchartBind(data.chartdata);
-        $scope.loading = true;
-    }, function (error) {
-        toastr.error(error);
-    });
 
 });

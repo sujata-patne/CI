@@ -1,4 +1,8 @@
-
+/**
+ * @memberof myApp
+ * @type {controller|angular.Controller}
+ * @desc Master List Controller
+ */
 myApp.controller('masterListCtrl', function ($scope, $window, $http, $state, ngProgress, $stateParams, MasterLists, _, Excel) {
     $('.removeActiveClass').removeClass('active');
     $('.removeSubactiveClass').removeClass('active');
@@ -14,11 +18,11 @@ myApp.controller('masterListCtrl', function ($scope, $window, $http, $state, ngP
     $scope.chunkedFilterData = [];
     $scope.currentPage = 0;
     $scope.pageSize = 34;
-   // ngProgress.start();
-    $scope.uploading = true;
-    //  Get masterlist details
+     $scope.uploading = true;
+    /**
+     * @desc Get masterlist details
+     */
     MasterLists.getMasterList({ Id: $stateParams.id, state: $scope.CurrentPage }, function (master) {
-      //  ngProgress.complete();
         $scope.uploading = false;
         master.UserRole === "Content Manager" ? location.href = "/" : "";
         $scope.IsEditPermission = master.UserRole === "Moderator" ? false : true;
@@ -53,7 +57,10 @@ myApp.controller('masterListCtrl', function ($scope, $window, $http, $state, ngP
     }, function (error) {
         toastr.error(error);
     });
-    //  Download/export master list data into excel file
+    /**
+     * @desc  Download/export master list data into excel file
+     * @constructor
+     */
     $scope.ExportExcel = function () {
         if ($scope.MasterlistExportData.length > 0) {
             var array = [];
@@ -70,7 +77,10 @@ myApp.controller('masterListCtrl', function ($scope, $window, $http, $state, ngP
         }
     }
 
-    // List Page functions
+    /**
+     * @desc List Page functions
+     * @constructor
+     */
     $scope.MasterListChange = function () {
         var master = _.find($scope.MasterList, function (master, key) { return master.cm_id == $scope.SelectedMasterList; });
         $scope.MasterName = master ? master.cm_name : "";
@@ -92,6 +102,9 @@ myApp.controller('masterListCtrl', function ($scope, $window, $http, $state, ngP
         }
         createChunks();
     }
+    /**
+     * @desc Create Chunks of Master List Data for Export
+     */
     function createChunks() {
         var masterList = [];
         var cnt = 1;
@@ -114,6 +127,11 @@ myApp.controller('masterListCtrl', function ($scope, $window, $http, $state, ngP
             $scope.chunkedFilterData = BindMasterList($scope.filterData);
         }
     }
+
+    /**
+     * @desc Change Celebrity Role
+     * @constructor
+     */
     $scope.CelebrityRoleChange = function () {
         if ($scope.MasterName == "Celebrity") {
             var data = _.where($scope.SubMasterList, ($scope.SelectedCelebrityRole && $scope.SelectedCelebrityRole != "") ? { "cd_cm_id": $scope.SelectedMasterList, "cmd_entity_detail": $scope.SelectedCelebrityRole} : { "cd_cm_id": $scope.SelectedMasterList })
@@ -128,19 +146,30 @@ myApp.controller('masterListCtrl', function ($scope, $window, $http, $state, ngP
             createChunks();
         }
     }
-
-    //  get search data
+    /**
+     * @desc get search data
+     * @param data
+     * @constructor
+     */
     $scope.FilterContent = function (data) {
         $scope.searchcontentquery = $scope.Searchquery;
         createChunks();
     }
-
-    // add edit Page Function
+    /**
+     * @desc add edit Page Function
+     */
     $scope.resetform = function () {
         $scope.SelectedMasterList = "";
         $scope.CelebrityRoleDisable = true;
         $scope.masterlistform.$setPristine();
     }
+    /**
+     * @desc Get Role
+     * @param OldData
+     * @param SelectedData
+     * @returns {Array}
+     * @constructor
+     */
     function GetAddRole(OldData, SelectedData) {
         var AddArray = [];
         _.each(SelectedData, function (selected) {
@@ -152,6 +181,13 @@ myApp.controller('masterListCtrl', function ($scope, $window, $http, $state, ngP
         return AddArray;
     }
 
+    /**
+     * @desc Deleted Role
+     * @param OldData
+     * @param SelectedData
+     * @returns {Array}
+     * @constructor
+     */
     function GetDeleteRole(OldData, SelectedData) {
         var DeleteArray = [];
         _.each(OldData, function (old) {
@@ -162,6 +198,13 @@ myApp.controller('masterListCtrl', function ($scope, $window, $http, $state, ngP
         });
         return DeleteArray;
     }
+
+    /**
+     * @desc Add Content Types
+     * @param OldData
+     * @param SelectedData
+     * @returns {Array}
+     */
     function addContentTypes(OldData, SelectedData) {
         var AddArray = [];
         _.each(SelectedData, function (selected) {
@@ -173,6 +216,12 @@ myApp.controller('masterListCtrl', function ($scope, $window, $http, $state, ngP
         return AddArray;
     }
 
+    /**
+     * @desc Delete Content Type
+     * @param OldData
+     * @param SelectedData
+     * @returns {Array}
+     */
     function deleteContentTypes(OldData, SelectedData) {
         var DeleteArray = [];
         _.each(OldData, function (old) {
@@ -183,6 +232,10 @@ myApp.controller('masterListCtrl', function ($scope, $window, $http, $state, ngP
         });
         return DeleteArray;
     }
+    /**
+     * @desc Save Master List Details
+     * @param isValid
+     */
     $scope.submitForm = function (isValid) {
 
         var addContentTypesList = addContentTypes($scope.OldSubMasterList, $scope.SelectedContentType);
@@ -231,6 +284,14 @@ myApp.controller('masterListCtrl', function ($scope, $window, $http, $state, ngP
             }
         }
     };
+    /**
+     * @desc Delete Master List Details
+     * @param Id
+     * @param cd_name
+     * @param cm_name
+     * @param cd_desc
+     * @constructor
+     */
     $scope.DeleteMasterList = function (Id, cd_name, cm_name, cd_desc) {
         bootbox.confirm("Are you sure want to delete this " + cm_name + "?", function (result) {
             if (result) {
@@ -274,5 +335,4 @@ myApp.controller('masterListCtrl', function ($scope, $window, $http, $state, ngP
             }
         });
     }
-
 });

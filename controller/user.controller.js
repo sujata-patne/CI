@@ -8,13 +8,8 @@ var fs = require("fs");
 var wlogger = require("../config/logger");
 var reload = require('require-reload')(require);
 var config = require('../config')();
-function Pad(padString, value, length) {
-    var str = value.toString();
-    while (str.length < length)
-        str = padString + str;
+var common = require('../helpers/common');
 
-    return str;
-}
 /**
  * @class
  * @classdesc create a log file if not exist.
@@ -22,7 +17,7 @@ function Pad(padString, value, length) {
  * @param {object} res - http response object.
  */
 exports.allAction = function (req, res, next) {
-    var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
+    var currDate = common.Pad("0",parseInt(new Date().getDate()), 2)+'_'+common.Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
     if (wlogger.logDate == currDate) {
         var logDir = config.log_path;
         var filePath = logDir + 'logs_'+currDate+'.log';
@@ -288,8 +283,7 @@ exports.addedituser = function (req, res, next) {
                                     ld_created_by: req.session.UserName,
                                     ld_modified_on: new Date(),
                                     ld_modified_by: req.session.UserName,
-                                    ld_last_login: new Date(),
-                                    ld_crud_isactive: 1
+                                    ld_last_login: new Date()
                                 };
                                 var query = connection_ikon_cms.query('INSERT INTO icn_login_detail SET ?', datas, function (err, rightresult) {
                                     if (err) {

@@ -1,14 +1,22 @@
 /**
  * Created by Sujata.Halwai on 01-06-2016.
  */
+/**
+ * @name contentFileListGrid
+ * @type {directive|angular.Directive}
+ * @desc <content-file-list-grid> Directive
+ */
 myApp.directive('contentFileListGrid', function () {
     return {
-        scope: true,
+        scope: false,
         tranclude: true,
         templateUrl: '../../partials/views/content-file-list.html',
         controller: function ($scope, ngProgress, Upload, ContentFile) {
             $scope.IsEditPermission = ($scope.UserRole == "Moderator" || $scope.UserRole == "Super Admin") ? true : false;
-
+            /**
+             * @name uploadAudio
+             * @param isvalid
+             */
             $scope.uploadAudio = function (isvalid) {
                 if (isvalid) {
                     if ($scope.replacefile) {
@@ -63,6 +71,10 @@ myApp.directive('contentFileListGrid', function () {
                     }
                 }
             }
+            /**
+             * @name upload
+             * @param isvalid
+             */
             $scope.upload = function (isvalid) {
                 if (isvalid) {
                     if ($scope.replacefile) {
@@ -103,6 +115,9 @@ myApp.directive('contentFileListGrid', function () {
                     }
                 }
             }
+            /**
+             * @name replacefileupload
+             */
             $scope.replacefileupload = function () {
                 $scope.InvalidFileError = false;
                 if ($scope.replacefile) {
@@ -125,6 +140,9 @@ myApp.directive('contentFileListGrid', function () {
                     }
                 }
             }
+            /**
+             * @name replaceAudioFileupload
+             */
             $scope.replaceAudioFileupload = function () {
                 $scope.InvalidFileError = false;
                 if ($scope.replacefile) {
@@ -158,6 +176,9 @@ myApp.directive('contentFileListGrid', function () {
                     }
                 }
             }
+            /**
+             * @name getAudioData
+             */
             $scope.getAudioData = function () {
                 $scope.audioBitrateFiles = [];
                 _.each($scope.AudioFiles, function (val) {
@@ -172,6 +193,9 @@ myApp.directive('contentFileListGrid', function () {
                 });
                 $scope.audioFileDetails = BindMasterList($scope.audioBitrateFiles);
             }
+            /**
+             * @name resetSearch
+             */
             $scope.resetSearch = function () {
                 $scope.currentPage = 0;
                 $scope.SearchUsername = '';

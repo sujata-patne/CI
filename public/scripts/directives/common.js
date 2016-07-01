@@ -1,14 +1,22 @@
 /**
  * Created by sujata.halwai on 16-05-2016.
  */
-
+/**
+ * @name loadingSpinner
+ * @type {directive|angular.Directive}
+ * @desc <loading-spinner> Directive
+ */
 myApp.directive('loadingSpinner',function(){
     return {
         restrict:'EA',
         templateUrl: '../../partials/views/loading.html'
     }
 });
-
+/**
+ * @name dynamicModel
+ * @type {directive|angular.Directive}
+ * @desc <dynamic-model> Directive
+ */
 myApp.directive('dynamicModel', ['$compile', '$parse', function ($compile, $parse) {
     return {
         restrict: 'A',
@@ -23,7 +31,11 @@ myApp.directive('dynamicModel', ['$compile', '$parse', function ($compile, $pars
         }
     };
 }]);
-
+/**
+ * @name myEnter
+ * @type {directive|angular.Directive}
+ * @desc <my-enter> Directive
+ */
 myApp.directive('myEnter', function () {
     return function (scope, element, attrs) {
         element.bind("keydown keypress", function (event) {

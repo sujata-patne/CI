@@ -1,9 +1,15 @@
 /**
  * Created by Sujata.Halwai on 01-06-2016.
  */
+/**
+ * @memberof myApp
+ * @type {directive|angular.Directive}
+ * @name supportingFileListGrid
+ * @desc <supporting-file-list-grid> Directive
+ */
 myApp.directive('supportingFileListGrid', function () {
     return {
-        scope: true,
+        scope: false,
         transclude: true,
         templateUrl: '../../partials/views/supporting-file-list.html',
         controller: function ($scope, $attrs, ngProgress, Upload, ContentFile, $window) {
@@ -11,36 +17,6 @@ myApp.directive('supportingFileListGrid', function () {
             $scope.replaceSupportingFile = [];
             $scope.tempFiles = [];
             $scope.IsEditPermission = ($scope.UserRole == "Moderator" || $scope.UserRole == "Super Admin") ? true : false;
-
-            function getExtension(filename) {
-                var parts = filename.split('.');
-                return parts[parts.length - 1];
-            }
-            function isImage(filename) {
-                var ext = getExtension(filename);
-                switch (ext.toLowerCase()) {
-                    case 'jpg':
-                    case 'jpeg':
-                    case 'gif':
-                    case 'bmp':
-                    case 'png':
-                        //etc
-                        return true;
-                }
-                return false;
-            }
-            function isVideo(filename) {
-                var ext = getExtension(filename);
-                switch (ext.toLowerCase()) {
-                    case 'm4v':
-                    case 'avi':
-                    case 'mpg':
-                    case 'mp4':
-                        // etc
-                        return true;
-                }
-                return false;
-            }
 
             $scope.replaceSupportingFileUpload = function (cnt, success) {
                 if ($scope.replaceSupportingFile && $scope.replaceSupportingFile.length > 0) {

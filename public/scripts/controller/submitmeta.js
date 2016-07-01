@@ -1,4 +1,8 @@
-
+/**
+ * @memberof myApp
+ * @type {controller|angular.Controller}
+ * @desc Submit Metadata Controller
+ */
 myApp.controller('submitmetaCtrl', function ($scope, $state, $http, $stateParams, ngProgress, $window, Metadatas, _, Icon) {
     $('.removeActiveClass').removeClass('active');
     $('.removeSubactiveClass').removeClass('active');
@@ -11,6 +15,9 @@ myApp.controller('submitmetaCtrl', function ($scope, $state, $http, $stateParams
     ngProgress.start();
     $scope.uploading = true;
     $scope.MetaId;
+    /**
+     * Redirect To Home Page on error
+     */
     if ($stateParams.status.indexOf("add") > -1 || $stateParams.status.indexOf("edit") > -1 || $stateParams.status.indexOf("error") > -1) {
         if ($stateParams.mode == "a" || $stateParams.mode == "e") {
             try {
@@ -41,7 +48,9 @@ myApp.controller('submitmetaCtrl', function ($scope, $state, $http, $stateParams
         $scope.errorvisible = true;
     }
 
-    // save metadata form for different content types like imagery, audio, video, text ,games/apps
+    /**
+     * @desc  save metadata form for different content types like imagery, audio, video, text ,games/apps
+     */
     Metadatas.SubmitMetadata({ Id: $scope.MetaId, state: $scope.CurrentPage, contenttype: $stateParams.contenttype }, function (metadata) {
         ngProgress.complete();
         $scope.uploading = false;

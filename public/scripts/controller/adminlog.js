@@ -1,6 +1,14 @@
-
-myApp.controller('adminLogCtrl', function ($scope, $state, $http, $stateParams, ngProgress, $window, Logs, _, Excel) {
-    
+/**
+ * @memberof myApp
+ * @name adminLogCtrl
+ * @type {controller|angular.Controller}
+ * @param $scope {service} controller scope
+ * @param $state {service} controller scope
+ * @param $http {service} controller scope
+ * @param Logs {service} controller scope
+ * @desc indent the anonymous function and name it `adminLogCtrl` for visibility
+ */
+myApp.controller('adminLogCtrl', function ($scope, $state, $http, ngProgress, Logs, _, Excel) {
     $scope.CurrentPage = $state.current.name;
     $('.removeSubactiveClass').removeClass('active');
     $('.removeActiveClass').removeClass('active');
@@ -11,7 +19,12 @@ myApp.controller('adminLogCtrl', function ($scope, $state, $http, $stateParams, 
     $scope.pageSize = 50;
     //ngProgress.start();
     $scope.uploading = true;
-
+    /**
+     * @name GetAdminLogs
+     * @param AdminLogs
+     * @returns {Object}
+     * @constructor
+     */
     function GetAdminLogs(AdminLogs) {
         _.each(AdminLogs, function (log) {
             log.ald_created_on = getDate(log.ald_created_on) + " " + getTime(log.ald_created_on);
@@ -19,9 +32,12 @@ myApp.controller('adminLogCtrl', function ($scope, $state, $http, $stateParams, 
         });
         return AdminLogs;
     }
-// Get admin logs details
+
+    /**
+     * @desc Get admin logs details
+     * @memberOf Factories/Services Logs
+     */
     Logs.getAdminLog({ state: $scope.CurrentPage }, function (logs) {
-      //  ngProgress.complete();
         $scope.uploading = false;
         logs.UserRole === "Super Admin" ? "" : location.href = "/";
         $scope.AdminLogs = GetAdminLogs(logs.AdminLogs);
@@ -30,8 +46,10 @@ myApp.controller('adminLogCtrl', function ($scope, $state, $http, $stateParams, 
     function (error) {
         toastr.error(error);
     });
-
-// Export/Download excel for admin log
+    /**
+     * @desc Export/Download excel for admin log
+     * @constructor
+     */
     $scope.ExportExcel = function () {
         if ($scope.AdminLogs.length > 0) {
             var array = [];
@@ -47,7 +65,6 @@ myApp.controller('adminLogCtrl', function ($scope, $state, $http, $stateParams, 
             });
         }
     }
-
 });
 
  

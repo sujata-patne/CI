@@ -12,76 +12,8 @@ var config = require('../config')();
 var btoa = require("btoa");
 var _ = require("underscore");
 var fs = require("fs");
-function getDate() {
-    var d = new Date();
-    var dt = d.getDate();
-    var month = d.getMonth() + 1;
-    var year = d.getFullYear();
-    var selectdate = year + '-' + Pad("0", month, 2) + '-' + Pad("0", dt, 2);
-    return selectdate;
-}
-function getTime(val) {
-    var d = new Date(val);
-    var minite = d.getMinutes();
-    var hour = d.getHours();
-    var second = d.getSeconds();
-    var selectdate = Pad("0", hour, 2) + ':' + Pad("0", minite, 2) + ':' + Pad("0", second, 2);
-    return selectdate;
-}
-function Pad(padString, value, length) {
-    var str = value.toString();
-    while (str.length < length)
-        str = padString + str;
+var common = require('../helpers/common');
 
-    return str;
-}
-function GetContentType(state) {
-    var contenttype = '';
-    var contenttype1 = '';
-    switch (state) {
-        case 'addwallpaper':
-            contenttype = '"Imagery"';
-            contenttype1 = 'Imagery';
-            break;
-        case 'editwallpaper':
-            contenttype = '"Imagery"';
-            contenttype1 = 'Imagery';
-            break;
-        case 'addvideo':
-            contenttype = '"Video"';
-            contenttype1 = 'Video';
-            break;
-        case 'editvideo':
-            contenttype = '"Video"';
-            contenttype1 = 'Video';
-            break;
-        case 'addaudio':
-            contenttype = '"Audio"';
-            contenttype1 = 'Audio';
-            break;
-        case 'editaudio':
-            contenttype = '"Audio"';
-            contenttype1 = 'Audio';
-            break;
-        case 'addgame':
-            contenttype = '"AppsGames"';
-            contenttype1 = 'AppsGames';
-            break;
-        case 'editgame':
-            contenttype = '"AppsGames"';
-            contenttype1 = 'AppsGames';
-            break;
-        case 'addtext':
-            contenttype = '"Text"';
-            contenttype1 = 'Text';
-            break;
-        case 'edittext':
-            contenttype = '"Text"';
-            contenttype1 = 'Text';
-            break;
-    }
-    return { contenttype: contenttype, contenttype1: contenttype1 };
-}
 /**
  * @class
  * @classdesc create a log file if not exist.
@@ -89,7 +21,7 @@ function GetContentType(state) {
  * @param {object} res - http response object.
  */
 exports.allAction = function (req, res, next) {
-    var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
+    var currDate = common.Pad("0",parseInt(new Date().getDate()), 2)+'_'+ common.Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
     if (wlogger.logDate == currDate) {
         var logDir = config.log_path;
         var filePath = logDir + 'logs_'+currDate+'.log';
@@ -115,9 +47,10 @@ exports.getmetadata = function (req, res, next) {
         if (req.session) {
             if (req.session.UserName) {
                 mysql.getConnection('CMS', function (err, connection_ikon_cms) {
-                    var contenttype = GetContentType(req.body.state).contenttype;
+                    var contenttype = common.GetContentType(req.body.state).contenttype;
                     var status = req.body.state.indexOf("add") > -1 ? "add" : "edit";
-                    var currentdate = getDate();
+                   // var currentdate = getDate();
+                    var currentdate = common.setDBDate();
                     var ModCMquery = " inner join (select * from icn_vendor_user)vu on (vd.vd_id =vu.vu_vd_id and vu_ld_id =" + req.session.UserId + ")";
                     var vendorquery = (req.session.UserRole == "Content Manager" || req.session.UserRole == "Moderator") ? ModCMquery : "";
                     async.parallel({
@@ -411,8 +344,8 @@ exports.addeditmetadata = function (req, res, next) {
         if (req.session) {
             if (req.session.UserName) {
                 mysql.getConnection('CMS', function (err, connection_ikon_cms) {
-                    var contenttype = (GetContentType(req.body.state)).contenttype;
-                    var contenttype1 = (GetContentType(req.body.state)).contenttype1;
+                    var contenttype = (common.GetContentType(req.body.state)).contenttype;
+                    var contenttype1 = (common.GetContentType(req.body.state)).contenttype1;
                     var obj = req.body;
 
                     var query = connection_ikon_cms.query('Select * From content_metadata where cm_title = ? and cm_content_type = ?', [obj.cm_title, obj.cm_content_type], function (err, result) {
@@ -2102,7 +2035,8 @@ exports.submitmeta = function (req, res, next) {
                     var contenttype = req.body.contenttype;
                     var ModCMquery = " inner join (select * from icn_vendor_user)vu on (vd.vd_id =vu.vu_vd_id and vu_ld_id =" + req.session.UserId + ")";
                     var vendorquery = (req.session.UserRole == "Content Manager" || req.session.UserRole == "Moderator") ? ModCMquery : "";
-                    var currentdate = getDate();
+                    //var currentdate = getDate();
+                    var currentdate = common.setDBDate();
                     async.parallel({
                         ContentMetadata: function (callback) {
                             if (req.session.UserRole == "Content Manager") {

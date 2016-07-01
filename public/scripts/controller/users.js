@@ -1,4 +1,8 @@
-
+/**
+ * @memberof myApp
+ * @type {controller|angular.Controller}
+ * @desc User List Controller
+ */
 myApp.controller('usersCtrl', function ($scope, $http, ngProgress, $timeout, Users, $state, $stateParams, $window, _, Excel) {
     $('.removeActiveClass').removeClass('active');
     $('.removeSubactiveClass').removeClass('active');
@@ -12,8 +16,13 @@ myApp.controller('usersCtrl', function ($scope, $http, ngProgress, $timeout, Use
     $scope.pageSize = 50;
 //  ngProgress.start();
     $scope.uploading = true;
-
-
+    /**
+     * @desc Get Vendors List
+     * @param UserId
+     * @param Vendors
+     * @returns {{vdname: string, vdid: Array}}
+     * @constructor
+     */
     function GetVendors(UserId, Vendors) {
         var vdname = "";
         var vdids = [];
@@ -31,6 +40,13 @@ myApp.controller('usersCtrl', function ($scope, $http, ngProgress, $timeout, Use
         }
     }
 
+    /**
+     * Get Users List
+     * @param UserData
+     * @param UserVendors
+     * @returns {Array}
+     * @constructor
+     */
     function GetUsers(UserData, UserVendors) {
         var Users = [];
         _.each(UserData, function (user) {
@@ -40,6 +56,13 @@ myApp.controller('usersCtrl', function ($scope, $http, ngProgress, $timeout, Use
         return Users;
     }
 
+    /**
+     * Get Deleted Vendors List
+     * @param Oldvendors
+     * @param SelectedVendors
+     * @returns {Array}
+     * @constructor
+     */
     function GetDeleteVendors(Oldvendors, SelectedVendors) {
         var DeleteArray = [];
         _.each(Oldvendors, function (oldvendor) {
@@ -51,6 +74,13 @@ myApp.controller('usersCtrl', function ($scope, $http, ngProgress, $timeout, Use
         return DeleteArray;
     }
 
+    /**
+     * Get added Vendors List
+     * @param Oldvendors
+     * @param SelectedVendors
+     * @returns {Array}
+     * @constructor
+     */
     function GetAddVendors(Oldvendors, SelectedVendors) {
         var AddArray = [];
         _.each(SelectedVendors, function (selected) {
@@ -61,7 +91,10 @@ myApp.controller('usersCtrl', function ($scope, $http, ngProgress, $timeout, Use
         });
         return AddArray;
     }
-//Get User details list
+
+    /**
+     * @desc Get User details list
+     */
     Users.getUsers({ Id: $stateParams.id, state: $scope.CurrentPage }, function (users) {
         //  ngProgress.complete();
         $scope.uploading = false;
@@ -95,7 +128,10 @@ myApp.controller('usersCtrl', function ($scope, $http, ngProgress, $timeout, Use
     }, function (error) {
         toastr.error(error);
     });
-//Export/Download User details list in Excel file
+    /**
+     * @desc Export/Download User details list in Excel file
+     * @constructor
+     */
     $scope.ExportExcel = function () {
         if ($scope.UserList.length > 0) {
             var array = [];
@@ -112,12 +148,17 @@ myApp.controller('usersCtrl', function ($scope, $http, ngProgress, $timeout, Use
             });
         }
     }
-//go back to User Detail list page
+    /**
+     * @desc go back to User Detail list page
+     * @constructor
+     */
     $scope.BackToList = function () {
         $window.location.href = "#user";
     }
 
-//Block and unblock users
+    /**
+     * @desc Block and unblock users
+     */
     $scope.BlockUnBlockUser = function (Id, Status, classtext) {
         bootbox.confirm("Are you sure want to " + Status + " this user?", function (result) {
             if (result) {
@@ -148,13 +189,18 @@ myApp.controller('usersCtrl', function ($scope, $http, ngProgress, $timeout, Use
         });
 
     }
-// REset user form
+    /**
+     * @desc Reset/Clear user form
+     */
     $scope.resetform = function () {
         $scope.userform.$setPristine();
     }
-//save User details
+    /**
+     * @desc save User details
+     * @param isValid
+     * @constructor
+     */
     $scope.SaveUserDetails = function (isValid) {
-
         if (isValid) {
             if (parseInt($scope.MobileNo).toString().length == 10) {
                 ngProgress.start();
@@ -206,6 +252,11 @@ myApp.controller('usersCtrl', function ($scope, $http, ngProgress, $timeout, Use
     }
 });
 
+/**
+ * @memberof myApp
+ * @type {controller|angular.Controller}
+ * @desc Change Password Controller
+ */
 myApp.controller('ChangerPasswordCtrl', function ($scope, $http, ngProgress, $timeout, Users, $state, $stateParams) {
     $scope.base_url = site_base_path;
     $('.removeActiveClass').removeClass('active');
@@ -220,7 +271,11 @@ myApp.controller('ChangerPasswordCtrl', function ($scope, $http, ngProgress, $ti
 
     ngProgress.color('yellowgreen');
     ngProgress.height('3px');
-//Save Changed password
+    /**
+     * @desc Save Changed password
+     * @param isValid
+     * @constructor
+     */
     $scope.SaveChangedPassword = function (isValid) {
         if (isValid) {
             if ($scope.NewPassword == $scope.ConfirmPassword) {
@@ -254,12 +309,19 @@ myApp.controller('ChangerPasswordCtrl', function ($scope, $http, ngProgress, $ti
             }
         }
     };
-//Reset change password form
+    /**
+     * @desc Reset change password form
+     * @constructor
+     */
     $scope.Resetclick = function () {
         $scope.successvisible = false;
         $scope.errorvisible = false;
     };
-//Change whether password visibility
+    /**
+     * @desc Change whether password visibility
+     * @param val
+     * @constructor
+     */
     $scope.Passwordvisible = function (val) {
         if (val == 1) {
             $scope.passwordtype = $scope.passwordtype == "password" ? "text" : "password";
@@ -272,8 +334,11 @@ myApp.controller('ChangerPasswordCtrl', function ($scope, $http, ngProgress, $ti
         }
     }
 });
-
-
+/**
+ * @desc Validate Email Id
+ * @param email
+ * @returns {boolean}
+ */
 function validateEmail(email) {
     var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
     return re.test(email);

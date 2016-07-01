@@ -1,4 +1,12 @@
-
+/**
+ * @memberof myApp
+ * @name propertyCtrl
+ * @type {controller|angular.Controller}
+ * @desc Property Controller
+ * @param $scope {service} controller scope
+ * @param $state {service} controller scope
+ * @param $http {service} controller scope
+ */
 myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngProgress, $stateParams, Propertys, _, Excel,ContentFile) {
     $('.removeActiveClass').removeClass('active');
     $('.removeSubactiveClass').removeClass('active');
@@ -6,7 +14,6 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
     //ngProgress.start();
     $scope.uploading = true;
     $scope.CurrentPage = $state.current.name;
-
     $scope.CurrentPage == "addproperty" ? $('#addproperty').addClass('active') : '';
     ($scope.CurrentPage == "property" || $scope.CurrentPage == "vendorproperty") ? $('#propertylist').addClass('active') : '';
     $scope.RightsShow = false;
@@ -21,7 +28,9 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
     $scope.Main = 1;
     $scope.Supporting = 2;
     $scope.Preview = 3;
-    //Get Property details list
+    /**
+     * @desc Get Property details list
+     */
     Propertys.getPropertys({ Id: $stateParams.id, state: $scope.CurrentPage }, function (property) {
        // ngProgress.complete();
         $scope.uploading = false;
@@ -111,7 +120,10 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
     }, function (error) {
         toastr.error(error);
     });
-//
+    /**
+     * @name openReleaseDatepicker
+     * @param evt
+     */
     $scope.openReleaseDatepicker = function (evt) {
         $scope.open1 = false;
         $scope.open2 = false;
@@ -119,34 +131,89 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
         evt.stopPropagation();
         $scope.open = !$scope.open;
     }
+    /**
+     * @name openDatepicker
+     * @param evt
+     */
     $scope.openDatepicker = function (evt) {
         $scope.open2 = false;
         evt.preventDefault();
         evt.stopPropagation();
         $scope.open1 = !$scope.open1;
     }
+    /**
+     * @name openEndDatepicker
+     * @param evt1
+     */
     $scope.openEndDatepicker = function (evt1) {
         $scope.open1 = false;
         evt1.preventDefault();
         evt1.stopPropagation();
         $scope.open2 = !$scope.open2;
     }
-
+    /**
+     * @desc  Get Property Title
+     * @param Role
+     * @param VendorActive
+     * @param VendorExpirydate
+     * @param PropertyActive
+     * @param PropertyExpirydate
+     * @returns {string}
+     * @constructor
+     */
     function GetTitle(Role, VendorActive, VendorExpirydate, PropertyActive, PropertyExpirydate) {
         return VendorActive == 1 ? Datewithouttime(VendorExpirydate) >= Datewithouttime(new Date()) ? PropertyActive == 1 ? Datewithouttime(PropertyExpirydate) >= Datewithouttime(new Date()) ? "Block" : "Property Expired" : "UnBlock" : "Vendor Expired" : "Vendor Blocked";
     }
 
+    /**
+     * @desc Change Button Color
+     * @param Role
+     * @param VendorActive
+     * @param VendorExpirydate
+     * @param PropertyActive
+     * @param PropertyExpirydate
+     * @returns {string}
+     * @constructor
+     */
     function ButtonColor(Role, VendorActive, VendorExpirydate, PropertyActive, PropertyExpirydate) {
         return VendorActive == 1 ? Datewithouttime(VendorExpirydate) >= Datewithouttime(new Date()) ? PropertyActive == 1 ? Datewithouttime(PropertyExpirydate) >= Datewithouttime(new Date()) ? "green" : "darkorange" : "red" : "darkorange" : "darkorange";
     }
 
+    /**
+     * @desc  Change Visibility for Edit
+     * @param Role
+     * @param VendorActive
+     * @param VendorExpirydate
+     * @param PropertyActive
+     * @param PropertyExpirydate
+     * @returns {boolean}
+     * @constructor
+     */
     function EditVisible(Role, VendorActive, VendorExpirydate, PropertyActive, PropertyExpirydate) {
         return Role == "Content Manager" ? VendorActive == 1 ? Datewithouttime(VendorExpirydate) >= Datewithouttime(new Date()) ? PropertyActive == 1 ? Datewithouttime(PropertyExpirydate) >= Datewithouttime(new Date()) ? true : true : false : false : false : true;;
     }
 
+    /**
+     * @desc Change Property Status
+     * @param Role
+     * @param VendorActive
+     * @param VendorExpirydate
+     * @param PropertyActive
+     * @param PropertyExpirydate
+     * @returns {string}
+     * @constructor
+     */
     function PropertyStatus(Role, VendorActive, VendorExpirydate, PropertyActive, PropertyExpirydate) {
         return VendorActive == 1 ? Datewithouttime(VendorExpirydate) >= Datewithouttime(new Date()) ? PropertyActive == 1 ? Datewithouttime(PropertyExpirydate) >= Datewithouttime(new Date()) ? "Active" : "Property Expired" : "Property Blocked" : "Vendor Expired" : "Vendor Blocked";
     }
+
+    /**
+     * @desc Get Added Rights data
+     * @param OldData
+     * @param SelectedData
+     * @returns {Array}
+     * @constructor
+     */
     function GetAddRights(OldData, SelectedData) {
         var AddArray = [];
         _.each(SelectedData, function (selected) {
@@ -158,6 +225,13 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
         return AddArray;
     }
 
+    /**
+     * @desc Get deleted Rights data
+     * @param OldData
+     * @param SelectedData
+     * @returns {Array}
+     * @constructor
+     */
     function GetDeleteRights(OldData, SelectedData) {
         var DeleteArray = [];
         _.each(OldData, function (old) {
@@ -171,40 +245,19 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
         });
          return DeleteArray;
     }
-    function getExtension(filename) {
-        var parts = filename.split('.');
-        return parts[parts.length - 1];
-    }
 
-    function isImage(filename) {
-        var ext = getExtension(filename);
-        switch (ext.toLowerCase()) {
-            case 'jpg':
-            case 'gif':
-            case 'bmp':
-            case 'png':
-                //etc
-                return true;
-        }
-        return false;
-    }
-
-    function isVideo(filename) {
-        var ext = getExtension(filename);
-        switch (ext.toLowerCase()) {
-            case 'm4v':
-            case 'avi':
-            case 'mpg':
-            case 'mp4':
-                // etc
-                return true;
-        }
-        return false;
-    }
+    /**
+     * @name resetform
+     */
     $scope.resetform = function () {
         $scope.propertyForm.$setPristine();
     }
-
+    /**
+     * @name CheckGroupSelection
+     * @param selectedcountry
+     * @returns {Array}
+     * @constructor
+     */
     function CheckGroupSelection(selectedcountry) {
         var newselectedCountry = [];
         var country = [];
@@ -249,6 +302,12 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
         return newselectedCountry;
     }
 
+    /**
+     * @name GetSelectedCountry
+     * @param selectedcountry
+     * @returns {Array}
+     * @constructor
+     */
     function GetSelectedCountry(selectedcountry) {
         var country = [];
         var group = [];
@@ -274,6 +333,10 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
         return country;
     }
 
+    /**
+     * @name ExportExcel
+     * @constructor
+     */
     $scope.ExportExcel = function () {
         if ($scope.PropertyList.length > 0) {
             var array = [];
@@ -289,7 +352,10 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
             });
         }
     }
-
+    /**
+     * @name VendorChange
+     * @constructor
+     */
     $scope.VendorChange = function () {
         var newAllowedContentType = [];
          VendorRights();
@@ -337,7 +403,12 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
             }
         }
     }
-
+    /**
+     * @name GetVendorCountry
+     * @param selectedcountry
+     * @returns {Array}
+     * @constructor
+     */
     function GetVendorCountry(selectedcountry) {
         var country = [];
         var tempcountry1 = [];
@@ -375,6 +446,10 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
         return country;
     }
 
+    /**
+     * @name VendorRights
+     * @constructor
+     */
     function VendorRights() {
         $scope.AllowedContentType = [];
         $scope.CountryDistributionRights = [];
@@ -399,10 +474,18 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
         });
     }
 
+    /**
+     * @name Searchpropertyclick
+     * @param data
+     * @constructor
+     */
     $scope.Searchpropertyclick = function (data) {
         $scope.searchpropertyquery = $scope.propertyquery;
     }
-
+    /**
+     * @name commonfileuploader
+     * @param files
+     */
     $scope.commonfileuploader = function (files) {
         var supporting_image_limit = $scope.ConfigData.supporting_image_limit;
         var video_preview_limit = $scope.ConfigData.video_preview_limit;
@@ -534,7 +617,13 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
             }
         }
     }
-
+    /**
+     * @name BlockUnBlockProperty
+     * @param Id
+     * @param Status
+     * @param classtext
+     * @constructor
+     */
     $scope.BlockUnBlockProperty = function (Id, Status, classtext) {
         if (classtext !== "darkorange") {
             bootbox.confirm("Are you sure want to " + Status + " this property?", function (result) {
@@ -569,13 +658,18 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
         }
 
     }
-
+    /**
+     * @name submitForm
+     * @param isValid
+     */
     $scope.submitForm = function (isValid) {
         if (isValid) {
             var year = new Date().getFullYear();
             var ReleaseYear = new Date($scope.ReleaseYear).getFullYear();
             var flag = (ReleaseYear > 1949 && ReleaseYear < (year + 2)) ? Datewithouttime($scope.StartDate) <= Datewithouttime($scope.ExpiryDate) ? Datewithouttime($scope.VendorStartDate) <= Datewithouttime($scope.StartDate) && Datewithouttime($scope.VendorEndDate) >= Datewithouttime($scope.ExpiryDate) ? $scope.RightsShow == true ? $scope.SelectedAllowedContentType.length > 0 ? $scope.SelectedCountryDistributionRights.length > 0 ? $scope.SelectedChannelDistributionRights.length > 0 ? "" : "Please Select Channel Distribution rights." : "Please Select Country Distribution rights." : "Please Select Allowed Content Type." : "" : "Start & Expiry date should be within limit of Vendor limits." : "Expire date must be equal or greater than start date." : "Release Year must be between 1950 to current year + 1.";
             if (flag == "") {
+                $scope.uploading = true;
+
                 var NewRightsData = [];
                 if (!$scope.RightsShow) {
                     $scope.SelectedAllowedContentType = [];
@@ -614,10 +708,7 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
                  Propertys.AddEditProperty(property, function (data) {
                     if (data.success) {
                         $scope.MetaId = data.cm_id;
-
                         PreviewUpload(0, {upload:'preview'}, function (data1) {
-                            console.log(data)
-
                             ngProgress.complete();
                             $scope.uploading = false;
                             toastr.success(data.message);
@@ -640,7 +731,13 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
             }
         }
     };
-
+    /**
+     * @name PreviewUpload
+     * @param tcu
+     * @param item
+     * @param success
+     * @constructor
+     */
     function PreviewUpload(tcu,item,success) {
         if(item.upload === 'preview' && $scope.CommonFiles && $scope.CommonFiles.length > 0) {
             var data = $scope.CommonFiles[tcu];
@@ -666,7 +763,6 @@ myApp.controller('propertyCtrl', function ($scope, $window, $http, $state, ngPro
                     $("#commonfile").val("");
                     $scope.CommonFiles = [];
                     $scope.commonfile = null;
-                    // $scope.supportfile = null;
                     success(item.upload);
                 }
                 else {

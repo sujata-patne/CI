@@ -14,23 +14,16 @@ var shell = require('shelljs');
 var CronJob = require('cron').CronJob;
 var wlogger = require("../config/logger");
 var reload = require('require-reload')(require);
-
-function Pad(padString, value, length) {
-    var str = value.toString();
-    while (str.length < length)
-        str = padString + str;
-
-    return str;
-}
+var common = require('../helpers/common');
 
 /**
  * @class
- * @classdesc create a log file if not exist.
+ * @classdesc Create a log file if not exist.
  * @param {object} req - http requset object.
  * @param {object} res - http response object.
  */
 exports.allAction = function (req, res, next) {
-    var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
+    var currDate = common.Pad("0",parseInt(new Date().getDate()), 2)+'_'+common.Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
     if (wlogger.logDate == currDate) {
         var logDir = config.log_path;
         var filePath = logDir + 'logs_'+currDate+'.log';
@@ -46,86 +39,17 @@ exports.allAction = function (req, res, next) {
     }
 }
 
-
+/**
+ * Run Cron at every day at 9PM.
+ */
 new CronJob('00 00 09 * * 0-6', function () {
     CronActivity();
 }, null, true, 'Asia/Kolkata');
 
-function getDate() {
-    var d = new Date();
-    var dt = d.getDate();
-    var month = d.getMonth() + 1;
-    var year = d.getFullYear();
-    var selectdate = year + '-' + Pad("0", month, 2) + '-' + Pad("0", dt, 2);
-    return selectdate;
-}
-
-function getTime(val) {
-    var d = new Date(val);
-    var minite = d.getMinutes();
-    var hour = d.getHours();
-    var second = d.getSeconds();
-    var selectdate = Pad("0", hour, 2) + ':' + Pad("0", minite, 2) + ':' + Pad("0", second, 2);
-    return selectdate;
-}
-
-
-function GetContentType(state) {
-    var contenttype = '';
-    switch (state) {
-        case 'addwallpaper':
-            contenttype = '"Imagery"';
-            break;
-        case 'editwallpaper':
-            contenttype = '"Imagery"';
-            break;
-        case 'addvideo':
-            contenttype = '"Video"';
-            break;
-        case 'editvideo':
-            contenttype = '"Video"';
-            break;
-        case 'addaudio':
-            contenttype = '"Audio"';
-            break;
-        case 'editaudio':
-            contenttype = '"Audio"';
-            break;
-        case 'addgame':
-            contenttype = '"Games & Apps"';
-            break;
-        case 'editgame':
-            contenttype = '"Games & Apps"';
-            break;
-        case 'addtext':
-            contenttype = '"Texts"';
-            break;
-        case 'edittext':
-            contenttype = '"Texts"';
-            break;
-    }
-    return contenttype;
-}
-
-function toSeconds(str) {
-    if (str) {
-        var pieces = str.split(":");
-        var result = Number(pieces[0]) * 60 + Number(pieces[1]);
-        return (result.toFixed(3));
-    }
-    return str;
-}
-
-function CronActivity() {
-    try {
-    }
-    catch (err) {
-    }
-}
 
 /**
  * @class
- * @classdesc bulk upload of metadata details.
+ * @classdesc Bulk upload of metadata details.
  * @param {object} req - http requset object.
  * @param {object} res - http response object.
  * @param {function} next - callback function.
@@ -134,7 +58,8 @@ exports.bulkupload = function (req, res, next) {
     try {
         res.send({ success: false, message: 'upload process in progress' });
         mysql.getConnection('CMS', function (err, connection_ikon_cms) {
-            var currentdate = getDate();
+            //var currentdate = getDate();
+            var currentdate = common.setDBDate();
             var query = connection_ikon_cms.query('select * from (select * from icn_vendor_detail)vd', function (err, Vendors) {
                 if (err) {
                     var error = {
@@ -178,7 +103,8 @@ exports.bulkupload = function (req, res, next) {
                                                                 CheckMetadata(0);
                                                                 function CheckMetadata(index) {
                                                                     var Error = [];
-                                                                    var currentdate = getDate();
+                                                                    //var currentdate = getDate();
+                                                                    var currentdate = common.setDBDate();
                                                                     var obj = {};
                                                                     obj.Vendor_name = data[index]["Vendor Name"]; //complete
                                                                     obj.Property_name = data[index]["Property"]; //complete
@@ -1214,7 +1140,7 @@ exports.bulkupload = function (req, res, next) {
                                                                             function (value, callback) {
                                                                                 if (obj.Duration) {
                                                                                     try {
-                                                                                        var val = toSeconds(obj.Duration);
+                                                                                        var val = common.toSeconds(obj.Duration);
                                                                                         if (!isNaN(val)) {
                                                                                             obj.cm_content_duration = val;
                                                                                             callback(null, null);

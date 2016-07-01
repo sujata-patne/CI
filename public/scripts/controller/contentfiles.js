@@ -1,4 +1,8 @@
-//HEWITT.H789@yopmail.com
+/**
+ * @memberof myApp
+ * @type {controller|angular.Controller}
+ * @desc Content File Controller
+ */
 myApp.controller('content-filesCtrl', function ($scope, $state, $http, $stateParams, ngProgress, $window, ContentFile, _, Icon, Upload,Excel,$q) {
     $('.removeActiveClass').removeClass('active');
     $('.removeSubactiveClass').removeClass('active');
@@ -26,7 +30,17 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
     $scope.Main = 1;
     $scope.Supporting = 2;
     $scope.Preview = 3;
-    function getStatus(UserRole, MetadataExpirydate, VendorExpirydate, PropertyExpirydate, Meta_active, Vendor_active, Property_active, cm_state) {
+    /**
+     * @desc Get Matadata Status
+     * @param MetadataExpirydate
+     * @param VendorExpirydate
+     * @param PropertyExpirydate
+     * @param Vendor_active
+     * @param Property_active
+     * @param cm_state
+     * @returns {String}
+     */
+    function getStatus(MetadataExpirydate, VendorExpirydate, PropertyExpirydate, Vendor_active, Property_active, cm_state) {
         var status;
 
         if (cm_state == 7) {
@@ -57,13 +71,18 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
 
         return status;
     }
-    //  get data to display chart and grid on dashbard page
+
+    /**
+     *  @desc get data to display chart and grid on dashbard page
+     */
     Icon.GetDashBoardData(function (dashboard) {
         $scope.ContentType = _.where( dashboard.ContentType, { cm_name: "Content Type" });
     }, function (error) {
         toastr.error(error);
     });
-    //  get data to render on add content file form
+    /**
+     *  @desc get data to render on add content file form
+     */
     ContentFile.getContentFile({}, function (content) {
         content.UserRole === "Super Admin" || content.UserRole == "Moderator" ? location.href = "/" : "";
         $scope.ConfigData = content.ConfigData;
@@ -71,8 +90,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
         content.BGSongType.forEach(function (songType) {
             $scope.BGSongType.push(songType.cd_name);
         })
-       // console.log($scope.BGSongType)
-        $scope.Templates = content.Templates;
+         $scope.Templates = content.Templates;
         //$scope.ContentType = _.where(content.ContentType, { cm_name: "Content Type" });
         $scope.OtherTemplates = content.OtherTemplates;
         $scope.OtherTemplates.forEach(function(template){
@@ -93,8 +111,10 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
     }, function (error) {
         toastr.error(error);
     });
-    //  get data to populate handset group dropdown
-
+    /**
+     * @desc get data to populate handset group dropdown
+     * @constructor
+     */
     $scope.HandsetGroupChange = function () {
         if (!$scope.SelectedHandsetGroup || $scope.SelectedHandsetGroup == "") {
             $scope.GroupHandset = [];
@@ -112,8 +132,9 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             });
         }
     }
-
-    //  click to move selected data to left side
+    /**
+     * @desc click to move selected data to left side
+     */
     $scope.leftclick = function () {
         _.each($scope.SelectedGroupHandset, function (selected) {
             var index = _.findIndex($scope.GroupHandset, function (cnt) { return cnt.dc_id == selected })
@@ -124,7 +145,9 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
         })
         $scope.SelectedGroupHandset = [];
     }
-    //  click to move selected data to right side
+    /**
+     * @desc click to move selected data to right side
+     */
     $scope.rightclick = function () {
         _.each($scope.SelectedFilterCriteria, function (selected) {
             var index = _.findIndex($scope.SelectedCriteriaHandset, function (cnt) { return cnt.dc_id == selected })
@@ -135,26 +158,36 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
         })
         $scope.SelectedFilterCriteria = [];
     }
-    //  click to move all data to left side
+    /**
+     * @desc click to move all data to left side
+     */
     $scope.leftAllclick = function () {
         _.each($scope.GroupHandset, function (selected) {
             $scope.SelectedCriteriaHandset.push(selected);
         })
         $scope.GroupHandset = [];
     }
-    //  click to move data to right side
+    /**
+     * @desc click to move data to right side
+     */
     $scope.rightAllclick = function () {
         _.each($scope.SelectedCriteriaHandset, function (selected) {
             $scope.GroupHandset.push(selected);
         })
         $scope.SelectedCriteriaHandset = [];
     }
-    //  on content type change
+    /**
+     * @desc on content type change
+     * @constructor
+     */
     $scope.ContentTypeChange = function () {
         $scope.FileUploadVisible = false;
         $scope.Uploadervisible = false;
     }
-    //  reset form
+    /**
+     * Reset/Clear form
+     * @constructor
+     */
     $scope.Suggestions = function () {
         $scope.FileUploadVisible = true;
         $("#thumbfile").val("");
@@ -191,7 +224,11 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             $scope.TextPartVisible = true;
         }
     }
-    // serach metadata
+    /**
+     * @desc search metadata
+     * @param isvalid
+     * @constructor
+     */
     $scope.SearchMetadata = function (isvalid) {
         if (isvalid) {
             try {
@@ -207,7 +244,7 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                                 lang.MetaId = Icon.GetEncode(lang.ct_group_id);
                                 lang.file = '';
                             })
-                            var status = getStatus('', metadata.Metadata[0].cm_expires_on, metadata.Metadata[0].vd_end_on, metadata.Metadata[0].propertyexpirydate, '', metadata.Metadata[0].vd_is_active, metadata.Metadata[0].propertyactive, metadata.Metadata[0].cm_state)
+                            var status = getStatus(metadata.Metadata[0].cm_expires_on, metadata.Metadata[0].vd_end_on, metadata.Metadata[0].propertyexpirydate, metadata.Metadata[0].vd_is_active, metadata.Metadata[0].propertyactive, metadata.Metadata[0].cm_state)
                             if (!status) {
                                 $scope.Files = metadata.Files;
                                 $scope.ThumbDataFiles = metadata.ThumbFiles;
@@ -256,38 +293,10 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             }
         }
     }
-
-    function getExtension(filename) {
-        var parts = filename.split('.');
-        return parts[parts.length - 1];
-    }
-
-    function isImage(filename) {
-        var ext = getExtension(filename);
-        switch (ext.toLowerCase()) {
-            case 'jpg':
-            case 'gif':
-            case 'bmp':
-            case 'png':
-                //etc
-                return true;
-        }
-        return false;
-    }
-
-    function isVideo(filename) {
-        var ext = getExtension(filename);
-        switch (ext.toLowerCase()) {
-            case 'm4v':
-            case 'avi':
-            case 'mpg':
-            case 'mp4':
-                // etc
-                return true;
-        }
-        return false;
-    }
-//  validate thumbnail uploader
+    /**
+     * @desc validate thumbnail file for upload
+      * @param files
+     */
     $scope.thumbfileuploader = function (files) {
         var thumb_limit = $scope.ConfigData.thumb_limit;
         $scope.thumberror = false;
@@ -336,7 +345,9 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             }
         }
     }
-//  validate imagery uploader
+    /**
+     * @desc validate imagery uploader
+     */
     $scope.wallpaperfileuploader = function () {
         var wallpaper_limit = $scope.ConfigData.wallpaper_limit;
 
@@ -411,7 +422,10 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
 
         }
     }
-//  validate video uploader
+    /**
+     * @desc validate video uploader
+      * @param files
+     */
     $scope.videofileuploader = function (files) {
         var video_limit = $scope.ConfigData.video_limit;
 
@@ -431,7 +445,10 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             }
         }
     }
-//  validate audio uploader
+    /**
+     * @desc validate audio uploader
+     * @param files
+     */
     $scope.audiofileuploader = function (files) {
         var audio_limit = $scope.ConfigData.audio_limit;
 
@@ -452,7 +469,16 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             }
         }
     }
-//  validate audio zip file uploader
+    /**
+     * @desc validate audio zip file uploader
+     * @param audiofile
+     * @param cm_id
+     * @param ct_group_id
+     * @param cd_name
+     * @param MetaId
+     * @param ct_param
+     * @param ct_param_value
+     */
     $scope.audiozipfileuploader = function (audiofile, cm_id, ct_group_id, cd_name, MetaId, ct_param, ct_param_value) {
         if (audiofile) {
             if (getExtension(audiofile.name).toLowerCase() == "zip") {
@@ -481,7 +507,9 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
         }
 
     };
-//  validate game supporting image file uploader
+    /**
+     * @desc validate game supporting image file uploader
+     */
     $scope.gameimagefileuploader = function () {
         var supporting_image_limit = $scope.ConfigData.supporting_image_limit;
 
@@ -533,7 +561,9 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             }
         }
     }
-//  validate game supporting video file uploader
+    /**
+     * @desc validate game supporting video file uploader
+     */
     $scope.gamevideofileuploader = function () {
         var video_download_limit = $scope.ConfigData.video_download_limit;
 
@@ -585,7 +615,9 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             }
         }
     }
-//  validate game app file uploader
+    /**
+     * @desc validate game app file uploader
+     */
     $scope.gameappfileuploader = function () {
         var game_limit = $scope.ConfigData.game_limit;
 
@@ -626,7 +658,16 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             }
         }
     }
-//  validate text file uploader
+    /**
+     * @desc validate text file uploader
+     * @param textfile
+     * @param cm_id
+     * @param ct_group_id
+     * @param cd_name
+     * @param MetaId
+     * @param ct_param
+     * @param ct_param_value
+     */
     $scope.textfileuploader = function (textfile, cm_id, ct_group_id, cd_name, MetaId, ct_param, ct_param_value) {
         var text_limit = $scope.ConfigData.text_limit;
         if (textfile) {
@@ -635,7 +676,8 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
                 _.each(textfile, function (val) {
                     var count = _.where($scope.TextFiles, { ct_group_id: ct_group_id });
 
-                    if (getExtension(val.name).toLowerCase() == "txt") {
+                   // if (getExtension(val.name).toLowerCase() == "txt" || getExtension(val.name).toLowerCase() == "json" || getExtension(val.name).toLowerCase() == "xml") {
+                    if (isText(val.name)) {
                         $scope.TextFiles.push({ fileCategory:$scope.Main, count: (texts.length + count.length + 1), file: val, type: 'text', ct_param: ct_param, ct_param_value: ct_param_value, ct_group_id: ct_group_id, cm_id: cm_id, width: null, height: null, other: cd_name, langaugemetaid: MetaId })
                     }
                     else {
@@ -678,7 +720,16 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             $scope.TextFiles = tempfiles;
         }
     };
-//  validate language text file uploader
+    /**
+     * @desc validate language text file uploader
+     * @param langsupportfile
+     * @param cm_id
+     * @param ct_group_id
+     * @param cd_name
+     * @param MetaId
+     * @param ct_param
+     * @param ct_param_value
+     */
     $scope.langSupportFileUploader = function (langsupportfile, cm_id, ct_group_id, cd_name, MetaId, ct_param, ct_param_value) {
         var text_limit = $scope.ConfigData.text_limit;
          if (langsupportfile) {
@@ -731,7 +782,10 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             $scope.LangSupportFiles = tempfiles;
         }
     };
-//  validate audio, video, image supporting files uploader
+    /**
+     * @desc validate audio, video, image supporting files uploader
+     * @param files
+     */
     $scope.supportingfileuploader = function (files) {
         var supporting_image_limit = $scope.ConfigData.supporting_image_limit;
         var video_download_limit = $scope.ConfigData.video_download_limit;
@@ -854,7 +908,10 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             }
         }
     }
-//  validate audio, video, image preview files uploader
+    /**
+     * @desc validate audio, video, image preview files uploader
+     * @param files
+     */
     $scope.commonfileuploader = function (files) {
         var supporting_image_limit = $scope.ConfigData.supporting_image_limit;
         var video_preview_limit = $scope.ConfigData.video_preview_limit;
@@ -988,7 +1045,10 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             }
         }
     }
-//  upload audio, video, image, thumb, games, text main/supporting/preview files uploader
+    /**
+     * @desc upload audio, video, image, thumb, games, text main/supporting/preview files uploader
+      * @param files
+     */
     $scope.upload = function (files) {
         //console.log($scope.TypeName)
         if ($scope.TypeName == "Imagery") {
@@ -1134,6 +1194,13 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             }
         }
     }
+    /**
+     * @desc Upload Thumbnails files
+     * @param tu
+     * @param item
+     * @param success
+     * @constructor
+     */
     function ThumbUpload(tu,item,success) {
         if(item.upload === 'thumb' && $scope.ThumbFiles && $scope.ThumbFiles.length > 0) {
             ContentFile.Upload('/uploadThumb', {
@@ -1173,6 +1240,14 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             success(item.upload);
         }
     }
+
+    /**
+     * @desc Upload Imagery files
+     * @param wu
+     * @param item
+     * @param success
+     * @constructor
+     */
     function WallpaperUpload(wu,item,success) {
         if(item.upload === 'main' && $scope.WallPaperFiles && $scope.WallPaperFiles.length > 0 ) {
             var data = $scope.WallPaperFiles[wu];
@@ -1214,6 +1289,14 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             success(item.upload);
         }
     }
+
+    /**
+     * @desc Upload Video files
+     * @param vu
+     * @param item
+     * @param success
+     * @constructor
+     */
     function VideoUpload(vu,item,success) {
         if(item.upload === 'main' && $scope.VideoFiles && $scope.VideoFiles.length > 0 ) {
             var data = $scope.VideoFiles[vu];
@@ -1265,6 +1348,14 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             success(item.upload);
         }
 }
+
+    /**
+     * @desc Upload Audio files
+     * @param au
+     * @param item
+     * @param success
+     * @constructor
+     */
     function AudioUpload(au,item,success) {
         if(item.upload === 'main' && $scope.AudioFiles && $scope.AudioFiles.length > 0 ) {
             var data = $scope.AudioFiles[au];
@@ -1305,6 +1396,14 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             success(item.upload);
         }
     }
+
+    /**
+     * @desc Upload Game files
+     * @param ga
+     * @param item
+     * @param success
+     * @constructor
+     */
     function GameAppUpload(ga,item,success) {
         if(item.upload === 'main' && $scope.GameAppFiles && $scope.GameAppFiles.length > 0 ) {
 
@@ -1358,6 +1457,14 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             success(item.upload);
         }
     }
+
+    /**
+     * @desc Upload Text Language files
+     * @param tuf
+     * @param item
+     * @param success
+     * @constructor
+     */
     function TextFileUpload(tuf,item,success) {
         if(item.upload === 'main' && $scope.TextFiles && $scope.TextFiles.length > 0 ) {
             var data = $scope.TextFiles[tuf];
@@ -1405,6 +1512,14 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
 
         }
     }
+
+    /**
+     * @desc Upload Supporting files
+     * @param tcu
+     * @param item
+     * @param success
+     * @constructor
+     */
     function SupportingUpload(tcu,item,success) {
         if(item.upload === 'supporting' && $scope.SupportingFiles && $scope.SupportingFiles.length > 0) {
             var data = $scope.SupportingFiles[tcu];
@@ -1445,6 +1560,14 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             success(item.upload);
         }
     }
+
+    /**
+     * @desc Upload Preview files
+     * @param tcu
+     * @param item
+     * @param success
+     * @constructor
+     */
     function PreviewUpload(tcu,item,success) {
         if(item.upload === 'preview' && $scope.CommonFiles && $scope.CommonFiles.length > 0) {
             var data = $scope.CommonFiles[tcu];
@@ -1486,13 +1609,19 @@ myApp.controller('content-filesCtrl', function ($scope, $state, $http, $statePar
             success(item.upload);
         }
     }
+
+    /**
+     * @desc Upload Supporting Text Language files
+     * @param tuf
+     * @param item
+     * @param success
+     * @constructor
+     */
     function SupportingTextFileUpload(tuf,item,success) {
         if(item.upload === 'text' && $scope.LangSupportFiles && $scope.LangSupportFiles.length > 0) {
             var data = $scope.LangSupportFiles[tuf];
             var filetype = (data.fileCategory == 2)? 'Supporting' : 'Preview';
-console.log('data')
-console.log(data)
-            var languageMetadata = data.langaugemetaid;
+             var languageMetadata = data.langaugemetaid;
             ContentFile.Upload('/uploadotherfiles', {
                 fileCategory: data.fileCategory,
                 count: data.count,

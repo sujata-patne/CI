@@ -1,4 +1,12 @@
-
+/**
+ * @memberof myApp
+ * @name content-listingCtrl
+ * @type {controller|angular.Controller}
+ * @desc Content Catalog Controller
+ * @param $scope {service} controller scope
+ * @param $state {service} controller scope
+ * @param $http {service} controller scope
+ */
 myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $http, $stateParams, ngProgress, $window, ContentListing, _, Icon, Upload, ContentFile) {
     $('.removeActiveClass').removeClass('active');
     $('.removeSubactiveClass').removeClass('active');
@@ -11,7 +19,6 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
     $scope.base_url = $rootScope.base_url;
     $scope.replacefile = '';
     $scope.success = "Metadata files uploaded successfully.";
-
     $scope.currentPage = 0;
     $scope.pageSize = 3;
     $scope.FileUploadVisible = false;
@@ -28,9 +35,10 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
     $scope.Preview = 3;
     $scope.Thumbuggestion = "Filename must be ContentId_thumb_Width_Height.extension like [2345_thumb_240_360.gif].";
 
-    //ngProgress.start();
-    $scope.uploading = true;
-    //  Get Content listing data to display content like main, supporting, preview and thumb files uploaded
+     $scope.uploading = true;
+    /**
+     * @desc Get Content listing data to display content like main, supporting, preview and thumb files uploaded
+     */
     ContentListing.getContentListing({ Id: $stateParams.id, isProperty:$stateParams.isProperty }, function (content) {
        // ngProgress.complete();
         $scope.uploading = false;
@@ -53,10 +61,8 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
                 $scope.Preview = template.ct_param;
             }
         })
-        var meta = content.ContentMetadata[0];
-        console.log('meta.parentname ')
-        console.log(meta.parentname)
-        var data = getStatus(content.UserRole, meta.cm_expires_on, meta.vd_end_on, meta.propertyexpirydate, meta.cm_state, meta.vd_is_active, meta.propertyactive, meta.cm_state);
+        var meta = content.ContentMetadata[0]; 
+        var data = getStatus(meta.cm_expires_on, meta.vd_end_on, meta.propertyexpirydate, meta.vd_is_active, meta.propertyactive, meta.cm_state);
         if (data) {
             $scope.error = data;
             $scope.errorvisible = true;
@@ -131,7 +137,9 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
     }, function (error) {
         toastr.error(error);
     });
-    //  Get Content listing data to display thumb files uploaded
+    /**
+     *  @desc Get Content listing data to display thumb files uploaded
+     */
     $scope.getThumbFiles = function () {
         if ($scope.ThumbFiles.length > 0) {
             $scope.Thumbs = [];
@@ -153,7 +161,9 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
             $scope.ThumbUploadVisible = $scope.UserRole == "Super Admin" ? false : $scope.ThumbUploadVisible;
         }
     }
-    //  Get Content listing data to display imagery, video, text,games/apps files uploaded
+    /**
+     * @desc Get Content listing data to display imagery, video, text,games/apps files uploaded
+     */
     $scope.getContentFiles = function () {
         if ($scope.WallpaperFiles.length > 0 || $scope.AppFiles.length > 0 || $scope.TextFiles.length > 0 || $scope.VideoFiles.length > 0) {
             $scope.Files = [];
@@ -209,9 +219,10 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
         } else {
             $scope.FileUploadVisible = $scope.UserRole == "Super Admin" ? false : $scope.FileUploadVisible;
         }
-       // console.log($scope.filesdetail);
-    }
-    //  Get Content listing data to display audio files uploaded
+     }
+    /**
+     *  @desc Get Content listing data to display audio files uploaded
+     */
     $scope.getAudioData = function () {
         $scope.audioBitrateFiles = [];
         _.each($scope.AudioFiles, function (val) {
@@ -232,11 +243,9 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
         //$scope.filesdetail = BindMasterList($scope.audioBitrateFiles);
 
     }
-    function getExtension(filename) {
-        var parts = filename.split('.');
-        return parts[parts.length - 1];
-    }
-    //  Get Content listing data to display all types supporting files uploaded
+    /**
+     * @desc Get Content listing data to display all types supporting files uploaded
+     */
     $scope.getSupportingFiles = function () {
         if($scope.SupportingImages.length > 0){
             var j = 0;
@@ -445,7 +454,9 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
         //console.log($scope.SupportingFiles);
         $scope.FileUploadVisible =  ($scope.supportingFilesDetail.length > 0 )? true : $scope.FileUploadVisible;
     }
-    //  Get Content listing data to display all types preview files uploaded
+    /**
+     * @desc Get Content listing data to display all types preview files uploaded
+     */
     $scope.getPreviewFiles = function () {
         if($scope.PreviewImages.length > 0){
             var j = 0;
@@ -644,8 +655,17 @@ myApp.controller('content-listingCtrl', function ($scope, $rootScope, $state, $h
        console.log($scope.PreviewFiles)
         $scope.FileUploadVisible =  ($scope.previewFilesDetail.length > 0 )? true : $scope.FileUploadVisible;
     }
-
-    function getStatus(UserRole, MetadataExpirydate, VendorExpirydate, PropertyExpirydate, Meta_active, Vendor_active, Property_active, cm_state) {
+    /**
+     * @desc Get Content Metadata Status
+     * @param MetadataExpirydate
+     * @param VendorExpirydate
+     * @param PropertyExpirydate
+     * @param Vendor_active
+     * @param Property_active
+     * @param cm_state
+     * @returns {String}
+     */
+    function getStatus(MetadataExpirydate, VendorExpirydate, PropertyExpirydate, Vendor_active, Property_active, cm_state) {
         var status;
         if (cm_state == 7) {
             status = "Metadata deleted for this Metadata Id.";

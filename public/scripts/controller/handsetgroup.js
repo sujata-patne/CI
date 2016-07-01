@@ -1,13 +1,20 @@
+/**
+ * @memberof myApp
+ * @type {controller|angular.Controller}
+ * @desc Handset Group Controller
+ */
 myApp.controller('handsetGroupCtrl', function ($scope, $http, ngProgress, $state, $stateParams, $window, HandSetGroup) {
-
     $('.removeActiveClass').removeClass('active');
     $('.removeSubactiveClass').removeClass('active');
     $('#addcontentfile').addClass('active');
     ngProgress.color('yellowgreen');
     ngProgress.height('3px');
     $scope.CurrentPage = $state.current.name;
-//ngProgress.start();
-    $scope.uploading = true;
+     $scope.uploading = true;
+    /**
+     * @desc Get Filtered Search Result
+     * @constructor
+     */
     function FilterData() {
         var query = "";
         if ($scope.Selectedbrand) {
@@ -47,7 +54,11 @@ myApp.controller('handsetGroupCtrl', function ($scope, $http, ngProgress, $state
         //Selectedram
         //Selectedresoh
     }
-    //  Get filtered data of handset group
+
+    /**
+     * @desc Get filtered data of handset group
+     * @constructor
+     */
     $scope.FilterChange = function () {
         $scope.SelectedCriteriaHandset = [];
         FilterData();
@@ -58,7 +69,11 @@ myApp.controller('handsetGroupCtrl', function ($scope, $http, ngProgress, $state
             }
         });
     }
-
+    /**
+     * @desc Filter Handset Details
+     * @param handset
+     * @constructor
+     */
     function BindPageData(handset) {
         $scope.BrandNames = _.unique(_.pluck(handset.Devices, "dc_make"));
         $scope.OS = _.unique(_.pluck(handset.Devices, "dc_OS"));
@@ -75,7 +90,9 @@ myApp.controller('handsetGroupCtrl', function ($scope, $http, ngProgress, $state
         $scope.AllGroups.unshift({ chgr_group_id: -1, chgr_group_name: "Add New Group" });
         $scope.HandsetGroupChange();
     }
-//  Get handset group details
+    /**
+     * @desc Get handset group details
+     */
     HandSetGroup.getHandSetGroup({ state: $scope.CurrentPage }, function (handset) {
         // ngProgress.complete();
         $scope.uploading = false;
@@ -85,10 +102,19 @@ myApp.controller('handsetGroupCtrl', function ($scope, $http, ngProgress, $state
     }, function (error) {
         toastr.error(error);
     });
-//  reset serch form
+    /**
+     * @desc Reset/Clear serch form
+     */
     $scope.resetform = function () {
         BindPageData($scope.PageAllData);
     }
+    /**
+     * @desc Get Handset Details
+     * @param OldData
+     * @param TotalData
+     * @returns {Array}
+     * @constructor
+     */
     function GetAddHandset(OldData, TotalData) {
         var AddArray = [];
         _.each(TotalData, function (total) {
@@ -99,7 +125,13 @@ myApp.controller('handsetGroupCtrl', function ($scope, $http, ngProgress, $state
         })
         return AddArray;
     }
-
+    /**
+     * @desc Delete Handset Details
+     * @param OldData
+     * @param TotalData
+     * @returns {Array}
+     * @constructor
+     */
     function GetDeleteHandset(OldData, TotalData) {
         var DeleteArray = [];
         _.each(OldData, function (old) {
@@ -110,7 +142,10 @@ myApp.controller('handsetGroupCtrl', function ($scope, $http, ngProgress, $state
         })
         return DeleteArray;
     }
-    //  move selected handset data to left
+
+    /**
+     * @desc move selected handset data to left
+     */
     $scope.leftclick = function () {
         _.each($scope.SelectedGroupHandset, function (selected) {
             var index = _.findIndex($scope.GroupHandset, function (cnt) { return cnt.dc_id == selected })
@@ -124,7 +159,9 @@ myApp.controller('handsetGroupCtrl', function ($scope, $http, ngProgress, $state
         })
         $scope.SelectedGroupHandset = [];
     }
-    //  move selected handset data to right
+    /**
+     * @desc move selected handset data to right
+     */
     $scope.rightclick = function () {
         _.each($scope.SelectedFilterCriteria, function (selected) {
             var index = _.findIndex($scope.SelectedCriteriaHandset, function (cnt) { return cnt.dc_id == selected })
@@ -135,7 +172,9 @@ myApp.controller('handsetGroupCtrl', function ($scope, $http, ngProgress, $state
         })
         $scope.SelectedFilterCriteria = [];
     }
-    //  move all handset data to left
+    /**
+     * @desc move all handset data to left
+     */
     $scope.leftAllclick = function () {
         _.each($scope.GroupHandset, function (selected) {
             var data = _.find($scope.FilterDatas, function (device) { return device.dc_id == selected.dc_id; });
@@ -145,15 +184,19 @@ myApp.controller('handsetGroupCtrl', function ($scope, $http, ngProgress, $state
         })
         $scope.GroupHandset = [];
     }
-
-    //  move all handset data to right
+    /**
+     * @desc move all handset data to right
+     */
     $scope.rightAllclick = function () {
         _.each($scope.SelectedCriteriaHandset, function (selected) {
             $scope.GroupHandset.push(selected);
         })
         $scope.SelectedCriteriaHandset = [];
     }
-    //  handle onchange event on handset group
+    /**
+     * @desc handle onchange event on handset group
+     * @constructor
+     */
     $scope.HandsetGroupChange = function () {
         if (!$scope.SelectedHandsetGroup || $scope.SelectedHandsetGroup == "") {
             $scope.IsDisable = true;
@@ -197,7 +240,11 @@ myApp.controller('handsetGroupCtrl', function ($scope, $http, ngProgress, $state
             $scope.IsDisable = false;
         }
     }
-    //  Save handle group details
+    /**
+     * @desc Save handle group details
+     * @param isValid
+     * @constructor
+     */
     $scope.SubmitForm = function (isValid) {
         if (isValid) {
             if ($scope.GroupHandset) {

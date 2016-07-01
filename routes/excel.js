@@ -4,9 +4,9 @@ module.exports = function (app) {
     app.route('/*')
         .all(excel.allAction);
     app.route('/pdf')
-     .get(excel.pdf)
+        .get(excel.pdf)
     app.route('/exportexcel')
-     .post(excel.exportexcel)
+        .post(excel.exportexcel)
     app.route('/exportVcode')
-     .post(excel.exportVcode)
+        .post(excel.exportVcode)
 }

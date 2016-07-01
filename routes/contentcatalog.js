@@ -1,5 +1,3 @@
-
-
 var contentcatalog = require('../controller/contentcatalog.controller');
 module.exports = function (app) {
     app.route('/*')

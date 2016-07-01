@@ -1,4 +1,8 @@
-
+/**
+ * @memberof myApp
+ * @type {controller|angular.Controller}
+ * @desc Vendor List Controller
+ */
 myApp.controller('vendorCtrl', function ($scope, $state, $http, $stateParams, ngProgress, $window, Vendors, _, Excel) {
     $('.removeActiveClass').removeClass('active');
     $('.removeSubactiveClass').removeClass('active');
@@ -17,33 +21,65 @@ myApp.controller('vendorCtrl', function ($scope, $state, $http, $stateParams, ng
     $scope.open2 = false;
     //  ngProgress.start();
     $scope.uploading = true;
-    //open datepicker for start date
+    /**
+     * @desc open datepicker for start date
+     * @param evt
+     */
     $scope.openDatepicker = function (evt) {
         $scope.open2 = false;
         evt.preventDefault();
         evt.stopPropagation();
         $scope.open1 = !$scope.open1;
     }
-    //open datepicker for end date
+    /**
+     * @desc open datepicker for end date
+     * @param evt1
+     */
     $scope.openEndDatepicker = function (evt1) {
         $scope.open1 = false;
         evt1.preventDefault();
         evt1.stopPropagation();
         $scope.open2 = !$scope.open2;
     }
-
+    /**
+     * @desc Get Vendor Title
+     * @param expirydate
+     * @param active
+     * @returns {string}
+     * @constructor
+     */
     function GetTitle(expirydate, active) {
         return active != 1 ? "UnBlock" : (Datewithouttime(expirydate) < Datewithouttime(new Date()) ? "Expired" : "Block");
     }
 
+    /**
+     * @desc Get Vendor Status
+     * @param expirydate
+     * @param active
+     * @returns {string}
+     * @constructor
+     */
     function GetStatus(expirydate, active) {
         return active != 1 ? "Vendor Blocked" : (Datewithouttime(expirydate) < Datewithouttime(new Date()) ? "Vendor Expired" : "Active");
     }
 
+    /**
+     * @desc Change Button Color
+     * @param expirydate
+     * @param active
+     * @returns {string}
+     * @constructor
+     */
     function ButtonColor(expirydate, active) {
         return active != 1 ? "red" : (Datewithouttime(expirydate) < Datewithouttime(new Date()) ? "darkorange" : "green");
     }
 
+    /**
+     * @desc Get Vendor Details
+     * @param Vendors
+     * @returns {*}
+     * @constructor
+     */
     function GetVendorData(Vendors) {
         _.each(Vendors, function (vendor) {
             vendor.vd_created_on = setDate(vendor.vd_created_on);
@@ -53,7 +89,11 @@ myApp.controller('vendorCtrl', function ($scope, $state, $http, $stateParams, ng
         });
         return Vendors;
     }
-    //Export/download vendors list in excel file
+
+    /**
+     * @desc Export/download vendors list in excel file
+     * @constructor
+     */
     $scope.ExportExcel = function () {
         if ($scope.vendorlist.length > 0) {
             var array = [];
@@ -69,6 +109,12 @@ myApp.controller('vendorCtrl', function ($scope, $state, $http, $stateParams, ng
             });
         }
     }
+    /**
+     * @desc Select Icon Country Group's Country List
+     * @param selectedcountry
+     * @returns {Array}
+     * @constructor
+     */
     function CheckGroupSelection(selectedcountry) {
         var country = [];
         var tempcountry1 = [];
@@ -107,6 +153,12 @@ myApp.controller('vendorCtrl', function ($scope, $state, $http, $stateParams, ng
         return country;
     }
 
+    /**
+     * @desc Get Selected Country List
+     * @param selectedcountry
+     * @returns {Array}
+     * @constructor
+     */
     function GetSelectedCountry(selectedcountry) {
         var country = [];
         var group = [];
@@ -131,7 +183,10 @@ myApp.controller('vendorCtrl', function ($scope, $state, $http, $stateParams, ng
         country = _.unique(country);
         return country;
     }
-// get Vendor details list
+
+    /**
+     * @desc get Vendor details list
+     */
     Vendors.GetVendors({ Id: $stateParams.id, state: $scope.CurrentPage }, function (vendordata) {
         //  ngProgress.complete();
         $scope.uploading = false;
@@ -155,8 +210,7 @@ myApp.controller('vendorCtrl', function ($scope, $state, $http, $stateParams, ng
             $scope.OldRightsData = (vendordata.SelectedRightsData);
             $scope.SelectedAllowedContentType = _.unique(_.pluck(vendordata.SelectedRightsData, "r_allowed_content_type"));
             var selectedcountry = _.unique(_.pluck(vendordata.SelectedRightsData, "r_country_distribution_rights"));
-            console.log('selectedcountry')
-            console.log(selectedcountry)
+
             var country = CheckGroupSelection(selectedcountry);
             $scope.SelectedCountryDistributionRights = country;
             $scope.SelectedChannelDistributionRights = _.unique(_.pluck(vendordata.SelectedRightsData, "r_channel_distribution_rights"));
@@ -181,14 +235,27 @@ myApp.controller('vendorCtrl', function ($scope, $state, $http, $stateParams, ng
     function (error) {
         toastr.error(error);
     });
-    // create search query for vendors
+    /**
+     * @desc create search query for vendors
+     * @param data
+     * @constructor
+     */
     $scope.SearchVendorclick = function (data) {
         $scope.searchvendorquery = $scope.vendorquery;
     }
-    //reset search form
+    /**
+     * @desc reset search form
+     */
     $scope.resetform = function () {
         $scope.vendorForm.$setPristine();
     }
+    /**
+     * @desc Get added Rights List
+     * @param OldData
+     * @param SelectedData
+     * @returns {Array}
+     * @constructor
+     */
     function GetAddRights(OldData, SelectedData) {
         var AddArray = [];
         _.each(SelectedData, function (selected) {
@@ -200,6 +267,13 @@ myApp.controller('vendorCtrl', function ($scope, $state, $http, $stateParams, ng
         return AddArray;
     }
 
+    /**
+     * @desc Get Deleted Rights List
+     * @param OldData
+     * @param SelectedData
+     * @returns {Array}
+     * @constructor
+     */
     function GetDeleteRights(OldData, SelectedData) {
         var DeleteArray = [];
         _.each(OldData, function (old) {
@@ -210,7 +284,14 @@ myApp.controller('vendorCtrl', function ($scope, $state, $http, $stateParams, ng
         });
         return DeleteArray;
     }
-    //Block and unblock vendors
+
+    /**
+     * @desc Block and unblock vendors
+     * @param Id
+     * @param Status
+     * @param classtext
+     * @constructor
+     */
     $scope.BlockUnBlockVendor = function (Id, Status, classtext) {
         if (Status !== "Expired" && classtext !== "darkorange") {
             bootbox.confirm("Are you sure want to " + Status + " this vendor?", function (result) {
@@ -244,7 +325,10 @@ myApp.controller('vendorCtrl', function ($scope, $state, $http, $stateParams, ng
         }
 
     }
-    //Save vendor details
+    /**
+     * @desc Save vendor details
+     * @param isValid
+     */
     $scope.submitForm = function (isValid) {
         if (isValid) {
             if (parseInt($scope.PersonMobileNo).toString().length == 10) {

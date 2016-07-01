@@ -15,30 +15,8 @@ var fs = require('fs');
 var wlogger = require("../config/logger");
 var contentCatalogueManager = require('../models/contentCatalogue.model');
 var reload = require('require-reload')(require);
+var common = require('../helpers/common');
 
-function getDate() {
-    var d = new Date();
-    var dt = d.getDate();
-    var month = d.getMonth() + 1;
-    var year = d.getFullYear();
-    var selectdate = year + '-' + Pad("0", month, 2) + '-' + Pad("0", dt, 2);
-    return selectdate;
-}
-function getTime(val) {
-    var d = new Date(val);
-    var minite = d.getMinutes();
-    var hour = d.getHours();
-    var second = d.getSeconds();
-    var selectdate = Pad("0", hour, 2) + ':' + Pad("0", minite, 2) + ':' + Pad("0", second, 2);
-    return selectdate;
-}
-function Pad(padString, value, length) {
-    var str = value.toString();
-    while (str.length < length)
-        str = padString + str;
-
-    return str;
-}
 
 /**
  * @class
@@ -47,7 +25,7 @@ function Pad(padString, value, length) {
  * @param {object} res - http response object.
  */
 exports.allAction = function (req, res, next) {
-    var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
+    var currDate = common.Pad("0",parseInt(new Date().getDate()), 2)+'_'+common.Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
     if (wlogger.logDate == currDate) {
         var logDir = config.log_path;
         var filePath = logDir + 'logs_'+currDate+'.log';
@@ -74,7 +52,8 @@ exports.getcontentcatalog = function (req, res, next) {
         if (req.session) {
             if (req.session.UserName) {
                 mysql.getConnection('CMS', function (err, connection_ikon_cms) {
-                    var currentdate = getDate();
+                   // var currentdate = getDate();
+                    var currentdate = common.setDBDate();
                     var ModCMquery = " inner join (select * from icn_vendor_user)vu on (vd.vd_id =vu.vu_vd_id and vu_ld_id =" + req.session.UserId + ")";
                     var vendorquery = (req.session.UserRole == "Content Manager" || req.session.UserRole == "Moderator") ? ModCMquery : "";
                     var propquery = (req.body.state == "propertycontent") ? " inner join (select * from content_metadata where cm_property_id is null and cm_id = " + req.body.Id + ")cm on (vd.vd_id = cm.cm_vendor)" : "";
@@ -306,7 +285,8 @@ exports.getcontentlisting = function (req, res, next) {
         if (req.session) {
             if (req.session.UserName) {
                 mysql.getConnection('CMS', function (err, connection_ikon_cms) {
-                    var currentdate = getDate();
+                    //var currentdate = getDate();
+                    var currentdate = common.setDBDate();
                     var ModCMquery = " left join (select * from icn_vendor_user)vu on (vd.vd_id =vu.vu_vd_id and vu_ld_id =" + req.session.UserId + ")";
                     var vendorquery = (req.session.UserRole == "Content Manager" || req.session.UserRole == "Moderator") ? ModCMquery : "";
                     async.waterfall([

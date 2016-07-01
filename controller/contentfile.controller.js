@@ -14,30 +14,7 @@ var dir = require("node-dir");
 var XLSX = require('xlsx');
 var wlogger = require("../config/logger");
 var reload = require('require-reload')(require);
-
-function getDate() {
-    var d = new Date();
-    var dt = d.getDate();
-    var month = d.getMonth() + 1;
-    var year = d.getFullYear();
-    var selectdate = year + '-' + Pad("0", month, 2) + '-' + Pad("0", dt, 2);
-    return selectdate;
-}
-function getTime(val) {
-    var d = new Date(val);
-    var minite = d.getMinutes();
-    var hour = d.getHours();
-    var second = d.getSeconds();
-    var selectdate = Pad("0", hour, 2) + ':' + Pad("0", minite, 2) + ':' + Pad("0", second, 2);
-    return selectdate;
-}
-function Pad(padString, value, length) {
-    var str = value.toString();
-    while (str.length < length)
-        str = padString + str;
-
-    return str;
-}
+var common = require('../helpers/common');
 
 /**
  * @class
@@ -46,7 +23,7 @@ function Pad(padString, value, length) {
  * @param {object} res - http response object.
  */
 exports.allAction = function (req, res, next) {
-    var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
+    var currDate = common.Pad("0",parseInt(new Date().getDate()), 2)+'_'+common.Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
     if (wlogger.logDate == currDate) {
         var logDir = config.log_path;
         var filePath = logDir + 'logs_'+currDate+'.log';
@@ -238,7 +215,7 @@ exports.checkmetadata = function (req, res, next) {
                         },
                         LyricsLanguages: function (callback) {
                             //if (req.body.contenttype == "Audio") {
-                            var query = 'select * from (SELECT cm_id,cm_lyrics_languages FROM content_metadata where cm_id =? and NOT ISNULL(cm_lyrics_languages) )meta ' +
+                            var query456 = 'select * from (SELECT cm_id,cm_lyrics_languages FROM content_metadata where cm_id =? and NOT ISNULL(cm_lyrics_languages) )meta ' +
                                 'left join(select * from multiselect_metadata_detail)mlm on(mlm.cmd_group_id = meta.cm_lyrics_languages) ' +
                                 'left join(select * from catalogue_detail )cd on(cd.cd_id = mlm.cmd_entity_detail) ' +
                                 'left join(select * from catalogue_master where cm_name in ("Languages"))cm on(cm.cm_id =cd.cd_cm_id)' +
@@ -250,7 +227,14 @@ exports.checkmetadata = function (req, res, next) {
                                 'left join(select * from catalogue_detail )cd on(cd.cd_id = mlm.cmd_entity_detail) ' +
                                 'left join(select * from catalogue_master where cm_name in ("Languages"))cm on(cm.cm_id =cd.cd_cm_id)' +
                                 'left join(select * from content_template)ct on(ct.ct_param =  mlm.cmd_entity_detail and ct.ct_param_value = cd.cd_name)';
-                            //console.log(query)
+
+                            var query = 'select * FROM (SELECT cm_id, cm_lyrics_languages FROM content_metadata where cm_id = ? and NOT ISNULL(cm_lyrics_languages) )meta '+
+                                'left join multiselect_metadata_detail as mlm on (mlm.cmd_group_id = meta.cm_lyrics_languages) '+
+                                'left join catalogue_detail as cd on(cd.cd_id = mlm.cmd_entity_detail) '+
+                                'left join catalogue_master as cm on(cm.cm_id =cd.cd_cm_id and cm_name in ("Languages")) '+
+                                'left join content_template as ct on(ct.ct_param =  mlm.cmd_entity_detail and ct.ct_param_value = cd.cd_name) '+
+                                'left join content_files as cm_files on(meta.cm_id = cm_files.cf_cm_id and ct.ct_group_id = cm_files.cf_template_id and file_category_id = 1) '+
+                                'group by meta.cm_id, ct.ct_group_id';
                             var query = connection_ikon_cms.query(query, [req.body.Id], function (err, Languages) {
                                 callback(err, Languages);
                             });
@@ -2269,7 +2253,7 @@ exports.uploadappsgame = function (req, res, next) {
                         var index = old_path.lastIndexOf('/') + 1;
                         var file_name = old_path.substr(index);
                         var file_namepath = files.file.name.substring(0, files.file.name.lastIndexOf('.'));
-                        var filenamedata = (fields.cm_id + '_' + 'app' + '_' + Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase();
+                        var filenamedata = (fields.cm_id + '_' + 'app' + '_' + common.Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase();
                         var save_path = config.site_game_path + filenamedata;
                         var new_path = config.site_base_path + save_path;
                         var temp_path = config.site_temp_path + filenamedata;
@@ -2678,7 +2662,7 @@ exports.uploadtext = function (req, res, next) {
                         var file_namepath = files.file.name.substring(0, files.file.name.indexOf('.'));
                         var fileCategory = (fields.fileCategory == 1) ?  '':(fields.fileCategory == 2) ?'_supporting':'_preview';
 
-                        var filenamedata = (fields.cm_id + '_' + fields.ct_param_value + fileCategory + '_' + Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase();
+                        var filenamedata = (fields.cm_id + '_' + fields.ct_param_value + fileCategory + '_' + common.Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase();
                         var save_path = ((fields.fileCategory == 1) ? config.site_text_path :(fields.fileCategory == 2) ? config.supporting_text_path : config.preview_text_path)  + filenamedata;
                        // console.log(save_path); process.exit(0);
                        //var save_path = config.site_text_path + filenamedata;
@@ -3061,8 +3045,8 @@ exports.uploadotherfiles = function (req, res, next) {
                         var file_namepath = files.file.name.substring(0, files.file.name.indexOf('.'));
                         var fileCategory = (fields.fileCategory == 1) ?  '':(fields.fileCategory == 2) ?'_supporting':'_preview';
 
-                        var filenamedata = (fields.type != 'text')? (fields.cm_id + '_' + fields.type + fileCategory + '_' + Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase() : (fields.cm_id + '_' + fields.ct_param_value + fileCategory + '_' + Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase();
-                        //var filenamedata = (fields.type != 'text')? (fields.cm_id + '_' + fields.type +  preview + '_' + Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase() : (fields.cm_id + '_' + fields.ct_param_value + preview + '_' + Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase();
+                        var filenamedata = (fields.type != 'text')? (fields.cm_id + '_' + fields.type + fileCategory + '_' + common.Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase() : (fields.cm_id + '_' + fields.ct_param_value + fileCategory + '_' + common.Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase();
+                        //var filenamedata = (fields.type != 'text')? (fields.cm_id + '_' + fields.type +  preview + '_' + common.Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase() : (fields.cm_id + '_' + fields.ct_param_value + preview + '_' + common.Pad("0", fields.count, 2) + '.' + file_ext).toLowerCase();
                         var save_path = ((fields.fileCategory == 1) ?  (fields.type == 'image' ? config.site_wallpaper_path : (fields.type == 'audio' ? config.site_audio_path :(fields.type == 'video' ? config.site_video_path:config.site_text_path ))) :(fields.fileCategory == 2) ? (fields.type == 'image' ? config.supporting_image_path : (fields.type == 'audio' ? config.supporting_audio_path :(fields.type == 'video' ? config.supporting_video_path:config.supporting_text_path ))) :(fields.type == 'image' ? config.preview_image_path : (fields.type == 'audio' ? config.preview_audio_path :(fields.type == 'video' ? config.preview_video_path:config.preview_text_path ))) ) + filenamedata;
                          //var save_path = (fields.type == 'image' ? config.site_wallpaper_path : (fields.type == 'audio' ? config.site_audio_path :(fields.type == 'video' ? config.site_video_path:config.site_text_path ))) + filenamedata;
                         var new_path = config.site_base_path + save_path;
@@ -3090,7 +3074,6 @@ exports.uploadotherfiles = function (req, res, next) {
                                         res.status(500).json(err.message);
                                     } else {
                                         var temp_path = config.site_temp_path + filenamedata;
-                                      //  console.log(temp_path);
                                         shell.exec('cp "' + new_path + '" "' + temp_path + '"');
                                         shell.exec('chmod 777 ' + temp_path);
                                         fs.unlink(old_path, function (err) {
@@ -3263,7 +3246,7 @@ exports.uploadotherfiles = function (req, res, next) {
 
 /**
  * @class
- * @classdesc replave existing file of any content type.
+ * @classdesc replace existing file of any content type.
  * @param {object} req - http requset object.
  * @param {object} res - http response object.
  * @param {function} next - callback function.
@@ -3442,7 +3425,7 @@ exports.replaceFile = function (req, res, next) {
 
 /**
  * @class
- * @classdesc replace thumbnail file.
+ * @classdesc Replace thumbnail file.
  * @param {object} req - http requset object.
  * @param {object} res - http response object.
  * @param {function} next - callback function.
@@ -3499,7 +3482,7 @@ exports.replaceThumbFile = function (req, res, next) {
 }
 
 /**
- * Get Closest Bitrate template id
+ * @desc Get Closest Bitrate template id
  * @param {Array} templates
  * @param {Number} bitrate
  * @return {Function} callback
@@ -3519,7 +3502,7 @@ function getClosestTemplateIdBitrate(templates, bitrate,callback){
 }
 
 /**
- * Update Content Metadata
+ * @desc Update Content Metadata
  * @param {Resource} connection_ikon_cms
  * @param {Array} fields
  * @param {Array} session
@@ -3594,7 +3577,7 @@ function updateMetadata(connection_ikon_cms,fields,session, callback){
 }
 
 /**
- * Add or Update Audio File
+ * @desc Add or Update Audio File
  * @param {Resource} connection_ikon_cms
  * @param {String} save_path
  * @param {Array} fields
@@ -3681,7 +3664,7 @@ function addUpdateAudioFile(connection_ikon_cms, save_path, fields, templateID, 
 }
 
 /**
- * Get file inforamtion like width,height,bit_rate,duration, size  of given filepath
+ * @desc Get file inforamtion like width,height,bit_rate,duration, size  of given filepath
  * @param {String} file_path
  * @param {String} file_type
  * @param {Array} session

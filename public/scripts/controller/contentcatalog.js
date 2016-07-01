@@ -1,6 +1,6 @@
 /**
  * @memberof myApp
- * @name content-catalogCtrl
+ * @type {controller|angular.Controller}
  * @desc Content Catalog Controller
  * @param $scope {service} controller scope
  * @param $state {service} controller scope
@@ -40,6 +40,7 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
      * @param cm_state
      * @returns {{color: string, cm_state: *, IsEdit: boolean, status: string, IsBlock: boolean}}
      */
+
     function getStatus(MetadataExpirydate, VendorExpirydate, PropertyExpirydate, Vendor_active, Property_active, cm_state) {
         var data = { color: "chartreuse", cm_state: cm_state, IsEdit: true, status: 'Active', IsBlock: false };
         if (cm_state == 7 || cm_state == 5 || cm_state == 1 || cm_state == 2) {
@@ -94,7 +95,8 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
         $scope.uploading = false;
         $scope.AllMetadata = content.ContentMetadata;
         _.each($scope.AllMetadata, function (meta) {
-            var data = getStatus(content.UserRole, meta.cm_expires_on, meta.vd_end_on, meta.propertyexpirydate, meta.cm_state, meta.vd_is_active, meta.propertyactive, meta.cm_state)
+            var data = getStatus(meta.cm_expires_on, meta.vd_end_on, meta.propertyexpirydate, meta.vd_is_active, meta.propertyactive, meta.cm_state)
+          //  var data = getStatus(content.UserRole, meta.cm_expires_on, meta.vd_end_on, meta.propertyexpirydate, meta.cm_state, meta.vd_is_active, meta.propertyactive, meta.cm_state)
             meta.color = data.color;
             meta.MetaId = Icon.GetEncode(meta.cm_id);
 			meta.cm_thumb_url = meta.cm_thumb_url != null && meta.cm_thumb_url ?meta.cm_thumb_url.split(',')[0]:'';
@@ -282,12 +284,15 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
         }
         $scope.SearchChange();
     }
-    //other search Event 
+    /**
+     * @desc other search Event
+     * @name SearchChange
+    */
     $scope.SearchChange = function () {
         var match = _.find($scope.ContentType, function (val) { return val.cd_id == parseInt($scope.SelectedType) })
         if (match) {
             $scope.SelectedContentType = match.cd_name;
-         }
+        }
         var query = "";
         if ($scope.SelectedContentStatus) {
             query = '"cm_state" :' + $scope.SelectedContentStatus;
@@ -302,16 +307,17 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
         if (query != "") {
             query = "{" + query + "}";
             var obj = JSON.parse(query);
-           // console.log(obj)
 
             $scope.MetaDatas = _.where($scope.AllMetadata, obj);
-           // console.log($scope.MetaDatas)
 
             $scope.SearchContentBy();
             $scope.loading = true;
         }
     }
-    //search content by
+    /**
+     * @desc search content by
+     * @name SearchContentBy
+     */
     $scope.SearchContentBy = function () {
         if ($scope.SearchContent && $scope.SearchContent != "" && $scope.SelectedSearchContentBy) {
             $scope.FilterData = _.filter($scope.MetaDatas, function (val) {
@@ -356,8 +362,10 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
         $scope.loading = true;
         $scope.currentPage = 0;
     }
-
-    // get previous page
+    /**
+     * @desc get previous page
+     * @name PreviousClick
+     */
     $scope.PreviousClick = function () {
         var ChangedData = _.filter($scope.FilterData, function (item) { return item.SelectedPublishReject === 4 || item.SelectedPublishReject === 5; })
         if (ChangedData.length > 0) {
@@ -375,7 +383,10 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             $scope.currentPage = parseInt($scope.currentPage) - 1;
         }
     }
-    // get next page
+    /**
+     * @desc get next page
+     * @name NextClick
+     */
     $scope.NextClick = function () {
         var ChangedData = _.filter($scope.FilterData, function (item) { return item.SelectedPublishReject === 4 || item.SelectedPublishReject === 5; })
         if (ChangedData.length > 0) {
@@ -394,7 +405,16 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
         }
 
     }
-    //Block & unblock Meta
+    /**
+     * @desc Block & unblock Meta
+     * @param Id
+     * @param Title
+     * @param IsBlock
+     * @param cm_expires_on
+     * @param Status
+     * @param state
+     * @name BlockUnBlockMetadata
+     */
     $scope.BlockUnBlockMetadata = function (Id, Title, IsBlock, cm_expires_on, Status, state) {
         if ((IsBlock && (state == 4)) || ((!IsBlock) && (state == 6))) {
             bootbox.confirm("Are you sure want to " + Status + " this Content Metadata ?", function (result) {
@@ -431,7 +451,13 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             });
         }
     }
-    // delete metadata
+    /**
+     * @desc delete metadata
+     * @param Id
+     * @param Title
+     * @param state
+     * @name DeleteMetadata
+     */
     $scope.DeleteMetadata = function (Id, Title, state) {
         bootbox.confirm("Are you sure want to delete Content Metadata ?", function (result) {
             if (result) {
@@ -462,7 +488,10 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             }
         });
     }
-    // publish all metadata
+    /**
+     * @desc publish all metadata
+     * @name PublishAll
+     */
     $scope.PublishAll = function () {
         if ($scope.FilterData.length > 0) {
             bootbox.confirm("Are you sure want to publish All Content Metadata ?", function (result) {
@@ -499,7 +528,14 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
 
         }
     }
-    // publish all metadata on current page
+
+    /**
+     * @desc publish all metadata on current page
+     * @param Id
+     * @param Status
+     * @param classtext
+     * @name PublishAllFromCurrentPage
+     */
     $scope.PublishAllFromCurrentPage = function (Id, Status, classtext) {
         if ($scope.FilterData.length > 0) {
             var begin = ($scope.currentPage * $scope.pageSize), end = begin + $scope.pageSize;
@@ -539,7 +575,13 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             }
         }
     }
-    // save metadata events
+    /**
+     * @desc save metadata events
+     * @param Id
+     * @param Status
+     * @param classtext
+     * @name Submit
+     */
     $scope.Submit = function (Id, Status, classtext) {
         if ($scope.FilterData.length > 0) {
             var begin = ($scope.currentPage * $scope.pageSize), end = begin + $scope.pageSize;
@@ -597,7 +639,14 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             }
         }
     }
-    // reset search criteria
+
+    /**
+     * @desc reset search criteria
+     * @param Id
+     * @param Status
+     * @param classtext
+     * @name Reset
+     */
     $scope.Reset = function (Id, Status, classtext) {
         if (scope.FilterData.length > 0) {
             var begin = ($scope.currentPage * $scope.pageSize), end = begin + $scope.pageSize;
@@ -608,7 +657,10 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             })
         }
     }
-    // set vcode file uploader
+    /**
+     * @name vcodefileuploader
+     * @desc set vcode file uploader
+     */
     $scope.vcodefileuploader = function () {
         $scope.vcodeError = false;
         $scope.VcodeFiles = [];
@@ -616,7 +668,11 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             //console.log($scope.vcodefile)
         }
     };
-    // upload excel for importing vcode and promocode
+    /**
+     * @desc upload excel for importing vcode and promocode
+     * @name upload
+     * @param {Boolean} isValid
+     */
     $scope.upload = function (isValid) {
         if(isValid && $scope.vcodefile.name == $scope.MetadataId+'_'+$scope.SelectedDownloadType+'_NameList.xlsx') {
             var operators = {};
@@ -673,7 +729,11 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             toastr.error('Invalid Excel file extension or naming conventions.');
         }
     };
-    // add and update vcode and promocode
+    /**
+     * @name addUpdateVcodePromocode
+     * @desc add and update vcode and promocode
+     * @param isValid
+     */
     $scope.addUpdateVcodePromocode = function (isValid) {
         if ($scope.SelectedCountryOperator) {
             if ($scope.SelectedDownloadType == 'Vcode') {
@@ -746,45 +806,20 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             }
         }
     }
-    // add and update vcode
-    $scope.addUpdateVcode123 = function (isValid) {
-        if(isValid) {
-            ContentCatalog.addUpdateVcode({
-                'cmId': $scope.MetadataId,
-                'operator': $scope.SelectedCountryOperator,
-                'vcode': $scope.SelectedVcode,
-                'promocode': $scope.SelectedPromocode
-            }, function (data) {
-                ngProgress.complete();
-                if (data.success) {
-                    $scope.SelectedCountryOperator = "";
-                    $scope.SelectedVcode = "";
-                    $scope.SelectedPromocode = "";
-                    toastr.success(data.message);
-                    if (ngProgress.complete() == 100) {
-                        $scope.CloseImportExport();
-                    }
-                }
-                else {
-                    toastr.error(data.message);
-                    if (ngProgress.complete() == 100) {
-                        $scope.CloseImportExport();
-                    }
-                }
-                ngProgress.complete();
-            }, function (error) {
-                toastr.error(error);
-                ngProgress.complete();
-            });
-        }
-    }
-    //  close popup of import/export
+    /**
+     * @name CloseImportExport
+     * @desc close popup of import/export
+     */
     $scope.CloseImportExport = function () {
         $scope.ShowExportPopUp = false;
         $scope.ShowImportPopUp = false;
         $scope.ShowVcodeAddUpdatePopUp = false;
     }
-    //  open popup of  export
+    /**
+     * @name ShowPopupForExport
+     * @param {Number} cm_id
+     * @desc open popup of  export
+     */
     $scope.ShowPopupForExport = function (cm_id) {
          $scope.MetadataId = cm_id;
         $scope.ShowExportPopUp = true;
@@ -792,18 +827,23 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
         $scope.SelectedCountryOperator = '';
         $scope.hidevcodepromsubmit = $scope.ShowExportPopUpSubmit =  false;
     }
-    //  open popup of import
+    /**
+     *
+     * @param cm_id
+     * @name ShowPopupForImport
+     * @desc open popup of import
+     */
     $scope.ShowPopupForImport = function (cm_id) {
          $scope.MetadataId = cm_id;
         $scope.ShowImportPopUp = true;
         $scope.SelectedDownloadType = '';
         $scope.vcodefile = '';
     }
-   /* $scope.ShowPopupForVcode = function (cm_id) {
-        $scope.MetadataId = cm_id;
-        $scope.ShowVcodeAddUpdatePopUp = true;
-    }*/
-    //  get vcode for generic type metadata
+    /**
+     * @name getVcodeForGeneric
+     * @param cm_id
+     * @desc get vcode for generic type metadata
+     */
     $scope.getVcodeForGeneric = function (cm_id) {
         var operators = {};
         if($scope.SelectedDownloadType && $scope.SelectedCountryOperator){
@@ -835,8 +875,11 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             })
         }
     }
-
-    //  open popup of importing vcode
+    /**
+     * @name ShowPopupForVcode
+     * @param cm_id
+     * @desc open popup of importing vcode
+     */
     $scope.ShowPopupForVcode = function (cm_id) {
         $scope.MetadataId = cm_id;
 
@@ -849,23 +892,23 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
         $scope.hidevcodepromsubmit = $scope.ShowExportPopUpSubmit =  false;
 
     }
-    //  open popup of exporting vcode
-
+    /**
+     * @name showExportpopupsubmit
+     * @desc open popup of exporting vcode
+     */
     $scope.showExportpopupsubmit = function () {
         if ($scope.SelectedDownloadType) {
             $scope.ShowExportPopUpSubmit = true;
         } else {
             $scope.ShowExportPopUpSubmit = false;
         }
-
     }
+    
 
-    function getExtension(filename) {
-        var parts = filename.split('.');
-        return parts[parts.length - 1];
-    }
-    //  export/download into excelsheet for vcode mapping
-
+    /**
+     * @desc export/download into excelsheet for vcode mapping
+     * @name ExportForVcode
+     */
     $scope.ExportForVcode = function () {
          $scope.ShowExportPopUp = false;
         var operators = {};
@@ -919,7 +962,10 @@ myApp.controller('content-catalogCtrl', function ($scope, $state, $http, $stateP
             toastr.error(error);
         });
     }
-    //  export/download into excelsheet for metadata
+    /**
+     * @desc export/download into excelsheet for metadata
+     * @name ExportExcel
+     */
     $scope.ExportExcel = function () {
         if ($scope.FilterData.length > 0) {
             var array = [];

@@ -12,80 +12,8 @@ var curDate = new Date();
 var config = require('../config')();
 var reload = require('require-reload')(require);
 var fs = require('fs');
+var common = require('../helpers/common');
 
-function encrypt(text) {
-    var cipher = crypto.createCipher(algorithm, password)
-    var crypted = cipher.update(text, 'utf8', 'hex')
-    crypted += cipher.final('hex');
-    return crypted;
-}
-
-function decrypt(text) {
-    var decipher = crypto.createDecipher(algorithm, password)
-    var dec = decipher.update(text, 'hex', 'utf8')
-    dec += decipher.final('utf8');
-    return dec;
-}
-
-function getloginDate(val) {
-    if (val) {
-        var d = new Date(val);
-        //var d = moment(new Date(val), "Asia/Kolkata").format("YYYY-MM-DD");
-         var dt = d.getDate();
-         var month = d.getMonth() + 1;
-         var year = d.getFullYear();
-         var selectdate = Pad("0", dt, 2) + '/' + Pad("0", month, 2) + '/' + year.toString().substring(2);
-        return selectdate;
-    }
-    else {
-        var d = new Date();
-        //var d = moment(curDate, "Asia/Kolkata").format("YYYY-MM-DD");
-        var dt = d.getDate();
-        var month = d.getMonth() + 1;
-        var year = d.getFullYear();
-        var selectdate = year + '-' + Pad("0", month, 2) + '-' + Pad("0", dt, 2);
-        return selectdate;
-    }
-}
-
-function getDate(val) {
-    if (val) {
-        var d = new Date(val);
-        //var d = moment(new Date(val), "Asia/Kolkata").format("YYYY-MM-DD");
-        var dt = d.getDate();
-        var month = d.getMonth() + 1;
-        var year = d.getFullYear();
-        var selectdate = year + '-' + Pad("0", month, 2) + '-' + Pad("0", dt, 2);
-        return selectdate;
-    }
-    else {
-        var d = new Date();
-        //var d = moment(curDate, "Asia/Kolkata");
-        var dt = d.getDate();
-        var month = d.getMonth() + 1;
-        var year = d.getFullYear();
-        var selectdate = year + '-' + Pad("0", month, 2) + '-' + Pad("0", dt, 2);
-        return selectdate;
-    }
-}
-
-function getTime(val) {
-    var d = new Date(val);
-    //var d = moment(new Date(val), "Asia/Kolkata");
-    var minite = d.getMinutes();
-    var hour = d.getHours();
-    var second = d.getSeconds();
-    var selectdate = Pad("0", hour, 2) + ':' + Pad("0", minite, 2) + ':' + Pad("0", second, 2);
-    return selectdate;
-}
-
-function Pad(padString, value, length) {
-    var str = value.toString();
-    while (str.length < length)
-        str = padString + str;
-
-    return str;
-}
 /**
  * @class
  * @classdesc create a log file if not exist.
@@ -94,7 +22,7 @@ function Pad(padString, value, length) {
  */
 
 exports.allAction = function (req, res, next) {
-    var currDate = Pad("0",parseInt(new Date().getDate()), 2)+'_'+Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
+    var currDate = common.Pad("0",parseInt(new Date().getDate()), 2)+'_'+common.Pad("0",parseInt(new Date().getMonth() + 1), 2)+'_'+new Date().getFullYear();
     if (wlogger.logDate == currDate) {
         var logDir = config.log_path;
         var filePath = logDir + 'logs_'+currDate+'.log';
@@ -115,7 +43,6 @@ exports.allAction = function (req, res, next) {
  * @param {object} req - http requset object.
  * @param {object} res - http response object.
  */
-
 exports.getSitePath = function (req, res, next) {
    // console.log(config)
     res.send({"site_path": config.site_path,
@@ -134,15 +61,12 @@ exports.getSitePath = function (req, res, next) {
         video_limit : config.video_limit,
         log_path:config.log_path});
 }
-
 /**
  * @class
  * @classdesc get menu pages details.
  * @param {object} req - http requset object.
  * @param {object} res - http response object.
  */
-
-//Menu Pages
 exports.pages = function (req, res, next) {
     if (req.session) {
         if (req.session.UserName) {
@@ -156,7 +80,7 @@ exports.pages = function (req, res, next) {
                     message: 'Get Page data'
                 }
                 wlogger.info(info); // for information
-                res.render('index', { title: 'Express', username: req.session.FullName, Pages: pageData, userrole: req.session.UserRole, lastlogin: " " + (req.session.lastlogin ? getloginDate(req.session.lastlogin) : "") + " " + (req.session.lastlogin ? getTime(req.session.lastlogin) : "") });
+                res.render('index', { title: 'Express', username: req.session.FullName, Pages: pageData, userrole: req.session.UserRole, lastlogin: " " + (req.session.lastlogin ? common.getLoginDate(req.session.lastlogin) : "") + " " + (req.session.lastlogin ? common.setTime(req.session.lastlogin) : "") });
             }
             else {
                 res.render('account-login', { error: "You can't access content Ingestion." });
@@ -211,7 +135,7 @@ exports.login = function (req, res, next) {
                         }
                         wlogger.error(error); // for err
                     } else {
-                        var query = connection_ikon_cms.query('SELECT * FROM icn_login_detail where BINARY ld_id= ?  ', [decrypt(req.cookies.publish_userid)], function (err, row, fields) {
+                        var query = connection_ikon_cms.query('SELECT * FROM icn_login_detail where BINARY ld_id= ?  ', [common.decrypt(req.cookies.publish_userid)], function (err, row, fields) {
                             if (err) {
                                 connection_ikon_cms.release();
                                 var error = {
@@ -421,7 +345,7 @@ exports.authenticate = function (req, res, next) {
                                             if (req.body.rememberMe) {
                                                 var minute = 10080 * 60 * 1000;
                                                 res.cookie('publish_remember', 1, {maxAge: minute});
-                                                res.cookie('publish_userid', encrypt(row[0].ld_id.toString()), {maxAge: minute});
+                                                res.cookie('publish_userid', common.encrypt(row[0].ld_id.toString()), {maxAge: minute});
                                             }
                                             AdminLog.adminlog(connection_ikon_cms, req.body.username + " successfully login at " + curDate.toDateString(), "Acccount Login", req.body.username, true);
                                             var session = req.session;
@@ -749,51 +673,6 @@ exports.viewChangePassword = function (req, res, next) {
     res.render('account-changepassword', { error: '' });
 }
 
-//Change Password Post
-/*exports.changePassword = function (req, res) {
-    try {
-        if (req.session) {
-            if (req.session.UserName) {
-                var session = req.session;
-                mysql.getConnection('CMS', function (err, connection_ikon_cms) {
-                    if(err){
-                        logger.writeLog('changePassword : ' + JSON.stringify(err));
-                    }else {
-                        if (req.body.oldpassword == session.Password) {
-                            var query = connection_ikon_cms.query('UPDATE icn_login_detail SET ld_user_pwd=?, ld_modified_on=? WHERE ld_id=?', [req.body.newpassword, new Date(), session.UserId], function (err, result) {
-                                if (err) {
-                                    connection_ikon_cms.release();
-                                    res.status(500).json(err.message);
-                                }
-                                else {
-                                    logger.writeLog('changePassword : ' + JSON.stringify('Password updated successfully.'));
-                                    AdminLog.adminlog(connection_ikon_cms, req.session.UserName + " user password updated successfully and UserId is " + req.session.UserId, "Change Password", req.session.UserName, true);
-                                    session.Password = req.body.newpassword;
-                                    res.send({success: true, message: 'Password updated successfully.'});
-                                }
-                            });
-                        }
-                        else {
-                            logger.writeLog('changePassword : ' + JSON.stringify('Old Password does not match.'));
-                            connection_ikon_cms.release();
-                            res.send({success: false, message: 'Old Password does not match.'});
-                        }
-                    }
-                })
-            }
-            else {
-                res.redirect('/accountlogin');
-            }
-        }
-        else {
-            res.redirect('/accountlogin');
-        }
-    }
-    catch (err) {
-        connection_ikon_cms.release();
-        res.status(500).json(err.message);
-    }
-};*/
 /**
  * @class
  * @classdesc change user password and send email.
@@ -923,7 +802,7 @@ exports.getdashboarddata = function (req, res) {
                         }
                         wlogger.error(error); // for error
                     }else {
-                        var currentdate = getDate(curDate);
+                        var currentdate = common.setDate(curDate);
                         var ModCMquery = " inner join (select * from icn_vendor_user)vu on (vd.vd_id =vu.vu_vd_id and vu_ld_id =" + req.session.UserId + ")";
                         var vendorquery = (req.session.UserRole == "Content Manager" || req.session.UserRole == "Moderator") ? ModCMquery : "";
                         async.parallel({
