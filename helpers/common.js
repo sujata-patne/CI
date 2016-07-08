@@ -1,6 +1,8 @@
 /**
  * Created by Sujata.Halwai on 01-07-2016.
  */
+var crypto = require('crypto');
+
 var self = module.exports = {
     /**
      * @desc Padding String
